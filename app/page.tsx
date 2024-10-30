@@ -54,7 +54,7 @@ export default function Home() {
           {upcomingEvents.map((event, index) => (
             <div
               key={index}
-              className="bg-gray-900 p-6  mx-1 rounded-xl transition-all duration-300 hover:transform hover:scale-105 md:grid md:grid-cols-2 gap-4"
+              className="bg-gray-900 p-6  mx-auto rounded-xl transition-all duration-300 hover:transform hover:scale-105 md:grid md:grid-cols-2 gap-4"
             >
               {/* Contenuto del testo a sinistra */}
               <div className="flex flex-col justify-center">
