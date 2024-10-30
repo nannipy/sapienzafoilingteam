@@ -4,6 +4,8 @@ import React from "react";
 import Image from "next/image";
 import { ChevronDown, Calendar, Instagram, Linkedin, Facebook, ArrowRight } from "lucide-react";
 
+import Head from "next/head"; 
+
 export default function Home() {
 
   const upcomingEvents = [
@@ -17,6 +19,17 @@ export default function Home() {
   ];
 
   return (
+    <>
+    <meta property="og:title" content="Sapienza Sailing Team" />
+    <meta property="og:description" content="Il nostro impegno e passione per la vela." />
+    <meta property="og:image" content="https://tuosito.com/moth_4.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <Head>
+        <title>Sapienza Sailing Team</title>
+        <meta name="description" content="Il sito ufficiale del Sapienza Sailing Team: il nostro impegno e passione per la vela." />
+        <meta name="keywords" content="vela, regate, Sapienza, Sapienza Sailing Team" />
+      </Head>
     <main className="relative min-h-screen bg-black">
       {/* Hero Section */}
       <div className="relative h-screen flex items-center justify-center">
@@ -84,7 +97,7 @@ export default function Home() {
                 <Image
                   className="rounded-xl mt-4"
                   src={event.image}
-                  alt="sumoth"
+                  alt="Evento Sumoth 2025 al lago di Garda, Verona"
                   width={400}
                   height={400}
                 />
@@ -139,7 +152,7 @@ export default function Home() {
             <p className="text-xl mb-8">
               Cerchiamo persone appassionate che vogliono mettersi alla prova e crescere insieme a noi.
             </p>
-            <button className="group bg-white text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
+            <button onClick={() => window.location.href = '/contact'} className="group bg-white text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
               Contattaci
               <ArrowRight className="inline ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
@@ -150,5 +163,6 @@ export default function Home() {
       
 
     </main>
+    </>
   );
 }
