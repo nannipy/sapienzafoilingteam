@@ -113,7 +113,7 @@ const TeamPage = () => {
       {/* Navigation Section */}
       <div className="bg-white sticky top-20 z-20 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex overflow-x-auto py-4 gap-4 justify-center">
+          <div className="flex overflow-x-auto py-4 gap-4 sm:justify-center justify-start">
             <button
               onClick={() => setActiveSection('all')}
               className={`px-4 py-2 rounded-full whitespace-nowrap transition-all duration-300 ${
@@ -143,7 +143,7 @@ const TeamPage = () => {
 
       {/* Team Sections */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="space-y-16">
+        <div className="space-y-16 justify-start">
           {divisions
             .filter(d => activeSection === 'all' || activeSection === d.id)
             .map((division) => (

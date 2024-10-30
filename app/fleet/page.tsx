@@ -10,6 +10,7 @@ import {
   ChevronRight,
   Wrench,
 } from 'lucide-react';
+import Image from 'next/image';
 
 const FleetPage = () => {
   const [activeSection, setActiveSection] = useState<SectionKey>('foils');
@@ -111,6 +112,27 @@ const FleetPage = () => {
             Nel frattempo, ti invitiamo a scoprire tutti i dettagli tecnici del Moth, una delle barche più innovative nel mondo della vela.
           </p>
         </div>
+
+       {/* Why Moth Section */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="bg-white rounded-xl p-8 shadow-lg mb-16 flex flex-col lg:flex-row">
+            <div className="flex-1 mb-6 lg:mb-0 lg:mr-6">
+              <div className="flex items-center justify-center mb-6">
+                <Info className="w-12 h-12 text-blue-600 mr-4" />
+                <h2 className="text-3xl font-bold">Perché il Moth?</h2>
+              </div>
+              <p className="text-lg text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
+                Il Moth è una delle imbarcazioni più innovative nel mondo della vela, capace di &quot;volare&quot; sopra l&apos;acqua grazie all&apos;uso dei foil. 
+                Abbiamo scelto questa imbarcazione per il suo design avanzato e le sfide tecniche che comporta, che ci permettono di esplorare soluzioni ingegneristiche all&apos;avanguardia. 
+                Per noi, costruire un Moth significa spingerci oltre i limiti della tecnologia e della scienza applicata alla nautica.
+              </p>
+            </div>
+            <div className="flex-shrink-0">
+              <Image src="/moth_model.jpg" alt="Moth Model" className="w-full h-auto rounded-lg"  width={300} height={300}/>
+            </div>
+          </div>
+        </div>
+
 
         {/* Moth Technical Details */}
         <div className="grid lg:grid-cols-3 gap-8">
