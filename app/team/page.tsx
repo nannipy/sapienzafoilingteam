@@ -99,25 +99,6 @@ const TeamPage = () => {
       ]
     },
     {
-      id: 'management',
-      name: 'Management e Comunicazione',
-      icon: <Handshake className="w-6 h-6" />,
-           color: 'bg-blue-500',
-      description: 'Strategia, comunicazione e gestione delle relazioni pubbliche del team.',
-      details: [
-        'Pianificazione e sviluppo delle strategie',
-        'Gestione della comunicazione esterna',
-        'Relazioni con sponsor e partner',
-        'Organizzazione di eventi e attività promozionali'
-      ],
-      keyAreas: [
-        'Strategia e Management',
-        'Comunicazione',
-        'Relazioni Pubbliche',
-        'Partnership'
-      ]
-    },
-    {
       id: 'design',
       name: 'Progettazione e Ottimizzazione',
       icon: <Component className="w-6 h-6" />,
@@ -135,7 +116,27 @@ const TeamPage = () => {
         'Performance Optimization',
         'Prototipazione 3D'
       ]
+    },
+    {
+      id: 'management',
+      name: 'Management e Comunicazione',
+      icon: <Handshake className="w-6 h-6" />,
+           color: 'bg-blue-500',
+      description: 'Strategia, comunicazione e gestione delle relazioni pubbliche del team.',
+      details: [
+        'Pianificazione e sviluppo delle strategie',
+        'Gestione della comunicazione esterna',
+        'Relazioni con sponsor e partner',
+        'Organizzazione di eventi e attività promozionali'
+      ],
+      keyAreas: [
+        'Strategia e Management',
+        'Comunicazione',
+        'Relazioni Pubbliche',
+        'Partnership'
+      ]
     }
+    
   ];
 
   return (
@@ -166,11 +167,10 @@ const TeamPage = () => {
               document.getElementById('team-sections')?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            <ChevronDown className="w-8 h-8" />
+            <ChevronDown className="w-8 h-8"/>
           </motion.div>
         </motion.div>
       </motion.div>
-
 
       {/* Enhanced Navigation Section */}
       <div className="bg-white sticky top-20 z-20 shadow-md">
@@ -213,7 +213,7 @@ const TeamPage = () => {
       {/* Enhanced Team Sections */}
       <div id="team-sections" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <AnimatePresence mode="wait">
-          <motion.div className="space-y-16 justify-start ">
+          <motion.div className="space-y-16 justify-start" >
             {divisions
               .filter(d => activeSection === 'all' || activeSection === d.id)
               .map((division) => (
@@ -232,7 +232,7 @@ const TeamPage = () => {
                     >
                       {division.icon}
                     </motion.div>
-                    <h2 className="text-3xl font-bold">{division.name}</h2>
+                    <h2 className="text-3xl font-extrabold ">{division.name}</h2>
                   </div>
                   <div className="max-w-3xl mx-auto">
                     <p className="text-lg mb-8 text-center">{division.description}</p>
@@ -250,7 +250,7 @@ const TeamPage = () => {
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                                className="text-gray-700"
+                                className="text-gray-700 md:text-base sm:text-sm"
                               >
                                 {detail}
                               </motion.li>
@@ -259,7 +259,7 @@ const TeamPage = () => {
                         </div>
                         <div>
                           <h3 className="text-xl font-semibold mb-4">Aree di Competenza</h3>
-                          <div className="grid grid-cols-2 gap-4">
+                          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             {division.keyAreas.map((area, index) => (
                               <motion.div
                                 key={index}
@@ -267,7 +267,7 @@ const TeamPage = () => {
                                 className="bg-blue-50 p-3 rounded-lg flex items-center justify-center cursor-pointer hover:bg-blue-100 transition-colors"
                               >
                                 {iconsMap[area]}
-                                <span>{area}</span>
+                                <span className="text-sm sm:text-base ">{area}</span>
                               </motion.div>
                             ))}
                           </div>
