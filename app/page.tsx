@@ -142,7 +142,7 @@ export default function Home() {
       {/* Call to Action Section with Floating Elements */}
       <section className="relative py-20 bg-gradient-to-br from-blue-900 to-blue-700 text-white overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('/wave-pattern.svg')] opacity-10 animate-slide" />
+          <div className="absolute inset-0 opacity-10 animate-slide" />
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
