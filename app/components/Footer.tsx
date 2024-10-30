@@ -1,4 +1,4 @@
-import {  Anchor, Instagram } from "lucide-react";
+import { Instagram, Linkedin, Facebook } from "lucide-react";
 
 
 const Footer: React.FC = () => (
@@ -10,7 +10,8 @@ const Footer: React.FC = () => (
       </div>
       <div className="flex space-x-6">
         <Instagram className="text-black w-6 h-6 hover:text-white cursor-pointer transition-colors duration-300" />
-        <Anchor className="text-black w-6 h-6 hover:text-white cursor-pointer transition-colors duration-300" />
+        <Linkedin className="text-black w-6 h-6 hover:text-white cursor-pointer transition-colors duration-300" />
+        <Facebook className="text-black w-6 h-6 hover:text-white cursor-pointer transition-colors duration-300" />
       </div>
     </div>
   </div>
