@@ -42,8 +42,8 @@ const ContactPage = () => {
   return (
     <main className="min-h-screen bg-white text-black">
       {/* Hero Section */}
-      <div className="relative h-96 bg-blue-900 ">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-800 opacity-90" />
+      <div className="relative h-96 bg-gradient-to-br from-blue-900 to-blue-700 ">
+        <div className="absolute inset-0 " />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4">
           <MessageSquare className="w-16 h-16 mb-4" />
           <h1 className="text-4xl md:text-5xl font-bold mb-2">Contattaci</h1>

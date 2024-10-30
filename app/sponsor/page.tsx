@@ -8,8 +8,8 @@ const SponsorPage = () => {
   return (
     <main className="min-h-screen bg-white text-black">
       {/* Hero Section */}
-      <div className="relative h-full  bg-blue-900">
-        <div className="absolute h-96 inset-0 bg-blue-900 opacity-90" />
+      <div className="relative h-full  bg-gradient-to-br from-blue-900 to-blue-700">
+        <div className="absolute h-96 inset-0 " />
         <div className="relative z-10 h-full p-44 flex flex-col items-center justify-center text-white px-4">
           <HandshakeIcon className="w-20 h-20 mb-6" />
           <h1 className="text-5xl md:text-6xl font-bold mb-4 text-center">Diventa Nostro Partner</h1>
