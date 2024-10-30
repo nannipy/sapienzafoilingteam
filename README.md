@@ -75,8 +75,8 @@ Il pulsante di call to action reindirizza alla pagina /contact per contattare il
 
 Contributi
 
-	1.	Fai un fork del repository.
-	2.	Crea un nuovo branch per le modifiche.
+1.	**Fai un fork del repository.**
+2.	**Crea un nuovo branch per le modifiche.**
 
     ```bash
     git checkout -b nome-branch
