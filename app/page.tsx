@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import Image from "next/image";
 import { ChevronDown, Calendar, Instagram, Linkedin, Facebook, ArrowRight } from "lucide-react";
@@ -10,6 +12,7 @@ export default function Home() {
       date: "15 Giugno 2025",
       location: "Garda, Verona",
       image: "/sumoth.png",
+      link: "https://sumoth.org"
     },
   ];
 
@@ -18,7 +21,7 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative h-screen flex items-center justify-center">
         <Image
-          src="/moth.jpg"
+          src="/moth_4.jpg"
           alt="regatta"
           fill
           className="object-cover brightness-50"
@@ -38,14 +41,25 @@ export default function Home() {
 
         <div className="absolute bottom-8 w-full flex justify-center">
           <div className="animate-bounce">
-            <ChevronDown className="text-white w-8 h-8" />
-          </div>
+          <ChevronDown
+          className="text-white w-8 h-8"
+          onClick={() => {
+          const targetElement = document.querySelector('#upcoming-events');
+          if (targetElement) {
+            window.scrollTo({
+            top: targetElement.getBoundingClientRect().top + window.pageYOffset - 100,
+            behavior: 'smooth'
+            });
+           }
+          }}
+          />
+        </div>
         </div>
       </div>
 
      
       {/* Upcoming Events Section */}
-      <div className="bg-black py-16">
+      <div className="bg-black py-16" id="upcoming-events">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-white mb-12 text-center">
             Prossimi Eventi
@@ -55,6 +69,7 @@ export default function Home() {
             <div
               key={index}
               className="bg-gray-900 p-6  mx-auto rounded-xl transition-all duration-300 hover:transform hover:scale-105 md:grid md:grid-cols-2 gap-4"
+              onClick={() => window.open(event.link, '_blank')}
             >
               {/* Contenuto del testo a sinistra */}
               <div className="flex flex-col justify-center">
