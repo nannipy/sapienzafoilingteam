@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Warehouse, Anchor, Handshake, Component, PencilRuler, Leaf, 
          Truck, Wrench, Globe, Star, Layout, Lightbulb, LifeBuoy, 
-         PersonStanding, Anvil, ChevronDown } from 'lucide-react';
+         PersonStanding, Anvil, ChevronDown, CircuitBoard, Bolt  } from 'lucide-react';
 
 
 const TeamPage = () => {
@@ -28,8 +28,8 @@ const TeamPage = () => {
     'Supporto Operativo': <LifeBuoy className="w-4 h-4 mr-1 sm:mr-2" />,
     'Logistica': <Truck className="w-4 h-4 mr-1 sm:mr-2" />,
     'Manutenzione': <Wrench className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Gestione Emergenze': <Globe className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Coordinamento Eventi': <Handshake className="w-4 h-4 mr-1 sm:mr-2" />,
+    'Elettronica': <CircuitBoard className="w-4 h-4 mr-1 sm:mr-2" />,
+    'Fine Tuning': <Bolt className="w-4 h-4 mr-1 sm:mr-2" />,
     'Strategia e Management': <Users className="w-4 h-4 mr-1 sm:mr-2" />,
     'Comunicazione': <Globe className="w-4 h-4 mr-1 sm:mr-2" />,
     'Relazioni Pubbliche': <PersonStanding className="w-4 h-4 mr-1 sm:mr-2" />,
@@ -61,41 +61,22 @@ const TeamPage = () => {
       ]
     },
     {
-      id: 'logistics',
-      name: 'Logistica',
-      icon: <Warehouse className="w-6 h-6" />,
-      color: 'bg-blue-500',
-      description: 'Gestione logistica e supporto delle operazioni di trasporto e movimentazione.',
-      details: [
-        'Pianificazione e coordinamento delle attività di trasporto',
-        'Gestione della catena di approvvigionamento',
-        'Ottimizzazione delle risorse logistiche',
-        'Supporto nelle attività a terra e in acqua'
-      ],
-      keyAreas: [
-        'Pianificazione Logistica',
-        'Supply Chain',
-        'Gestione Risorse',
-        'Supporto Operativo'
-      ]
-    },
-    {
       id: 'shore',
       name: 'Shore Team',
       icon: <Anchor className="w-6 h-6" />,
            color: 'bg-blue-500',
-      description: 'Gestione logistica e supporto a terra durante gli eventi.',
+      description: ' Messa a punto e tuning della barca durante allenamenti ed eventi, presa e analisi dati.',
       details: [
-        'Coordinamento delle operazioni a terra',
-        'Manutenzione preventiva',
-        'Gestione delle emergenze',
+        'Coordinamento delle operazioni a terra e in acqua',
+        'Manutenzione ',
+        'Installazione di sensori per la presa dati e analisi dei dati raccolti',
         'Supporto logistico durante le regate'
       ],
       keyAreas: [
         'Logistica',
         'Manutenzione',
-        'Gestione Emergenze',
-        'Coordinamento Eventi'
+        'Elettronica',
+        'Fine Tuning'
       ]
     },
     {
@@ -108,7 +89,7 @@ const TeamPage = () => {
         'Progettazione CAD delle strutture',
         'Analisi e simulazioni FEM',
         'Ottimizzazione della resistenza e delle performance',
-        'Prototipazione tramite stampa 3D'
+        'CFD e simulazioni 3D'
       ],
       keyAreas: [
         'CAD e Progettazione',
@@ -156,7 +137,7 @@ const TeamPage = () => {
           <Users className="w-16 h-16 mb-2"/>
           <h1 className="text-4xl md:text-5xl font-bold mb-1">Il Nostro Team</h1>
           <p className="text-xl max-w-3xl text-center mb-10 px-6">
-            Il nostro team si articola in cinque reparti fondamentali, ognuno con un ruolo strategico 
+            Il nostro team si articola in quattro reparti fondamentali, ognuno con un ruolo strategico 
             e un contributo distintivo al successo del progetto.
           </p>
           <motion.div

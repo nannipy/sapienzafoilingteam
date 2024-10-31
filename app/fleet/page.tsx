@@ -23,7 +23,7 @@ const FleetPage = () => {
     technicalSpecs: string[];
   }> = {
     foils: {
-      title: "Sistema Foil",
+      title: "I Foil",
       description: "I foil sono ali sottomarine che generano portanza idrodinamica, permettendo all'imbarcazione di sollevarsi dall'acqua.",
       details: [
         "Foil principale: Genera la maggior parte della portanza",
@@ -33,13 +33,13 @@ const FleetPage = () => {
       ],
       technicalSpecs: [
         "Materiale: Carbonio pre-preg",
-        "Span foil principale: ~2.25m",
+        "Span foil principale: ~80 cm",
         "Profilo alare: Specifico per alte velocità",
         "Regolazioni: Rake e ride height"
       ]
     },
     hull: {
-      title: "Scafo",
+      title: "Lo Scafo",
       description: "Lo scafo del Moth è progettato per minimizzare il peso e massimizzare l'aerodinamica quando vola sui foil.",
       details: [
         "Struttura ultra-leggera in carbonio",
@@ -55,8 +55,8 @@ const FleetPage = () => {
       ]
     },
     rig: {
-      title: "Piano Velico",
-      description: "Il piano velico del Moth è altamente efficiente e completamente regolabile per ottimizzare le prestazioni.",
+      title: "La Vela",
+      description: "La vela del Moth è altamente efficiente e completamente regolabile per ottimizzare le prestazioni.",
       details: [
         "Albero in carbonio ad alta modularità",
         "Vela ad alto aspect ratio",
@@ -71,8 +71,8 @@ const FleetPage = () => {
       ]
     },
     controls: {
-      title: "Sistemi di Controllo",
-      description: "I sistemi di controllo permettono al timoniere di gestire l'assetto e la potenza durante il volo.",
+      title: "I controlli di volo",
+      description: "I controlli di volo permettono al timoniere di gestire l'assetto e la potenza durante il volo.",
       details: [
         "Controlli ride height",
         "Sistema wand automatico",
@@ -108,8 +108,10 @@ const FleetPage = () => {
             <h2 className="text-3xl font-bold">Flotta in Costruzione</h2>
           </div>
           <p className="text-lg text-center max-w-3xl mx-auto">
-            Come associazione studentesca appena formata, stiamo lavorando alla costruzione della nostra prima imbarcazione. 
-            Nel frattempo, ti invitiamo a scoprire tutti i dettagli tecnici del Moth, una delle barche più innovative nel mondo della vela.
+          Come team appena formato, stiamo lavorando alla costruzione della nostra
+          prima imbarcazione. Nel frattempo, ti invitiamo a scoprire tutti i dettagli tecnici
+          del Moth, una delle classi più innovative nel mondo della vela, alla quale anche
+          la nostra barca apparterrà.
           </p>
         </div>
 
@@ -119,12 +121,19 @@ const FleetPage = () => {
             <div className="flex-1 mb-6 lg:mb-0 lg:mr-6">
               <div className="flex items-center justify-center mb-6">
                 <Info className="w-12 h-12 text-blue-600 mr-4" />
-                <h2 className="text-3xl font-bold">Perché il Moth?</h2>
+                <h2 className="text-3xl font-bold">Perché il SuMoth?</h2>
               </div>
               <p className="text-lg text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
-                Il Moth è una delle imbarcazioni più innovative nel mondo della vela, capace di &quot;volare&quot; sopra l&apos;acqua grazie all&apos;uso dei foil. 
-                Abbiamo scelto questa imbarcazione per il suo design avanzato e le sfide tecniche che comporta, che ci permettono di esplorare soluzioni ingegneristiche all&apos;avanguardia. 
-                Per noi, costruire un Moth significa spingerci oltre i limiti della tecnologia e della scienza applicata alla nautica.
+              Abbiamo scelto di partecipare alla SuMoth Challenge perché condividiamo i
+              valori che persegue: innovazione, tecnologia e sostenibilità. Il Moth è una delle
+              imbarcazioni più innovative nel mondo della vela, capace di &quot;volare&quot; sopra
+              l&apos;acqua grazie all&apos;uso dei foil. Il suo design avanzato e le sfide tecniche che
+              comporta, che ci permettono di esplorare soluzioni ingegneristiche
+              all&apos;avanguardia. Per noi, costruire un Moth significa spingerci oltre i limiti della
+              tecnologia e della scienza applicata alla nautica. L’utilizzo di materiali eco-
+              compatibili per la costruzione ci spinge ad esplorare e testare tecniche
+              sostenibili che possono avere un impatto concreto sui metodi di costruzione in
+              ambito nautico.
               </p>
             </div>
             <div className="flex-shrink-0">
@@ -211,8 +220,8 @@ const FleetPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Vuoi far parte del progetto?</h2>
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            Stiamo cercando studenti appassionati di vela e ingegneria per 
-            contribuire alla costruzione della nostra flotta.
+          Se sei uno studente appassionato di vela e ingegneria e vuoi contribuire alla
+          costruzione della nostra flotta, invia una candidatura spontanea.
           </p>
           <div className="flex justify-center space-x-4">
             <a

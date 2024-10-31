@@ -34,7 +34,7 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative h-screen flex items-center justify-center">
         <Image
-          src="/moth_4.jpg"
+          src="/moth_5.jpg"
           alt="regatta"
           fill
           className="object-cover brightness-50"
