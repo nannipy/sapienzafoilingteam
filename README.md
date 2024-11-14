@@ -1,4 +1,4 @@
-# Sapienza Sailing Team - Homepage
+# Sapienza Foiling Team - Homepage
 
 Questa è la homepage del sito **Sapienza Sailing Team**, sviluppata con **Next.js** e **TypeScript**. La pagina presenta il team, i prossimi eventi, e fornisce un collegamento ai profili social per seguire le attività del team. È inclusa anche una sezione di call to action per incentivare nuovi membri a entrare nel team.
 
