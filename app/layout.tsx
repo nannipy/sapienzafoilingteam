@@ -20,8 +20,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Sapienza Sailing Team",
-  description: "Sapienza Sailing Team",
+  title: "Sapienza Foiling Team",
+  description: "Sapienza Foiling Team",
   icons: {
     icon: "/favicon.ico",
   }

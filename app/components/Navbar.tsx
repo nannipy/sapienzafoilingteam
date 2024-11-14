@@ -42,7 +42,7 @@ const Navbar = () => {
           {/* Logo/Brand */}
           <Link href="/" className="flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
             <Anchor className="w-6 h-6" />
-            <span className="text-lg font-bold">Sapienza Sailing Team</span>
+            <span className="text-lg font-bold">Sapienza Foiling Team</span>
           </Link>
 
           {/* Desktop Navigation */}

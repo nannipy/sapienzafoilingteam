@@ -20,15 +20,15 @@ export default function Home() {
 
   return (
     <>
-    <meta property="og:title" content="Sapienza Sailing Team" />
+    <meta property="og:title" content="Sapienza Foiling Team" />
     <meta property="og:description" content="Il nostro impegno e passione per la vela." />
     <meta property="og:image" content="https://tuosito.com/moth_4.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     
     <Head>
-        <title>Sapienza Sailing Team</title>
-        <meta name="description" content="Il sito ufficiale del Sapienza Sailing Team: il nostro impegno e passione per la vela." />
-        <meta name="keywords" content="vela, regate, Sapienza, Sapienza Sailing Team" />
+        <title>Sapienza Foiling Team</title>
+        <meta name="description" content="Il sito ufficiale del Sapienza Foiling Team: il nostro impegno e passione per la vela." />
+        <meta name="keywords" content="vela, regate, Sapienza, Sapienza Foiling Team" />
       </Head>
     <main className="relative min-h-screen bg-black">
       {/* Hero Section */}
@@ -44,7 +44,7 @@ export default function Home() {
         <div className="relative z-10 text-center text-white px-4">
           <div className="transition-all duration-500">
             <h1 className="text-5xl md:text-7xl font-bold pb-4">
-              Sapienza Sailing Team
+              Sapienza Foiling Team
             </h1>
             <p className="text-xl md:text-2xl italic">
               Il nostro impegno, la nostra passione.
