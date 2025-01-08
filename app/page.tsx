@@ -152,8 +152,8 @@ export default function Home() {
             <p className="text-xl mb-8">
               Cerchiamo persone appassionate che vogliono mettersi alla prova e crescere insieme a noi.
             </p>
-            <button onClick={() => window.location.href = '/contact'} className="group bg-white text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
-              Contattaci
+            <button onClick={() => window.location.href = 'https://docs.google.com/forms/d/1TsTV28v7nggIEp98K8JGwtKbrV5P-9xzHIxmuFlSXCs/edit?pli=1'} className="group bg-white text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
+              Unisciti a noi 
               <ArrowRight className="inline ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
