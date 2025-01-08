@@ -147,8 +147,8 @@ const ContactPage = () => {
 
                 {/* Social Links */}
                 <div className="pt-4 border-t">
-                  <h3 className="text-lg font-semibold text-black mb-3 text-center  ">Social</h3>
-                  <div className="flex space-x-9 justify-center">
+                  <h3 className="text-lg font-semibold text-black mb-3 ">Social</h3>
+                  <div className="flex space-x-9 ml-4">
                     <a 
                     href="#" 
                     className="hover:text-blue-600 transition-colors"
