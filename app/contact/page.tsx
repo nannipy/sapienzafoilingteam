@@ -23,23 +23,7 @@ const ContactPage = () => {
     }, 1000);
   };
 
-  const departments = [
-    {
-      name: "Ufficio Tecnico",
-      email: "technical@teamname.it",
-      description: "Per questioni tecniche e collaborazioni tecnologiche"
-    },
-    {
-      name: "Marketing & PR",
-      email: "marketing@teamname.it",
-      description: "Per partnership, sponsorizzazioni e media"
-    },
-    {
-      name: "Risorse Umane",
-      email: "careers@teamname.it",
-      description: "Per opportunità di lavoro e stage"
-    }
-  ];
+ 
 
   return (
     <main className="min-h-screen bg-white text-black">
