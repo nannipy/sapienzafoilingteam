@@ -8,7 +8,7 @@ import {
   
   CheckCircle2
 } from 'lucide-react';
-import {  MapPin, Phone, Facebook, Instagram, Linkedin } from 'lucide-react';
+import {  MapPin, Facebook, Instagram, Linkedin } from 'lucide-react';
 
 
 const ContactPage = () => {
