@@ -8,6 +8,8 @@ import {
   
   CheckCircle2
 } from 'lucide-react';
+import {  MapPin, Phone, Facebook, Instagram, Linkedin } from 'lucide-react';
+
 
 const ContactPage = () => {
   const [formStatus, setFormStatus] = useState('idle'); // idle, sending, success, error
@@ -125,21 +127,68 @@ const ContactPage = () => {
           </div>
 
           {/* Departments */}
-          <div>
-            <h2 className="text-2xl font-bold mb-6">I Nostri Dipartimenti</h2>
-            <div className="space-y-6">
-              {departments.map((dept, index) => (
-                <div key={index} className="bg-white rounded-xl shadow-lg p-6">
-                  <h3 className="text-xl font-semibold mb-2">{dept.name}</h3>
-                  <p className="text-gray-600 mb-3">{dept.description}</p>
-                  <div className="flex items-center text-blue-600">
-                    <Mail className="w-5 h-5 mr-2" />
-                    <a href={`mailto:${dept.email}`} className="hover:underline">
-                      {dept.email}
+
+          <div className="bg-white w-full max-w-2xl mx-auto rounded-xl shadow-lg">
+            <div className="border-b p-6">
+              <h2 className="text-3xl font-bold text-gray-800">I Nostri Contatti</h2>
+            </div>
+            
+            <div className="p-6">
+              <div className="space-y-6">
+                {/* Email Section */}
+                <div className="group">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-2">Email</h3>
+                  <a 
+                    href="mailto:sapienzafoilingteam@gmail.com" 
+                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200"
+                  >
+                    <Mail className="w-6 h-6 text-blue-600" />
+                    <span className="text-blue-600 group-hover:underline">sapienzafoilingteam@gmail.com</span>
+                  </a>
+                </div>
+
+                {/* Location Section */}
+                <div className="group">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-2">Sede</h3>
+                  <a 
+                    href="https://goo.gl/maps/YOUR_LOCATION" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200"
+                  >
+                    <MapPin className="w-6 h-6 text-blue-600" />
+                    <span className="text-blue-600 group-hover:underline">Via Eudossiana 18, 00184 Roma</span>
+                  </a>
+                </div>
+
+                {/* Social Links */}
+                <div className="pt-4 border-t">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-3">Social</h3>
+                  <div className="flex space-x-4">
+                    <a 
+                      href="#" 
+                      className="p-2 rounded-full hover:bg-blue-50 transition-colors duration-200"
+                      aria-label="Instagram"
+                    >
+                      <Instagram className="w-6 h-6 text-blue-600" />
+                    </a>
+                    <a 
+                      href="#" 
+                      className="p-2 rounded-full hover:bg-blue-50 transition-colors duration-200"
+                      aria-label="LinkedIn"
+                    >
+                      <Linkedin className="w-6 h-6 text-blue-600" />
+                    </a>
+                    <a 
+                      href="#" 
+                      className="p-2 rounded-full hover:bg-blue-50 transition-colors duration-200"
+                      aria-label="Facebook"
+                    >
+                      <Facebook className="w-6 h-6 text-blue-600" />
                     </a>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
