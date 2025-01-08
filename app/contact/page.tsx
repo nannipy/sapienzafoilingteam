@@ -121,7 +121,7 @@ const ContactPage = () => {
               <div className="space-y-6">
                 {/* Email Section */}
                 <div className="group">
-                  <h3 className="text-lg font-semibold text-gray-700 mb-2">Email</h3>
+                  <h3 className="text-lg font-semibold text-black mb-2">Email</h3>
                   <a 
                     href="mailto:sapienzafoilingteam@gmail.com" 
                     className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200"
@@ -133,7 +133,7 @@ const ContactPage = () => {
 
                 {/* Location Section */}
                 <div className="group">
-                  <h3 className="text-lg font-semibold text-gray-700 mb-2">Sede</h3>
+                  <h3 className="text-lg font-semibold text-black mb-2">Sede</h3>
                   <a 
                     href="https://goo.gl/maps/YOUR_LOCATION" 
                     target="_blank" 
@@ -147,29 +147,29 @@ const ContactPage = () => {
 
                 {/* Social Links */}
                 <div className="pt-4 border-t">
-                  <h3 className="text-lg font-semibold text-gray-700 mb-3">Social</h3>
-                  <div className="flex space-x-4">
+                  <h3 className="text-lg font-semibold text-black mb-3 text-center  ">Social</h3>
+                  <div className="flex space-x-9 justify-center">
                     <a 
-                      href="#" 
-                      className="p-2 rounded-full hover:bg-blue-50 transition-colors duration-200"
-                      aria-label="Instagram"
-                    >
-                      <Instagram className="w-6 h-6 text-blue-600" />
-                    </a>
-                    <a 
-                      href="#" 
-                      className="p-2 rounded-full hover:bg-blue-50 transition-colors duration-200"
-                      aria-label="LinkedIn"
-                    >
-                      <Linkedin className="w-6 h-6 text-blue-600" />
-                    </a>
-                    <a 
-                      href="#" 
-                      className="p-2 rounded-full hover:bg-blue-50 transition-colors duration-200"
-                      aria-label="Facebook"
-                    >
-                      <Facebook className="w-6 h-6 text-blue-600" />
-                    </a>
+                    href="#" 
+                    className="hover:text-blue-600 transition-colors"
+                    aria-label="Instagram"
+                  >
+                    <Instagram className="w-8 h-8 hover:scale-110 transition-transform" />
+                  </a>
+                  <a 
+                    href="#" 
+                    className="hover:text-blue-600 transition-colors"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="w-8 h-8 hover:scale-110 transition-transform" />
+                  </a>
+                  <a 
+                    href="#" 
+                    className="hover:text-blue-600 transition-colors"
+                    aria-label="Facebook"
+                  >
+                    <Facebook className="w-8 h-8 hover:scale-110 transition-transform" />
+                  </a>
                   </div>
                 </div>
               </div>

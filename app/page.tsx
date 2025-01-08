@@ -11,7 +11,7 @@ export default function Home() {
   const upcomingEvents = [
     {
       title: "2025 SuMoth Challenge",
-      date: "15 Giugno 2025",
+      date: "16 Giugno 2025",
       location: "Garda, Verona",
       image: "/sumoth.png",
       link: "https://sumoth.org"
