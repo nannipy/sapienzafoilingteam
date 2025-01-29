@@ -150,7 +150,7 @@ const ContactPage = () => {
                   <h3 className="text-lg font-semibold text-black mb-3 ">Social</h3>
                   <div className="flex space-x-9 ml-4">
                     <a 
-                    href="#" 
+                    href="https://www.instagram.com/sapienzafoilingteam/" 
                     className="hover:text-blue-600 transition-colors"
                     aria-label="Instagram"
                   >
@@ -164,7 +164,7 @@ const ContactPage = () => {
                     <Linkedin className="w-8 h-8 hover:scale-110 transition-transform" />
                   </a>
                   <a 
-                    href="#" 
+                    href="https://www.facebook.com/profile.php?id=61572515878295" 
                     className="hover:text-blue-600 transition-colors"
                     aria-label="Facebook"
                   >

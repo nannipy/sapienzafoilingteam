@@ -100,7 +100,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              href="/joinus"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfUxoIJQdocILXDDgykkHAJ1yg60mGeZ7T_fr5M6cob1ca8oA/viewform?usp=dialog"
               className="block mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-center transition-all duration-300 hover:bg-blue-700"
               onClick={handleMenuToggle}
             >
