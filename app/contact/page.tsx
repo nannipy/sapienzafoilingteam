@@ -157,7 +157,7 @@ const ContactPage = () => {
                     <Instagram className="w-8 h-8 hover:scale-110 transition-transform" />
                   </a>
                   <a 
-                    href="#" 
+                    href="https://www.linkedin.com/company/sapienza-foiling-team/about/" 
                     className="hover:text-blue-600 transition-colors"
                     aria-label="LinkedIn"
                   >

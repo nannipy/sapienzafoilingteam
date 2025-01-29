@@ -114,21 +114,21 @@ export default function Home() {
             <h3 className="text-2xl font-semibold mb-8">Seguici sui nostri social</h3>
             <div className="flex justify-center space-x-8">
               <a 
-                href="#" 
+                href="https://www.instagram.com/sapienzafoilingteam/" 
                 className="hover:text-blue-600 transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-8 h-8 hover:scale-110 transition-transform" />
               </a>
               <a 
-                href="#" 
+                href="https://www.linkedin.com/company/sapienza-foiling-team/about/" 
                 className="hover:text-blue-600 transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-8 h-8 hover:scale-110 transition-transform" />
               </a>
               <a 
-                href="#" 
+                href="https://www.facebook.com/profile.php?id=61572515878295" 
                 className="hover:text-blue-600 transition-colors"
                 aria-label="Facebook"
               >

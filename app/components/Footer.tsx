@@ -9,9 +9,27 @@ const Footer: React.FC = () => (
         © 2024 Sapienza Foiling Team
       </div>
       <div className="flex space-x-6">
-        <Instagram className="text-black w-6 h-6 hover:text-white cursor-pointer transition-colors duration-300" />
-        <Linkedin className="text-black w-6 h-6 hover:text-white cursor-pointer transition-colors duration-300" />
-        <Facebook className="text-black w-6 h-6 hover:text-white cursor-pointer transition-colors duration-300" />
+        <a 
+          href="https://www.instagram.com/sapienzafoilingteam/" 
+          className="hover:text-blue-600 transition-colors"
+          aria-label="Instagram"
+        >
+          <Instagram className="w-8 h-8 hover:scale-110 transition-transform" />
+        </a>
+        <a 
+          href="https://www.linkedin.com/company/sapienza-foiling-team/about/" 
+          className="hover:text-blue-600 transition-colors"
+          aria-label="LinkedIn"
+        >
+          <Linkedin className="w-8 h-8 hover:scale-110 transition-transform" />
+        </a>
+        <a 
+          href="https://www.facebook.com/profile.php?id=61572515878295" 
+          className="hover:text-blue-600 transition-colors"
+          aria-label="Facebook"
+        >
+          <Facebook className="w-8 h-8 hover:scale-110 transition-transform" />
+        </a>
       </div>
     </div>
   </div>
