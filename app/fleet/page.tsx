@@ -231,7 +231,7 @@ const FleetPage = () => {
               Contattaci
             </a>
             <a
-              href="/join"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfUxoIJQdocILXDDgykkHAJ1yg60mGeZ7T_fr5M6cob1ca8oA/viewform?usp=dialog"
               className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors border border-blue-600"
             >
               Unisciti al Team

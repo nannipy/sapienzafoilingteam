@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Anchor } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 
 const Navbar = () => {
   const [isRounded, setIsRounded] = useState(true);
@@ -20,17 +21,15 @@ const Navbar = () => {
 
   const handleMenuToggle = () => {
     if (!isMobileMenuOpen) {
-      // Opening menu
       setIsRounded(false);
       setTimeout(() => {
         setIsMobileMenuOpen(true);
-      }, 300); // Wait for rounding animation to complete
+      }, 300);
     } else {
-      // Closing menu
       setIsMobileMenuOpen(false);
       setTimeout(() => {
         setIsRounded(true);
-      }, 300); // Wait for menu collapse animation to complete
+      }, 300);
     }
   };
 
@@ -39,13 +38,10 @@ const Navbar = () => {
       <div className={`bg-white text-black font-bold mx-auto max-w-7xl shadow-lg hover:shadow-xl transition-all duration-300
         ${isRounded ? 'rounded-full' : 'rounded-lg'}`}>
         <div className="flex items-center justify-between px-6 py-3">
-          {/* Logo/Brand */}
           <Link href="/" className="flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
-            <Anchor className="w-6 h-6" />
-            <span className="text-lg font-bold">Sapienza Foiling Team</span>
+            <Image src="/logosft.png" alt="Logo" width={40} height={40} className="h-16 w-16" />
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             {navigationItems.map((item) => (
               <Link
@@ -67,7 +63,6 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300"
             onClick={handleMenuToggle}
@@ -80,7 +75,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation with Animation */}
         <div 
           className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
             isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'

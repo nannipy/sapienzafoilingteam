@@ -6,7 +6,7 @@ const Footer: React.FC = () => (
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="flex justify-between items-center">
       <div className="">
-        © 2024 Sapienza Foiling Team
+        © 2025 Sapienza Foiling Team
       </div>
       <div className="flex space-x-6">
         <a 
