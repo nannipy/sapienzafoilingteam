@@ -2,7 +2,7 @@ import { Instagram, Linkedin, Facebook } from "lucide-react";
 
 
 const Footer: React.FC = () => (
-  <footer className="bg-gray-200 text-black py-8">
+  <footer className="bg-gray-50 text-black py-8">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="flex justify-between items-center">
       <div className="">

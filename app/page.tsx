@@ -72,9 +72,9 @@ export default function Home() {
 
      
       {/* Upcoming Events Section */}
-      <div className="bg-black py-16" id="upcoming-events">
+      <div className="bg-gray-50 py-16" id="upcoming-events">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-white mb-12 text-center">
+          <h2 className="text-3xl font-bold text-black mb-12 text-center">
             Prossimi Eventi
           </h2>
           <div className="grid md:grid-cols-1">
@@ -108,7 +108,7 @@ export default function Home() {
         </div>
       </div>
       {/* Social Media Section */}
-      <section className="py-12 bg-gray-50 text-black">
+      <section className="py-12 bg-[#FDF1F3] text-black">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h3 className="text-2xl font-semibold mb-8">Seguici sui nostri social</h3>
