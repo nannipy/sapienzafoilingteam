@@ -130,7 +130,7 @@ const FleetPage = () => {
               l&apos;acqua grazie all&apos;uso dei foil. Il suo design avanzato e le sfide tecniche che
               comporta, che ci permettono di esplorare soluzioni ingegneristiche
               all&apos;avanguardia. Per noi, costruire un Moth significa spingerci oltre i limiti della
-              tecnologia e della scienza applicata alla nautica. L'utilizzo di materiali eco-
+              tecnologia e della scienza applicata alla nautica. L&apos;utilizzo di materiali eco-
               compatibili per la costruzione ci spinge ad esplorare e testare tecniche
               sostenibili che possono avere un impatto concreto sui metodi di costruzione in
               ambito nautico.
