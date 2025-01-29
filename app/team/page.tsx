@@ -6,10 +6,8 @@ import { Users, Warehouse, Anchor, Handshake, Component, PencilRuler, Leaf,
          Truck, Wrench, Globe, Star, Layout, Lightbulb, LifeBuoy, 
          PersonStanding, Anvil, ChevronDown, CircuitBoard, Bolt  } from 'lucide-react';
 
-
 const TeamPage = () => {
   const [activeSection, setActiveSection] = useState('all');
-  
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -18,7 +16,7 @@ const TeamPage = () => {
   };
 
   const iconsMap: Record<string, JSX.Element> = {
-   'Materiali Sostenibili': <Leaf className="w-4 h-4 mr-1 sm:mr-2" />,
+    'Materiali Sostenibili': <Leaf className="w-4 h-4 mr-1 sm:mr-2" />,
     'Processi di Manufacturing': <Wrench className="w-4 h-4 mr-1 sm:mr-2" />,
     'Impatto Ambientale': <Globe className="w-4 h-4 mr-1 sm:mr-2" />,
     'Innovazione': <Lightbulb className="w-4 h-4 mr-1 sm:mr-2" />,
@@ -45,7 +43,7 @@ const TeamPage = () => {
       id: 'materials',
       name: 'Materiali, Sostenibilità e Manufacturing',
       icon: <PencilRuler className="w-6 h-6" />,
-           color: 'bg-blue-500',
+      color: 'bg-[#822433]',
       description: 'Ricerca, selezione e gestione dei materiali e dei processi sostenibili per la costruzione dell\'imbarcazione.',
       details: [
         'Ricerca e sviluppo di materiali sostenibili',
@@ -64,7 +62,7 @@ const TeamPage = () => {
       id: 'shore',
       name: 'Shore Team',
       icon: <Anchor className="w-6 h-6" />,
-           color: 'bg-blue-500',
+      color: 'bg-[#822433]',
       description: ' Messa a punto e tuning della barca durante allenamenti ed eventi, presa e analisi dati.',
       details: [
         'Coordinamento delle operazioni a terra e in acqua',
@@ -83,7 +81,7 @@ const TeamPage = () => {
       id: 'design',
       name: 'Progettazione e Ottimizzazione',
       icon: <Component className="w-6 h-6" />,
-           color: 'bg-blue-500',
+      color: 'bg-[#822433]',
       description: 'Progettazione e ottimizzazione dei componenti dell\'imbarcazione per massimizzare le prestazioni.',
       details: [
         'Progettazione CAD delle strutture',
@@ -102,7 +100,7 @@ const TeamPage = () => {
       id: 'management',
       name: 'Management e Comunicazione',
       icon: <Handshake className="w-6 h-6" />,
-           color: 'bg-blue-500',
+      color: 'bg-[#822433]',
       description: 'Strategia, comunicazione e gestione delle relazioni pubbliche del team.',
       details: [
         'Pianificazione e sviluppo delle strategie',
@@ -117,7 +115,6 @@ const TeamPage = () => {
         'Partnership'
       ]
     }
-    
   ];
 
   return (
@@ -126,7 +123,7 @@ const TeamPage = () => {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="relative h-full bg-gradient-to-br from-blue-900 to-blue-700 overflow-hidden"
+        className="relative h-full bg-gradient-to-br from-[#822433] to-[#6d1f2b] overflow-hidden "
       >
         <motion.div 
           initial={{ y: 50, opacity: 0 }}
@@ -134,7 +131,7 @@ const TeamPage = () => {
           transition={{ duration: 0.8 }}
           className="relative z-10 h-96 flex flex-col items-center justify-center text-white mt-20 sm:mt-10"
         >
-          <Users className="w-16 h-16 mb-2"/>
+          <Users className="w-16 h-16 mb-2 mt-10"/>
           <h1 className="text-4xl md:text-5xl font-bold mb-1">Il Nostro Team</h1>
           <p className="text-xl max-w-3xl text-center mb-10 px-6">
             Il nostro team si articola in quattro reparti fondamentali, ognuno con un ruolo strategico 
@@ -154,7 +151,7 @@ const TeamPage = () => {
       </motion.div>
 
       {/* Enhanced Navigation Section */}
-      <div className="bg-white sticky top-20 z-20 shadow-md">
+      <div className="bg-white sticky top-24 z-20 shadow-md ">
         <div className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-8">
           <motion.div 
             className="flex overflow-x-auto py-4 gap-4 sm:justify-center justify-start sm:scrollbar-hide scrollbar-hide sm:overflow-visible"
@@ -164,7 +161,7 @@ const TeamPage = () => {
               onClick={() => setActiveSection('all')}
               className={`px-4 py-2 rounded-full whitespace-nowrap transition-all duration-300  ${
                 activeSection === 'all'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#822433] text-white'
                   : 'bg-gray-100 hover:bg-gray-200'
               }`}
               whileHover={{ scale: 1.05 }}
@@ -178,7 +175,7 @@ const TeamPage = () => {
                 onClick={() => setActiveSection(division.id)}
                 className={`px-4 py-2 rounded-full whitespace-nowrap transition-all duration-300  ${
                   activeSection === division.id
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-[#822433] text-white'
                     : 'bg-gray-100 hover:bg-gray-200'
                 }`}
                 whileHover={{ scale: 1.05 }}
@@ -245,7 +242,7 @@ const TeamPage = () => {
                               <motion.div
                                 key={index}
                                 whileHover={{ scale: 1.05 }}
-                                className="bg-blue-50 p-3 rounded-lg flex items-center justify-center cursor-pointer hover:bg-blue-100 transition-colors"
+                                className="bg-[#822433]/10 p-3 rounded-lg flex items-center justify-center cursor-pointer hover:bg-[#822433]/20 transition-colors"
                               >
                                 {iconsMap[area]}
                                 <span className="text-sm sm:text-base ">{area}</span>

@@ -11,21 +11,21 @@ const Footer: React.FC = () => (
       <div className="flex space-x-6">
         <a 
           href="https://www.instagram.com/sapienzafoilingteam/" 
-          className="hover:text-blue-600 transition-colors"
+          className="hover:text-[#822433] transition-colors"
           aria-label="Instagram"
         >
           <Instagram className="w-8 h-8 hover:scale-110 transition-transform" />
         </a>
         <a 
           href="https://www.linkedin.com/company/sapienza-foiling-team/about/" 
-          className="hover:text-blue-600 transition-colors"
+          className="hover:text-[#822433] transition-colors"
           aria-label="LinkedIn"
         >
           <Linkedin className="w-8 h-8 hover:scale-110 transition-transform" />
         </a>
         <a 
           href="https://www.facebook.com/profile.php?id=61572515878295" 
-          className="hover:text-blue-600 transition-colors"
+          className="hover:text-[#822433] transition-colors"
           aria-label="Facebook"
         >
           <Facebook className="w-8 h-8 hover:scale-110 transition-transform" />

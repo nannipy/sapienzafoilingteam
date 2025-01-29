@@ -81,15 +81,15 @@ export default function Home() {
           {upcomingEvents.map((event, index) => (
             <div
               key={index}
-              className="bg-gray-900 p-6  mx-auto rounded-xl transition-all duration-300 hover:transform hover:scale-105 md:grid md:grid-cols-2 gap-4"
+              className="bg-[#822433] p-6  mx-auto rounded-xl transition-all duration-300 hover:transform hover:scale-105 md:grid md:grid-cols-2 gap-4"
               onClick={() => window.open(event.link, '_blank')}
             >
               {/* Contenuto del testo a sinistra */}
               <div className="flex flex-col justify-center">
-                <Calendar className="text-blue-500 w-8 h-8 mb-4" />
+                <Calendar className="text-white w-8 h-8 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">{event.title}</h3>
-                <p className="text-gray-400">{event.date}</p>
-                <p className="text-gray-400">{event.location}</p>
+                <p className="text-white">{event.date}</p>
+                <p className="text-white">{event.location}</p>
               </div>
 
               {/* Immagine a destra */}
@@ -115,21 +115,21 @@ export default function Home() {
             <div className="flex justify-center space-x-8">
               <a 
                 href="https://www.instagram.com/sapienzafoilingteam/" 
-                className="hover:text-blue-600 transition-colors"
+                className="hover:text-[#822433] transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-8 h-8 hover:scale-110 transition-transform" />
               </a>
               <a 
                 href="https://www.linkedin.com/company/sapienza-foiling-team/about/" 
-                className="hover:text-blue-600 transition-colors"
+                className="hover:text-[#822433] transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-8 h-8 hover:scale-110 transition-transform" />
               </a>
               <a 
                 href="https://www.facebook.com/profile.php?id=61572515878295" 
-                className="hover:text-blue-600 transition-colors"
+                className="hover:text-[#822433] transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="w-8 h-8 hover:scale-110 transition-transform" />
@@ -140,7 +140,7 @@ export default function Home() {
       </section>
 
       {/* Call to Action Section with Floating Elements */}
-      <section className="relative py-20 bg-gradient-to-br from-blue-900 to-blue-700 text-white overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-[#822433] to-[#6d1f2b] text-white overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 opacity-10 animate-slide" />
         </div>
@@ -152,15 +152,13 @@ export default function Home() {
             <p className="text-xl mb-8">
               Cerchiamo persone appassionate che vogliono mettersi alla prova e crescere insieme a noi.
             </p>
-            <button onClick={() => window.location.href = 'https://docs.google.com/forms/d/1TsTV28v7nggIEp98K8JGwtKbrV5P-9xzHIxmuFlSXCs/edit?pli=1'} className="group bg-white text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
+            <button onClick={() => window.location.href = 'https://docs.google.com/forms/d/1TsTV28v7nggIEp98K8JGwtKbrV5P-9xzHIxmuFlSXCs/edit?pli=1'} className="group bg-white text-[#822433] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
               Unisciti a noi 
               <ArrowRight className="inline ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>
       </section>
-
-      
 
     </main>
     </>

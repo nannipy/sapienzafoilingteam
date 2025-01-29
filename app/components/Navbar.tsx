@@ -56,7 +56,7 @@ const Navbar = () => {
             ))}
             <Link
               href="https://docs.google.com/forms/d/e/1FAIpQLSfUxoIJQdocILXDDgykkHAJ1yg60mGeZ7T_fr5M6cob1ca8oA/viewform?usp=dialog"
-              className="ml-4 px-6 py-2 bg-blue-600 text-white rounded-full transition-all duration-300 hover:bg-blue-700 hover:shadow-md"
+              className="ml-4 px-6 py-2 bg-[#822433] text-white rounded-full transition-all duration-300 hover:bg-[#6d1f2b] hover:shadow-md"
               target="_blank"
             >
               Join Us
@@ -95,7 +95,7 @@ const Navbar = () => {
             ))}
             <Link
               href="https://docs.google.com/forms/d/e/1FAIpQLSfUxoIJQdocILXDDgykkHAJ1yg60mGeZ7T_fr5M6cob1ca8oA/viewform?usp=dialog"
-              className="block mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-center transition-all duration-300 hover:bg-blue-700"
+              className="block mt-2 px-4 py-2 bg-[#822433] text-white rounded-lg text-center transition-all duration-300 hover:bg-[#6d1f2b]"
               onClick={handleMenuToggle}
             >
               Join Us

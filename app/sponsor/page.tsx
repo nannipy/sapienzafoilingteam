@@ -8,7 +8,7 @@ const SponsorPage = () => {
   return (
     <main className="min-h-screen bg-white text-black">
       {/* Hero Section */}
-      <div className="relative h-full  bg-gradient-to-br from-blue-900 to-blue-700">
+      <div className="relative h-full bg-gradient-to-br from-[#822433] to-[#6d1f2b]">
         <div className="absolute h-96 inset-0 " />
         <div className="relative z-10 h-full p-44 flex flex-col items-center justify-center text-white px-4">
           <HandshakeIcon className="w-20 h-20 mb-6" />
@@ -16,7 +16,7 @@ const SponsorPage = () => {
           <p className="text-xl md:text-2xl mb-8 text-center max-w-3xl">
             Unisciti a noi nel percorso verso l&apos; eccellenza nella vela tecnologica e nell&apos; innovazione sostenibile
           </p>
-          <a href="#contact" className="bg-white text-blue-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-50 transition-colors">
+          <a href="#contact" className="bg-white text-[#822433] px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#822433]/10 transition-colors">
             Contattaci
           </a>
         </div>
@@ -29,7 +29,7 @@ const SponsorPage = () => {
             <h2 className="text-3xl font-bold text-center mb-8">Parliamo del Tuo Coinvolgimento</h2>
             <div className="space-y-6">
               <div className="flex items-center justify-center space-x-4 mb-8">
-                <MessageCircle className="w-6 h-6 text-blue-500" />
+                <MessageCircle className="w-6 h-6 text-[#822433]" />
                 <span className="text-lg">Compila il form per ricevere la nostra brochure sponsor</span>
               </div>
               <form className="space-y-6">
@@ -37,27 +37,27 @@ const SponsorPage = () => {
                   <input
                     type="text"
                     placeholder="Nome e Cognome"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#822433] focus:border-transparent"
                   />
                   <input
                     type="email"
                     placeholder="Email Aziendale"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#822433] focus:border-transparent"
                   />
                 </div>
                 <input
                   type="text"
                   placeholder="Azienda"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#822433] focus:border-transparent"
                 />
                 <textarea
                   placeholder="Il tuo messaggio"
                   rows={4}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#822433] focus:border-transparent"
                 />
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                  className="w-full bg-[#822433] text-white py-4 rounded-lg font-semibold hover:bg-[#9a2b3d] transition-colors"
                 >
                   Invia Richiesta
                 </button>
