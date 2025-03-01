@@ -164,14 +164,3 @@ Current Version: 1.0.0
 Status: Active Development
 
 Made with ⛵️ by Sapienza Foiling Team
- ```
-This enhanced README includes:
-
-1. More detailed feature descriptions
-2. Comprehensive development guidelines
-3. Detailed project structure
-4. Clear contribution workflow
-5. Extended setup instructions
-6. Script descriptions
-7. Styling guidelines
-8. Version information
