@@ -1,96 +1,176 @@
-# Sapienza Foiling Team - Homepage
+# Sapienza Foiling Team Website
 
-Questa è la homepage del sito **Sapienza Sailing Team**, sviluppata con **Next.js** e **TypeScript**. La pagina presenta il team, i prossimi eventi, e fornisce un collegamento ai profili social per seguire le attività del team. È inclusa anche una sezione di call to action per incentivare nuovi membri a entrare nel team.
+<p align="center">
+  <img src="/public/logosft.png" alt="Sapienza Foiling Team Logo" width="200"/>
+</p>
 
-## Funzionalità Principali
+## Overview
 
-- **Sezione Hero**: immagine di sfondo a schermo intero con il nome e il motto del team.
-- **Prossimi Eventi**: lista degli eventi in programma, con dettagli come data, luogo e immagine.
-- **Sezione Social Media**: collegamenti ai profili social del team.
-- **Call to Action**: invito a unirsi al team con collegamento alla pagina dei contatti.
+The Sapienza Foiling Team website serves as the digital hub for our university sailing team. We are dedicated to designing and constructing sustainable foiling boats, with a focus on innovation and environmental responsibility. Our team participates in the SuMoth Challenge, an international competition that promotes sustainable sailing technology.
 
-## Struttura del Codice
+## 🚀 Features
 
-Il componente `Home` contiene le seguenti sezioni principali:
+### For Visitors
+- **Responsive Design**: Optimized viewing experience across all devices
+- **Team Showcase**: Detailed information about our four main divisions
+- **Fleet Details**: Technical specifications and information about our boats
+- **Sponsorship Portal**: Opportunities and benefits for potential partners
+- **Contact System**: Direct communication channel with our team
+- **Event Calendar**: Upcoming competitions and team events
+- **Social Integration**: Connect with us across multiple platforms
 
-1. **Head Section**: definisce i metadati per i motori di ricerca e per i social network, ottimizzando la condivisione della pagina.
-2. **Sezione Hero**: visualizza il titolo del team e un breve motto, con un'immagine di sfondo a tutto schermo.
-3. **Prossimi Eventi**: mostra una lista di eventi in programma, con titolo, data, luogo e immagine. Ogni evento è cliccabile e apre un link in una nuova scheda.
-4. **Social Media Section**: icone dei social media con collegamenti ai profili del team.
-5. **Call to Action**: invita i visitatori a unirsi al team con un pulsante che reindirizza alla pagina di contatto.
+### For Developers
+- Modern React components with TypeScript
+- Framer Motion animations for enhanced UX
+- Tailwind CSS for responsive styling
+- Performance optimization with Vercel
+- SEO-friendly structure
 
-## Installazione
+## 🛠 Tech Stack
 
-1. **Clona il repository**
-   ```bash
-   git clone https://github.com/tuo-username/sapienza-sailing-team.git
-   cd sapienza-sailing-team
+- **Framework:** Next.js 14 with App Router
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Icons:** Lucide React
+- **Analytics:** Vercel Analytics
+- **Performance:** Vercel Speed Insights
+- **Fonts:** Local fonts with next/font
 
-2.	**Installa le dipendenze**
-    ```bash
-    npm install
-    ```
-3.	**Avvia il server di sviluppo**
-    ```bash
-    npm run dev
-    ```
+## 🏗 Project Structure
+sapienza-foiling-team/
+├── app/
+│   ├── components/       # Reusable UI components
+│   │   ├── Navbar.tsx
+│   │   └── Footer.tsx
+│   ├── fleet/           # Fleet page
+│   ├── team/            # Team page
+│   ├── sponsor/         # Sponsorship page
+│   ├── contact/         # Contact page
+│   ├── layout.tsx       # Root layout
+│   ├── page.tsx         # Home page
+│   └── globals.css      # Global styles
+├── public/             # Static assets
+└── package.json
 
-4.	**Accedi al sito**
-Apri il browser e vai all’indirizzo http://localhost:3000 per visualizzare la homepage.
+## 🚀 Getting Started
 
-Dipendenze Principali
+### Prerequisites
 
-	•	Next.js: framework React per lo sviluppo di applicazioni web.
-	•	React: libreria JavaScript per la creazione di interfacce utente.
-	•	TypeScript: linguaggio che aggiunge tipizzazione statica a JavaScript.
-	•	lucide-react: pacchetto di icone React.
-	•	next/image: componente di Next.js per l’ottimizzazione delle immagini.
+- Node.js (v18 or higher)
+- npm or yarn
+- Git
 
-Utilizzo
+### Installation
 
-Modifica degli Eventi
+1. Clone the repository
+```bash
+git clone https://github.com/nannipy/sapienza-foiling-team.git
 
-Per aggiornare gli eventi futuri:
+2. Navigate to the project directory
+```bash
+cd sapienza-foiling-team
+ ```
 
-	1.	Trova l’array upcomingEvents nel componente Home.
-	2.	Aggiungi o modifica gli oggetti evento con le proprietà:
-	•	title: nome dell’evento
-	•	date: data dell’evento
-	•	location: luogo dell’evento
-	•	image: percorso dell’immagine
-	•	link: URL per ulteriori dettagli sull’evento.
+3. Install dependencies
+```bash
+npm install
+ ```
 
-Metadati
+4. Create a local environment file
+```bash
+cp .env.example .env.local
+ ```
 
-La sezione <Head> contiene metadati per ottimizzare il SEO e la condivisione sui social media:
+5. Start the development server
+```bash
+npm run dev
+ ```
 
-	•	og:title: nome del team.
-	•	og:description: descrizione sintetica del team.
-	•	og:image: URL di un’immagine rappresentativa.
-	•	twitter:card: tipo di anteprima per Twitter.
+6. Open http://localhost:3000 in your browser
+### Available Scripts
+- npm run dev - Start development server
+- npm run build - Build for production
+- npm run start - Start production server
+- npm run lint - Run ESLint
+- npm run format - Format code with Prettier
+## 💻 Development Guide
+### Component Structure
+- Use functional components with TypeScript
+- Implement proper type definitions
+- Follow the established folder structure
+- Use Tailwind CSS for styling
+### Styling Guidelines
+- Use Tailwind CSS utility classes
+- Follow the color scheme defined in tailwind.config.js
+- Maintain responsive design principles
+- Use the custom color variables for consistency
+### Adding New Features
+1. Create a new branch for your feature
+2. Implement the feature following our coding standards
+3. Add necessary tests
+4. Update documentation
+5. Submit a pull request
+## 🤝 Contributing
+We welcome contributions! Here's how you can help:
 
-Navigazione
+1. Fork the repository
+2. Create your feature branch
+```bash
+git checkout -b feature/YourFeature
+ ```
 
-Il pulsante di call to action reindirizza alla pagina /contact per contattare il team. Assicurati che esista una pagina /contact nell’applicazione per evitare errori.
+3. Commit your changes
+```bash
+git commit -m 'Add YourFeature'
+ ```
 
-Contributi
+4. Push to the branch
+```bash
+git push origin feature/YourFeature
+ ```
 
-1.	**Fai un fork del repository.**
-2.	**Crea un nuovo branch per le modifiche.**
+5. Open a Pull Request
+### Contribution Guidelines
+- Follow the existing code style
+- Write meaningful commit messages
+- Update documentation
+- Test thoroughly
+- Create issues for major changes
+- Review existing issues before starting work
+## 📝 License
+This project is licensed under the MIT License - see the LICENSE.md file for details.
 
-    ```bash
-    git checkout -b nome-branch
-    ```
+## 📞 Contact & Support
+### General Inquiries
+- Email: sapienzafoilingteam@gmail.com
+- Website: sapienzafoilingteam.com
+### Social Media
+- Instagram: @sapienzafoilingteam
+- LinkedIn: Sapienza Foiling Team
+- Facebook: Sapienza Foiling Team
+### Location
+Via Eudossiana 18, 00184 Roma
 
-3.	**Effettua le modifiche e fai commit.**
-    ```bash
-    git commit -m "Descrizione delle modifiche"
-    ```
+## 🙏 Acknowledgments
+- Sapienza University of Rome for their support
+- Our sponsors and partners
+- The SuMoth Challenge organization
+- All team members and contributors
+- The open-source community
+## 📈 Project Status
+Current Version: 1.0.0
+Status: Active Development
 
-4.	**Manda una pull request per la revisione.**
+Made with ⛵️ by Sapienza Foiling Team
+ ```
+This enhanced README includes:
 
-Licenza
-
-Distribuito con una licenza MIT. Vedi il file LICENSE per maggiori dettagli.
-
-Questo README descrive l'obiettivo, le funzionalità e le modalità di modifica del progetto, inclusa la gestione degli eventi e dei metadati, fornendo una guida chiara per l'installazione e la contribuzione.
+1. More detailed feature descriptions
+2. Comprehensive development guidelines
+3. Detailed project structure
+4. Clear contribution workflow
+5. Extended setup instructions
+6. Script descriptions
+7. Styling guidelines
+8. Version information
