@@ -66,6 +66,7 @@ sapienza-foiling-team/
 1. Clone the repository
 ```bash
 git clone https://github.com/nannipy/sapienza-foiling-team.git
+```
 
 2. Navigate to the project directory
 ```bash
