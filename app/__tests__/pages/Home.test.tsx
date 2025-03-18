@@ -9,12 +9,13 @@ jest.mock('react-intersection-observer', () => ({
 
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props: any) => {
+  default: (props: { src: string; alt: string; fill?: boolean; priority?: boolean; [key: string]: any }) => {
     // Convert boolean props to strings
     const imgProps = {
       ...props,
       fill: props.fill ? "true" : undefined,
-      priority: props.priority ? "true" : undefined
+      priority: props.priority ? "true" : undefined,
+      alt: props.alt || ''
     };
     return <img {...imgProps} />
   },

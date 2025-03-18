@@ -4,8 +4,8 @@ import Footer from '../../components/Footer';
 
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props: any) => {
-    return <img {...props} />
+  default: (props: { src: string; alt: string; [key: string]: any }) => {
+    return <img {...props} alt={props.alt || ''} />
   },
 }));
 
