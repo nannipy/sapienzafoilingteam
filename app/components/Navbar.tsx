@@ -42,7 +42,7 @@ const Navbar = () => {
             <Image src="/logosft.png" alt="Logo" width={40} height={40} className="h-16 w-16" />
           </Link>
 
-          <div className="hidden md:flex items-center space-x-1">
+          <div data-testid="desktop-nav" className="hidden md:flex items-center space-x-1">
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
@@ -76,6 +76,7 @@ const Navbar = () => {
         </div>
 
         <div 
+          data-testid="mobile-menu"
           className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
             isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
           }`}

@@ -4,10 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { ChevronDown, Calendar, Instagram, Linkedin, Facebook, ArrowRight } from "lucide-react";
 
-import Head from "next/head"; 
-
 export default function Home() {
-
   const upcomingEvents = [
     {
       title: "2025 SuMoth Challenge",
@@ -20,17 +17,9 @@ export default function Home() {
 
   return (
     <>
-    <meta property="og:title" content="Sapienza Foiling Team" />
-    <meta property="og:description" content="Il nostro impegno e passione per la vela." />
-    <meta property="og:image" content="https://tuosito.com/moth_4.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    
-    <Head>
-        <title>Sapienza Foiling Team</title>
-        <meta name="description" content="Il sito ufficiale del Sapienza Foiling Team: il nostro impegno e passione per la vela." />
-        <meta name="keywords" content="vela, regate, Sapienza, Sapienza Foiling Team" />
-      </Head>
-    <main className="relative min-h-screen bg-black">
+
+
+    <main className="relative min-h-screen bg-black" data-testid="home-page">
       {/* Hero Section */}
       <div className="relative h-screen flex items-center justify-center">
         <Image
@@ -42,7 +31,7 @@ export default function Home() {
         />
         
         <div className="relative z-10 text-center text-white px-4">
-          <div className="transition-all duration-500">
+          <div className="transition-all duration-500" data-testid="animated-element">
             <h1 className="text-5xl md:text-7xl font-bold pb-4">
               Sapienza Foiling Team
             </h1>
@@ -52,6 +41,7 @@ export default function Home() {
         <div className="absolute bottom-8 w-full flex justify-center">
           <div className="animate-bounce">
           <ChevronDown
+          data-testid="chevron-down"
           className="text-white w-8 h-8"
           onClick={() => {
           const targetElement = document.querySelector('#upcoming-events');
@@ -69,7 +59,7 @@ export default function Home() {
 
      
       {/* Upcoming Events Section */}
-      <div className="bg-gray-50 py-16" id="upcoming-events">
+      <div className="bg-gray-50 py-16" id="upcoming-events" role="region" aria-label="achievements">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-black mb-12 text-center">
             Prossimi Eventi
@@ -149,7 +139,7 @@ export default function Home() {
             <p className="text-xl mb-8">
               Cerchiamo persone appassionate che vogliono mettersi alla prova e crescere insieme a noi.
             </p>
-            <button onClick={() => window.location.href = 'https://docs.google.com/forms/d/1TsTV28v7nggIEp98K8JGwtKbrV5P-9xzHIxmuFlSXCs/edit?pli=1'} className="group bg-white text-[#822433] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+            <button onClick={() => window.open('https://docs.google.com/forms/d/1TsTV28v7nggIEp98K8JGwtKbrV5P-9xzHIxmuFlSXCs/edit?pli=1', '_blank')} className="group bg-white text-[#822433] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
               Unisciti a noi 
               <ArrowRight className="inline ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
