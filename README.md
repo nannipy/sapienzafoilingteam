@@ -38,6 +38,8 @@ The Sapienza Foiling Team website serves as the digital hub for our university s
 - **Fonts:** Local fonts with next/font
 
 ## 🏗 Project Structure
+
+
 sapienza-foiling-team/
 ├── app/
 │   ├── components/       # Reusable UI components

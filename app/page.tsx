@@ -46,9 +46,6 @@ export default function Home() {
             <h1 className="text-5xl md:text-7xl font-bold pb-4">
               Sapienza Foiling Team
             </h1>
-            <p className="text-xl md:text-2xl italic">
-              Il nostro impegno, la nostra passione.
-            </p>
           </div>
         </div>
 
