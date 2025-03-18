@@ -39,7 +39,7 @@ The Sapienza Foiling Team website serves as the digital hub for our university s
 
 ## 🏗 Project Structure
 
-
+```bash
 sapienza-foiling-team/
 ├── app/
 │   ├── components/       # Reusable UI components
@@ -54,6 +54,7 @@ sapienza-foiling-team/
 │   └── globals.css      # Global styles
 ├── public/             # Static assets
 └── package.json
+```
 
 ## 🚀 Getting Started
 
