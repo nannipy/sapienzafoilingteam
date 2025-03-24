@@ -1,67 +1,74 @@
 'use client';
 
 import React from 'react';
-import { HandshakeIcon, MessageCircle} from 'lucide-react';
+import { HandshakeIcon, MessageCircle, Rocket, Users, Target } from 'lucide-react';
+import Image from 'next/image';
 
 const SponsorPage = () => {
 
   return (
     <main className="min-h-screen bg-white text-black">
       {/* Hero Section */}
-      <div className="relative h-full bg-gradient-to-br from-[#822433] to-[#6d1f2b]">
-        <div className="absolute h-96 inset-0 " />
-        <div className="relative z-10 h-full p-44 flex flex-col items-center justify-center text-white px-4">
-          <HandshakeIcon className="w-20 h-20 mb-6" />
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-center">Diventa Nostro Partner</h1>
-          <p className="text-xl md:text-2xl mb-8 text-center max-w-3xl">
-            Unisciti a noi nel percorso verso l&apos; eccellenza nella vela tecnologica e nell&apos; innovazione sostenibile
-          </p>
-          <a href="#contact" className="bg-white text-[#822433] px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#822433]/10 transition-colors">
+      <div className="relative h-96 bg-gradient-to-br from-[#822433] to-[#6d1f2b]">
+        <div className="absolute inset-0 " />
+        <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 ">
+          <HandshakeIcon className="w-16 h-16 mb-4 mt-20 " />
+          <h1 className="text-4xl md:text-5xl font-bold mb-2">Diventa Nostro Partner</h1>
+          <p className="text-xl text-center">Unisciti a noi nel percorso verso l&apos;eccellenza nella vela tecnologica e nell&apos;innovazione sostenibile</p>
+          <a href="mailto:sapienzafoilingteam@gmail.com" className="mt-4 bg-white text-[#822433] px-8 py-4 rounded-full text-lg font-semibold  transition-colors">
             Contattaci
           </a>
         </div>
       </div>
+    
       
-      {/* Contact Section */}
-      <div id="contact" className="py-16">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-xl shadow-xl p-8">
-            <h2 className="text-3xl font-bold text-center mb-8">Parliamo del Tuo Coinvolgimento</h2>
-            <div className="space-y-6">
-              <div className="flex items-center justify-center space-x-4 mb-8">
-                <MessageCircle className="w-6 h-6 text-[#822433]" />
-                <span className="text-lg">Compila il form per ricevere la nostra brochure sponsor</span>
+      {/* Sponsors Grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h2 className="text-3xl font-bold text-center mb-12">I Nostri Sponsor</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <a href="https://www.solidworks.com" target="_blank" rel="noopener noreferrer" className="group">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32">
+              <Image src="/sponsors/solidworks.svg" alt="SolidWorks" width={100} height={80} className="object-contain" />
+            </div>
+          </a>
+          <a href="https://www.notion.so" target="_blank" rel="noopener noreferrer" className="group">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32">
+              <Image src="/sponsors/notion.svg" alt="Notion" width={100} height={40} className="object-contain" />
+            </div>
+          </a>
+          <a href="https://www.beta-cae.com/" target="_blank" rel="noopener noreferrer" className="group">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32">
+              <Image src="/sponsors/beta.svg" alt="Beta Simulation Solutions" width={200} height={80} className="object-contain" />
+            </div>
+          </a>
+        </div>
+      </div>
+
+      {/* Partnership Benefits */}
+      <div className="bg-[#fdf1f3] py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-12">Perché Diventare Nostro Partner?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <div className="flex items-center mb-4">
+                <Target className="w-8 h-8 text-[#822433] mr-3" />
+                <h3 className="text-xl font-semibold">Visibilità</h3>
               </div>
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <input
-                    type="text"
-                    placeholder="Nome e Cognome"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#822433] focus:border-transparent"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Email Aziendale"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#822433] focus:border-transparent"
-                  />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Azienda"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#822433] focus:border-transparent"
-                />
-                <textarea
-                  placeholder="Il tuo messaggio"
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#822433] focus:border-transparent"
-                />
-                <button
-                  type="submit"
-                  className="w-full bg-[#822433] text-white py-4 rounded-lg font-semibold hover:bg-[#9a2b3d] transition-colors"
-                >
-                  Invia Richiesta
-                </button>
-              </form>
+              <p className="text-gray-600">Raggiungi un pubblico giovane e dinamico attraverso i nostri canali di comunicazione e gli eventi del team.</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <div className="flex items-center mb-4">
+                <Rocket className="w-8 h-8 text-[#822433] mr-3" />
+                <h3 className="text-xl font-semibold">Innovazione</h3>
+              </div>
+              <p className="text-gray-600">Associa il tuo brand a un progetto all'avanguardia nella tecnologia e nella sostenibilità.</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <div className="flex items-center mb-4">
+                <Users className="w-8 h-8 text-[#822433] mr-3" />
+                <h3 className="text-xl font-semibold">Network</h3>
+              </div>
+              <p className="text-gray-600">Entra in contatto con talenti emergenti e altri partner nel settore nautico e tecnologico.</p>
             </div>
           </div>
         </div>

@@ -139,7 +139,7 @@ const TeamPage = () => {
           </p>
           <motion.div
             animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            transition={{ duration: 1, repeat: Infinity }}
             className="cursor-pointer"
             onClick={() => {
               document.getElementById('team-sections')?.scrollIntoView({ behavior: 'smooth' });

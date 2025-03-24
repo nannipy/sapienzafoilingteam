@@ -35,14 +35,14 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3">
-      <div className={`bg-white text-black font-bold mx-auto max-w-7xl shadow-lg hover:shadow-xl transition-all duration-300
+      <div className={`bg-white text-black font-bold mx-auto max-w-4xl shadow-lg hover:shadow-xl transition-all duration-300
         ${isRounded ? 'rounded-full' : 'rounded-lg'}`}>
         <div className="flex items-center justify-between px-6 py-3">
           <Link href="/" className="flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
             <Image src="/logosft.png" alt="Logo" width={40} height={40} className="h-16 w-16" />
           </Link>
 
-          <div data-testid="desktop-nav" className="hidden md:flex items-center space-x-1">
+          <div data-testid="desktop-nav" className="hidden md:flex items-center space-x-4">
             {navigationItems.map((item) => (
               <Link
                 key={item.href}

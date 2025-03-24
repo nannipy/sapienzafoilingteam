@@ -8,7 +8,29 @@ const Footer: React.FC = () => (
       <div className="">
         © 2025 Sapienza Foiling Team
       </div>
-      <div className="flex space-x-6">
+      <a
+          href="mailto:sapienzafoilingteam@gmail.com"
+          className="hover:text-[#822433] font-bold transition-colors flex items-center gap-2"
+          aria-label="Email"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            className="w-8 h-8 hover:scale-110 transition-transform hidden md:block"
+          >
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          <span className="text-sm hidden md:block">sapienzafoilingteam@gmail.com</span>
+        </a>
+      
+      <div className="flex space-x-3">
+        {/* Social Media Icons */}
         <a 
           href="https://www.instagram.com/sapienzafoilingteam/" 
           className="hover:text-[#822433] transition-colors"

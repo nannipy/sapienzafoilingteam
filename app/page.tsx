@@ -137,7 +137,7 @@ export default function Home() {
               Entra a far parte del team
             </h2>
             <p className="text-xl mb-8">
-              Cerchiamo persone appassionate che vogliono mettersi alla prova e crescere insieme a noi.
+              Cerchiamo persone appassionate che vogliono mettersi <br className="hidden md:block"></br>alla prova e crescere insieme a noi.
             </p>
             <button onClick={() => window.open('https://docs.google.com/forms/d/1TsTV28v7nggIEp98K8JGwtKbrV5P-9xzHIxmuFlSXCs/edit?pli=1', '_blank')} className="group bg-white text-[#822433] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
               Unisciti a noi 
