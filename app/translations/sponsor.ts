@@ -6,6 +6,9 @@ export const sponsorTranslations = {
     sponsorsSection: {
       title: 'Our Sponsors'
     },
+    collaborations: {
+      title: 'Collaborations',
+    },
     benefits: {
       title: 'Why Become Our Partner?',
       visibility: {
@@ -29,6 +32,9 @@ export const sponsorTranslations = {
     sponsorsSection: {
       title: 'I Nostri Sponsor'
     },
+    collaborations: {
+      title: 'Collaborazioni',
+    },
     benefits: {
       title: 'Perché Diventare Nostro Partner?',
       visibility: {
@@ -44,5 +50,6 @@ export const sponsorTranslations = {
         description: 'Entra in contatto con talenti emergenti e altri partner nel settore nautico e tecnologico.'
       }
     }
+    
   }
 };

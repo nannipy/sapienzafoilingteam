@@ -10,12 +10,11 @@ const SponsorPage = () => {
   const { language } = useLanguage();
 
   return (
-    <main className="min-h-screen bg-white text-black">
+    <main className="bg-white text-black">
       {/* Hero Section */}
-      <div className="relative h-96 bg-gradient-to-br from-[#822433] to-[#6d1f2b]">
-        <div className="absolute inset-0 " />
-        <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 ">
-          <HandshakeIcon className="w-16 h-16 mb-4 mt-20 " />
+      <div className="relative h-[28rem] sm:h-96 bg-gradient-to-br from-[#822433] to-[#6d1f2b]">
+        <div className="relative h-full flex flex-col items-center justify-center text-white px-4 ">
+          <HandshakeIcon className="w-16 h-16 mt-20 " />
           <h1 className="text-4xl md:text-5xl font-bold mb-2">{sponsorTranslations[language].title}</h1>
           <p className="text-xl text-center">{sponsorTranslations[language].subtitle}</p>
           <a href="mailto:sapienzafoilingteam@gmail.com" className="mt-4 bg-white text-[#822433] px-8 py-4 rounded-full text-lg font-semibold  transition-colors">
@@ -34,18 +33,36 @@ const SponsorPage = () => {
               <Image src="/sponsors/solidworks.svg" alt="SolidWorks" width={100} height={80} className="object-contain" />
             </div>
           </a>
-          <a href="https://www.notion.so" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32">
-              <Image src="/sponsors/notion.svg" alt="Notion" width={100} height={40} className="object-contain" />
-            </div>
-          </a>
           <a href="https://www.beta-cae.com/" target="_blank" rel="noopener noreferrer" className="group">
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32">
               <Image src="/sponsors/beta.svg" alt="Beta Simulation Solutions" width={200} height={80} className="object-contain" />
             </div>
           </a>
+          <a href="https://www.notion.so" target="_blank" rel="noopener noreferrer" className="group">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32">
+              <Image src="/sponsors/notion.svg" alt="Notion" width={100} height={40} className="object-contain" />
+            </div>
+          </a>
         </div>
       </div>
+      {/* Collaborations*/}
+      {/* Collaborations */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h2 className="text-3xl font-bold text-center mb-12">{sponsorTranslations[language].collaborations.title}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <a href="https://www.dima.uniroma1.it/dima/" target="_blank" rel="noopener noreferrer" className="group">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32">
+              <Image src="/collaborations/dima.png" alt="Collaboration 1" width={300} height={100} className="object-contain" />
+            </div>
+          </a>
+          <a href="https://www.inm.cnr.it/" target="_blank" rel="noopener noreferrer" className="group">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32">
+              <Image src="/collaborations/inm.png" alt="Collaboration 2" width={300} height={100} className="object-contain" />
+            </div>
+          </a>
+        </div>
+      </div>
+
 
       {/* Partnership Benefits */}
       <div className="bg-[#fdf1f3] py-16">

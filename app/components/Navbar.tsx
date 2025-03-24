@@ -86,13 +86,6 @@ const Navbar = () => {
           }`}
         >
           <div className="px-4 py-2">
-            <button
-              onClick={() => setLanguage(language === 'en' ? 'it' : 'en')}
-              className="w-full mb-2 p-3 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-300 flex items-center justify-center"
-              aria-label={navbarTranslations[language].switchLanguage}
-            >
-              {language === 'en' ? '🇮🇹' : '🇬🇧'}
-            </button>
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
