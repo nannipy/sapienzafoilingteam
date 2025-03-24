@@ -62,7 +62,7 @@ const ContactPage = () => {
                 <div className="group">
                   <h3 className="text-lg font-semibold text-black mb-2">LinkTree</h3>
                   <a 
-                    href="mailto:sapienzafoilingteam@gmail.com" 
+                    href="linktr.ee/sapienzafoilingteam" 
                     className="flex items-center space-x-3 p-3 rounded-lg hover:bg-[#fdf1f3] transition-colors duration-200"
                   >
                     <TreePine className="w-6 h-6 text-[#822433]" />
