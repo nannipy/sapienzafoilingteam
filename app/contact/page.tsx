@@ -1,30 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   Mail, 
-  Send,
   MessageSquare,
-  
-  CheckCircle2
 } from 'lucide-react';
 import {  MapPin, Facebook, Instagram, Linkedin , TreePine} from 'lucide-react';
 
 
 const ContactPage = () => {
-  const [formStatus, setFormStatus] = useState('idle'); // idle, sending, success, error
-
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    setFormStatus('sending');
-    // Simuliamo l'invio del form
-    setTimeout(() => {
-      setFormStatus('success');
-    }, 1000);
-  };
-
- 
-
   return (
     <main className="min-h-screen bg-white text-black">
       {/* Hero Section */}

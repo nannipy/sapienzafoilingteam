@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { HandshakeIcon, MessageCircle, Rocket, Users, Target } from 'lucide-react';
+import { HandshakeIcon, Rocket, Users, Target } from 'lucide-react';
 import Image from 'next/image';
 
 const SponsorPage = () => {
@@ -61,7 +61,7 @@ const SponsorPage = () => {
                 <Rocket className="w-8 h-8 text-[#822433] mr-3" />
                 <h3 className="text-xl font-semibold">Innovazione</h3>
               </div>
-              <p className="text-gray-600">Associa il tuo brand a un progetto all'avanguardia nella tecnologia e nella sostenibilità.</p>
+              <p className="text-gray-600">Associa il tuo brand a un progetto all&apos;avanguardia nella tecnologia e nella sostenibilità.</p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-lg">
               <div className="flex items-center mb-4">
