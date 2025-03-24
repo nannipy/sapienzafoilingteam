@@ -1,10 +1,13 @@
 'use client'
 
 import React from "react";
+import { useLanguage } from "./context/LanguageContext";
+import { homeTranslations } from "./translations/home";
 import Image from "next/image";
 import { ChevronDown, Calendar, Instagram, Linkedin, Facebook, ArrowRight } from "lucide-react";
 
 export default function Home() {
+  const { language } = useLanguage();
   const upcomingEvents = [
     {
       title: "2025 SuMoth Challenge",
@@ -62,7 +65,7 @@ export default function Home() {
       <div className="bg-gray-50 py-16" id="upcoming-events" role="region" aria-label="achievements">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-black mb-12 text-center">
-            Prossimi Eventi
+            {homeTranslations[language].upcomingEvents}
           </h2>
           <div className="grid md:grid-cols-1">
           {upcomingEvents.map((event, index) => (
@@ -98,7 +101,7 @@ export default function Home() {
       <section className="py-12 bg-[#FDF1F3] text-black">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <h3 className="text-2xl font-semibold mb-8">Seguici sui nostri social</h3>
+            <h3 className="text-2xl font-semibold mb-8">{homeTranslations[language].followUs}</h3>
             <div className="flex justify-center space-x-8">
               <a 
                 href="https://www.instagram.com/sapienzafoilingteam/" 
@@ -134,13 +137,13 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-6">
-              Entra a far parte del team
+              {homeTranslations[language].joinTeamTitle}
             </h2>
             <p className="text-xl mb-8">
-              Cerchiamo persone appassionate che vogliono mettersi <br className="hidden md:block"></br>alla prova e crescere insieme a noi.
+              {homeTranslations[language].joinTeamDescription}
             </p>
             <button onClick={() => window.open('https://docs.google.com/forms/d/1TsTV28v7nggIEp98K8JGwtKbrV5P-9xzHIxmuFlSXCs/edit?pli=1', '_blank')} className="group bg-white text-[#822433] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
-              Unisciti a noi 
+              {homeTranslations[language].joinUsButton}
               <ArrowRight className="inline ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>

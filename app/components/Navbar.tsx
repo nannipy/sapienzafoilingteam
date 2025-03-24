@@ -4,17 +4,20 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import { useLanguage } from '../context/LanguageContext';
+import { navbarTranslations } from '../translations/navbar';
 
 const Navbar = () => {
   const [isRounded, setIsRounded] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const currentPath = usePathname();
+  const { language, setLanguage } = useLanguage();
   
   const navigationItems = [
-    { label: 'Flotta', href: '/fleet' },
-    { label: 'Team', href: '/team' },
-    { label: 'Sponsor', href: '/sponsor' },
-    { label: 'Contatti', href: '/contact' },
+    { label: navbarTranslations[language].fleet, href: '/fleet' },
+    { label: navbarTranslations[language].team, href: '/team' },
+    { label: navbarTranslations[language].sponsor, href: '/sponsor' },
+    { label: navbarTranslations[language].contact, href: '/contact' },
   ];
 
   const isCurrentPath = (path: string) => currentPath === path;
@@ -43,6 +46,7 @@ const Navbar = () => {
           </Link>
 
           <div data-testid="desktop-nav" className="hidden md:flex items-center space-x-4">
+            
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
@@ -59,7 +63,7 @@ const Navbar = () => {
               className="ml-4 px-6 py-2 bg-[#822433] text-white rounded-full transition-all duration-300 hover:bg-[#6d1f2b] hover:shadow-md"
               target="_blank"
             >
-              Join Us
+              {navbarTranslations[language].joinUs}
             </Link>
           </div>
 
@@ -82,6 +86,13 @@ const Navbar = () => {
           }`}
         >
           <div className="px-4 py-2">
+            <button
+              onClick={() => setLanguage(language === 'en' ? 'it' : 'en')}
+              className="w-full mb-2 p-3 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-300 flex items-center justify-center"
+              aria-label={navbarTranslations[language].switchLanguage}
+            >
+              {language === 'en' ? '🇮🇹' : '🇬🇧'}
+            </button>
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
@@ -99,11 +110,21 @@ const Navbar = () => {
               className="block mt-2 px-4 py-2 bg-[#822433] text-white rounded-lg text-center transition-all duration-300 hover:bg-[#6d1f2b]"
               onClick={handleMenuToggle}
             >
-              Join Us
+              {navbarTranslations[language].joinUs}
             </Link>
           </div>
         </div>
       </div>
+      <button
+        onClick={() => setLanguage(language === 'en' ? 'it' : 'en')}
+        className={`
+          w-12 h-12 rounded-full flex items-center justify-center bg-white hover:bg-gray-200 transition-colors duration-300
+          fixed md:top-10 md:right-10 bottom-4 left-4 md:left-auto md:bottom-auto shadow-lg
+        `}
+        aria-label="Switch language"
+      >
+        {language === 'en' ? '🇮🇹' : '🇬🇧'}
+      </button>
     </nav>
   );
 };

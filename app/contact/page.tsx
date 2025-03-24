@@ -6,9 +6,12 @@ import {
   MessageSquare,
 } from 'lucide-react';
 import {  MapPin, Facebook, Instagram, Linkedin , TreePine} from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { contactTranslations } from '../translations/contact';
 
 
 const ContactPage = () => {
+  const { language } = useLanguage();
   return (
     <main className="min-h-screen bg-white text-black">
       {/* Hero Section */}
@@ -16,7 +19,7 @@ const ContactPage = () => {
         <div className="absolute inset-0 " />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4">
           <MessageSquare className="w-16 h-16 mb-4 mt-10" />
-          <h1 className="text-4xl md:text-5xl font-bold mb-2">Contattaci</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-2">{contactTranslations[language].title}</h1>
         </div>
       </div>
 
@@ -28,14 +31,14 @@ const ContactPage = () => {
 
           <div className="bg-white w-full max-w-2xl mx-auto rounded-xl shadow-lg">
             <div className="border-b p-6">
-              <h2 className="text-3xl font-bold text-gray-800">I Nostri Contatti</h2>
+              <h2 className="text-3xl font-bold text-gray-800">{contactTranslations[language].ourContacts}</h2>
             </div>
             
             <div className="p-6">
               <div className="space-y-6">
                 {/* Email Section */}
                 <div className="group">
-                  <h3 className="text-lg font-semibold text-black mb-2">Email</h3>
+                  <h3 className="text-lg font-semibold text-black mb-2">{contactTranslations[language].email}</h3>
                   <a 
                     href="mailto:sapienzafoilingteam@gmail.com" 
                     className="flex items-center space-x-3 p-3 rounded-lg hover:bg-[#fdf1f3] transition-colors duration-200"
@@ -48,7 +51,7 @@ const ContactPage = () => {
 
                 {/* Location Section */}
                 <div className="group">
-                  <h3 className="text-lg font-semibold text-black mb-2">Sede</h3>
+                  <h3 className="text-lg font-semibold text-black mb-2">{contactTranslations[language].location}</h3>
                   <a 
                     href="https://goo.gl/maps/YOUR_LOCATION" 
                     target="_blank" 
@@ -60,7 +63,7 @@ const ContactPage = () => {
                   </a>
                 </div>
                 <div className="group">
-                  <h3 className="text-lg font-semibold text-black mb-2">LinkTree</h3>
+                  <h3 className="text-lg font-semibold text-black mb-2">{contactTranslations[language].linktree}</h3>
                   <a 
                     href="linktr.ee/sapienzafoilingteam" 
                     className="flex items-center space-x-3 p-3 rounded-lg hover:bg-[#fdf1f3] transition-colors duration-200"
@@ -72,7 +75,7 @@ const ContactPage = () => {
 
                 {/* Social Links */}
                 <div className="pt-4 border-t">
-                  <h3 className="text-lg font-semibold text-black mb-3 ">Social</h3>
+                  <h3 className="text-lg font-semibold text-black mb-3 ">{contactTranslations[language].social}</h3>
                   <div className="flex space-x-9 ml-4">
                     <a 
                     href="https://www.instagram.com/sapienzafoilingteam/" 

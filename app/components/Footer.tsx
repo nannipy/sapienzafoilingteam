@@ -1,12 +1,18 @@
+'use client';
+
 import { Instagram, Linkedin, Facebook } from "lucide-react";
+import { useLanguage } from '../context/LanguageContext';
+import { footerTranslations } from '../translations/footer';
 
 
-const Footer: React.FC = () => (
+const Footer: React.FC = () => {
+  const { language } = useLanguage();
+  return (
   <footer className="bg-gray-50 text-black py-8">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="flex justify-between items-center">
       <div className="">
-        © 2025 Sapienza Foiling Team
+        {footerTranslations[language].copyright}
       </div>
       <a
           href="mailto:sapienzafoilingteam@gmail.com"
@@ -56,6 +62,7 @@ const Footer: React.FC = () => (
     </div>
   </div>
 </footer>
-);
+  );
+}
 
 export default Footer;
