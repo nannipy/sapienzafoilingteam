@@ -112,11 +112,24 @@ const Navbar = () => {
         onClick={() => setLanguage(language === 'en' ? 'it' : 'en')}
         className={`
           w-12 h-12 rounded-full flex items-center justify-center bg-white hover:bg-gray-200 transition-colors duration-300
-          fixed md:top-10 md:right-10 bottom-4 left-4 md:left-auto md:bottom-auto shadow-lg
-        `}
+          fixed bottom-4 left-4 shadow-lg text-black`}
         aria-label="Switch language"
       >
-        {language === 'en' ? '🇮🇹' : '🇬🇧'}
+        {language === 'en' ? (
+          <Image 
+            src="/flags/it-flag.png" 
+            alt="Italian Flag" 
+            width={24} 
+            height={24}
+          />
+        ) : (
+          <Image 
+            src="/flags/en-flag.png" 
+            alt="British Flag" 
+            width={24} 
+            height={24}
+          />
+        )}
       </button>
     </nav>
   );
