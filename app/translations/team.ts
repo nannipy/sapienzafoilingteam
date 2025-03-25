@@ -3,6 +3,8 @@ export const teamTranslations = {
     title: 'Our Team',
     subtitle: 'Our team is organized into four fundamental departments, each with a strategic role and a distinctive contribution to the project\'s success.',
     allDepartments: 'All Departments',
+    activities: 'Main Activities',
+    competenceAreas: 'Areas of Expertise',
     divisions: {
       materials: {
         name: 'Materials, Sustainability and Manufacturing',
@@ -74,6 +76,8 @@ export const teamTranslations = {
     title: 'Il Nostro Team',
     subtitle: 'Il nostro team si articola in quattro reparti fondamentali, ognuno con un ruolo strategico e un contributo distintivo al successo del progetto.',
     allDepartments: 'Tutti i Reparti',
+    activities: 'Attività Principali',
+    competenceAreas: 'Aree di Competenza',
     divisions: {
       materials: {
         name: 'Materiali, Sostenibilità e Manufacturing',

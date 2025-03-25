@@ -1,119 +1,90 @@
 'use client';
-
+import { useLanguage } from '../context/LanguageContext';
+import { teamTranslations } from '../translations/team';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Warehouse, Anchor, Handshake, Component, PencilRuler, Leaf, 
          Truck, Wrench, Globe, Star, Layout, Lightbulb, LifeBuoy, 
          PersonStanding, Anvil, ChevronDown, CircuitBoard, Bolt  } from 'lucide-react';
 
+const iconsMap: Record<string, JSX.Element> = {
+  'Materiali Sostenibili': <Leaf className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Processi di Manufacturing': <Wrench className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Impatto Ambientale': <Globe className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Innovazione': <Lightbulb className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Logistica': <Truck className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Manutenzione': <Wrench className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Elettronica': <CircuitBoard className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Fine Tuning': <Bolt className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Strategia e Management': <Users className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Comunicazione': <Globe className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Relazioni Pubbliche': <PersonStanding className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Partnership': <Handshake className="w-4 h-4 mr-1 sm:mr-2" />,
+  'CAD e Progettazione': <PencilRuler className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Simulazione FEM': <Anvil className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Performance Optimization': <Star className="w-4 h-4 mr-1 sm:mr-2" />,
+  'Prototipazione 3D': <Layout className="w-4 h-4 mr-1 sm:mr-2" />
+};
+
+const iconKeyMap: Record<string, string> = {
+  'Sustainable Materials': 'Materiali Sostenibili',
+  'Manufacturing Processes': 'Processi di Manufacturing',
+  'Environmental Impact': 'Impatto Ambientale',
+  'Innovation': 'Innovazione',
+  'Logistics': 'Logistica',
+  'Maintenance': 'Manutenzione',
+  'Electronics': 'Elettronica',
+  'Fine Tuning': 'Fine Tuning',
+  'Strategy and Management': 'Strategia e Management',
+  'Communication': 'Comunicazione',
+  'Public Relations': 'Relazioni Pubbliche',
+  'Partnership': 'Partnership',
+  'CAD and Design': 'CAD e Progettazione',
+  'FEM Simulation': 'Simulazione FEM',
+  'Performance Optimization': 'Performance Optimization',
+  '3D Prototyping': 'Prototipazione 3D'
+};
+
 const TeamPage = () => {
+  const { language } = useLanguage();
   const [activeSection, setActiveSection] = useState('all');
-
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 }
-  };
-
-  const iconsMap: Record<string, JSX.Element> = {
-    'Materiali Sostenibili': <Leaf className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Processi di Manufacturing': <Wrench className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Impatto Ambientale': <Globe className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Innovazione': <Lightbulb className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Pianificazione Logistica': <Truck className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Supply Chain': <Warehouse className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Gestione Risorse': <Users className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Supporto Operativo': <LifeBuoy className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Logistica': <Truck className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Manutenzione': <Wrench className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Elettronica': <CircuitBoard className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Fine Tuning': <Bolt className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Strategia e Management': <Users className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Comunicazione': <Globe className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Relazioni Pubbliche': <PersonStanding className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Partnership': <Handshake className="w-4 h-4 mr-1 sm:mr-2" />,
-    'CAD e Progettazione': <PencilRuler className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Simulazione FEM': <Anvil className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Performance Optimization': <Star className="w-4 h-4 mr-1 sm:mr-2" />,
-    'Prototipazione 3D': <Layout className="w-4 h-4 mr-1 sm:mr-2" />
-  };
 
   const divisions = [
     {
       id: 'materials',
-      name: 'Materiali, Sostenibilità e Manufacturing',
+      name: teamTranslations[language].divisions.materials.name,
       icon: <PencilRuler className="w-6 h-6" />,
       color: 'bg-[#822433]',
-      description: 'Ricerca, selezione e gestione dei materiali e dei processi sostenibili per la costruzione dell\'imbarcazione.',
-      details: [
-        'Ricerca e sviluppo di materiali sostenibili',
-        'Analisi e riduzione dell\'impatto ambientale',
-        'Ottimizzazione dei processi di manufacturing',
-        'Integrazione di soluzioni eco-friendly'
-      ],
-      keyAreas: [
-        'Materiali Sostenibili',
-        'Processi di Manufacturing',
-        'Impatto Ambientale',
-        'Innovazione'
-      ]
+      description: teamTranslations[language].divisions.materials.description,
+      details: teamTranslations[language].divisions.materials.details,
+      keyAreas: teamTranslations[language].divisions.materials.keyAreas
     },
     {
       id: 'shore',
-      name: 'Shore Team',
+      name: teamTranslations[language].divisions.shore.name,
       icon: <Anchor className="w-6 h-6" />,
       color: 'bg-[#822433]',
-      description: ' Messa a punto e tuning della barca durante allenamenti ed eventi, presa e analisi dati.',
-      details: [
-        'Coordinamento delle operazioni a terra e in acqua',
-        'Manutenzione ',
-        'Installazione di sensori per la presa dati e analisi dei dati raccolti',
-        'Supporto logistico durante le regate'
-      ],
-      keyAreas: [
-        'Logistica',
-        'Manutenzione',
-        'Elettronica',
-        'Fine Tuning'
-      ]
+      description: teamTranslations[language].divisions.shore.description,
+      details: teamTranslations[language].divisions.shore.details,
+      keyAreas: teamTranslations[language].divisions.shore.keyAreas
     },
     {
       id: 'design',
-      name: 'Progettazione e Ottimizzazione',
+      name: teamTranslations[language].divisions.design.name,
       icon: <Component className="w-6 h-6" />,
       color: 'bg-[#822433]',
-      description: 'Progettazione e ottimizzazione dei componenti dell\'imbarcazione per massimizzare le prestazioni.',
-      details: [
-        'Progettazione CAD delle strutture',
-        'Analisi e simulazioni FEM',
-        'Ottimizzazione della resistenza e delle performance',
-        'CFD e simulazioni 3D'
-      ],
-      keyAreas: [
-        'CAD e Progettazione',
-        'Simulazione FEM',
-        'Performance Optimization',
-        'Prototipazione 3D'
-      ]
+      description: teamTranslations[language].divisions.design.description,
+      details: teamTranslations[language].divisions.design.details,
+      keyAreas: teamTranslations[language].divisions.design.keyAreas
     },
     {
       id: 'management',
-      name: 'Management e Comunicazione',
+      name: teamTranslations[language].divisions.management.name,
       icon: <Handshake className="w-6 h-6" />,
       color: 'bg-[#822433]',
-      description: 'Strategia, comunicazione e gestione delle relazioni pubbliche del team.',
-      details: [
-        'Pianificazione e sviluppo delle strategie',
-        'Gestione della comunicazione esterna',
-        'Relazioni con sponsor e partner',
-        'Organizzazione di eventi e attività promozionali'
-      ],
-      keyAreas: [
-        'Strategia e Management',
-        'Comunicazione',
-        'Relazioni Pubbliche',
-        'Partnership'
-      ]
+      description: teamTranslations[language].divisions.management.description,
+      details: teamTranslations[language].divisions.management.details,
+      keyAreas: teamTranslations[language].divisions.management.keyAreas
     }
   ];
 
@@ -132,10 +103,9 @@ const TeamPage = () => {
           className="relative z-10 h-96 flex flex-col items-center justify-center text-white mt-20 sm:mt-10"
         >
           <Users className="w-16 h-16 mb-2 mt-10"/>
-          <h1 className="text-4xl md:text-5xl font-bold mb-1">Il Nostro Team</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-1">{teamTranslations[language].title}</h1>
           <p className="text-xl max-w-3xl text-center mb-10 px-6">
-            Il nostro team si articola in quattro reparti fondamentali, ognuno con un ruolo strategico 
-            e un contributo distintivo al successo del progetto.
+            {teamTranslations[language].subtitle}
           </p>
           <motion.div
             animate={{ y: [0, 10, 0] }}
@@ -167,7 +137,7 @@ const TeamPage = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Tutti i Reparti
+              {teamTranslations[language].allDepartments}
             </motion.button>
             {divisions.map((division) => (
               <motion.button
@@ -200,7 +170,11 @@ const TeamPage = () => {
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  variants={fadeInUp}
+                  variants={{
+                    initial: { opacity: 0, y: 20 },
+                    animate: { opacity: 1, y: 0 },
+                    exit: { opacity: 0, y: -20 }
+                  }}
                   className="group"
                 >
                   <div className="flex items-center gap-4 mb-6 justify-center mx-auto">
@@ -220,7 +194,7 @@ const TeamPage = () => {
                     >
                       <div className="space-y-6">
                         <div>
-                          <h3 className="text-xl font-semibold mb-4">Attività Principali</h3>
+                          <h3 className="text-xl font-semibold mb-4">{teamTranslations[language].activities}</h3>
                           <ul className="list-disc pl-6 space-y-2">
                             {division.details.map((detail, index) => (
                               <motion.li
@@ -236,7 +210,7 @@ const TeamPage = () => {
                           </ul>
                         </div>
                         <div>
-                          <h3 className="text-xl font-semibold mb-4">Aree di Competenza</h3>
+                          <h3 className="text-xl font-semibold mb-4">{teamTranslations[language].competenceAreas}</h3>
                           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             {division.keyAreas.map((area, index) => (
                               <motion.div
@@ -244,7 +218,7 @@ const TeamPage = () => {
                                 whileHover={{ scale: 1.05 }}
                                 className="bg-[#822433]/10 p-3 rounded-lg flex items-center justify-center cursor-pointer hover:bg-[#822433]/20 transition-colors"
                               >
-                                {iconsMap[area]}
+                                {iconsMap[language === 'en' ? iconKeyMap[area] : area]}
                                 <span className="text-sm sm:text-base ">{area}</span>
                               </motion.div>
                             ))}
