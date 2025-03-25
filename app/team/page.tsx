@@ -3,8 +3,8 @@ import { useLanguage } from '../context/LanguageContext';
 import { teamTranslations } from '../translations/team';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, Warehouse, Anchor, Handshake, Component, PencilRuler, Leaf, 
-         Truck, Wrench, Globe, Star, Layout, Lightbulb, LifeBuoy, 
+import { Users, Anchor, Handshake, Component, PencilRuler, Leaf, 
+         Truck, Wrench, Globe, Star, Layout, Lightbulb, 
          PersonStanding, Anvil, ChevronDown, CircuitBoard, Bolt  } from 'lucide-react';
 
 const iconsMap: Record<string, JSX.Element> = {
