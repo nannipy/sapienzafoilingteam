@@ -131,7 +131,7 @@ export async function PATCH(request: Request) {
     }
 
     // Get the updated article data from the request body
-    const { title, content, image_url, image_alt, publish_date } = await request.json();
+    const { title, content, image_url, image_alt } = await request.json();
 
     if (!title || !content) {
       return NextResponse.json({ error: 'Title and content are required' }, { status: 400 });
