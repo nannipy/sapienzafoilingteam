@@ -4,6 +4,7 @@ export const navbarTranslations = {
     team: 'Team',
     sponsor: 'Sponsor',
     contact: 'Contact',
+    blog: 'Blog',
     joinUs: 'Join Us',
     switchLanguage: 'Switch language'
   },
@@ -12,6 +13,7 @@ export const navbarTranslations = {
     team: 'Team',
     sponsor: 'Sponsor',
     contact: 'Contatti',
+    blog: 'Blog',
     joinUs: 'Unisciti a Noi',
     switchLanguage: 'Cambia lingua'
   }

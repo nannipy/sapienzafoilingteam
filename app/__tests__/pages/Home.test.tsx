@@ -2,24 +2,28 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { useInView } from 'react-intersection-observer';
 import HomePage from '../../page';
+import Image from 'next/image';
 
 jest.mock('react-intersection-observer', () => ({
   useInView: jest.fn(),
 }));
 
-jest.mock('next/image', () => ({
-  __esModule: true,
-  default: (props: { src: string; alt: string; fill?: boolean; priority?: boolean; [key: string]: any }) => {
-    // Convert boolean props to strings
-    const imgProps = {
-      ...props,
-      fill: props.fill ? "true" : undefined,
-      priority: props.priority ? "true" : undefined,
-      alt: props.alt || ''
-    };
-    return <img {...imgProps} />
-  },
-}));
+jest.mock('next/image', () => {
+  const MockImage = ({ }: {
+    src: string,
+    alt: string,
+    fill?: boolean,
+    priority?: boolean,
+  }) => {
+    return <Image
+    src="/moth_5.jpg"
+    alt="Regata di barche a vela con foil al tramonto" 
+    fill
+    priority
+  />
+  };
+  return MockImage;
+});
 
 // Mock window.open and scrollTo for navigation tests
 const mockOpen = jest.fn();

@@ -1,11 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Footer from '../../components/Footer';
+import Image from 'next/image';
 
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props: { src: string; alt: string; [key: string]: any }) => {
-    return <img {...props} alt={props.alt || ''} />
+  default: (props: { src: string; alt: string; }) => {
+    return <Image {...props} alt={props.alt || ''} />
   },
 }));
 

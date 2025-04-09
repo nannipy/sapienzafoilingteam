@@ -1,0 +1,60 @@
+export const blogTranslations = {
+  en: {
+    title: 'Blog',
+    readMore: 'Read More',
+    noArticles: 'No articles found',
+    publishedOn: 'Published on',
+    backToList: 'Back to Articles',
+    admin: {
+      title: 'Blog Administration',
+      newArticle: 'New Article',
+      editArticle: 'Edit Article',
+      articleTitle: 'Title',
+      articleContent: 'Content',
+      articleImage: 'Image URL',
+      articleImageAlt: 'Image Description',
+      titlePlaceholder: 'Enter article title',
+      contentPlaceholder: 'Write your article content in markdown',
+      imagePlaceholder: 'Enter image URL',
+      imageAltPlaceholder: 'Enter image description',
+      save: 'Save Article',
+      cancel: 'Cancel',
+      delete: 'Delete',
+      edit: 'Edit',
+      view: 'View',
+      saveSuccess: 'Article saved successfully',
+      deleteSuccess: 'Article deleted successfully',
+      error: 'An error occurred',
+      articlesList: 'Articles List'
+    }
+  },
+  it: {
+    title: 'Blog',
+    readMore: 'Leggi di più',
+    noArticles: 'Nessun articolo trovato',
+    publishedOn: 'Pubblicato il',
+    backToList: 'Torna agli Articoli',
+    admin: {
+      title: 'Amministrazione Blog',
+      newArticle: 'Nuovo Articolo',
+      editArticle: 'Modifica Articolo',
+      articleTitle: 'Titolo',
+      articleContent: 'Contenuto',
+      articleImage: 'URL Immagine',
+      articleImageAlt: 'Descrizione Immagine',
+      titlePlaceholder: 'Inserisci il titolo dell\'articolo',
+      contentPlaceholder: 'Scrivi il contenuto dell\'articolo in markdown',
+      imagePlaceholder: 'Inserisci URL immagine',
+      imageAltPlaceholder: 'Inserisci descrizione immagine',
+      save: 'Salva Articolo',
+      cancel: 'Annulla',
+      delete: 'Elimina',
+      edit: 'Modifica',
+      view: 'Visualizza',
+      saveSuccess: 'Articolo salvato con successo',
+      deleteSuccess: 'Articolo eliminato con successo',
+      error: 'Si è verificato un errore',
+      articlesList: 'Lista Articoli'
+    }
+  }
+};

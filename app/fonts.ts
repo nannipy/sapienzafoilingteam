@@ -1,25 +1,15 @@
 import localFont from 'next/font/local';
 
 export const geist = localFont({
-  src: [
-    {
-      path: './fonts/GeistVF.woff',
-      weight: '400',
-      style: 'normal',
-    },
-  ],
+  src: './fonts/GeistVF.woff2',
   variable: '--font-geist',
+  display: 'swap',
 });
 
 export const geistMono = localFont({
-  src: [
-    {
-      path: './fonts/GeistMonoVF.woff',
-      weight: '400',
-      style: 'normal',
-    },
-  ],
+  src: './fonts/GeistMonoVF.woff2',
   variable: '--font-geist-mono',
+  display: 'swap',
 });
 
 export const kelson = localFont({

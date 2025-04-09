@@ -18,6 +18,7 @@ const Navbar = () => {
     { label: navbarTranslations[language].team, href: '/team' },
     { label: navbarTranslations[language].sponsor, href: '/sponsor' },
     { label: navbarTranslations[language].contact, href: '/contact' },
+    { label: navbarTranslations[language].blog, href: '/blog'},
   ];
 
   const isCurrentPath = (path: string) => currentPath === path;
@@ -48,6 +49,7 @@ const Navbar = () => {
           <div data-testid="desktop-nav" className="hidden md:flex items-center space-x-4">
             
             {navigationItems.map((item) => (
+              
               <Link
                 key={item.href}
                 href={item.href}

@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { usePathname } from 'next/navigation';
 import Navbar from '../../components/Navbar';
+import Image from 'next/image';
 
 jest.mock('next/navigation', () => ({
   usePathname: jest.fn(),
@@ -9,8 +10,8 @@ jest.mock('next/navigation', () => ({
 
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props: any) => {
-    return <img {...props} />
+  default: (props: { src: string; alt: string; }) => {
+    return <Image {...props} alt={props.alt || ''} />
   },
 }));
 
