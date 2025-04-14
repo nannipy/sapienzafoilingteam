@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server';
 import { supabase, supabaseAdmin } from '@/app/lib/supabase';
 
+// // Helper function to validate date format
+// function isValidDate(dateString: string): boolean {
+//   const date = new Date(dateString);
+//   return date instanceof Date && !isNaN(date.getTime());
+// }
+
 // GET /api/articles - Get all articles
 export async function GET(request: Request) {
   try {
@@ -61,7 +67,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Unauthorized - Invalid token' }, { status: 401 });
     }
 
-    const { title, content, image_url, image_alt, publish_date } = await request.json();
+    const { title, content, image_url, image_alt } = await request.json();
 
     if (!title || !content) {
       return NextResponse.json({ error: 'Title and content are required' }, { status: 400 });
@@ -76,7 +82,6 @@ export async function POST(request: Request) {
           content,
           image_url: image_url || null,
           image_alt: image_alt || null,
-          publish_date: publish_date || null,
           author_id: user.id
         }
       ])
@@ -136,6 +141,7 @@ export async function PATCH(request: Request) {
     if (!title || !content) {
       return NextResponse.json({ error: 'Title and content are required' }, { status: 400 });
     }
+
 
     // Update the article
     const { data, error } = await supabaseAdmin!

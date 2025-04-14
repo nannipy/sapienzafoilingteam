@@ -99,7 +99,7 @@ export async function PATCH( request: NextRequest, { params }: { params: Promise
     }
      console.log('PATCH /api/articles/[id] - Authenticated User:', user.id);
 
-    // 2. Authorization: Check if the user owns the article
+    /* 2. Authorization: Check if the user owns the article
     const { data: existingArticle, error: fetchError } = await supabase
       .from('posts')
       .select('author_id') // Only select what's needed for the check
@@ -112,7 +112,7 @@ export async function PATCH( request: NextRequest, { params }: { params: Promise
              return NextResponse.json({ error: 'Article not found' }, { status: 404 });
         }
         return NextResponse.json({ error: 'Database error checking article ownership' }, { status: 500 });
-    }
+    } 
 
     if (!existingArticle) { // Should be caught by PGRST116, but double-check
         return NextResponse.json({ error: 'Article not found' }, { status: 404 });
@@ -123,7 +123,7 @@ export async function PATCH( request: NextRequest, { params }: { params: Promise
       return NextResponse.json({ error: 'Forbidden: You do not have permission to edit this article' }, { status: 403 });
     }
     console.log(`PATCH /api/articles/[id] - Authorization successful for user ${user.id} on article ${articleId}`);
-
+    */
 
     // 3. Request Body Validation
     let updateData: { title: string; content: string; image_url?: string | null; image_alt?: string | null; };

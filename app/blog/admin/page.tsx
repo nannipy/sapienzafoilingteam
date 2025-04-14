@@ -16,7 +16,6 @@ import {
   Loader2,
   LayoutDashboard, // New icon for Dashboard/List view
   PlusCircle, // New icon for Create view
-  LogOut, // New icon for Logout
   FileText, // Icon for article content
   Tag, // Icon for image alt text
   Newspaper // Icon for general article info
@@ -261,37 +260,70 @@ export default function BlogAdminPage() {
   };
 
   // Delete article
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this article?')) return;
-    setError(null); setSuccess(null);
+const handleDelete = async (id: string) => {
+    // Create custom confirmation dialog
+    const confirmDialog = document.createElement('div');
+    confirmDialog.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+    confirmDialog.innerHTML = `
+        <div class="bg-white rounded-lg p-6 max-w-sm mx-4 shadow-xl">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Confirm Deletion</h3>
+            <p class="text-gray-600 mb-6">Are you sure you want to delete this article? This action cannot be undone.</p>
+            <div class="flex justify-end gap-4">
+                <button class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg" id="cancelDelete">Cancel</button>
+                <button class="px-4 py-2 bg-red-600 text-white hover:bg-red-700 rounded-lg" id="confirmDelete">Delete</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(confirmDialog);
+
+    // Handle dialog response
+    const dialogResult = new Promise((resolve) => {
+        document.getElementById('confirmDelete')?.addEventListener('click', () => {
+            document.body.removeChild(confirmDialog);
+            resolve(true);
+        });
+        document.getElementById('cancelDelete')?.addEventListener('click', () => {
+            document.body.removeChild(confirmDialog);
+            resolve(false);
+        });
+    });
+
+    const confirmed = await dialogResult;
+    if (!confirmed) return;
+
+    setError(null); 
+    setSuccess(null);
+    
     try {
         const session = (await supabase.auth.getSession()).data.session;
         if (!session) throw new Error("User session not found.");
 
-      const response = await fetch(`/api/articles?id=${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${session.access_token}`
-        }
-      });
-      if (!response.ok) throw new Error((await response.json()).error || 'Failed to delete article');
+        const response = await fetch(`/api/articles?id=${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${session.access_token}`
+            }
+        });
+        
+        if (!response.ok) throw new Error((await response.json()).error || 'Failed to delete article');
 
-      setArticles(articles.filter(a => a.id !== id));
-      setSuccess(blogTranslations[language].admin.deleteSuccess);
-      // Ensure we are in list view if the deleted article was being edited
-      if (currentArticle.id === id) {
-          handleCancel();
-      } else {
-          setViewMode('list'); // Stay in list view
-      }
+        setArticles(articles.filter(a => a.id !== id));
+        setSuccess(blogTranslations[language].admin.deleteSuccess);
+        
+        if (currentArticle.id === id) {
+            handleCancel();
+        } else {
+            setViewMode('list');
+        }
 
     } catch (error: unknown) {
-      const errorMessage = 'Si è verificato un errore imprevisto';
-      console.error('Error deleting article:', error);
-      setError(errorMessage || blogTranslations[language].admin.error);
+        const errorMessage = 'Si è verificato un errore imprevisto';
+        console.error('Error deleting article:', error);
+        setError(errorMessage || blogTranslations[language].admin.error);
     }
-  };
+};
 
    // Switch to form for editing
    const handleEdit = (article: Article) => {
@@ -334,12 +366,6 @@ export default function BlogAdminPage() {
     setViewMode('list');
   };
 
-    // Handle Logout
-    const handleLogout = async () => {
-        await supabase.auth.signOut();
-        router.push('/auth'); // Redirect to login page after logout
-    };
-
   // Loading state before authentication check is complete
   if (!user && loading) {
     return (
@@ -351,85 +377,9 @@ export default function BlogAdminPage() {
 
   // Main Dashboard Layout
   return (
-    <div className="flex min-h-screen bg-gray-100 pt-20">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-md flex flex-col fixed rounded-xl mt-20">
-        <div className="h-16 flex items-center justify-center border-b border-gray-200">
-            <Link href="/" className="text-xl font-bold text-[#822433]">
-                Admin Panel
-            </Link>
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex-grow pt-4">
-          <ul>
-            {/* Dashboard/List View */}
-            <li className="px-4 mb-2">
-              <button
-                onClick={() => setViewMode('list')}
-                className={`w-full flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 ${
-                  viewMode === 'list'
-                    ? 'bg-[#f0e4e6] text-[#822433]'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-              >
-                <LayoutDashboard className="mr-3 h-5 w-5" />
-                {blogTranslations[language].admin.articlesList}
-              </button>
-            </li>
-            {/* Create New Article */}
-            <li className="px-4 mb-2">
-              <button
-                onClick={handleCreateNew}
-                className={`w-full flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 ${
-                  viewMode === 'form' && !isEditing
-                    ? 'bg-[#f0e4e6] text-[#822433]'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-              >
-                <PlusCircle className="mr-3 h-5 w-5" />
-                Create New
-              </button>
-            </li>
-             {/* Edit Article (shows active only when editing) */}
-             {isEditing && viewMode === 'form' && (
-                <li className="px-4 mb-2">
-                <button
-                    className={`w-full flex items-center px-3 py-2 rounded-md text-sm font-medium bg-[#f0e4e6] text-[#822433] cursor-default`} // Active style, not clickable
-                >
-                    <Edit className="mr-3 h-5 w-5" />
-                     Edit Article
-                </button>
-                </li>
-            )}
-            <li className="px-4 mb-2">
-              <Link
-                href="/blog/admin/media"
-                className="w-full flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-              >
-                <ImageIcon className="mr-3 h-5 w-5" />
-                Gestione Media
-              </Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* User Info & Logout */}
-        <div className="border-t border-gray-200 p-4 mt-16">
-            <p className="text-xs text-gray-500 mb-1">Logged in as:</p>
-            <p className="text-sm font-medium text-gray-800 truncate mb-3">{user?.email}</p>
-             <button
-                onClick={handleLogout}
-                className="w-full flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium text-red-600 hover:bg-red-50 hover:text-red-800 transition-colors duration-150 border border-red-200"
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </button>
-        </div>
-      </aside>
-
+    <div className="flex min-h-screen bg-gray-100">
       {/* Main Content Area */}
-      <main className="flex-1 ml-64 p-6 md:p-10"> {/* Added margin-left to offset sidebar */}
+      <main className="flex-1 p-6 md:p-10"> {/* Added margin-left to offset sidebar */}
         {/* Notifications */}
          <div className="mb-6 h-10"> {/* Reserve space even when no message */}
             {error && (
@@ -453,7 +403,7 @@ export default function BlogAdminPage() {
         {/* Dynamic Content: List or Form */}
         {viewMode === 'list' && (
           <div className="bg-white p-6 md:p-8 rounded-xl shadow-md border border-gray-200 animate-fade-in">
-            <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-2">
                 <h1 className="text-2xl font-semibold text-gray-800">
                     {blogTranslations[language].admin.articlesList}
                 </h1>
@@ -486,7 +436,7 @@ export default function BlogAdminPage() {
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         {blogTranslations[language].publishedOn}
                       </th>
-                      <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th scope="col" className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Actions
                       </th>
                     </tr>
@@ -519,15 +469,18 @@ export default function BlogAdminPage() {
                             <div className="text-sm text-gray-500">{formattedDate}</div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <div className="flex justify-end items-center space-x-3">
-                              <Link href={`/blog/${article.id}`} title={blogTranslations[language].admin.view} className="text-blue-600 hover:text-blue-800 transition-colors">
+                            <div className="flex justify-end items-center space-x-3 gap-4">
+                              <Link href={`/blog/${article.id}`} title={blogTranslations[language].admin.view} className="text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1">
                                 <Eye size={18} />
+                                <span>View</span>
                               </Link>
-                              <button onClick={() => handleEdit(article)} title={blogTranslations[language].admin.edit} className="text-indigo-600 hover:text-indigo-800 transition-colors">
+                              <button onClick={() => handleEdit(article)} title={blogTranslations[language].admin.edit} className="text-indigo-600 hover:text-indigo-800 transition-colors flex items-center gap-1">
                                 <Edit size={18} />
+                                <span>Edit</span>
                               </button>
-                              <button onClick={() => handleDelete(article.id)} title={blogTranslations[language].admin.delete} className="text-red-600 hover:text-red-800 transition-colors">
+                              <button onClick={() => handleDelete(article.id)} title={blogTranslations[language].admin.delete} className="text-red-600 hover:text-red-800 transition-colors flex items-center gap-1">
                                 <Trash size={18} />
+                                <span>Delete</span>
                               </button>
                             </div>
                           </td>
@@ -544,19 +497,47 @@ export default function BlogAdminPage() {
         {/* ----- Article Form ----- */}
         {viewMode === 'form' && (
           <div className="bg-white p-6 md:p-8 rounded-xl shadow-md border border-gray-200 animate-fade-in">
-            <h1 className="text-2xl font-semibold text-gray-800 mb-6">
-              {isEditing
-                ? blogTranslations[language].admin.editArticle
-                : blogTranslations[language].admin.newArticle}
-            </h1>
+            <div className="flex justify-between mb-6">
+              <h1 className="text-2xl font-semibold text-gray-800">
+                {isEditing
+                  ? blogTranslations[language].admin.editArticle
+                  : blogTranslations[language].admin.newArticle}
+              </h1>
+              <div className="flex justify-end space-x-4 ">
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-[#822433] text-white rounded-lg hover:bg-[#6d1f2b] transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isUploading}
+                >
+                  {isUploading ? (
+                    <Loader2 className="animate-spin h-4 w-4" />
+                  ) : (
+                    <FileText size={16} />
+                  )}
+                  {isEditing
+                    ? 'Save Changes'
+                    : 'Publish Article'}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleCancel}
+                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm"
+                >
+                  <LayoutDashboard size={16} />
+                  Back To List
+                </button>
+              </div>
+            </div>
+            
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Title Input */}
               <div>
                 <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
                     <Newspaper size={16} className="inline mr-1 mb-0.5" />
                     {blogTranslations[language].admin.articleTitle}
-                    <span className="text-red-500 ml-1">*</span>
+                    <span className="text-red-500 ml-1"></span>
                 </label>
+                
                 <input
                   type="text"
                   id="title"
@@ -616,7 +597,7 @@ export default function BlogAdminPage() {
                     {isUploading && (
                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-75 rounded-lg z-10">
                         <Loader2 className="w-8 h-8 text-[#822433] animate-spin mb-2" />
-                        <p className="text-sm text-gray-600">Uploading...</p>
+                        <p className="text-sm text-gray-600"> Uploading... </p>
                     </div>
                     )}
 
@@ -680,37 +661,28 @@ export default function BlogAdminPage() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4 border-t border-gray-200">
+              <div className="flex justify-end space-x-4">
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-[#822433] text-white rounded-lg hover:bg-[#6d1f2b] transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isUploading}
+                >
+                  {isUploading ? (
+                    <Loader2 className="animate-spin h-4 w-4" />
+                  ) : (
+                    <FileText size={16} />
+                  )}
+                  {isEditing
+                    ? 'Save Changes'
+                    : 'Publish Article'}
+                </button>
                 <button
                   type="button"
                   onClick={handleCancel}
-                  className="px-5 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors text-gray-700 text-sm font-medium order-2 sm:order-1"
+                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm"
                 >
-                  {blogTranslations[language].admin.cancel}
-                </button>
-                <button
-                  type="submit"
-                  className="px-5 py-2 bg-[#822433] text-white rounded-lg hover:bg-[#6d1f2b] transition-colors flex items-center justify-center gap-2 text-sm font-medium order-1 sm:order-2 shadow-sm disabled:opacity-60"
-                  disabled={isUploading} // Disable save while uploading
-                >
-                   {isUploading ? (
-                        <>
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                            Processing...
-                        </>
-                    ) : (
-                       isEditing ? (
-                        <>
-                          <Edit size={16} />
-                          {blogTranslations[language].admin.save} Changes
-                        </>
-                      ) : (
-                        <>
-                           <PlusCircle size={16}/>
-                          {blogTranslations[language].admin.save} Article
-                        </>
-                      )
-                    )}
+                  <LayoutDashboard size={16} />
+                  Back To List
                 </button>
               </div>
             </form>
