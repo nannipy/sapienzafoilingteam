@@ -76,12 +76,12 @@ export default function ArticlePage({ params }: { params: Promise<PageParams> })
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 text-gray-900 pt-24 pb-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="absolute left-0 top-0">
+    <main className="min-h-screen bg-gray-50 text-gray-900 pt-24 pb-16 ">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative  ">
+        <div className="left-4 top-0 z-50">
           <Link 
             href="/blog" 
-            className="inline-flex items-center bg-gray-100/80 hover:bg-[#822433] hover:text-white p-2 rounded-xl text-[#822433] transition-colors duration-200 mt-5 group"
+            className="inline-flex items-center bg-gray-100/80 hover:bg-[#822433] hover:text-white p-2 rounded-xl text-[#822433] transition-colors duration-200 mt-4 group"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             {blogTranslations[language].backToList}
