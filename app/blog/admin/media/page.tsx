@@ -162,7 +162,6 @@ export default function MediaManagerPage() {
 
       setFolders(fetchedFolders);
       setFiles(fetchedFiles);
-      showNotification('success', 'Contenuto caricato.'); // Feedback on successful load
 
     } catch (error: unknown) { // Changed from any to unknown
       console.error('Error fetching files/folders:', error);
@@ -618,21 +617,21 @@ export default function MediaManagerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 pt-16 md:pt-20"> {/* Adjusted padding top */}
+    <div className="min-h-screen bg-gray-100 "> {/* Adjusted padding top */}
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-6"> {/* Adjusted padding */}
         <div className="bg-white rounded-lg shadow p-4 md:p-6">
           {/* Header */}
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4 md:mb-6">
             <h1 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2 md:mb-0">
-              Gestione Media
+              Media
             </h1>
              {/* Action Buttons - Moved here for better mobile layout */}
              <div className="flex items-center space-x-1 md:space-x-2 flex-wrap">
                <button
                  onClick={handleCreateFolder}
                  disabled={isProcessing}
-                 className="flex items-center px-2 py-1 md:px-3 md:py-2 text-xs md:text-sm font-medium text-white bg-red-900 hover:bg-red-950 rounded-md shadow-sm disabled:opacity-50"
-               >
+                 className="px-4 py-2 bg-[#822433] text-white rounded-lg hover:bg-[#6d1f2b] transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm"
+                >
                  <FolderPlus className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
                  Nuova Cartella
                </button>

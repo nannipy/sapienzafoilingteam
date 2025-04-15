@@ -34,14 +34,7 @@ export default function AdminPanel({
   const currentPath = usePathname();
 
   return (
-    <div className="flex min-h-screen bg-gray-100 pt-20 ">
-      <aside className="w-72 bg-white shadow-md flex flex-col fixed rounded-xl mt-40 ml-3 ">
-        <div className="h-16 flex items-center justify-center border-b border-gray-200">
-          <Link href="/" className="text-xl font-bold text-[#822433]">
-            Admin Panel
-          </Link>
-        </div>
-
+    <div className="flex min-h-screen bg-gray-100">
         <nav className="flex-grow pt-4">
           <ul>
             <li className="px-4 mb-2">
@@ -78,8 +71,7 @@ export default function AdminPanel({
                 }`}
               >
                 <ImageIcon className="mr-3 h-5 w-5" />
-
-                Gestione Media
+                Media
               </Link>
             </li>
           </ul>
@@ -96,7 +88,7 @@ export default function AdminPanel({
             Logout
           </button>
         </div>
-      </aside>
+     
 
       <main className="flex-1 ml-64 p-6 md:p-10">{children}</main>
     </div>

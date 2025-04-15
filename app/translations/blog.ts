@@ -25,7 +25,7 @@ export const blogTranslations = {
       saveSuccess: 'Article saved successfully',
       deleteSuccess: 'Article deleted successfully',
       error: 'An error occurred',
-      articlesList: 'Articles List'
+      articlesList: 'Articles'
     }
   },
   it: {
@@ -54,7 +54,7 @@ export const blogTranslations = {
       saveSuccess: 'Articolo salvato con successo',
       deleteSuccess: 'Articolo eliminato con successo',
       error: 'Si è verificato un errore',
-      articlesList: 'Lista Articoli'
+      articlesList: 'Articoli'
     }
   }
 };
