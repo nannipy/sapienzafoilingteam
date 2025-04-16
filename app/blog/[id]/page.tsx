@@ -1,15 +1,12 @@
 'use client';
 
-import React, { useEffect, useState, use } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '../../context/LanguageContext';
 import { blogTranslations } from '../../translations/blog';
 import { Calendar, ArrowLeft } from 'lucide-react';
 import { marked } from 'marked';
-
-type PageParams = {
-  id: string;
-};
+import { useParams } from 'next/navigation';
 
 type Article = {
   id: string;
@@ -20,9 +17,9 @@ type Article = {
   created_at: string;
 };
 
-export default function ArticlePage({ params }: { params: Promise<PageParams> }) {
-  const resolvedParams = use(params);
-  const { id: articleId } = resolvedParams;
+export default function ArticlePage() {
+  const params = useParams<{ id: string }>(); // Get params using the hook
+  const articleId = params?.id; // Extract the id, handle potential undefined
   
   const { language } = useLanguage();
   const [article, setArticle] = useState<Article | null>(null);
@@ -37,7 +34,6 @@ export default function ArticlePage({ params }: { params: Promise<PageParams> })
         setError("Article ID missing");
      return
     };
-    console.log("Using Article ID in useEffect: ", articleId); 
 
     const fetchArticle = async () => {
       try {

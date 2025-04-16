@@ -29,17 +29,17 @@ const SponsorPage = () => {
         <h2 className="text-3xl font-bold text-center mb-12">{sponsorTranslations[language].sponsorsSection.title}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <a href="https://www.solidworks.com" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
               <Image src="/sponsors/solidworks.svg" alt="SolidWorks" width={100} height={80} className="object-contain" />
             </div>
           </a>
           <a href="https://www.beta-cae.com/" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
               <Image src="/sponsors/beta.svg" alt="Beta Simulation Solutions" width={200} height={80} className="object-contain" />
             </div>
           </a>
           <a href="https://www.notion.so" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
               <Image src="/sponsors/notion.svg" alt="Notion" width={100} height={40} className="object-contain" />
             </div>
           </a>
@@ -51,12 +51,12 @@ const SponsorPage = () => {
         <h2 className="text-3xl font-bold text-center mb-12">{sponsorTranslations[language].collaborations.title}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <a href="https://www.dima.uniroma1.it/dima/" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
               <Image src="/collaborations/dima.png" alt="Collaboration 1" width={300} height={100} className="object-contain" />
             </div>
           </a>
           <a href="https://www.inm.cnr.it/" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
               <Image src="/collaborations/inm.png" alt="Collaboration 2" width={300} height={100} className="object-contain" />
             </div>
           </a>

@@ -20,8 +20,6 @@ export default function Home() {
 
   return (
     <>
-
-
     <main className="relative min-h-screen bg-black" data-testid="home-page">
       {/* Hero Section */}
       <div className="relative h-screen flex items-center justify-center">
@@ -149,7 +147,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
     </main>
     </>
   );

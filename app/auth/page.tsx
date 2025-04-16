@@ -87,7 +87,7 @@ const AuthPage = () => {
         
         setSuccess(authTranslations[language].loginSuccess);
         // Redirect to home page after successful login
-        setTimeout(() => router.push('/'), 1500);
+        router.push('/blog/admin');
       } else {
         // Signup logic
         const { error } = await supabase.auth.signUp({

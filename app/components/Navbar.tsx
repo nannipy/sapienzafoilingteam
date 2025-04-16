@@ -43,7 +43,7 @@ const Navbar = () => {
         ${isRounded ? 'rounded-full' : 'rounded-lg'}`}>
         <div className="flex items-center justify-between px-6 py-3">
           <Link href="/" className="flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
-            <Image src="/logosft.png" alt="Logo" width={40} height={40} className="h-16 w-16" />
+            <Image src="/logosft.png" alt="Logo" width={40} height={40} className="h-16 w-16" priority />
           </Link>
 
           <div data-testid="desktop-nav" className="hidden md:flex items-center space-x-4">
