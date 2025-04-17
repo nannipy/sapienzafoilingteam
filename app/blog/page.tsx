@@ -16,6 +16,8 @@ type Article = {
   image_url: string | null; // Allow null images
   image_alt: string | null; // Allow null alt text
   created_at: string;
+  content_en: string;
+  title_en: string;
 };
 
 export default function BlogPage() {
@@ -57,8 +59,10 @@ export default function BlogPage() {
   }, []); // Dependency array is empty, runs once on mount
 
   // Function to strip markdown/HTML and truncate content for preview
-  const createExcerpt = (content: string, maxLength: number = 120) => {
+  const createExcerpt = (content: string, content_en: string, maxLength: number = 120) => {
     if (!content) return '';
+    content = language === 'en' ? content_en : content;
+    
     // Basic stripping (you might want a more robust library for complex HTML/Markdown)
     const plainText = content.replace(/<\/?[^>]+(>|$)/g, "").replace(/[#*`_~]/g, "");
     if (plainText.length <= maxLength) return plainText;
@@ -73,6 +77,13 @@ export default function BlogPage() {
       month: 'long',
       day: 'numeric'
     });
+  };
+  
+  const titlelanguage =  (title: string, title_en: string) =>{
+    if (language === 'en') {
+      return title_en;
+    }
+    return title;
   };
 
   return (
@@ -136,13 +147,13 @@ export default function BlogPage() {
                     {/* Link wraps the title for better click target */}
                     <Link href={`/blog/${article.id}`} className="focus:outline-none">
                       <span className="absolute inset-0" aria-hidden="true" /> {/* Makes the whole card clickable */}
-                      {article.title}
+                      {titlelanguage(article.title, article.title_en)}
                     </Link>
                   </h2>
 
                   {/* Excerpt */}
                   <p className="text-sm text-gray-600 mb-4 line-clamp-3 flex-grow">
-                    {createExcerpt(article.content)}
+                    {createExcerpt(article.content, article.content_en)}
                   </p>
 
                   {/* Footer: Date and Read More */}

@@ -15,6 +15,7 @@ type Article = {
   image_url: string;
   image_alt: string;
   created_at: string;
+  content_en: string;
 };
 
 export default function ArticlePage() {
@@ -66,8 +67,11 @@ export default function ArticlePage() {
   };
 
   // Convert markdown to HTML
-  const renderMarkdown = (content: string) => {
+  const renderMarkdown = (content: string, content_en: string) => {
     if (!content) return { __html: '' }; // Add guard for null/undefined content
+    if (language === 'en') {
+      return { __html: marked(content_en) };
+    }
     return { __html: marked(content) };
   };
 
@@ -113,7 +117,8 @@ export default function ArticlePage() {
                   prose-pre:bg-gray-900 prose-pre:text-gray-100
                   prose-img:rounded-lg prose-img:shadow-md
                   prose-ul:marker:text-[#822433]"
-                dangerouslySetInnerHTML={renderMarkdown(article.content)}
+
+                dangerouslySetInnerHTML={renderMarkdown(article.content, article.content_en)}
               />
             </div>
           </article>
