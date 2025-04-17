@@ -264,7 +264,6 @@ export default function BlogAdminPage() {
 
         const confirmed = await dialogResult;
         if (!confirmed) return;
-        // ... rest of delete logic ...
 
         setError(null); setSuccess(null);
         try {
@@ -327,10 +326,7 @@ export default function BlogAdminPage() {
     setViewMode('list'); // Use context setter
   };
 
-  // No need for the initial loading check for user here, layout handles it
-  // if (!user && loading) { ... } // Remove this block
-
-
+  
   // --- Render logic ---
   return (
     // Modifica il main container
