@@ -61,7 +61,7 @@ export default function BlogPage() {
   // Function to strip markdown/HTML and truncate content for preview
   const createExcerpt = (content: string, content_en: string, maxLength: number = 120) => {
     // Verifica se il contenuto è valido
-    let textToUse = language === 'en' ? content_en : content;
+    const textToUse = language === 'en' ? content_en : content;
     
     // Se il contenuto non è valido, ritorna una stringa vuota
     if (!textToUse) return '';
