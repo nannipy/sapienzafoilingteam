@@ -36,7 +36,7 @@ export const sponsorTranslations = {
       title: 'I Nostri Partner'
     },
     navybase:{
-      title: 'Base Navale',
+      title: 'Base Nautica',
     },
     collaborations: {
       title: 'Collaborazioni',
