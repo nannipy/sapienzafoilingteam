@@ -4,7 +4,10 @@ export const sponsorTranslations = {
     subtitle: 'Join us on the journey towards excellence in technological sailing and sustainable innovation',
     contactButton: 'Contact Us',
     sponsorsSection: {
-      title: 'Our Sponsors'
+      title: 'Our Partners'
+    },
+    navybase:{
+      title: 'Navy Base',
     },
     collaborations: {
       title: 'Collaborations',
@@ -30,7 +33,10 @@ export const sponsorTranslations = {
     subtitle: 'Unisciti a noi nel percorso verso l\'eccellenza nella vela tecnologica e nell\'innovazione sostenibile',
     contactButton: 'Contattaci',
     sponsorsSection: {
-      title: 'I Nostri Sponsor'
+      title: 'I Nostri Partner'
+    },
+    navybase:{
+      title: 'Base Navale',
     },
     collaborations: {
       title: 'Collaborazioni',

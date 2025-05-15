@@ -60,11 +60,14 @@ export default function BlogPage() {
 
   // Function to strip markdown/HTML and truncate content for preview
   const createExcerpt = (content: string, content_en: string, maxLength: number = 120) => {
-    if (!content) return '';
-    content = language === 'en' ? content_en : content;
+    // Verifica se il contenuto è valido
+    let textToUse = language === 'en' ? content_en : content;
+    
+    // Se il contenuto non è valido, ritorna una stringa vuota
+    if (!textToUse) return '';
     
     // Basic stripping (you might want a more robust library for complex HTML/Markdown)
-    const plainText = content.replace(/<\/?[^>]+(>|$)/g, "").replace(/[#*`_~]/g, "");
+    const plainText = textToUse.replace(/<\/?[^>]+(>|$)/g, "").replace(/[#*`_~]/g, "");
     if (plainText.length <= maxLength) return plainText;
     return plainText.substring(0, maxLength).trim() + '...';
   };
