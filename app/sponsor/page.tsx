@@ -27,7 +27,7 @@ const SponsorPage = () => {
       {/* Sponsors Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="text-3xl font-bold text-center mb-12">{sponsorTranslations[language].sponsorsSection.title}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2  gap-8">
           <a href="http://www.fluidodesign.eu/" target="_blank" rel="noopener noreferrer" className="group">
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
               <Image src="/sponsors/fluidodesign.svg" alt="Notion" width={270} height={70} className="object-contain" />
@@ -41,11 +41,6 @@ const SponsorPage = () => {
           <a href="https://www.gottifredimaffioli.com/" target="_blank" rel="noopener noreferrer" className="group">
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
               <Image src="/sponsors/gottifredi.svg" alt="Notion" width={250} height={40} className="object-contain" />
-            </div>
-          </a>
-          <a href="https://www.centrovelico3v.it/" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
-              <Image src="/sponsors/3v.svg" alt="Notion" width={250} height={70} className="object-contain" />
             </div>
           </a>
           <a href="https://www.harken.it/it/home/" target="_blank" rel="noopener noreferrer" className="group">
