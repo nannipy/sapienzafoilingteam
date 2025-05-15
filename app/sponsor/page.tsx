@@ -6,6 +6,16 @@ import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 import { sponsorTranslations } from '../translations/sponsor';
 
+ const sponsors = [
+        { name : 'Maire', link: 'https://www.groupmaire.com/it/', logo: 'maire.svg', width: 250 },
+        { name : 'Fluidodesign', link: 'http://www.fluidodesign.eu/', logo: 'fluidodesign.svg', width: 270, height: 70 },
+        { name : 'Gottifredi', link: 'https://www.gottifredimaffioli.com/', logo: 'gottifredi.svg', width: 250 },
+        { name : 'Harken', link: 'https://www.harken.it/it/home/', logo: 'harken.svg', width: 250 },
+        { name : 'Beta', link: 'https://www.beta-cae.com/', logo: 'beta.svg', width: 200, height: 80 },
+        { name : 'Solidworks', link: 'https://www.solidworks.com', logo: 'solidworks.svg', width: 100, height: 80 },
+        { name : 'Comaryachts', link: 'https://www.comaryachts.it', logo: 'comar.svg', width: 250 },
+        { name : 'Notion', link: 'https://www.notion.so', logo: 'notion.svg', width: 100, height: 40 },
+      ];
 const SponsorPage = () => {
   const { language } = useLanguage();
 
@@ -27,56 +37,25 @@ const SponsorPage = () => {
       {/* Sponsors Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="text-3xl font-bold text-center mb-12">{sponsorTranslations[language].sponsorsSection.title}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2  gap-8">
-          <a href="http://www.fluidodesign.eu/" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
-              <Image src="/sponsors/fluidodesign.svg" alt="Notion" width={270} height={70} className="object-contain" />
-            </div>
-          </a>
-          <a href="https://www.groupmaire.com/it/" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
-              <Image src="/sponsors/maire.svg" alt="Notion" width={250} height={40} className="object-contain" />
-            </div>
-          </a>
-          <a href="https://www.gottifredimaffioli.com/" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
-              <Image src="/sponsors/gottifredi.svg" alt="Notion" width={250} height={40} className="object-contain" />
-            </div>
-          </a>
-          <a href="https://www.harken.it/it/home/" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
-              <Image src="/sponsors/harken.svg" alt="Notion" width={250} height={40} className="object-contain" />
-            </div>
-          </a>
-          <a href="https://www.beta-cae.com/" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
-              <Image src="/sponsors/beta.svg" alt="Beta Simulation Solutions" width={200} height={80} className="object-contain" />
-            </div>
-          </a>
-          <a href="https://www.solidworks.com" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
-              <Image src="/sponsors/solidworks.svg" alt="SolidWorks" width={100} height={80} className="object-contain" />
-            </div>
-          </a>
-          <a href="https://www.comaryachts.it" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
-              <Image src="/sponsors/comar.svg" alt="Notion" width={250} height={40} className="object-contain" />
-            </div>
-          </a>
-          <a href="https://www.notion.so" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
-              <Image src="/sponsors/notion.svg" alt="Notion" width={100} height={40} className="object-contain" />
-            </div>
-          </a>
+        <div className="flex flex-wrap justify-center gap-8">
+          {sponsors.map(sponsor => (
+            <a href={sponsor.link} target="_blank" rel="noopener noreferrer" className="group w-full md:w-[calc((100%-4rem)/3)]" key={sponsor.link}>              
+              <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-full">                
+                <Image src={`/sponsors/${sponsor.logo}`} alt={sponsor.name} width={sponsor.width || 250} height={sponsor.height || 40} className="object-contain" />
+              </div>
+            </a>
+          ))}
         </div>
       </div>
+
+     
 
       {/* Base Nautica */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="text-3xl font-bold text-center mb-12">{sponsorTranslations[language].navybase.title}</h2>
         <div className="grid grid-cols-1  gap-8">
           <a href="https://www.centrovelico3v.it" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto mx-48">
               <Image src="/sponsors/3v.svg" alt="Collaboration 1" width={300} height={100} className="object-contain" />
             </div>
           </a>
