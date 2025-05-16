@@ -12,7 +12,7 @@ import { sponsorTranslations } from '../translations/sponsor';
         { name : 'Gottifredi', link: 'https://www.gottifredimaffioli.com/', logo: 'gottifredi.svg', width: 250 },
         { name : 'Harken', link: 'https://www.harken.it/it/home/', logo: 'harken.svg', width: 250 },
         { name : 'Beta', link: 'https://www.beta-cae.com/', logo: 'beta.svg', width: 200, height: 80 },
-        { name : 'Solidworks', link: 'https://www.solidworks.com', logo: 'solidworks.svg', width: 100, height: 80 },
+        { name : 'Solidworks', link: 'https://www.solidworks.com', logo: 'solidworks.svg', width: 250, height: 80 },
         { name : 'Comaryachts', link: 'https://www.comaryachts.it', logo: 'comar.svg', width: 250 },
         { name : 'Notion', link: 'https://www.notion.so', logo: 'notion.svg', width: 100, height: 40 },
       ];

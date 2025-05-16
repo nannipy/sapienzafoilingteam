@@ -348,7 +348,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   // --- Render logic ---
   return (
     <main className="flex-1 p-4 md:p-6 lg:p-10 max-w-7xl mx-auto w-full">
-      <div className="hidden md:block mb-4 md:mb-6 min-h-[40px]">
+      <div className="hidden md:block mb-4 md:mb-6 min-h-[10px]">
          {error && (
                 <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded text-sm flex items-center justify-between">
                     <span>{error}</span>
@@ -398,13 +398,13 @@ const handleSubmit = async (e: React.FormEvent) => {
                             {blogTranslations[language].admin.articleTitle}
                           </th>
                           <th scope="col" className="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Image
+                            {blogTranslations[language].admin.image}
                           </th>
                           <th scope="col" className="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             {blogTranslations[language].publishedOn}
                           </th>
                           <th scope="col" className="px-4 md:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Actions
+                            {blogTranslations[language].admin.actions}
                           </th>
                         </tr>
                       </thead>

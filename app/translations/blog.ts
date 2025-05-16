@@ -1,3 +1,5 @@
+import { image } from "@uiw/react-md-editor";
+
 export const blogTranslations = {
   en: {
     title: 'Blog',
@@ -10,6 +12,8 @@ export const blogTranslations = {
       newArticle: 'New Article',
       editArticle: 'Edit Article',
       articleTitle: 'Title',
+      image: 'Image',
+      actions: 'Actions',
       articleContent: 'Content',
       articleImage: 'Image URL',
       articleImageAlt: 'Image Description',
@@ -39,6 +43,8 @@ export const blogTranslations = {
       newArticle: 'Nuovo Articolo',
       editArticle: 'Modifica Articolo',
       articleTitle: 'Titolo',
+      image: 'Immagine',
+      actions: 'Azioni',
       articleContent: 'Contenuto',
       articleImage: 'URL Immagine',
       articleImageAlt: 'Descrizione Immagine',

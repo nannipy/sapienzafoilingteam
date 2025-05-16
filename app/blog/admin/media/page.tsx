@@ -617,7 +617,7 @@ export default function MediaManagerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 "> {/* Adjusted padding top */}
+    <div className="min-h-screen bg-gray-100 mt-5"> {/* Adjusted padding top */}
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-6"> {/* Adjusted padding */}
         <div className="bg-white rounded-lg shadow p-4 md:p-6">
           {/* Header */}
