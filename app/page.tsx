@@ -77,7 +77,7 @@ export default function Home() {
           {upcomingEvents.map((event, index) => (
             <div
               key={index}
-              className="bg-[#822433] p-6  mx-auto rounded-xl transition-all duration-300 hover:transform hover:scale-105 md:grid md:grid-cols-2 gap-4 my-5"
+              className="bg-[#822433] p-6  px-16 md:px-28 md:py-5 mx-auto rounded-xl transition-all duration-300 hover:transform hover:scale-105 md:grid md:grid-cols-2 gap-4 my-5"
               onClick={() => window.open(event.link, '_blank')}
             >
               {/* Contenuto del testo a sinistra */}
