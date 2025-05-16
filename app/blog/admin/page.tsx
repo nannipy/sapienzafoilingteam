@@ -416,7 +416,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                             <tr key={article.id} className="hover:bg-gray-50 transition-colors duration-150">
                               <td className="px-4 md:px-6 py-4">
                                 <div className="text-sm font-medium text-gray-900 truncate max-w-[150px] md:max-w-none">
-                                  {article.title}
+                                  {language === 'en' ? article.title_en : article.title}
                                 </div>
                               </td>
                               <td className="hidden md:table-cell px-4 md:px-6 py-4 whitespace-nowrap">

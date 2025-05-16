@@ -154,10 +154,7 @@ export default function BlogPage() {
                     </Link>
                   </h2>
 
-                  {/* Excerpt */}
-                  <p className="text-sm text-gray-600 mb-4 line-clamp-3 flex-grow">
-                    {createExcerpt(article.content, article.content_en)}
-                  </p>
+                  
 
                   {/* Footer: Date and Read More */}
                   <div className="mt-auto flex items-center justify-between text-xs text-gray-500 pt-3 border-t border-gray-100">
