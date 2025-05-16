@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '../../context/LanguageContext';
 import { blogTranslations } from '../../translations/blog';
-import { Calendar, ArrowLeft } from 'lucide-react';
+import { Calendar, ArrowLeft, Loader2 } from 'lucide-react';
 import { marked } from 'marked';
 import { useParams } from 'next/navigation';
 
@@ -90,7 +90,7 @@ export default function ArticlePage() {
 
         {loading ? (
           <div className="flex justify-center py-16">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#822433]"></div>
+            <Loader2 className="w-10 h-10 text-[#822433] animate-spin mb-2" />
           </div>
         ) : error ? (
           <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r mb-8">

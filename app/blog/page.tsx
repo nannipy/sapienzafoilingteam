@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 import { blogTranslations } from '../translations/blog';
-import { Calendar, ArrowRight, MessageSquare, ImageOff } from 'lucide-react'; // Added ArrowRight, ImageOff
+import { Calendar, ArrowRight, MessageSquare, ImageOff, Loader2 } from 'lucide-react'; // Added ArrowRight, ImageOff
 
 type Article = {
   id: string;
@@ -105,7 +105,7 @@ export default function BlogPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
         {loading ? (
           <div className="flex justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#822433]"></div>
+            <Loader2 className="w-10 h-10 text-[#822433] animate-spin mb-2" />
           </div>
         ) : error ? (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 text-center">

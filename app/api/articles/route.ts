@@ -67,9 +67,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Unauthorized - Invalid token' }, { status: 401 });
     }
 
-    const { title, content, image_url, image_alt } = await request.json();
+    const { title, content, image_url, image_alt, title_en, content_en } = await request.json();
 
-    if (!title || !content) {
+    if (!title || !content || !title_en || !content_en) {
       return NextResponse.json({ error: 'Title and content are required' }, { status: 400 });
     }
 
@@ -80,6 +80,8 @@ export async function POST(request: Request) {
           title,
           slug: title.toLowerCase().replace(/ /g, '-'),
           content,
+          title_en,
+          content_en,
           image_url: image_url || null,
           image_alt: image_alt || null,
           author_id: user.id
@@ -100,116 +102,3 @@ export async function POST(request: Request) {
   }
 }
 
-// PATCH /api/articles/[id] - Update an article
-export async function PATCH(request: Request) {
-  try {
-    console.log('API PATCH /articles - Request URL:', request.url);
-    
-    // Verify authentication using the token from request header
-    const authHeader = request.headers.get('Authorization');
-    const token = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
-    
-    console.log('API PATCH /articles - Token present:', !!token);
-    
-    if (!token) {
-      return NextResponse.json({ error: 'Unauthorized - No token provided' }, { status: 401 });
-    }
-
-    // Verify the token
-    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
-    
-    console.log('API PATCH /articles - Auth result:', { user: !!user, error: authError });
-    
-    if (authError || !user) {
-      return NextResponse.json({ error: 'Unauthorized - Invalid token' }, { status: 401 });
-    }
-
-    // Get the article ID from the URL
-    const url = new URL(request.url);
-    const pathParts = url.pathname.split('/');
-    const id = pathParts[pathParts.length - 1];
-    
-    console.log('API PATCH /articles - Extracted ID:', id);
-
-    if (!id) {
-      return NextResponse.json({ error: 'Article ID is required' }, { status: 400 });
-    }
-
-    // Get the updated article data from the request body
-    const { title, content, image_url, image_alt } = await request.json();
-
-    if (!title || !content) {
-      return NextResponse.json({ error: 'Title and content are required' }, { status: 400 });
-    }
-
-
-    // Update the article
-    const { data, error } = await supabaseAdmin!
-      .from('posts')
-      .update({
-        title,
-        slug: title.toLowerCase().replace(/ /g, '-'),
-        content,
-        image_url: image_url || null,
-        image_alt: image_alt || null,
-        // Don't update author_id or created_at
-      })
-      .eq('id', id)
-      .select()
-      .single();
-
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 });
-    }
-
-    return NextResponse.json(data);
-  } catch (error: unknown) {
-    console.error("Descrizione Errore:", error); 
-    const errorMessage = 'Si è verificato un errore imprevisto';
-    return NextResponse.json({ error: errorMessage }, { status: 500 });
-  }
-}
-
-// DELETE /api/articles/[id] - Delete an article
-export async function DELETE(request: Request) {
-  try {
-    // Verify authentication using the token from request header
-    const authHeader = request.headers.get('Authorization');
-    const token = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
-    
-    if (!token) {
-      return NextResponse.json({ error: 'Unauthorized - No token provided' }, { status: 401 });
-    }
-
-    // Verify the token
-    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
-    
-    if (authError || !user) {
-      return NextResponse.json({ error: 'Unauthorized - Invalid token' }, { status: 401 });
-    }
-
-    // Get the article ID from the URL search params
-    const url = new URL(request.url);
-    const id = url.searchParams.get('id');
-
-    if (!id) {
-      return NextResponse.json({ error: 'Article ID is required' }, { status: 400 });
-    }
-
-    // Delete the article
-    const { error } = await supabaseAdmin!
-      .from('posts')
-      .delete()
-      .eq('id', id);
-
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 });
-    }
-
-    return NextResponse.json({ message: 'Article deleted successfully' });
-  }catch (error: unknown) {
-    console.error("Descrizione Errore:", error); 
-    const errorMessage = 'Si è verificato un errore imprevisto';
-    return NextResponse.json({ error: errorMessage }, { status: 500 });
-  }
-}

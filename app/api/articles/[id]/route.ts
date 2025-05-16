@@ -126,7 +126,7 @@ export async function PATCH( request: NextRequest, { params }: { params: Promise
     */
 
     // 3. Request Body Validation
-    let updateData: { title: string; content: string; image_url?: string | null; image_alt?: string | null; };
+    let updateData: { title: string; content: string; title_en: string ; content_en: string; image_url?: string | null; image_alt?: string | null; };
     try {
         const body = await request.json();
         if (!body.title || typeof body.title !== 'string' || body.title.trim() === '') {
@@ -135,9 +135,24 @@ export async function PATCH( request: NextRequest, { params }: { params: Promise
          if (!body.content || typeof body.content !== 'string' || body.content.trim() === '') {
             throw new Error('Content is required and cannot be empty.');
         }
+        if (body.title_en && typeof body.title_en !== 'string') {
+            throw new Error('Title EN must be a string.');
+        }
+        if (body.content_en && typeof body.content_en !== 'string') {
+            throw new Error('Content EN must be a string.');
+        }
+        if (body.image_url && typeof body.image_url !== 'string') {
+            throw new Error('Image URL must be a string.');
+        }
+        if (body.image_alt && typeof body.image_alt !== 'string') {
+            throw new Error('Image Alt must be a string.');
+        }
+
         updateData = {
             title: body.title.trim(),
             content: body.content.trim(), // Use trim() here if you want to save trimmed content
+            title_en: body.title_en.trim(),
+            content_en: body.content_en.trim(),
             image_url: body.image_url || null, // Handle optional fields
             image_alt: body.image_alt || null
         };
@@ -150,7 +165,13 @@ export async function PATCH( request: NextRequest, { params }: { params: Promise
     const { data: updatedArticle, error: updateError } = await supabase
       .from('posts')
       .update({
-        ...updateData,
+            ...updateData,
+        title: updateData.title,
+        content: updateData.content,
+        title_en: updateData.title_en,
+        content_en: updateData.content_en,
+        image_url: updateData.image_url,
+        image_alt: updateData.image_alt,
         slug: updateData.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, ''), // Generate slug
         updated_at: new Date().toISOString() // Update timestamp
       })
