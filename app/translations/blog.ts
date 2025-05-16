@@ -1,4 +1,3 @@
-import { image } from "@uiw/react-md-editor";
 
 export const blogTranslations = {
   en: {
