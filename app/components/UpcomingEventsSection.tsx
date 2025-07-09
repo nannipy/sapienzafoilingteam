@@ -6,9 +6,7 @@ import { Calendar } from "lucide-react";
 import { useLanguage } from '../context/LanguageContext';
 import { homeTranslations } from '../translations/home';
 
-interface UpcomingEventsSectionProps {
-  // Define any props if needed
-}
+type UpcomingEventsSectionProps = Record<string, never>;
 
 const UpcomingEventsSection: React.FC<UpcomingEventsSectionProps> = () => {
   const { language } = useLanguage();

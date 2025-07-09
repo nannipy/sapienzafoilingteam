@@ -5,9 +5,7 @@ import { Instagram, Linkedin, Facebook } from "lucide-react";
 import { useLanguage } from '../context/LanguageContext';
 import { homeTranslations } from '../translations/home';
 
-interface SocialMediaSectionProps {
-  // Define any props if needed
-}
+type SocialMediaSectionProps = Record<string, never>;
 
 const SocialMediaSection: React.FC<SocialMediaSectionProps> = () => {
   const { language } = useLanguage();

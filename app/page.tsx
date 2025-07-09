@@ -2,14 +2,14 @@
 
 import React from "react";
 import { useLanguage } from "./context/LanguageContext";
-import { homeTranslations } from "./translations/home";
+
 import HeroSection from "./components/HeroSection";
 import UpcomingEventsSection from "./components/UpcomingEventsSection";
 import SocialMediaSection from "./components/SocialMediaSection";
 import CallToActionSection from "./components/CallToActionSection";
 
 export default function Home() {
-  const { language } = useLanguage();
+  useLanguage();
 
   const handleChevronClick = () => {
     const targetElement = document.querySelector('#upcoming-events');

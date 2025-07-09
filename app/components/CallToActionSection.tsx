@@ -5,9 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { useLanguage } from '../context/LanguageContext';
 import { homeTranslations } from '../translations/home';
 
-interface CallToActionSectionProps {
-  // Define any props if needed
-}
+type CallToActionSectionProps = Record<string, never>;
 
 const CallToActionSection: React.FC<CallToActionSectionProps> = () => {
   const { language } = useLanguage();
