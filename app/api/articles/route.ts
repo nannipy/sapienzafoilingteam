@@ -8,22 +8,9 @@ import { supabase, supabaseAdmin } from '@/app/lib/supabase';
 // }
 
 // GET /api/articles - Get all articles
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    // Log the incoming request headers
-    console.log('API GET /articles - Request headers:', {
-      authorization: request.headers.get('Authorization'),
-      hasAuthHeader: !!request.headers.get('Authorization')
-    });
-    
-    // Try to extract token from Authorization header
-    const authHeader = request.headers.get('Authorization');
-    const token = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
-    console.log('API GET /articles - Extracted token:', token ? `${token.substring(0, 10)}...` : 'No token');
-    
-    // Use supabaseAdmin for unrestricted access
-    console.log('API GET /articles - Executing query to posts table with admin client');
-    const { data, error } = await supabaseAdmin!
+    const { data, error } = await supabase
       .from('posts')
       .select('*')
       .order('created_at', { ascending: false });

@@ -19,18 +19,16 @@
     "@uiw/react-md-editor": "^4.0.5",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
-    "card": "^2.5.4",
     "framer-motion": "^11.18.2",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.460.0",
     "marked": "^15.0.7",
-    "punycode": "^2.3.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-intersection-observer": "^9.16.0"
+    "react-dom": "^18.3.1"  
   },
   "overrides": {
-    "whatwg-url": "^13.0.0"
+    "whatwg-url": "^13.0.0",
+    "brace-expansion": "2.0.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
@@ -55,3 +53,4 @@
     "typescript": "^5.8.2"
   }
 }
+
