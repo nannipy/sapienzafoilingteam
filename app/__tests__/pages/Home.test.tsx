@@ -1,37 +1,10 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { useInView } from 'react-intersection-observer';
 import HomePage from '../../page';
-import Image from 'next/image';
+import { LanguageProvider } from '../../context/LanguageContext';
 
-jest.mock('react-intersection-observer', () => ({
-  useInView: jest.fn(),
-}));
-
-jest.mock('next/image', () => {
-  const MockImage = ({ }: {
-    src: string,
-    alt: string,
-    fill?: boolean,
-    priority?: boolean,
-  }) => {
-    return <Image
-    src="/moth_5.jpg"
-    alt="Regata di barche a vela con foil al tramonto" 
-    fill
-    priority
-  />
-  };
-  return MockImage;
-});
-
-// Mock window.open and scrollTo for navigation tests
-const mockOpen = jest.fn();
+// Mock window.scrollTo for navigation tests
 const mockScrollTo = jest.fn();
-Object.defineProperty(window, 'open', {
-  value: mockOpen,
-  writable: true
-});
 Object.defineProperty(window, 'scrollTo', {
   value: mockScrollTo,
   writable: true
@@ -41,10 +14,23 @@ Object.defineProperty(window, 'pageYOffset', {
   writable: true
 });
 
+const renderWithProvider = (component: React.ReactElement) => {
+  return render(<LanguageProvider>{component}</LanguageProvider>);
+};
+
 describe('Home Page', () => {
   beforeEach(() => {
-    (useInView as jest.Mock).mockReturnValue({ ref: jest.fn(), inView: true });
     jest.clearAllMocks();
+  });
+
+  it('renders all sections of the home page', () => {
+    renderWithProvider(<HomePage />);
+    expect(screen.getByTestId('home-page')).toBeInTheDocument();
+    // Check for elements from each section to ensure they are rendered
+    expect(screen.getByText('Sapienza Foiling Team')).toBeInTheDocument(); // From HeroSection
+    expect(screen.getByText('Prossimi Eventi')).toBeInTheDocument(); // From UpcomingEventsSection
+    expect(screen.getByText('Seguici sui nostri social')).toBeInTheDocument(); // From SocialMediaSection
+    expect(screen.getByText('Entra a far parte del team')).toBeInTheDocument(); // From CallToActionSection
   });
 
   it('scrolls to upcoming events section when chevron is clicked', () => {
@@ -54,7 +40,7 @@ describe('Home Page', () => {
     });
     document.querySelector = mockQuerySelector;
 
-    render(<HomePage />);
+    renderWithProvider(<HomePage />);
     const chevronDown = screen.getByTestId('chevron-down');
     fireEvent.click(chevronDown);
 
@@ -63,47 +49,5 @@ describe('Home Page', () => {
       top: 400,
       behavior: 'smooth'
     });
-  });
-
-  it('renders the hero section with team name', () => {
-    render(<HomePage />);
-    const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading).toBeInTheDocument();
-    expect(heading).toHaveTextContent('Sapienza Foiling Team');
-  });
-
-  it('renders upcoming events section with event details', () => {
-    render(<HomePage />);
-    expect(screen.getByText('Prossimi Eventi')).toBeInTheDocument();
-    expect(screen.getByText('2025 SuMoth Challenge')).toBeInTheDocument();
-    expect(screen.getByText('16 Giugno 2025')).toBeInTheDocument();
-    expect(screen.getByText('Garda, Verona')).toBeInTheDocument();
-  });
-
-  it('renders social media links', () => {
-    render(<HomePage />);
-    expect(screen.getByLabelText('Instagram')).toHaveAttribute('href', 'https://www.instagram.com/sapienzafoilingteam/');
-    expect(screen.getByLabelText('LinkedIn')).toHaveAttribute('href', 'https://www.linkedin.com/company/sapienza-foiling-team/about/');
-    expect(screen.getByLabelText('Facebook')).toHaveAttribute('href', 'https://www.facebook.com/profile.php?id=61572515878295');
-  });
-
-  it('renders call-to-action section', () => {
-    render(<HomePage />);
-    expect(screen.getByText('Entra a far parte del team')).toBeInTheDocument();
-    expect(screen.getByText('Unisciti a noi')).toBeInTheDocument();
-  });
-
-  it('handles call-to-action button click', () => {
-    render(<HomePage />);
-    const joinButton = screen.getByText('Unisciti a noi');
-    fireEvent.click(joinButton);
-    expect(mockOpen).toHaveBeenCalledWith('https://docs.google.com/forms/d/1TsTV28v7nggIEp98K8JGwtKbrV5P-9xzHIxmuFlSXCs/edit?pli=1', '_blank');
-  });
-
-  it('handles event card click', () => {
-    render(<HomePage />);
-    const eventCard = screen.getByText('2025 SuMoth Challenge').closest('div');
-    if (eventCard) fireEvent.click(eventCard);
-    expect(mockOpen).toHaveBeenCalledWith('https://sumoth.org', '_blank');
   });
 });

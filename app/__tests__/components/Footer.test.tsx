@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Footer from '../../components/Footer';
 import Image from 'next/image';
+import { LanguageProvider } from '../../context/LanguageContext';
 
 jest.mock('next/image', () => ({
   __esModule: true,
@@ -10,18 +11,23 @@ jest.mock('next/image', () => ({
   },
 }));
 
+const renderWithProvider = (component: React.ReactElement) => {
+  return render(<LanguageProvider>{component}</LanguageProvider>);
+};
+
 describe('Footer Component', () => {
   it('displays the copyright text', () => {
-    render(<Footer />);
+    renderWithProvider(<Footer />);
     expect(screen.getByText('© 2025 Sapienza Foiling Team')).toBeInTheDocument();
   });
 
   it('renders social media links', () => {
-    render(<Footer />);
+    renderWithProvider(<Footer />);
     const socialLinks = screen.getAllByRole('link');
-    expect(socialLinks).toHaveLength(3);
+    expect(socialLinks).toHaveLength(4);
     
     const socialUrls = [
+      'mailto:sapienzafoilingteam@gmail.com',
       'https://www.instagram.com/sapienzafoilingteam/',
       'https://www.linkedin.com/company/sapienza-foiling-team/about/',
       'https://www.facebook.com/profile.php?id=61572515878295'
@@ -34,9 +40,9 @@ describe('Footer Component', () => {
   });
 
   it('has accessible social media links', () => {
-    render(<Footer />);
+    renderWithProvider(<Footer />);
     const socialLinks = screen.getAllByRole('link');
-    const expectedLabels = ['Instagram', 'LinkedIn', 'Facebook'];
+    const expectedLabels = ['Email', 'Instagram', 'LinkedIn', 'Facebook'];
     
     socialLinks.forEach((link, index) => {
       expect(link).toHaveAttribute('aria-label', expectedLabels[index]);
@@ -44,7 +50,7 @@ describe('Footer Component', () => {
   });
 
   it('has social media icons with correct styling', () => {
-    render(<Footer />);
+    renderWithProvider(<Footer />);
     const icons = screen.getAllByRole('link');
     
     icons.forEach(icon => {

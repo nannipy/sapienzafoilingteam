@@ -55,7 +55,7 @@ const SponsorPage = () => {
         <h2 className="text-3xl font-bold text-center mb-12">{sponsorTranslations[language].navybase.title}</h2>
         <div className="grid grid-cols-1  gap-8">
           <a href="https://www.centrovelico3v.it" target="_blank" rel="noopener noreferrer" className="group">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto mx-48">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
               <Image src="/sponsors/3v.svg" alt="Collaboration 1" width={300} height={100} className="object-contain" />
             </div>
           </a>

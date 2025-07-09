@@ -1,3 +1,4 @@
+// jest.config.ts
 import type { Config } from 'jest';
 import nextJest from 'next/jest';
 
@@ -11,11 +12,17 @@ const config: Config = {
   preset: 'ts-jest',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
+     // Aggiungi questo se nextJest non lo gestisce e hai errori con import CSS/SCSS
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov'],
-  testMatch: ['**/__tests__/**/*.test.ts?(x)'],
+  // Modificato per includere file .test.tsx accanto ai componenti
+  testMatch: [
+    '**/__tests__/**/*.test.[jt]s?(x)', // Mantiene la possibilità di usare __tests__
+    '**/?(*.)+(spec|test).[jt]s?(x)'    // Aggiunge la ricerca per file .spec o .test accanto ai componenti
+  ],
 };
 
 export default createJestConfig(config);

@@ -72,6 +72,7 @@ const Navbar = () => {
           <button
             className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300"
             onClick={handleMenuToggle}
+            aria-label="Toggle navigation"
           >
             {!isRounded ? (
               <X className="w-6 h-6" />
