@@ -82,7 +82,20 @@ export const fleetTranslations = {
       description: 'If you are a student passionate about sailing and engineering and want to contribute to building our fleet, send a spontaneous application.',
       contactButton: 'Contact Us',
       joinButton: 'Join the Team'
-    }
+    },
+    rulebook: {
+      title: 'SuMoth Challenge Rulebook Highlights',
+      description: 'Explore the key regulations and guidelines of the Foiling SuMoth Challenge, providing essential information for participants and enthusiasts.',
+      technicalRequirements: {
+        title: 'Technical Requirements',
+      },
+      challengeStages: {
+        title: 'Challenge Stages',
+      },
+      competitionScoring: {
+        title: 'Competition & Scoring',
+      },
+    },
   },
   it: {
     title: 'La Nostra Flotta',
@@ -167,6 +180,19 @@ export const fleetTranslations = {
       description: 'Se sei uno studente appassionato di vela e ingegneria e vuoi contribuire alla costruzione della nostra flotta, invia una candidatura spontanea.',
       contactButton: 'Contattaci',
       joinButton: 'Unisciti al Team'
-    }
+    },
+    rulebook: {
+      title: 'Punti Salienti del Regolamento SuMoth Challenge',
+      description: 'Esplora le principali normative e linee guida della Foiling SuMoth Challenge, fornendo informazioni essenziali per partecipanti e appassionati.',
+      technicalRequirements: {
+        title: 'Requisiti Tecnici',
+      },
+      challengeStages: {
+        title: 'Fasi della Sfida',
+      },
+      competitionScoring: {
+        title: 'Competizione e Punteggio',
+      },
+    },
   }
 };

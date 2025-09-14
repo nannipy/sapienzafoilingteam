@@ -13,6 +13,7 @@ import {
 import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 import { fleetTranslations } from '../translations/fleet';
+import SuMothRulebookSection from '../components/SuMothRulebookSection';
 
 const FleetPage = () => {
   const { language } = useLanguage();
@@ -144,6 +145,9 @@ const FleetPage = () => {
           </div>
         </div>
       </div>
+
+      {/* SuMoth Rulebook Section */}
+      <SuMothRulebookSection />
 
        {/* Call to Action */}
        <div className="bg-[#fdf1f3] py-16">
