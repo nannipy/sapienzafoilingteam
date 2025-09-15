@@ -2,14 +2,14 @@
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { Suspense, useEffect } from 'react'
+import { JSX, Suspense, useEffect } from 'react'
 import React from 'react'
 
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
     capture_pageview: false, // Disable automatic pageview capture, as we capture manually
-    opt_in_capturing_by_default: false, // Wait for explicit user consent
+    opt_out_capturing_by_default: true, // Wait for explicit user consent
     respect_dnt: true // Respect Do Not Track headers
   })
 }

@@ -1,7 +1,8 @@
 'use client';
+import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { teamTranslations } from '../translations/team';
-import React, { useState } from 'react';
+import { JSX, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Anchor, Handshake, Component, PencilRuler, Leaf, 
          Truck, Wrench, Globe, Star, Layout, Lightbulb, 

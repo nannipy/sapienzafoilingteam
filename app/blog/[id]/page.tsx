@@ -1,22 +1,10 @@
 // app/blog/[id]/page.tsx
-
 import { supabase } from '../../lib/supabase';
 import { Article } from '../../lib/types';
 import ArticleClientPage from './ArticleClientPage';
 import { notFound } from 'next/navigation';
 import { marked } from 'marked';
 
-type Props = {
-  params: { id: string };
-};
-
-// This will pre-build all blog posts at build time
-export async function generateStaticParams() {
-  const { data: posts } = await supabase.from('posts').select('id');
-  return posts?.map(post => ({
-    id: post.id.toString(),
-  })) || [];
-}
 
 async function getArticle(id: string): Promise<Article | null> {
   const { data, error } = await supabase
@@ -32,9 +20,16 @@ async function getArticle(id: string): Promise<Article | null> {
   return data;
 }
 
-export default async function ArticlePage({ params }: Props) {
-  const article = await getArticle(params.id);
-
+export default async function ArticlePage({ 
+  params 
+}: { 
+  params: Promise<{ id: string }> 
+}) {
+  // Await the params Promise to get the actual parameters
+  const { id } = await params;
+  
+  const article = await getArticle(id);
+  
   if (!article) {
     notFound(); // Triggers the not-found page
   }
