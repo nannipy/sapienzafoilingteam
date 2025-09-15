@@ -2,7 +2,7 @@ export const pastEventsTranslations = {
     en: [
         {
             title: "Rome Foil Festival",
-            date: "May 15 - May 18 2025",
+            date: "15 - 18 May  2025",
             location: "Bracciano, Rome",
             image: "/romefoilfestival.jpeg",
             link: "https://www.romefoilfestival.com/"
@@ -18,7 +18,7 @@ export const pastEventsTranslations = {
     it: [
         {
             title: "Rome Foil Festival",
-            date: "15 Maggio - 18 Maggio 2025",
+            date: "15 - 18 Maggio 2025",
             location: "Bracciano, Roma",
             image: "/romefoilfestival.jpeg",
             link: "https://www.romefoilfestival.com/"
