@@ -21,7 +21,7 @@ export const homeTranslations = {
   it: {
     title: 'Sapienza Foiling Team',
     pastEvents: 'Eventi Passati',
-    upcomingEvents: 'Eventi Futuri',
+    upcomingEvents: 'Prossimi Eventi',
     eventTitle: '2025 SuMoth Challenge',
     eventDate: '16 Giugno 2025',
     eventLocation: 'Garda, Verona',
