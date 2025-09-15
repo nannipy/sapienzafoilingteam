@@ -17,7 +17,7 @@ It is a modern web application built with:
 *   **Testing:** Jest, React Testing Library, TS-Jest
 *   **Code Quality:** ESLint
 
-The architecture follows a typical Next.js application structure, with API routes, dedicated pages for different sections (blog, contact, fleet, etc.), reusable components, and Supabase integration for backend services.
+The architecture follows a typical Next.js application structure, with API routes, dedicated pages for different sections (blog, contact, boat, etc.), reusable components, and Supabase integration for backend services.
 
 ## Building and Running
 

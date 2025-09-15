@@ -13,7 +13,7 @@ The Sapienza Foiling Team website serves as the digital hub for our university s
 ### For Visitors
 - **Responsive Design**: Optimized viewing experience across all devices.
 - **Team Showcase**: Detailed information about our four main divisions.
-- **Fleet Details**: Technical specifications and information about our boats.
+- **Boat Details**: Technical specifications and information about our boats.
 - **Sponsorship Portal**: Opportunities and benefits for potential partners.
 - **Contact System**: Direct communication channel with our team.
 - **Event Calendar**: Upcoming competitions and team events.

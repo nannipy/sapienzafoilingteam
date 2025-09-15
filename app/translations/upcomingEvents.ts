@@ -1,15 +1,15 @@
 export const upcomingEventsTranslations = {
     en: [
         {
-            title: "Rome Foil Festival",
-            date: "May 15 - May 18 2025",
-            location: "Bracciano, Rome",
-            image: "/romefoilfestival.jpeg",
-            link: "https://www.romefoilfestival.com/"
+            title: "Rome Maker Fair",
+            date: "OCT 17 - OCT 19 2025",
+            location: "Gazometro, Rome",
+            image: "/makerfair.jpg",
+            link: "https://makerfairerome.eu/"
         },
         {
-            title: "2025 SuMoth Challenge",
-            date: "June 16 2025",
+            title: "2026 SuMoth Challenge",
+            date: "June 16 2026",
             location: "Garda, Verona",
             image: "/sumoth.png",
             link: "https://sumoth.org"
@@ -17,18 +17,19 @@ export const upcomingEventsTranslations = {
     ],
     it: [
         {
-            title: "Rome Foil Festival",
-            date: "15 Maggio - 18 Maggio 2025",
-            location: "Bracciano, Roma",
-            image: "/romefoilfestival.jpeg",
-            link: "https://www.romefoilfestival.com/"
+            title: "Rome Maker Fair",
+            date: "17 Ottobre  - 19 Ottobre 2025",
+            location: "Gazometro, Roma",
+            image: "/makerfair.jpg",
+            link: "https://makerfairerome.eu/"
         },
         {
-            title: "2025 SuMoth Challenge",
-            date: "16 Giugno 2025",
+            title: "2026 SuMoth Challenge",
+            date: "16 Giugno 2026",
             location: "Garda, Verona",
             image: "/sumoth.png",
             link: "https://sumoth.org"
         }
     ]
 };
+

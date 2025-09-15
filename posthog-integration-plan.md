@@ -48,7 +48,7 @@ This document outlines the implementation plan for integrating PostHog analytics
   ```javascript
   // Hero section CTA clicks
   posthog.capture('hero_cta_clicked', {
-    cta_type: 'learn_more' | 'contact_us' | 'view_fleet',
+    cta_type: 'learn_more' | 'contact_us' | 'view_boat',
     section: 'hero'
   })
   ```
@@ -57,7 +57,7 @@ This document outlines the implementation plan for integrating PostHog analytics
   // Page transitions
   posthog.capture('page_navigation', {
     from_page: 'home',
-    to_page: 'team' | 'fleet' | 'sponsor' | 'contact',
+    to_page: 'team' | 'boat' | 'sponsor' | 'contact',
     navigation_type: 'menu' | 'cta' | 'link'
   })
   ```
@@ -78,7 +78,7 @@ This document outlines the implementation plan for integrating PostHog analytics
   })
   ```
 
-#### 2.3 Team & Fleet Interest Tracking
+#### 2.3 Team & Boat Interest Tracking
 - [ ] Team member profile clicks
 - [x] Boat specification downloads/views
 - [x] Division information engagement
@@ -145,7 +145,7 @@ This document outlines the implementation plan for integrating PostHog analytics
 #### 5.1 User Personas & Segmentation
 - [ ] Create user segments based on behavior
   - Potential sponsors (sponsor page engagement)
-  - Sailing enthusiasts (blog + fleet focus)
+  - Sailing enthusiasts (blog + boat focus)
   - Students/academics (team + technical content)
   - Media/press (blog + contact patterns)
 
@@ -196,7 +196,7 @@ POSTHOG_PERSONAL_API_KEY=your_personal_api_key
 
 2. **Content Performance Dashboard**
    - Blog post engagement metrics
-   - Most popular team/fleet content
+   - Most popular team/boat content
    - Seasonal content trends
 
 3. **Conversion Dashboard**

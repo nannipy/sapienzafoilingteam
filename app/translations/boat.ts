@@ -1,7 +1,6 @@
-export const fleetTranslations = {
+export const boatTranslations = {
   en: {
-    title: 'Our Fleet',
-    subtitle: 'The future of flying sailing',
+    title: 'Our Moth',
     workInProgress: {
       title: 'Fleet Under Construction',
       description: 'As a newly formed team, we are working on building our first boat. In the meantime, we invite you to discover all the technical details of the Moth, one of the most innovative classes in the sailing world, to which our boat will also belong.'
@@ -98,8 +97,8 @@ export const fleetTranslations = {
     },
   },
   it: {
-    title: 'La Nostra Flotta',
-    subtitle: 'Il futuro della vela volante',
+    title: 'Il nostro Moth',
+    
     workInProgress: {
       title: 'Flotta in Costruzione',
       description: 'Come team appena formato, stiamo lavorando alla costruzione della nostra prima imbarcazione. Nel frattempo, ti invitiamo a scoprire tutti i dettagli tecnici del Moth, una delle classi più innovative nel mondo della vela, alla quale anche la nostra barca apparterrà.'

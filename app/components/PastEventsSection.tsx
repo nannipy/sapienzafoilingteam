@@ -5,22 +5,21 @@ import Image from "next/image";
 import { Calendar } from "lucide-react";
 import { useLanguage } from '../context/LanguageContext';
 import { homeTranslations } from '../translations/home';
-import { upcomingEventsTranslations } from "../translations/upcomingEvents";
+import { pastEventsTranslations } from '../translations/pastEvents';
 
-type UpcomingEventsSectionProps = Record<string, never>;
+type PastEventsSectionProps = Record<string, never>;
 
-const UpcomingEventsSection: React.FC<UpcomingEventsSectionProps> = () => {
+const PastEventsSection: React.FC<PastEventsSectionProps> = () => {
   const { language } = useLanguage();
 
-
   return (
-    <div className="bg-gray-50 py-16" id="upcoming-events" role="region" aria-label="achievements">
+    <div className="bg-gray-50 py-16" id="past-events" role="region" aria-label="achievements">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <h2 className="text-3xl font-bold text-black mb-12 text-center">
-          {homeTranslations[language].upcomingEvents}
+          {homeTranslations[language].pastEvents}
         </h2>
         <div className="grid md:grid-cols-1">
-          {upcomingEventsTranslations[language].map((event, index) => (
+          {pastEventsTranslations[language].map((event, index) => (
             <div
               key={index}
               className="bg-[#822433] p-6  px-16 md:px-28 md:py-5 mx-auto rounded-xl transition-all duration-300 hover:transform hover:scale-105 md:grid md:grid-cols-2 gap-4 my-5"
@@ -52,4 +51,4 @@ const UpcomingEventsSection: React.FC<UpcomingEventsSectionProps> = () => {
   );
 };
 
-export default UpcomingEventsSection;
+export default PastEventsSection;

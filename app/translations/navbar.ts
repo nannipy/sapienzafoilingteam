@@ -1,20 +1,20 @@
 export const navbarTranslations = {
   en: {
-    fleet: 'Fleet',
+    home: 'Home',
+    boat: 'Moth',
     team: 'Team',
     sponsor: 'Sponsor',
     contact: 'Contact',
     blog: 'Blog',
     joinUs: 'Join Us',
-    switchLanguage: 'Switch language'
   },
   it: {
-    fleet: 'Flotta',
+    home: 'Home',
+    boat: 'Moth',
     team: 'Team',
     sponsor: 'Sponsor',
     contact: 'Contatti',
     blog: 'Blog',
     joinUs: 'Unisciti a Noi',
-    switchLanguage: 'Cambia lingua'
-  }
+  },
 };

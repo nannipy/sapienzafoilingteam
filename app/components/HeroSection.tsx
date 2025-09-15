@@ -11,7 +11,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
-  const handleCTAClick = (ctaType: 'learn_more' | 'contact_us' | 'view_fleet') => {
+  const handleCTAClick = (ctaType: 'learn_more' | 'view_boat') => {
     posthog.capture('hero_cta_clicked', {
       cta_type: ctaType,
       section: 'hero'
@@ -43,20 +43,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
               Learn More
             </button>
           </Link>
-          <Link href="/contact">
+          <Link href="/boat">
             <button
-              onClick={() => handleCTAClick('contact_us')}
-              className="bg-transparent border border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition-colors"
-            >
-              Contact Us
-            </button>
-          </Link>
-          <Link href="/fleet">
-            <button
-              onClick={() => handleCTAClick('view_fleet')}
+              onClick={() => handleCTAClick('view_boat')}
               className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors"
             >
-              View Fleet
+              View Moth
             </button>
           </Link>
         </div>

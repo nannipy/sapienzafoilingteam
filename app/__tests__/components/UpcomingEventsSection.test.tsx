@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import UpcomingEventsSection from '../../components/UpcomingEventsSection';
+import UpcomingEventsSection from '../../components/PastEventsSection';
 import { LanguageProvider } from '../../context/LanguageContext';
 import { homeTranslations } from '../../translations/home';
 

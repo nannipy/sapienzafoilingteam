@@ -4,9 +4,10 @@ import React from "react";
 import { useLanguage } from "./context/LanguageContext";
 
 import HeroSection from "./components/HeroSection";
-import UpcomingEventsSection from "./components/UpcomingEventsSection";
+import PastEventsSection from "./components/PastEventsSection";
 import SocialMediaSection from "./components/SocialMediaSection";
 import CallToActionSection from "./components/CallToActionSection";
+import UpcomingEventsSection from "./components/UpcomingEventsSection";
 
 export default function Home() {
   useLanguage();
@@ -25,6 +26,7 @@ export default function Home() {
     <>
       <main className="relative min-h-screen bg-black" data-testid="home-page">
         <HeroSection onChevronClick={handleChevronClick} />
+        <PastEventsSection />
         <UpcomingEventsSection />
         <SocialMediaSection />
         <CallToActionSection />

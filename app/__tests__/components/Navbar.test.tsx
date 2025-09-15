@@ -53,7 +53,7 @@ describe('Navbar Component', () => {
     expect(screen.getByAltText('Logo')).toBeInTheDocument();
     const desktopNav = screen.getByTestId('desktop-nav'); // Assicurati che data-testid esista nel JSX
     
-    expect(desktopNav.querySelector('a[href="/fleet"]')).toHaveTextContent(navbarTranslations.it.fleet);
+    expect(desktopNav.querySelector('a[href="/boat"]')).toHaveTextContent(navbarTranslations.it.boat);
     expect(desktopNav.querySelector('a[href="/team"]')).toHaveTextContent(navbarTranslations.it.team);
     expect(desktopNav.querySelector('a[href="/sponsor"]')).toHaveTextContent(navbarTranslations.it.sponsor);
     expect(desktopNav.querySelector('a[href="/contact"]')).toHaveTextContent(navbarTranslations.it.contact);
@@ -76,7 +76,7 @@ describe('Navbar Component', () => {
     expect(screen.getByAltText('Logo')).toBeInTheDocument();
     const desktopNav = screen.getByTestId('desktop-nav');
     
-    expect(desktopNav.querySelector('a[href="/fleet"]')).toHaveTextContent(navbarTranslations.en.fleet);
+    expect(desktopNav.querySelector('a[href="/boat"]')).toHaveTextContent(navbarTranslations.en.boat);
     expect(desktopNav.querySelector('a[href="/team"]')).toHaveTextContent(navbarTranslations.en.team);
     // ... eccetera per gli altri link in EN
     expect(desktopNav.querySelector('a[href="/blog"]')).toHaveTextContent(navbarTranslations.en.blog);

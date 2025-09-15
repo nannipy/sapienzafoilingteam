@@ -2,14 +2,14 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { teamTranslations } from '../translations/team';
-import { JSX, useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Anchor, Handshake, Component, PencilRuler, Leaf, 
          Truck, Wrench, Globe, Star, Layout, Lightbulb, 
          PersonStanding, Anvil, ChevronDown, CircuitBoard, Bolt  } from 'lucide-react';
 import posthog from 'posthog-js';
 
-const iconsMap: Record<string, JSX.Element> = {
+const iconsMap: Record<string, React.JSX.Element> = {
   'Materiali Sostenibili': <Leaf className="w-4 h-4 mr-1 sm:mr-2" />,
   'Processi di Manufacturing': <Wrench className="w-4 h-4 mr-1 sm:mr-2" />,
   'Impatto Ambientale': <Globe className="w-4 h-4 mr-1 sm:mr-2" />,

@@ -15,7 +15,7 @@ const Navbar = () => {
   const { language, setLanguage } = useLanguage();
   
   const navigationItems = [
-    { label: navbarTranslations[language].fleet, href: '/fleet' },
+    { label: navbarTranslations[language].boat, href: '/boat' },
     { label: navbarTranslations[language].team, href: '/team' },
     { label: navbarTranslations[language].sponsor, href: '/sponsor' },
     { label: navbarTranslations[language].contact, href: '/contact' },
