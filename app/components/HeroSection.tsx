@@ -3,12 +3,21 @@
 import React from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
+import posthog from "posthog-js";
 
 interface HeroSectionProps {
   onChevronClick: () => void;
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
+  const handleCTAClick = (ctaType: 'learn_more' | 'contact_us' | 'view_fleet') => {
+    posthog.capture('hero_cta_clicked', {
+      cta_type: ctaType,
+      section: 'hero'
+    });
+  };
+
   return (
     <div className="relative h-screen flex items-center justify-center">
       <Image
@@ -24,6 +33,32 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
           <h1 className="text-5xl md:text-7xl font-bold pb-4">
             Sapienza Foiling Team
           </h1>
+        </div>
+        <div className="flex justify-center gap-4 mt-8">
+          <Link href="/team">
+            <button
+              onClick={() => handleCTAClick('learn_more')}
+              className="bg-transparent border border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition-colors"
+            >
+              Learn More
+            </button>
+          </Link>
+          <Link href="/contact">
+            <button
+              onClick={() => handleCTAClick('contact_us')}
+              className="bg-transparent border border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition-colors"
+            >
+              Contact Us
+            </button>
+          </Link>
+          <Link href="/fleet">
+            <button
+              onClick={() => handleCTAClick('view_fleet')}
+              className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors"
+            >
+              View Fleet
+            </button>
+          </Link>
         </div>
       </div>
 

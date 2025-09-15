@@ -3,29 +3,33 @@
 import React, { useEffect, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { cookie } from '../translations/cookie';
+import posthog from 'posthog-js';
 
 const CookieBanner = () => {
   const [showBanner, setShowBanner] = useState(false);
   const { language } = useLanguage();
 
   useEffect(() => {
-    // Controlla se l'utente ha già espresso il consenso
     const consent = localStorage.getItem('cookieConsent');
     if (!consent) {
       setShowBanner(true);
+    } else if (consent === 'accepted') {
+      posthog.opt_in_capturing();
+    } else if (consent === 'rejected') {
+      posthog.opt_out_capturing();
     }
   }, []);
 
   const handleAccept = () => {
     localStorage.setItem('cookieConsent', 'accepted');
     setShowBanner(false);
-    // Qui puoi aggiungere la logica per abilitare i cookie non essenziali
+    posthog.opt_in_capturing();
   };
 
   const handleReject = () => {
     localStorage.setItem('cookieConsent', 'rejected');
     setShowBanner(false);
-    // Qui puoi aggiungere la logica per disabilitare i cookie non essenziali
+    posthog.opt_out_capturing();
   };
 
   if (!showBanner) return null;

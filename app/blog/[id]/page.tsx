@@ -1,133 +1,53 @@
-'use client';
+// app/blog/[id]/page.tsx
 
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { useLanguage } from '../../context/LanguageContext';
-import { blogTranslations } from '../../translations/blog';
-import { Calendar, ArrowLeft, Loader2 } from 'lucide-react';
+import { supabase } from '../../lib/supabase';
+import { Article } from '../../lib/types';
+import ArticleClientPage from './ArticleClientPage';
+import { notFound } from 'next/navigation';
 import { marked } from 'marked';
-import { useParams } from 'next/navigation';
 
-type Article = {
-  id: string;
-  title: string;
-  content: string;
-  image_url: string;
-  image_alt: string;
-  created_at: string;
-  content_en: string;
+type Props = {
+  params: { id: string };
 };
 
-export default function ArticlePage() {
-  const params = useParams<{ id: string }>(); // Get params using the hook
-  const articleId = params?.id; // Extract the id, handle potential undefined
-  
-  const { language } = useLanguage();
-  const [article, setArticle] = useState<Article | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  
+// This will pre-build all blog posts at build time
+export async function generateStaticParams() {
+  const { data: posts } = await supabase.from('posts').select('id');
+  return posts?.map(post => ({
+    id: post.id.toString(),
+  })) || [];
+}
 
-  useEffect(() => {
-    if (!articleId){
-      console.error("Article ID not found in params!"); 
-        setLoading(false);
-        setError("Article ID missing");
-     return
-    };
+async function getArticle(id: string): Promise<Article | null> {
+  const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .eq('id', id)
+    .single();
 
-    const fetchArticle = async () => {
-      try {
-        setLoading(true); // Start loading
-        setError(null); // Reset error
-        const response = await fetch(`/api/articles/${articleId}`);
-        if (!response.ok) throw new Error('Failed to fetch article');
-        const data = await response.json();
-        setArticle(data);
-      } catch (error) {
-        console.error('Error fetching article:', error);
-        setError('Failed to load article');
-      } finally {
-        setLoading(false);
-      }
-    };
+  if (error || !data) {
+    return null;
+  }
 
-    fetchArticle();
-  }, [articleId]);
+  return data;
+}
 
-  // Format date
-  const formatDate = (dateString: string) => {
-    if(!dateString) return ''; 
-    const date = new Date(dateString);
-    return date.toLocaleDateString(language === 'en' ? 'en-US' : 'it-IT', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
+export default async function ArticlePage({ params }: Props) {
+  const article = await getArticle(params.id);
 
-  // Convert markdown to HTML
-  const renderMarkdown = (content: string, content_en: string) => {
-    if (!content) return { __html: '' }; // Add guard for null/undefined content
-    if (language === 'en') {
-      return { __html: marked(content_en) };
-    }
-    return { __html: marked(content) };
-  };
+  if (!article) {
+    notFound(); // Triggers the not-found page
+  }
 
-  return (
-    <main className="min-h-screen bg-gray-50 text-gray-900 pt-24 pb-16 ">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative  ">
-        <div className="left-4 top-0 z-50">
-          <Link 
-            href="/blog" 
-            className="inline-flex items-center bg-gray-100/80 hover:bg-[#822433] hover:text-white p-2 rounded-xl text-[#822433] transition-colors duration-200 mt-4 group"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            {blogTranslations[language].backToList}
-          </Link>
-        </div>
+  // Render markdown to HTML on the server
+  const contentHtml = await marked(article.content || '');
+  const contentEnHtml = await marked(article.content_en || '');
 
-        {loading ? (
-          <div className="flex justify-center py-16">
-            <Loader2 className="w-10 h-10 text-[#822433] animate-spin mb-2" />
-          </div>
-        ) : error ? (
-          <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r mb-8">
-            <p className="text-red-700">{error}</p>
-          </div>
-        ) : article ? (
-          <article className="max-w-3xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden mt-5">
-            <div className="px-6 py-8">
-              <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-[#822433] leading-tight">{article.title}</h1>
-              
-              <div className="flex items-center text-gray-600 text-sm mb-10 border-b border-gray-100 pb-6">
-                <Calendar className="w-4 h-4 mr-2" />
-                <span>{blogTranslations[language].publishedOn} {formatDate(article.created_at)}</span>
-              </div>
+  const articleWithHtml = {
+      ...article,
+      content: contentHtml,
+      content_en: contentEnHtml
+  }
 
-              <div 
-                className="prose prose-lg max-w-none
-                  prose-headings:text-[#822433] prose-headings:font-bold
-                  prose-p:text-gray-700 prose-p:leading-relaxed
-                  prose-a:text-[#822433] prose-a:no-underline hover:prose-a:underline
-                  prose-strong:text-gray-900
-                  prose-blockquote:border-l-[#822433] prose-blockquote:bg-gray-50 prose-blockquote:py-2 prose-blockquote:px-4
-                  prose-code:text-[#822433] prose-code:bg-gray-50 prose-code:px-2 prose-code:py-0.5 prose-code:rounded
-                  prose-pre:bg-gray-900 prose-pre:text-gray-100
-                  prose-img:rounded-lg prose-img:shadow-md
-                  prose-ul:marker:text-[#822433]"
-
-                dangerouslySetInnerHTML={renderMarkdown(article.content, article.content_en)}
-              />
-            </div>
-          </article>
-        ) : (
-          <div className="text-center py-16 text-gray-500">
-            {blogTranslations[language].admin.error}
-          </div>
-        )}
-      </div>
-    </main>
-  );
+  return <ArticleClientPage article={articleWithHtml} />;
 }

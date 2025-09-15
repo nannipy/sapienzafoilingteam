@@ -1,7 +1,7 @@
 export const privacy = {
   it: {
     title: 'Privacy Policy',
-    lastUpdate: 'Ultimo aggiornamento: Gennaio 2024',
+    lastUpdate: 'Ultimo aggiornamento: settembre 2025',
     intro: 'La presente Privacy Policy descrive le modalità di gestione dei dati personali degli utenti che consultano il sito web del Sapienza Foiling Team.',
     controller: {
       title: 'Titolare del Trattamento',
@@ -46,7 +46,11 @@ export const privacy = {
     security: {
       title: 'Sicurezza dei Dati',
       content: 'Adottiamo misure di sicurezza tecniche e organizzative per proteggere i tuoi dati personali da accessi non autorizzati, perdita o alterazione.'
-    }
+    },
+    analytics: {
+      title: 'Analisi dei Dati',
+      content: 'Utilizziamo PostHog per raccogliere dati anonimi sull\'utilizzo del sito al fine di migliorare l\'esperienza utente. Questi dati ci aiutano a capire come i visitatori interagiscono con il sito, quali sono le pagine più popolari e come possiamo ottimizzare i nostri contenuti. Rispettiamo la tua privacy e ti offriamo la possibilità di disattivare questa raccolta dati tramite il banner dei cookie.'
+    },
   },
   en: {
     title: 'Privacy Policy',
@@ -95,6 +99,10 @@ export const privacy = {
     security: {
       title: 'Data Security',
       content: 'We implement technical and organizational security measures to protect your personal data from unauthorized access, loss, or alteration.'
-    }
+    },
+    analytics: {
+      title: 'Data Analytics',
+      content: 'We use PostHog to collect anonymous data about website usage to improve the user experience. This data helps us understand how visitors interact with the site, which pages are most popular, and how we can optimize our content. We respect your privacy and offer you the ability to opt-out of this data collection via the cookie banner.'
+    },
   }
 };

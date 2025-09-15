@@ -6,6 +6,7 @@ import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 import { navbarTranslations } from '../translations/navbar';
+import posthog from 'posthog-js';
 
 const Navbar = () => {
   const [isRounded, setIsRounded] = useState(true);
@@ -37,6 +38,14 @@ const Navbar = () => {
     }
   };
 
+  const handleNavClick = (toPage: string, type: 'menu' | 'cta' | 'link') => {
+    posthog.capture('page_navigation', {
+      from_page: currentPath,
+      to_page: toPage,
+      navigation_type: type
+    });
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3">
       <div className={`bg-white text-black font-bold mx-auto max-w-4xl shadow-lg hover:shadow-xl transition-all duration-300
@@ -53,6 +62,7 @@ const Navbar = () => {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={() => handleNavClick(item.href, 'menu')}
                 className={`px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-100 ${
                   isCurrentPath(item.href) ? 'bg-gray-100' : ''
                 }`}
@@ -64,6 +74,7 @@ const Navbar = () => {
               href="https://docs.google.com/forms/d/e/1FAIpQLSfUxoIJQdocILXDDgykkHAJ1yg60mGeZ7T_fr5M6cob1ca8oA/viewform?usp=dialog"
               className="ml-4 px-6 py-2 bg-[#822433] text-white rounded-full transition-all duration-300 hover:bg-[#6d1f2b] hover:shadow-md"
               target="_blank"
+              onClick={() => handleNavClick('join_us_form', 'cta')}
             >
               {navbarTranslations[language].joinUs}
             </Link>
@@ -96,7 +107,7 @@ const Navbar = () => {
                 className={`block px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-gray-100 ${
                   isCurrentPath(item.href) ? 'bg-gray-100' : ''
                 }`}
-                onClick={handleMenuToggle}
+                onClick={() => {handleMenuToggle(); handleNavClick(item.href, 'menu');}}
               >
                 {item.label}
               </Link>
@@ -104,7 +115,7 @@ const Navbar = () => {
             <Link
               href="https://docs.google.com/forms/d/e/1FAIpQLSfUxoIJQdocILXDDgykkHAJ1yg60mGeZ7T_fr5M6cob1ca8oA/viewform?usp=dialog"
               className="block mt-2 px-4 py-2 bg-[#822433] text-white rounded-lg text-center transition-all duration-300 hover:bg-[#6d1f2b]"
-              onClick={handleMenuToggle}
+              onClick={() => {handleMenuToggle(); handleNavClick('join_us_form', 'cta');}}
             >
               {navbarTranslations[language].joinUs}
             </Link>

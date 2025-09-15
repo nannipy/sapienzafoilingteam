@@ -8,6 +8,9 @@ import CookieBanner from "./components/CookieBanner";
 
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { PHProvider, PostHogPageview } from "./PostHogProvider";
+import { Suspense } from "react";
+import { WebAnalytics } from "./components/WebAnalytics";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,14 +39,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <LanguageProvider>
-          <Navbar />
-          {children}
-          <Footer />
-          <Analytics/>
-          <SpeedInsights/>
-          <CookieBanner/>
-        </LanguageProvider>
+        <PHProvider>
+        <WebAnalytics />
+        <Suspense>
+          <PostHogPageview />
+        </Suspense>
+          <LanguageProvider>
+            <Navbar />
+            {children}
+            <Footer />
+            <Analytics/>
+            <SpeedInsights/>
+            <CookieBanner/>
+          </LanguageProvider>
+        </PHProvider>
       </body>
     </html>
   );

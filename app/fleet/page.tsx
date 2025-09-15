@@ -14,11 +14,13 @@ import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 import { fleetTranslations } from '../translations/fleet';
 import SuMothRulebookSection from '../components/SuMothRulebookSection';
+import { usePostHog } from 'posthog-js/react';
 
 const FleetPage = () => {
   const { language } = useLanguage();
   const [activeSection, setActiveSection] = useState<SectionKey>('foils');
   type SectionKey = 'foils' | 'hull' | 'rig' | 'controls';
+  const posthog = usePostHog();
   
   const mothParts: Record<SectionKey, {
     title: string;
@@ -30,6 +32,11 @@ const FleetPage = () => {
     hull: fleetTranslations[language].hull,
     rig: fleetTranslations[language].rig,
     controls: fleetTranslations[language].controls
+  };
+
+  const handleSectionClick = (key: SectionKey) => {
+    setActiveSection(key);
+    posthog.capture('boat_specification_viewed', { section: key });
   };
 
   return (
@@ -84,7 +91,7 @@ const FleetPage = () => {
                 {Object.entries(mothParts).map(([key, part]) => (
                   <button
                     key={key}
-                    onClick={() => setActiveSection(key as keyof typeof mothParts)}
+                    onClick={() => handleSectionClick(key as keyof typeof mothParts)}
                     className={`w-full flex items-center justify-between p-3 rounded-lg transition-colors ${
                       activeSection === key
                         ? 'bg-[#822433] text-white'

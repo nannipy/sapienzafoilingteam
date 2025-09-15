@@ -5,6 +5,7 @@ import { HandshakeIcon, Rocket, Users, Target } from 'lucide-react';
 import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 import { sponsorTranslations } from '../translations/sponsor';
+import { usePostHog } from 'posthog-js/react';
 
  const sponsors = [
         { name : 'Maire', link: 'https://www.groupmaire.com/it/', logo: 'maire.svg', width: 250 },
@@ -18,6 +19,15 @@ import { sponsorTranslations } from '../translations/sponsor';
       ];
 const SponsorPage = () => {
   const { language } = useLanguage();
+  const posthog = usePostHog();
+
+  const handleSponsorClick = (sponsorName: string) => {
+    posthog.capture('sponsor_clicked', { sponsor_name: sponsorName });
+  };
+
+  const handleContactClick = () => {
+    posthog.capture('sponsor_contact_clicked');
+  };
 
   return (
     <main className="bg-white text-black">
@@ -27,7 +37,7 @@ const SponsorPage = () => {
           <HandshakeIcon className="w-16 h-16 mt-20 " />
           <h1 className="text-4xl md:text-5xl font-bold mb-2">{sponsorTranslations[language].title}</h1>
           <p className="text-xl text-center">{sponsorTranslations[language].subtitle}</p>
-          <a href="mailto:sapienzafoilingteam@gmail.com" className="mt-4 bg-white text-[#822433] px-8 py-4 rounded-full text-lg font-semibold  transition-colors">
+          <a href="mailto:sapienzafoilingteam@gmail.com" onClick={handleContactClick} className="mt-4 bg-white text-[#822433] px-8 py-4 rounded-full text-lg font-semibold  transition-colors">
             {sponsorTranslations[language].contactButton}
           </a>
         </div>
@@ -39,7 +49,7 @@ const SponsorPage = () => {
         <h2 className="text-3xl font-bold text-center mb-12">{sponsorTranslations[language].sponsorsSection.title}</h2>
         <div className="flex flex-wrap justify-center gap-8">
           {sponsors.map(sponsor => (
-            <a href={sponsor.link} target="_blank" rel="noopener noreferrer" className="group w-full md:w-[calc((100%-4rem)/3)]" key={sponsor.link}>              
+            <a href={sponsor.link} onClick={() => handleSponsorClick(sponsor.name)} target="_blank" rel="noopener noreferrer" className="group w-full md:w-[calc((100%-4rem)/3)]" key={sponsor.link}>              
               <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-full">                
                 <Image src={`/sponsors/${sponsor.logo}`} alt={sponsor.name} width={sponsor.width || 250} height={sponsor.height || 40} className="object-contain" />
               </div>
@@ -54,7 +64,7 @@ const SponsorPage = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="text-3xl font-bold text-center mb-12">{sponsorTranslations[language].navybase.title}</h2>
         <div className="grid grid-cols-1  gap-8">
-          <a href="https://www.centrovelico3v.it" target="_blank" rel="noopener noreferrer" className="group">
+          <a href="https://www.centrovelico3v.it" onClick={() => handleSponsorClick('3V')} target="_blank" rel="noopener noreferrer" className="group">
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
               <Image src="/sponsors/3v.svg" alt="Collaboration 1" width={300} height={100} className="object-contain" />
             </div>
@@ -66,12 +76,12 @@ const SponsorPage = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="text-3xl font-bold text-center mb-12">{sponsorTranslations[language].collaborations.title}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <a href="https://www.dima.uniroma1.it/dima/" target="_blank" rel="noopener noreferrer" className="group">
+          <a href="https://www.dima.uniroma1.it/dima/" onClick={() => handleSponsorClick('DIMA')} target="_blank" rel="noopener noreferrer" className="group">
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
               <Image src="/collaborations/dima.png" alt="Collaboration 1" width={300} height={100} className="object-contain" />
             </div>
           </a>
-          <a href="https://www.inm.cnr.it/" target="_blank" rel="noopener noreferrer" className="group">
+          <a href="https://www.inm.cnr.it/" onClick={() => handleSponsorClick('INM')} target="_blank" rel="noopener noreferrer" className="group">
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center h-32 w-auto">
               <Image src="/collaborations/inm.png" alt="Collaboration 2" width={300} height={100} className="object-contain" />
             </div>

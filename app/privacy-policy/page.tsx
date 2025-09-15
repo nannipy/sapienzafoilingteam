@@ -63,6 +63,11 @@ const PrivacyPolicy = () => {
             <h2 className="text-2xl font-semibold text-[#822433] mb-4">{content.security.title}</h2>
             <p>{content.security.content}</p>
             </section>
+
+            <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-[#822433] mb-4">{content.analytics.title}</h2>
+            <p>{content.analytics.content}</p>
+            </section>
         </div>
         </div>
     </main>

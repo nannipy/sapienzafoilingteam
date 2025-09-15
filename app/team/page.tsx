@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Anchor, Handshake, Component, PencilRuler, Leaf, 
          Truck, Wrench, Globe, Star, Layout, Lightbulb, 
          PersonStanding, Anvil, ChevronDown, CircuitBoard, Bolt  } from 'lucide-react';
+import posthog from 'posthog-js';
 
 const iconsMap: Record<string, JSX.Element> = {
   'Materiali Sostenibili': <Leaf className="w-4 h-4 mr-1 sm:mr-2" />,
@@ -88,6 +89,20 @@ const TeamPage = () => {
     }
   ];
 
+  const handleDivisionClick = (divisionId: string) => {
+    setActiveSection(divisionId);
+    posthog.capture('division_filter_clicked', {
+      division: divisionId
+    });
+  };
+
+  const handleKeyAreaClick = (keyArea: string, divisionId: string) => {
+    posthog.capture('key_area_clicked', {
+      key_area: keyArea,
+      division: divisionId
+    });
+  };
+
   return (
     <main className="min-h-screen bg-white text-black">
       {/* Enhanced Header Section */}
@@ -128,7 +143,7 @@ const TeamPage = () => {
             whileTap={{ cursor: "grabbing" }}
           >
             <motion.button
-              onClick={() => setActiveSection('all')}
+              onClick={() => handleDivisionClick('all')}
               className={`px-4 py-2 rounded-full whitespace-nowrap transition-all duration-300  ${
                 activeSection === 'all'
                   ? 'bg-[#822433] text-white'
@@ -142,7 +157,7 @@ const TeamPage = () => {
             {divisions.map((division) => (
               <motion.button
                 key={division.id}
-                onClick={() => setActiveSection(division.id)}
+                onClick={() => handleDivisionClick(division.id)}
                 className={`px-4 py-2 rounded-full whitespace-nowrap transition-all duration-300  ${
                   activeSection === division.id
                     ? 'bg-[#822433] text-white'
@@ -215,6 +230,7 @@ const TeamPage = () => {
                             {division.keyAreas.map((area, index) => (
                               <motion.div
                                 key={index}
+                                onClick={() => handleKeyAreaClick(area, division.id)}
                                 whileHover={{ scale: 1.05 }}
                                 className="bg-[#822433]/10 p-3 rounded-lg flex items-center justify-center cursor-pointer hover:bg-[#822433]/20 transition-colors"
                               >
