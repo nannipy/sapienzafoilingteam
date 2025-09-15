@@ -10,6 +10,8 @@ export const homeTranslations = {
     joinTeamTitle: 'Join our team',
     joinTeamDescription: 'We are looking for passionate people who want to challenge themselves and grow with us.',
     joinUsButton: 'Join Us',
+    learnMoreButton: 'Learn More',
+    viewMothButton: 'View Moth',
     socialLinks: {
       instagram: 'Instagram',
       linkedin: 'LinkedIn',
@@ -27,6 +29,8 @@ export const homeTranslations = {
     joinTeamTitle: 'Entra a far parte del team',
     joinTeamDescription: 'Cerchiamo persone appassionate che vogliono mettersi alla prova e crescere insieme a noi.',
     joinUsButton: 'Unisciti a noi',
+    learnMoreButton: 'Scopri di più',
+    viewMothButton: 'Vedi il Moth',
     socialLinks: {
       instagram: 'Instagram',
       linkedin: 'LinkedIn',

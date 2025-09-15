@@ -5,12 +5,15 @@ import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import posthog from "posthog-js";
+import { useLanguage } from '../context/LanguageContext';
+import { homeTranslations } from '../translations/home';
 
 interface HeroSectionProps {
   onChevronClick: () => void;
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
+  const { language } = useLanguage();
   const handleCTAClick = (ctaType: 'learn_more' | 'view_boat') => {
     posthog.capture('hero_cta_clicked', {
       cta_type: ctaType,
@@ -40,7 +43,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
               onClick={() => handleCTAClick('learn_more')}
               className="bg-transparent border border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition-colors"
             >
-              Learn More
+              {homeTranslations[language].learnMoreButton}
             </button>
           </Link>
           <Link href="/boat">
@@ -48,7 +51,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
               onClick={() => handleCTAClick('view_boat')}
               className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors"
             >
-              View Moth
+              {homeTranslations[language].viewMothButton}
             </button>
           </Link>
         </div>
