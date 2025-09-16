@@ -38,9 +38,9 @@ const PastEventsSection: React.FC<PastEventsSectionProps> = () => {
                   className="rounded-xl mt-4 w-60 h-40"
                   src={event.image}
                   alt="Evento Sumoth 2025 al lago di Garda, Verona"
-                  layout="fixed"
-                  width={300}
-                  height={100}
+                  layout="intrinsic"
+                  width={240}
+                  height={160}
                 />
               </div>
             </div>

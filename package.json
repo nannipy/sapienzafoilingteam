@@ -1,7 +1,12 @@
 {
   "name": "sapienza-sailing-team",
-  "version": "0.1.0",
+  "version": "1.2.0",
   "private": true,
+  "browserslist": [
+    ">0.3%",
+    "not dead",
+    "not op_mini all"
+  ],
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",

@@ -32,7 +32,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
       />
       
       <div className="relative z-10 text-center text-white px-4">
-        <div className="transition-all duration-500" data-testid="animated-element">
+        <div data-testid="animated-element">
           <h1 className="text-5xl md:text-7xl font-bold pb-4">
             Sapienza Foiling Team
           </h1>
