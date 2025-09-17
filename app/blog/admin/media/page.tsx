@@ -194,16 +194,41 @@ export default function MediaManagerPage() {
   const handleFileUpload = async (uploadedFiles: FileList | null) => {
     if (!uploadedFiles || uploadedFiles.length === 0) return;
 
+    const validFiles: File[] = [];
+    const invalidFiles: { name: string; reason: string }[] = [];
+
+    Array.from(uploadedFiles).forEach(file => {
+      if (file.size > MAX_FILE_SIZE_BYTES) {
+        invalidFiles.push({ name: file.name, reason: `Dimensioni superiori a ${MAX_FILE_SIZE_MB}MB` });
+      } else if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+        invalidFiles.push({ name: file.name, reason: 'Tipo di file non supportato' });
+      } else {
+        validFiles.push(file);
+      }
+    });
+
+    if (invalidFiles.length > 0) {
+      const errorMessages = invalidFiles.map(f => `${f.name} (${f.reason})`).join(', ');
+      showNotification('error', `File non validi: ${errorMessages}`);
+    }
+
+    if (validFiles.length === 0) {
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+      return;
+    }
+
     setIsProcessing(true);
     let successCount = 0;
     let errorCount = 0;
 
     try {
-      const uploadPromises = Array.from(uploadedFiles).map(file => {
+      const uploadPromises = validFiles.map(file => {
         const filePath = currentPath ? `${currentPath}/${file.name}` : file.name;
         return supabase.storage
           .from('images')
-          .upload(filePath, file, { upsert: false }); // upsert: false prevents overwriting by default
+          .upload(filePath, file, { upsert: false });
       });
 
       const results = await Promise.allSettled(uploadPromises);
@@ -215,25 +240,22 @@ export default function MediaManagerPage() {
           errorCount++;
           const error = result.status === 'rejected' ? result.reason : result.value.error;
           console.error('Upload error:', error);
-          // Optionally show individual file errors later
         }
       });
 
       if (successCount > 0) {
         showNotification('success', `${successCount} file(s) caricati con successo.`);
-        await fetchFilesAndFolders(); // Refresh list
+        await fetchFilesAndFolders();
       }
       if (errorCount > 0) {
         showNotification('error', `${errorCount} file(s) non caricati. Controlla se esistono già.`);
       }
 
-    } catch (error: unknown) { // Changed from any to unknown
+    } catch (error: unknown) {
       console.error('Error during batch upload:', error);
-      // Keep original message but log the error object
       showNotification('error', 'Errore imprevisto durante il caricamento.');
     } finally {
       setIsProcessing(false);
-       // Reset file input
        if (fileInputRef.current) {
            fileInputRef.current.value = '';
        }
