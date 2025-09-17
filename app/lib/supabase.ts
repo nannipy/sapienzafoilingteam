@@ -8,17 +8,3 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     persistSession: true
   }
 });
-
-// Only create the admin client on the server side
-const createAdminClient = () => {
-  if (typeof window === 'undefined' && process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    return createClient(supabaseUrl, process.env.SUPABASE_SERVICE_ROLE_KEY, {
-      auth: {
-        persistSession: true
-      }
-    });
-  }
-  return null;
-};
-
-export const supabaseAdmin = createAdminClient();

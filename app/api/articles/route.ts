@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { supabase, supabaseAdmin } from '@/app/lib/supabase';
+import { supabase } from '@/app/lib/supabase';
+import { supabaseAdmin } from '@/app/lib/supabase-admin';
 
 // // Helper function to validate date format
 // function isValidDate(dateString: string): boolean {

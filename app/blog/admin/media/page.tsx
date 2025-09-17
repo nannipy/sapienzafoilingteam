@@ -40,6 +40,16 @@ type FolderItem = {
 };
 
 const NOTIFICATION_TIMEOUT = 5000; // 5 seconds
+const MAX_FILE_SIZE_MB = 5;
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+const ALLOWED_FILE_TYPES = [
+  'image/jpeg',
+  'image/png',
+  'image/gif',
+  'image/svg+xml',
+  'image/webp',
+  'application/pdf',
+];
 
 export default function MediaManagerPage() {
   const router = useRouter();
@@ -693,9 +703,7 @@ export default function MediaManagerPage() {
 
           {/* Drop Zone */}
           <div
-            className={`border-2 border-dashed rounded-lg p-6 md:p-8 mb-6 text-center transition-colors duration-200 ${
-              isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
-            } ${isProcessing ? 'cursor-not-allowed opacity-60' : ''}`}
+            className={`border-2 border-dashed rounded-lg p-6 md:p-8 mb-6 text-center transition-colors duration-200 ${isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'} ${isProcessing ? 'cursor-not-allowed opacity-60' : ''}`}
             onDragEnter={handleDragEnter}
             onDragOver={handleDragOver} // Use handleDragOver here
             onDragLeave={handleDragLeave}
@@ -743,7 +751,7 @@ export default function MediaManagerPage() {
               {/* Folders */}
               {folders.map((folder) => (
                 <div
-                  key={`folder-${folder.name}`} // Added prefix for potential name conflicts
+                  key={`folder-${folder.name}`}
                   className="relative group border rounded-lg hover:shadow-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-1 transition-all duration-150 flex flex-col"
                 >
                   <button
@@ -782,7 +790,7 @@ export default function MediaManagerPage() {
               {/* Files */}
               {files.map((file) => (
                 <div
-                  key={file.id || `file-${file.name}`} // Use ID if available, fallback to name
+                  key={file.id || `file-${file.name}`}
                   className="relative group border rounded-lg hover:shadow-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-1 transition-all duration-150 flex flex-col"
                 >
                   <div className="flex-grow p-2 flex flex-col">

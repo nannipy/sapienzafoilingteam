@@ -14,23 +14,12 @@ import dynamic from 'next/dynamic';
 import NextImage from 'next/image';
 import debounce from 'lodash.debounce';
 import { useAdminContext } from '../../context/AdminContext';
+import { Article } from '../../../app/lib/types';
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor").then(mod => mod.default), {
     ssr: false,
     loading: () => <div className="flex justify-center items-center h-96"><Loader2 className="animate-spin h-8 w-8 text-[#822433]" /></div>,
 });
-
-
-type Article = {
-  id: string;
-  title: string;
-  content: string;
-  image_url: string | null;
-  image_alt: string;
-  created_at: string;
-  title_en: string;
-  content_en: string;
-};
 
 export default function BlogAdminPage() {
   const { language } = useLanguage();

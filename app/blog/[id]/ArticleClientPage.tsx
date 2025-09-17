@@ -9,6 +9,7 @@ import { Calendar, ArrowLeft } from 'lucide-react';
 import { Article } from '../../lib/types'; // Using the shared type
 import posthog from 'posthog-js';
 import ShareButtons from '../../components/ShareButtons';
+import DOMPurify from 'dompurify';
 
 const calculateReadingTime = (content: string) => {
   if (!content) return 0;
@@ -48,6 +49,9 @@ export default function ArticleClientPage({ article }: { article: Article }) {
   };
 
   const contentToRender = language === 'en' ? article.content_en : article.content;
+  // Sanitize the HTML content before rendering to prevent XSS attacks.
+  // DOMPurify is used on the client-side just before rendering the content.
+  const sanitizedContent = typeof window !== 'undefined' ? DOMPurify.sanitize(contentToRender) : contentToRender;
 
   return (
     <main className="min-h-screen bg-gray-50 text-gray-900 pt-24 pb-16 ">
@@ -78,11 +82,11 @@ export default function ArticleClientPage({ article }: { article: Article }) {
                 prose-a:text-[#822433] prose-a:no-underline hover:prose-a:underline
                 prose-strong:text-gray-900
                 prose-blockquote:border-l-[#822433] prose-blockquote:bg-gray-50 prose-blockquote:py-2 prose-blockquote:px-4
-                prose-code:text-[#822433] prose-code:bg-gray-50 prose-code:px-2 prose-code:py-0.5 prose-code:rounded
+                prose-code:text-[#82243d3] prose-code:bg-gray-50 prose-code:px-2 prose-code:py-0.5 prose-code:rounded
                 prose-pre:bg-gray-900 prose-pre:text-gray-100
                 prose-img:rounded-lg prose-img:shadow-md
                 prose-ul:marker:text-[#822433]"
-              dangerouslySetInnerHTML={{ __html: contentToRender }}
+              dangerouslySetInnerHTML={{ __html: sanitizedContent }}
             />
             <ShareButtons articleId={article.id} articleTitle={article.title} />
           </div>
