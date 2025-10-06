@@ -71,7 +71,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              href="https://docs.google.com/forms/d/e/1FAIpQLSfUxoIJQdocILXDDgykkHAJ1yg60mGeZ7T_fr5M6cob1ca8oA/viewform?usp=dialog"
+              href="https://forms.gle/vQZf3VMJkiYtFqpZA"
               className="ml-4 px-6 py-2 bg-[#822433] text-white rounded-full transition-all duration-300 hover:bg-[#6d1f2b] hover:shadow-md"
               target="_blank"
               onClick={() => handleNavClick('join_us_form', 'cta')}
