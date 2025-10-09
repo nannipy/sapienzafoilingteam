@@ -158,7 +158,8 @@ const BoatPage = () => {
               {boatTranslations[language].joinProject.contactButton}
             </a>
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSfUxoIJQdocILXDDgykkHAJ1yg60mGeZ7T_fr5M6cob1ca8oA/viewform?usp=dialog"
+              href="https://forms.gle/vQZf3VMJkiYtFqpZA"
+              target="_blank"
               className="bg-white text-[#822433] px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors border border-[#822433]"
             >
               {boatTranslations[language].joinProject.joinButton}
