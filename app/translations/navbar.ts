@@ -6,7 +6,7 @@ export const navbarTranslations = {
     sponsor: 'Sponsor',
     contact: 'Contact',
     blog: 'Blog',
-    joinUs: 'Join Us',
+    career: 'Join Us',
   },
   it: {
     home: 'Home',
@@ -15,6 +15,6 @@ export const navbarTranslations = {
     sponsor: 'Sponsor',
     contact: 'Contatti',
     blog: 'Blog',
-    joinUs: 'Unisciti a Noi',
+    career: 'Unisciti a Noi',
   },
 };

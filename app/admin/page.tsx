@@ -3,9 +3,9 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 //import { useRouter } from 'next/navigation'; // Keep useRouter if needed for other things
 import Link from 'next/link';
-import { useLanguage } from '../../context/LanguageContext';
-import { blogTranslations } from '../../translations/blog';
-import { supabase } from '../../lib/supabase';
+import { useLanguage } from '../context/LanguageContext';
+import { blogTranslations } from '../translations/blog';
+import { supabase } from '../lib/supabase';
 import {
   Edit, Trash, Eye, UploadCloud, Image as ImageIcon, XCircle, Loader2,
   LayoutDashboard, PlusCircle, FileText, Tag, Newspaper
@@ -13,8 +13,8 @@ import {
 import dynamic from 'next/dynamic';
 import NextImage from 'next/image';
 import debounce from 'lodash.debounce';
-import { useAdminContext } from '../../context/AdminContext';
-import { Article } from '../../../app/lib/types';
+import { useAdminContext } from '../context/AdminContext';
+import { Article } from '../lib/types';
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor").then(mod => mod.default), {
     ssr: false,

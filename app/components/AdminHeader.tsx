@@ -11,7 +11,8 @@ import {
   LayoutDashboard,
   Edit,
   Image as ImageIcon,
-  LogOut
+  LogOut,
+  FileUser
 } from 'lucide-react';
 
 type AdminHeaderProps = {
@@ -32,7 +33,7 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
           <nav className="flex items-center space-x-6 sm:space-x-2 justify-start">
              {/* Articles List Link */}
              <Link
-                href="/blog/admin"
+                href="/admin"
                 className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${
                   currentPath === '/blog/admin' && viewMode === 'list' // Active only if on admin page AND list view
                     ? 'bg-[#f0e4e6] text-[#822433]'
@@ -55,7 +56,7 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
 
             {/* Media Management Link */}
              <Link
-                href="/blog/admin/media"
+                href="/admin/media"
                 className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${
                   currentPath === '/blog/admin/media'
                     ? 'bg-[#f0e4e6] text-[#822433]'
@@ -64,6 +65,18 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
               >
                 <ImageIcon className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
                 <span className="ml-1 hidden sm:inline">Media</span>
+              </Link>
+              {/* Media Management Link */}
+             <Link
+                href="/admin/positions"
+                className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${
+                  currentPath === '/blog/admin/media'
+                    ? 'bg-[#f0e4e6] text-[#822433]'
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                }`}
+              >
+                <FileUser className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
+                <span className="ml-1 hidden sm:inline">Open Positions</span>
               </Link>
           </nav>
         </div>

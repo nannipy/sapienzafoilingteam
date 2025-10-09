@@ -9,3 +9,12 @@ export type Article = {
   content_en: string;
   title_en: string;
 };
+
+export type OpenPosition = {
+  id: string;
+  title: string;
+  location: string;
+  type: string;
+  description: string;
+  requirements: string[];
+};

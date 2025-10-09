@@ -4,11 +4,11 @@
 import React, { useState, useEffect, useCallback } from 'react'; // Removed unused imports
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
+import { supabase } from '../lib/supabase';
 import { User } from '@supabase/supabase-js';
-import AdminHeader from '../../components/AdminHeader';
+import AdminHeader from '../components/AdminHeader';
 // Import the Provider and hook from the new context file
-import { AdminProvider } from '../../context/AdminContext';
+import { AdminProvider } from '../context/AdminContext';
 
 // REMOVE Context definition and useAdminContext export from here
 

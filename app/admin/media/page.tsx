@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 // Removed unused LanguageContext and translations
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '../../lib/supabase';
 import { User } from '@supabase/supabase-js'; // Added specific user type
 import {
   Folder,
