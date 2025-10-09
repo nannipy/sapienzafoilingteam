@@ -1,6 +1,7 @@
 // app/api/positions/route.ts
 import { getOpenPositions, createOpenPosition } from '@/app/lib/supabase-admin';
 import { NextResponse, NextRequest } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { supabase } from '@/app/lib/supabase';
 
 export async function GET() {
@@ -21,5 +22,6 @@ export async function POST(req: NextRequest) {
 
   const data = await req.json();
   const position = await createOpenPosition(data);
+  revalidatePath('/career');
   return NextResponse.json(position);
 }

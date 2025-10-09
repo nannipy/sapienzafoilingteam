@@ -1,6 +1,7 @@
 // app/api/positions/[id]/route.ts
 import { getOpenPosition, updateOpenPosition, deleteOpenPosition } from '@/app/lib/supabase-admin';
 import { NextResponse, NextRequest } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { supabase } from '@/app/lib/supabase';
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -26,6 +27,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   const data = await req.json();
   const awaitedParams = await params;
   const position = await updateOpenPosition(awaitedParams.id, data);
+  revalidatePath('/career');
   return NextResponse.json(position);
 }
 
@@ -42,5 +44,6 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
 
   const awaitedParams = await params;
   await deleteOpenPosition(awaitedParams.id);
+  revalidatePath('/career');
   return new NextResponse(null, { status: 204 });
 }
