@@ -95,7 +95,7 @@ const CareerClientPage: React.FC<CareerClientPageProps> = ({ initialPositions: o
                 <a
                     href="mailto:sapienzafoilingteam@gmail.com"
                     onClick={() => handleApplyClick('thesis_internship')}
-                    className="inline-block bg-[#822433] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#6d1f2b] transition-colors"
+                    className="inline-block bg-[#822433] text-white px-8 py-3 rounded-2xl font-semibold hover:bg-[#6d1f2b] transition-colors"
                 >
                     {careerTranslations[language].thesisInternship.contactButton}
                 </a>

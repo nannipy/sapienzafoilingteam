@@ -153,14 +153,13 @@ const BoatPage = () => {
           <div className="flex justify-center space-x-4">
             <a
               href="/contact"
-              className="bg-[#822433] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#6d1f2b] transition-colors"
+              className="bg-[#822433] text-white px-8 py-3 rounded-2xl font-semibold hover:bg-[#6d1f2b] transition-colors"
             >
               {boatTranslations[language].joinProject.contactButton}
             </a>
             <a
-              href="https://forms.gle/vQZf3VMJkiYtFqpZA"
-              target="_blank"
-              className="bg-white text-[#822433] px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors border border-[#822433]"
+              href="/career"
+              className="bg-white text-[#822433] px-8 py-3 rounded-2xl font-semibold hover:bg-gray-50 transition-colors border border-[#822433]"
             >
               {boatTranslations[language].joinProject.joinButton}
             </a>
