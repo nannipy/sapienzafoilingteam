@@ -34,6 +34,7 @@
     "posthog-js": "^1.266.0",
     "posthog-node": "^5.8.4",
     "react": "^19.1.1",
+    "react-datepicker": "^8.7.0",
     "react-dom": "^19.1.1",
     "react-intersection-observer": "^9.16.0",
     "server-only": "^0.0.1",

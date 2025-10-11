@@ -12,7 +12,8 @@ import {
   Edit,
   Image as ImageIcon,
   LogOut,
-  FileUser
+  FileUser,
+  Calendar
 } from 'lucide-react';
 
 type AdminHeaderProps = {
@@ -25,7 +26,7 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
   const { user, viewMode, isEditing } = useAdminContext(); // Consume context
 
   return (
-    <div className="z-50 bg-white shadow-md h-16 flex items-center mx-4 sm:mx-8 md:mx-40 rounded-xl">
+    <div className="z-50 bg-white shadow-md h-16 flex items-center mx-4 sm:mx-8 md:mx-80 rounded-xl">
       <div className="flex items-center justify-between w-full px-4 sm:px-8 md:px-20">
 
         {/* Left Side: Logo and Navigation */}
@@ -66,17 +67,29 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
                 <ImageIcon className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
                 <span className="ml-1 hidden sm:inline">Media</span>
               </Link>
-              {/* Media Management Link */}
+            {/* Media Management Link */}
              <Link
                 href="/admin/positions"
                 className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${
-                  currentPath === '/blog/admin/media'
+                  currentPath === '/admin/positions'
                     ? 'bg-[#f0e4e6] text-[#822433]'
                     : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                 }`}
               >
                 <FileUser className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
                 <span className="ml-1 hidden sm:inline">Open Positions</span>
+              </Link>
+              {/* Events Management Link */}
+              <Link
+                href="/admin/events"
+                className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${
+                  currentPath === '/admin/events'
+                    ? 'bg-[#f0e4e6] text-[#822433]'
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                }`}
+              >
+                <Calendar className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
+                <span className="ml-1 hidden sm:inline">Events</span>
               </Link>
           </nav>
         </div>

@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { createClient } from '@supabase/supabase-js';
-import { OpenPosition } from './types';
+import { OpenPosition, Event } from './types';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 
@@ -85,3 +85,48 @@ export async function deleteOpenPosition(id: string) {
   }
   return data;
 }
+
+
+export async function getEvents() {
+  if (!supabaseAdmin) return [];
+  const { data, error } = await supabaseAdmin.from('events').select('*');
+  if (error) {
+    console.error('Error fetching events:', error);
+    return [];
+  }
+  return data;
+}
+
+/**
+ * Updates an event in the database.
+ * @param id - The ID of the event to update.
+ * @param data - An object containing the event fields to update.
+ * @returns The updated event data.
+ */
+export async function updateEvents(id: string, data: Partial<Event>) {
+  const { data: updatedData, error } = await supabaseAdmin!
+    .from('events')
+    .update(data)
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Supabase admin error in updateEvents:", error.message);
+    throw new Error(error.message);
+  }
+
+  return updatedData;
+}
+
+export async function deleteEvent(id: string) {
+  if (!supabaseAdmin) return null;
+  const { data, error } = await supabaseAdmin.from('events').delete().eq('id', id);
+  if (error) {
+    console.error(`Error deleting event with id ${id}:`, error);
+    return null;
+  }
+  return data;
+}
+
+

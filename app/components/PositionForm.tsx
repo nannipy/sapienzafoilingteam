@@ -40,6 +40,8 @@ const PositionForm: React.FC<PositionFormProps> = ({
       type,
       description,
       requirements: requirements.split('\n').filter(req => req.trim() !== ''),
+      created_at: initialData?.created_at || new Date().toISOString(),
+      order_index: initialData?.order_index || 0,
     };
     onSubmit(newPosition);
   };

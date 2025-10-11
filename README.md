@@ -28,6 +28,13 @@ The Sapienza Foiling Team website serves as the digital hub for our university s
 - Performance optimization with Vercel.
 - SEO-friendly structure.
 - Supabase integration for backend services.
+- **Job Positions Management**: Implemented a system for managing job positions, including revalidation for career paths on updates and creation.
+- **Security Enhancements**: Added file upload validation, secured service role keys, and implemented XSS prevention.
+- **UI/UX Improvements**: Updated fonts and improved image handling.
+- **Updated "Join Us" Link**: The "Join Us" link has been updated.
+
+### Internationalization (i18n)
+- **Translation Support**: Added translation support for CTA buttons in the Hero Section.
 
 ## 🛠 Tech Stack
 

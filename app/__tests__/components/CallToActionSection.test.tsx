@@ -30,6 +30,6 @@ describe('CallToActionSection', () => {
     renderWithProvider(<CallToActionSection />);
     const joinButton = screen.getByText(homeTranslations.it.joinUsButton);
     fireEvent.click(joinButton);
-    expect(mockOpen).toHaveBeenCalledWith('https://docs.google.com/forms/d/1TsTV28v7nggIEp98K8JGwtKbrV5P-9xzHIxmuFlSXCs/edit?pli=1', '_blank');
+    expect(mockOpen).toHaveBeenCalledWith('https://forms.gle/vQZf3VMJkiYtFqpZA', '_blank');
   });
 });

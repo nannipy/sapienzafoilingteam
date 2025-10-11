@@ -3,6 +3,15 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import HomePage from '../../page';
 import { LanguageProvider } from '../../context/LanguageContext';
 
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve([
+      { id: 1, title: 'Upcoming Event', title_en: 'Upcoming Event', date: new Date(Date.now() + 86400000).toISOString(), location: 'Test Location', image_url: '/test.jpg', image_alt: 'Test Image', link: '#' },
+    ]),
+  } as Response)
+);
+
 // Mock window.scrollTo for navigation tests
 const mockScrollTo = jest.fn();
 Object.defineProperty(window, 'scrollTo', {
@@ -20,15 +29,16 @@ const renderWithProvider = (component: React.ReactElement) => {
 
 describe('Home Page', () => {
   beforeEach(() => {
+    (fetch as jest.Mock).mockClear();
     jest.clearAllMocks();
   });
 
-  it('renders all sections of the home page', () => {
+  it('renders all sections of the home page', async () => {
     renderWithProvider(<HomePage />);
     expect(screen.getByTestId('home-page')).toBeInTheDocument();
     // Check for elements from each section to ensure they are rendered
     expect(screen.getByText('Sapienza Foiling Team')).toBeInTheDocument(); // From HeroSection
-    expect(screen.getByText('Prossimi Eventi')).toBeInTheDocument(); // From UpcomingEventsSection
+    expect(await screen.findByText('Prossimi Eventi')).toBeInTheDocument(); // From UpcomingEventsSection
     expect(screen.getByText('Seguici sui nostri social')).toBeInTheDocument(); // From SocialMediaSection
     expect(screen.getByText('Entra a far parte del team')).toBeInTheDocument(); // From CallToActionSection
   });
