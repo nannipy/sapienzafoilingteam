@@ -4,6 +4,7 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from '../context/LanguageContext';
 import { homeTranslations } from '../translations/home';
+import Link from "next/link";
 
 type CallToActionSectionProps = Record<string, never>;
 
@@ -23,10 +24,10 @@ const CallToActionSection: React.FC<CallToActionSectionProps> = () => {
           <p className="text-xl mb-8">
             {homeTranslations[language].joinTeamDescription}
           </p>
-          <button onClick={() => window.open('https://forms.gle/vQZf3VMJkiYtFqpZA', '_blank')} className="group bg-white text-[#822433] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+          <Link href='/career' className="group bg-white text-[#822433] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
             {homeTranslations[language].joinUsButton}
             <ArrowRight className="inline ml-2 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Link>
         </div>
       </div>
     </section>

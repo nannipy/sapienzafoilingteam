@@ -4,10 +4,12 @@ import React from 'react';
 import { 
   Mail, 
   MessageSquare,
-} from 'lucide-react';
+}
+from 'lucide-react';
 import {  MapPin, Facebook, Instagram, Linkedin , TreePine} from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { contactTranslations } from '../translations/contact';
+import Link from 'next/link'
 
 
 const ContactPage = () => {
@@ -27,9 +29,10 @@ const ContactPage = () => {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-1 gap-12">
+        <div className="grid lg:grid-cols-3 gap-8">
 
-          <div className="bg-white w-full max-w-2xl mx-auto rounded-xl shadow-lg">
+          {/* Column 1: Contacts */}
+          <div className="bg-white rounded-xl shadow-lg">
             <div className="border-b p-6">
               <h2 className="text-3xl font-bold text-gray-800">{contactTranslations[language].ourContacts}</h2>
             </div>
@@ -72,6 +75,7 @@ const ContactPage = () => {
                     <span className="text-[#822433] group-hover:underline">linktr.ee/sapienzafoilingteam</span>
                   </a>
                 </div>
+                
 
                 {/* Social Links */}
                 <div className="pt-4 border-t">
@@ -101,6 +105,29 @@ const ContactPage = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Column 2: Map */}
+          <div className="bg-white rounded-xl shadow-lg flex items-center justify-center overflow-hidden">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.9876229173233!2d12.490363776654638!3d41.89312327124013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61b0d854d591%3A0x479e9d6899d47703!2sVia%20Eudossiana%2C%2018%2C%2000184%20Roma%20RM!5e0!3m2!1sit!2sit!4v1760276733613!5m2!1sit!2sit" width="100%" height="100%" loading="lazy" ></iframe>
+          </div>
+
+          {/* Column 3: Get Involved */}
+          <div className="bg-white rounded-xl shadow-lg flex flex-col items-center justify-center p-6">
+            <div className="text-center">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">{contactTranslations[language].joinUs}</h3>
+                <p className="text-gray-600 mb-6">{contactTranslations[language].joinUsText}</p>
+                <Link href="/career" className="inline-block bg-[#822433] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#6d1f2b] transition-colors">
+                    {contactTranslations[language].goToCareerPage}
+                </Link>
+            </div>
+            <div className="text-center mt-8">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">{contactTranslations[language].collaborateWithUs}</h3>
+                <p className="text-gray-600 mb-6">{contactTranslations[language].collaborateWithUsText}</p>
+                <a href="mailto:sapienzafoilingteam@gmail.com" className="inline-block bg-[#822433] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#6d1f2b] transition-colors">
+                    {contactTranslations[language].contactUs}
+                </a>
             </div>
           </div>
         </div>
