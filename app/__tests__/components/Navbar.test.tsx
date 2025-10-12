@@ -48,7 +48,7 @@ describe('Navbar Component', () => {
     expect(desktopNav.querySelector('a[href="/sponsor"]')).toHaveTextContent(navbarTranslations.it.sponsor);
     expect(desktopNav.querySelector('a[href="/contact"]')).toHaveTextContent(navbarTranslations.it.contact);
     expect(desktopNav.querySelector('a[href="/blog"]')).toHaveTextContent(navbarTranslations.it.blog);
-    expect(desktopNav.querySelector('a[href="https://forms.gle/vQZf3VMJkiYtFqpZA"]')).toHaveTextContent(navbarTranslations.it.joinUs);
+    expect(desktopNav.querySelector('a[href="https://forms.gle/vQZf3VMJkiYtFqpZA"]')).toHaveTextContent(navbarTranslations.it.career);
   });
 
   it('renders the logo and navigation items in EN', () => {
@@ -69,7 +69,7 @@ describe('Navbar Component', () => {
     expect(desktopNav.querySelector('a[href="/boat"]')).toHaveTextContent(navbarTranslations.en.boat);
     expect(desktopNav.querySelector('a[href="/team"]')).toHaveTextContent(navbarTranslations.en.team);
     expect(desktopNav.querySelector('a[href="/blog"]')).toHaveTextContent(navbarTranslations.en.blog);
-    expect(desktopNav.querySelector('a[href="https://forms.gle/vQZf3VMJkiYtFqpZA"]')).toHaveTextContent(navbarTranslations.en.joinUs);
+    expect(desktopNav.querySelector('a[href="https://forms.gle/vQZf3VMJkiYtFqpZA"]')).toHaveTextContent(navbarTranslations.en.career);
   });
 
   it('highlights the current navigation item', () => {
