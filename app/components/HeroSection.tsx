@@ -22,26 +22,36 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
   };
 
   return (
-    <div className="relative h-screen flex items-center justify-center">
-      <Image
-        src="/moth_5.jpg"
-        alt="regatta"
-        fill
-        className="object-cover brightness-50"
-        priority
-      />
-      
-      <div className="relative z-10 text-center text-white px-4">
-        <div data-testid="animated-element">
-          <h1 className="text-5xl md:text-7xl font-bold pb-4">
-            Sapienza Foiling Team
+    <div className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-void">
+      {/* Background with overlay */}
+      <div className="absolute inset-0 w-full h-full"> 
+        <Image
+          src="/moth_5.jpg"
+          alt="Sapienza Foiling Team Regatta"
+          fill
+          className="object-cover object-center opacity-70"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-void via-void/10 to-transparent" />
+      </div>
+
+      <div className="relative z-10 flex flex-col items-center justify-center -mt-20 px-4">
+        {/* Main Title - Kelson Font */}
+        <div className="text-center animate-fade-in-up drop-shadow-2xl">
+          <h1 className=" font-extrabold text-7xl md:text-6xl lg:text-8xl text-white uppercase mb-2 drop-shadow-2xl">
+            Sapienza
+          </h1>
+          <h1 className=" font-bold text-6xl md:text-6xl lg:text-7xl text-white uppercase drop-shadow-lg">
+            Foiling Team
           </h1>
         </div>
-        <div className="flex justify-center gap-4 mt-8">
+
+        {/* Action Buttons */}
+        <div className="flex md:flex-row gap-6 mt-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <Link href="/team">
             <button
               onClick={() => handleCTAClick('learn_more')}
-              className="bg-transparent border border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition-colors"
+              className="px-8 py-3 rounded-full bg-[#822433] hover:bg-[#6b1d28] text-white font-medium tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(130,36,51,0.5)] border border-white/10"
             >
               {homeTranslations[language].learnMoreButton}
             </button>
@@ -49,7 +59,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
           <Link href="/boat">
             <button
               onClick={() => handleCTAClick('view_boat')}
-              className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors"
+              className="px-8 py-3 rounded-full backdrop-blur-sm bg-white/10 border border-white/20 text-white font-medium tracking-wide transition-all duration-300 hover:scale-105 hover:bg-white/20"
             >
               {homeTranslations[language].viewMothButton}
             </button>
@@ -57,14 +67,18 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
         </div>
       </div>
 
-      <div className="absolute bottom-8 w-full flex justify-center">
-        <div className="animate-bounce">
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-12 w-full flex justify-center animate-float">
+        <button 
+          onClick={onChevronClick}
+          className="p-4 rounded-full hover:bg-white/10 transition-colors group cursor-pointer"
+          aria-label="Scroll down"
+        >
           <ChevronDown
             data-testid="chevron-down"
-            className="text-white w-8 h-8"
-            onClick={onChevronClick}
+            className="text-white w-8 h-8 group-hover:text-[#822433] transition-colors"
           />
-        </div>
+        </button>
       </div>
     </div>
   );

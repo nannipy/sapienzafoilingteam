@@ -8,9 +8,6 @@ export async function GET() {
       .from('events')
       .select('*')
       .order('created_at', { ascending: false });
-    
-    console.log('API GET /events - Query result:', { data, error });
-
     if (error) {
       console.error('API GET /events - Database error:', error.message);
       return NextResponse.json({ error: error.message }, { status: 400 });
@@ -20,8 +17,6 @@ export async function GET() {
       console.error('API GET /events - No data returned');
       return NextResponse.json({ error: 'No events found' }, { status: 404 });
     }
-
-    console.log(`API GET /events - Success: Retrieved ${data.length} events`);
     return NextResponse.json(data);
   } catch (error: unknown) {
     const errorMessage = 'An unexpected error occurred';
@@ -37,14 +32,14 @@ export async function POST(request: Request) {
     // Verify authentication using the token from the request header
     const authHeader = request.headers.get('Authorization');
     const token = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
-    
+
     if (!token) {
       return NextResponse.json({ error: 'Unauthorized - No token provided' }, { status: 401 });
     }
 
     // Verify the token
     const { data: { user }, error: authError } = await supabase.auth.getUser(token);
-    
+
     if (authError || !user) {
       return NextResponse.json({ error: 'Unauthorized - Invalid token' }, { status: 401 });
     }
@@ -79,7 +74,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(data);
   } catch (error: unknown) {
-    console.error("API POST /events - Server error:", error); 
+    console.error("API POST /events - Server error:", error);
     const errorMessage = 'An unexpected error occurred';
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }

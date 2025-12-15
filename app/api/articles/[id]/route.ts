@@ -13,7 +13,7 @@ function isValidUUID(id: string): boolean {
 }
 
 // GET /api/articles/[id] - Get a single article (Publicly accessible or relies on RLS)
-export async function GET( request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const articleId = id;
@@ -28,8 +28,6 @@ export async function GET( request: NextRequest, { params }: { params: Promise<{
       console.error('GET /api/articles/[id] - Invalid article ID format:', articleId);
       return NextResponse.json({ error: 'Invalid Article ID format' }, { status: 400 });
     }
-
-    console.log('GET /api/articles/[id] - Fetching article with ID:', articleId);
 
     // Use the standard supabase client (assumes RLS handles permissions if needed, or it's public)
     const { data, error } = await supabase
@@ -55,7 +53,6 @@ export async function GET( request: NextRequest, { params }: { params: Promise<{
       return NextResponse.json({ error: 'Article not found' }, { status: 404 });
     }
 
-    console.log('GET /api/articles/[id] - Success: Retrieved article', articleId);
     return NextResponse.json(data); // Default 200 OK
 
   } catch (err: unknown) {
@@ -67,7 +64,7 @@ export async function GET( request: NextRequest, { params }: { params: Promise<{
 
 
 // PATCH /api/articles/[id] - Update an article (Requires Authentication & Authorization)
-export async function PATCH( request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params; // Destructure id from params data
     const articleId = id;
@@ -82,8 +79,6 @@ export async function PATCH( request: NextRequest, { params }: { params: Promise
       return NextResponse.json({ error: 'Invalid Article ID format' }, { status: 400 });
     }
 
-    console.log('PATCH /api/articles/[id] - Request received for ID:', articleId);
-
     // 1. Authentication: Verify user token
     const authHeader = request.headers.get('Authorization');
     const token = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
@@ -97,8 +92,6 @@ export async function PATCH( request: NextRequest, { params }: { params: Promise
       console.warn('PATCH /api/articles/[id] - Unauthorized: Invalid token', authError);
       return NextResponse.json({ error: 'Unauthorized: Invalid session' }, { status: 401 });
     }
-     console.log('PATCH /api/articles/[id] - Authenticated User:', user.id);
-
     /* 2. Authorization: Check if the user owns the article
     const { data: existingArticle, error: fetchError } = await supabase
       .from('posts')
@@ -126,46 +119,46 @@ export async function PATCH( request: NextRequest, { params }: { params: Promise
     */
 
     // 3. Request Body Validation
-    let updateData: { title: string; content: string; title_en: string ; content_en: string; image_url?: string | null; image_alt?: string | null; };
+    let updateData: { title: string; content: string; title_en: string; content_en: string; image_url?: string | null; image_alt?: string | null; };
     try {
-        const body = await request.json();
-        if (!body.title || typeof body.title !== 'string' || body.title.trim() === '') {
-            throw new Error('Title is required and cannot be empty.');
-        }
-         if (!body.content || typeof body.content !== 'string' || body.content.trim() === '') {
-            throw new Error('Content is required and cannot be empty.');
-        }
-        if (body.title_en && typeof body.title_en !== 'string') {
-            throw new Error('Title EN must be a string.');
-        }
-        if (body.content_en && typeof body.content_en !== 'string') {
-            throw new Error('Content EN must be a string.');
-        }
-        if (body.image_url && typeof body.image_url !== 'string') {
-            throw new Error('Image URL must be a string.');
-        }
-        if (body.image_alt && typeof body.image_alt !== 'string') {
-            throw new Error('Image Alt must be a string.');
-        }
+      const body = await request.json();
+      if (!body.title || typeof body.title !== 'string' || body.title.trim() === '') {
+        throw new Error('Title is required and cannot be empty.');
+      }
+      if (!body.content || typeof body.content !== 'string' || body.content.trim() === '') {
+        throw new Error('Content is required and cannot be empty.');
+      }
+      if (body.title_en && typeof body.title_en !== 'string') {
+        throw new Error('Title EN must be a string.');
+      }
+      if (body.content_en && typeof body.content_en !== 'string') {
+        throw new Error('Content EN must be a string.');
+      }
+      if (body.image_url && typeof body.image_url !== 'string') {
+        throw new Error('Image URL must be a string.');
+      }
+      if (body.image_alt && typeof body.image_alt !== 'string') {
+        throw new Error('Image Alt must be a string.');
+      }
 
-        updateData = {
-            title: body.title.trim(),
-            content: body.content.trim(), // Use trim() here if you want to save trimmed content
-            title_en: body.title_en.trim(),
-            content_en: body.content_en.trim(),
-            image_url: body.image_url || null, // Handle optional fields
-            image_alt: body.image_alt || null
-        };
+      updateData = {
+        title: body.title.trim(),
+        content: body.content.trim(), // Use trim() here if you want to save trimmed content
+        title_en: body.title_en.trim(),
+        content_en: body.content_en.trim(),
+        image_url: body.image_url || null, // Handle optional fields
+        image_alt: body.image_alt || null
+      };
     } catch (parseError) {
-         console.error('PATCH /api/articles/[id] - Invalid request body:', parseError);
-        return NextResponse.json({ error: 'Invalid request body. Ensure JSON is valid and required fields (title, content) are present.' }, { status: 400 });
+      console.error('PATCH /api/articles/[id] - Invalid request body:', parseError);
+      return NextResponse.json({ error: 'Invalid request body. Ensure JSON is valid and required fields (title, content) are present.' }, { status: 400 });
     }
 
     // 4. Perform Update
     const { data: updatedArticle, error: updateError } = await supabase
       .from('posts')
       .update({
-            ...updateData,
+        ...updateData,
         title: updateData.title,
         content: updateData.content,
         title_en: updateData.title_en,
@@ -181,13 +174,12 @@ export async function PATCH( request: NextRequest, { params }: { params: Promise
 
     if (updateError) {
       console.error('PATCH /api/articles/[id] - Supabase update error:', updateError);
-       if (updateError.code === 'PGRST116') { // Should not happen if auth check passed, but possible race condition
+      if (updateError.code === 'PGRST116') { // Should not happen if auth check passed, but possible race condition
         return NextResponse.json({ error: 'Article not found during update' }, { status: 404 });
       }
       return NextResponse.json({ error: 'Database error during update: ' + updateError.message }, { status: 500 });
     }
 
-    console.log("PATCH /api/articles/[id] - Success: Updated article", articleId);
     return NextResponse.json(updatedArticle); // 200 OK with updated data
 
   } catch (err: unknown) {
@@ -199,12 +191,12 @@ export async function PATCH( request: NextRequest, { params }: { params: Promise
 
 
 // DELETE /api/articles/[id] - Delete an article (Requires Authentication & Authorization)
-export async function DELETE( request: NextRequest, { params }: { params: Promise<{ id: string }> }){
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params; // Destructure id from params dat 
     const articleId = await id;
 
-     // Validate ID presence and format
+    // Validate ID presence and format
     if (!articleId || typeof articleId !== 'string') {
       console.error('DELETE /api/articles/[id] - Invalid or missing ID parameter:', articleId);
       return NextResponse.json({ error: 'Article ID missing or invalid' }, { status: 400 });
@@ -225,7 +217,7 @@ export async function DELETE( request: NextRequest, { params }: { params: Promis
     }
     const { data: { user }, error: authError } = await supabase.auth.getUser(token);
     if (authError || !user) {
-       console.warn('DELETE /api/articles/[id] - Unauthorized: Invalid token', authError);
+      console.warn('DELETE /api/articles/[id] - Unauthorized: Invalid token', authError);
       return NextResponse.json({ error: 'Unauthorized: Invalid session' }, { status: 401 });
     }
     console.log('DELETE /api/articles/[id] - Authenticated User:', user.id);
@@ -239,20 +231,20 @@ export async function DELETE( request: NextRequest, { params }: { params: Promis
       .single();
 
     if (fetchError) {
-        console.error('DELETE /api/articles/[id] - Error fetching article for auth check:', fetchError);
-        if (fetchError.code === 'PGRST116') {
-             return NextResponse.json({ error: 'Article not found' }, { status: 404 });
-        }
-        return NextResponse.json({ error: 'Database error checking article ownership' }, { status: 500 });
-    }
-     if (!existingArticle) {
+      console.error('DELETE /api/articles/[id] - Error fetching article for auth check:', fetchError);
+      if (fetchError.code === 'PGRST116') {
         return NextResponse.json({ error: 'Article not found' }, { status: 404 });
+      }
+      return NextResponse.json({ error: 'Database error checking article ownership' }, { status: 500 });
+    }
+    if (!existingArticle) {
+      return NextResponse.json({ error: 'Article not found' }, { status: 404 });
     }
     if (existingArticle.author_id !== user.id) {
       console.warn(`DELETE /api/articles/[id] - Forbidden: User ${user.id} does not own article ${articleId}`);
       return NextResponse.json({ error: 'Forbidden: You do not have permission to delete this article' }, { status: 403 });
     }
-     console.log(`DELETE /api/articles/[id] - Authorization successful for user ${user.id} on article ${articleId}`);
+    console.log(`DELETE /api/articles/[id] - Authorization successful for user ${user.id} on article ${articleId}`);
 
     // 3. Perform Delete
     const { error: deleteError } = await supabase
