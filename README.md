@@ -1,108 +1,83 @@
 # Sapienza Foiling Team Website
 
 <p align="center">
-  <img src="public/logosft.png" alt="Sapienza Foiling Team Logo" width="200"/>
+  <a href="https://www.sapienzafoilingteam.vercel.app/" target="_blank">
+    <img src="public/logosft.png" alt="Sapienza Foiling Team Logo" width="200"/>
+  </a>
 </p>
 
-## Overview
+<p align="center">
+  The official website for the Sapienza Foiling Team, a university sailing team dedicated to designing and building sustainable foiling boats to compete in the SuMoth Challenge.
+</p>
 
-The Sapienza Foiling Team website serves as the digital hub for our university sailing team. We are dedicated to designing and constructing sustainable foiling boats, with a focus on innovation and environmental responsibility. Our team participates in the SuMoth Challenge, an international competition that promotes sustainable sailing technology.
+## 🌐 Live Website
 
-## 🚀 Features
+You can visit the live website at: **[sapienzafoilingteam.vercel.app](https://www.sapienzafoilingteam.vercel.app/)**
 
-### For Visitors
-- **Responsive Design**: Optimized viewing experience across all devices.
-- **Team Showcase**: Detailed information about our four main divisions.
-- **Boat Details**: Technical specifications and information about our boats.
-- **Sponsorship Portal**: Opportunities and benefits for potential partners.
-- **Contact System**: Direct communication channel with our team.
-- **Event Calendar**: Upcoming competitions and team events.
-- **Social Integration**: Connect with us across multiple platforms.
-- **Blog**: Stay updated with the latest news and articles.
-- **Authentication**: Secure user authentication for administrative tasks.
+## ✨ Key Features
 
-### For Developers
-- Modern React components with TypeScript.
-- Framer Motion animations for enhanced UX.
-- Tailwind CSS for responsive styling.
-- Performance optimization with Vercel.
-- SEO-friendly structure.
-- Supabase integration for backend services.
-- **Job Positions Management**: Implemented a system for managing job positions, including revalidation for career paths on updates and creation.
-- **Security Enhancements**: Added file upload validation, secured service role keys, and implemented XSS prevention.
-- **UI/UX Improvements**: Updated fonts and improved image handling.
-- **Updated "Join Us" Link**: The "Join Us" link has been updated.
-
-### Internationalization (i18n)
-- **Translation Support**: Added translation support for CTA buttons in the Hero Section.
+-   **Responsive Design**: Fully optimized for a seamless experience on desktops, tablets, and mobile devices.
+-   **Team Showcase**: Introduces the team's structure and its four main divisions.
+-   **Boat Details**: Provides technical specifications and imagery of our innovative foiling boat.
+-   **Blog**: Features articles and news to keep followers updated on our latest progress and events.
+-   **Sponsorship Portal**: Outlines opportunities and benefits for potential sponsors and partners.
+-   **Career Opportunities**: Lists open positions for students to join the team.
+-   **Event Calendar**: Showcases upcoming competitions and team events.
+-   **Contact System**: A direct communication channel for inquiries.
+-   **Multilingual Support**: Content available in both English and Italian.
+-   **Admin Dashboard**: Secure area for team members to manage blog posts, events, and job positions.
 
 ## 🛠 Tech Stack
 
-- **Framework:** Next.js 14 with App Router
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS, PostCSS, @tailwindcss/typography
-- **Animations:** Framer Motion
-- **Icons:** Lucide React
-- **Backend/Database:** Supabase (Authentication, PostgreSQL Database, Storage)
-- **Deployment/Analytics:** Vercel Analytics, Vercel Speed Insights
-- **Testing:** Jest, React Testing Library, TS-Jest
-- **Code Quality:** ESLint
-- **Fonts:** Local fonts with `next/font`
+-   **Framework:** [Next.js](https://nextjs.org/) 14 (with App Router)
+-   **Language:** [TypeScript](https://www.typescriptlang.org/)
+-   **Styling:** [Tailwind CSS](https://tailwindcss.com/), [PostCSS](https://postcss.org/)
+-   **Animations:** [Framer Motion](https://www.framer.com/motion/)
+-   **Backend & DB:** [Supabase](https://supabase.io/) (Auth, PostgreSQL, Storage)
+-   **Deployment:** [Vercel](https://vercel.com/) (with Analytics and Speed Insights)
+-   **Testing:** [Jest](https://jestjs.io/), [React Testing Library](https://testing-library.com/react/)
+-   **Code Quality:** [ESLint](https://eslint.org/)
+-   **Icons:** [Lucide React](https://lucide.dev/)
 
-## 🏗 Project Structure
+## 🏗️ Project Structure
+
+The repository is organized as a standard Next.js 14 application:
 
 ```bash
 sapienza-foiling-team/
 ├── app/                          # Next.js App Router root
-│   ├── api/                      # API routes (Next.js API)
-│   │   ├── articles/             # API for blog articles
-│   │   ├── auth/                 # API for authentication (login, logout, signup)
-│   ├── auth/                     # Authentication related pages
-│   ├── blog/                     # Blog pages and admin interface
-│   │   ├── admin/                # Admin panel for blog management
-│   ├── components/               # Reusable UI components
-│   │   ├── AdminHeader.tsx
-│   │   ├── CallToActionSection.tsx
-│   │   ├── CookieBanner.tsx
-│   │   ├── Footer.tsx
-│   │   ├── HeroSection.tsx
-│   │   ├── Navbar.tsx
-│   │   ├── SocialMediaSection.tsx
-│   │   └── UpcomingEventsSection.tsx
+│   ├── admin/                    # Admin dashboard for managing content
+│   ├── api/                      # API routes for backend functionality
+│   │   ├── articles/             # Handles blog articles
+│   │   ├── auth/                 # Handles authentication
+│   │   ├── events/               # Handles team events
+│   │   └── positions/            # Handles job positions
+│   ├── auth/                     # Authentication page (login)
+│   ├── blog/                     # Blog list and single article pages
+│   ├── boat/                     # Boat details page
+│   ├── career/                   # Career opportunities page
 │   ├── contact/                  # Contact page
-│   ├── context/                  # React Context providers (e.g., AdminContext, LanguageContext)
-│   ├── fleet/                    # Fleet page
-│   ├── fonts/                    # Custom fonts
-│   ├── lib/                      # Utility functions and Supabase client initialization
-│   │   └── supabase.ts           # Supabase client setup
 │   ├── privacy-policy/           # Privacy Policy page
 │   ├── sponsor/                  # Sponsorship page
-│   ├── team/                     # Team page
-│   ├── translations/             # Internationalization (i18n) content
-│   ├── __tests__/                # Unit and integration tests for components and pages
-│   ├── favicon.ico               # Favicon
-│   ├── globals.css               # Global CSS styles
-│   ├── layout.tsx                # Root layout for the application
+│   ├── team/                     # Team showcase page
+│   ├── components/               # Reusable React components
+│   ├── context/                  # React Context providers (Admin, Language)
+│   ├── fonts/                    # Local font files
+│   ├── lib/                      # Shared libraries, helpers, and Supabase clients
+│   │   ├── supabase.ts           # Public Supabase client
+│   │   ├── supabase-admin.ts     # Admin Supabase client (for backend use)
+│   │   └── types.ts              # TypeScript type definitions
+│   ├── translations/             # i18n translation files
+│   ├── __tests__/                # Unit and integration tests
+│   ├── layout.tsx                # Root application layout
 │   └── page.tsx                  # Home page
-├── public/                       # Static assets (images, logos, flags, sponsors)
+├── public/                       # Static assets (images, logos, etc.)
 ├── supabase/                     # Supabase local development setup and migrations
-│   ├── migrations/               # Database migration files
-│   └── config.toml               # Supabase CLI configuration
-├── __mocks__/                    # Mock files for testing
-├── .github/                      # GitHub Actions workflows and issue templates
-├── .next/                        # Next.js build output (ignored by Git)
-├── node_modules/                 # Project dependencies (ignored by Git)
+├── .github/                      # GitHub Actions workflows
 ├── .eslintrc.json                # ESLint configuration
-├── .gitignore                    # Specifies intentionally untracked files to ignore
-├── jest.config.ts                # Jest test runner configuration
-├── jest.setup.ts                 # Jest setup file
-├── LICENSE                       # Project license
+├── jest.config.ts                # Jest configuration
 ├── next.config.ts                # Next.js configuration
-├── package-lock.json             # npm dependency lock file
-├── package.json                  # Project metadata and dependencies
-├── postcss.config.js             # PostCSS configuration
-├── README.md                     # This README file
-├── tailwind.config.js            # Tailwind CSS configuration
+├── package.json                  # Project dependencies and scripts
 └── tsconfig.json                 # TypeScript configuration
 ```
 
@@ -110,158 +85,89 @@ sapienza-foiling-team/
 
 ### Prerequisites
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Git
+-   Node.js (v18 or higher)
+-   npm (or yarn/pnpm)
+-   Git
 
-### Installation
+### Installation & Setup
 
 1.  **Clone the repository:**
     ```bash
     git clone https://github.com/nannipy/sapienza-foiling-team.git
-    ```
-
-2.  **Navigate to the project directory:**
-    ```bash
     cd sapienza-foiling-team
     ```
 
-3.  **Install dependencies:**
+2.  **Install dependencies:**
     ```bash
     npm install
     ```
 
-4.  **Create a local environment file:**
-    ```bash
-    cp .env.example .env.local
+3.  **Set up environment variables:**
+    Create a new file named `.env.local` in the root of the project and add the following content:
     ```
-    *Note: You will need to populate `.env.local` with your Supabase project credentials. Refer to the Supabase documentation for details on setting up your project and obtaining these keys.*
+    NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-project-anon-key
+    SUPABASE_SERVICE_ROLE_KEY=your-supabase-project-service-role-key
+    ```
+    You can find these keys in your Supabase project's dashboard under `Project Settings` > `API`.
 
-5.  **Start the development server:**
+4.  **Run the development server:**
     ```bash
     npm run dev
     ```
 
-6.  **Open in browser:**
-    Open [http://localhost:3000](http://localhost:3000) in your web browser.
+5.  **Open your browser:**
+    Navigate to [http://localhost:3000](http://localhost:3000) to see the application running.
 
-### Available Scripts
+## 📜 Available Scripts
 
--   `npm run dev`: Starts the development server with Turbopack for faster compilation.
--   `npm run build`: Builds the application for production.
--   `npm run start`: Starts the Next.js production server.
--   `npm run lint`: Runs ESLint to check for code quality issues.
--   `npm run test`: Runs all Jest tests.
--   `npm run test:watch`: Runs Jest tests in watch mode.
--   `npm run test:coverage`: Runs Jest tests and generates a coverage report.
+-   `npm run dev`: Starts the development server with hot-reloading.
+-   `npm run build`: Creates a production-ready build of the application.
+-   `npm run start`: Starts the production server.
+-   `npm run lint`: Lints the code using ESLint to find and fix issues.
+-   `npm run test`: Runs all tests using Jest.
+-   `npm run test:watch`: Runs tests in interactive watch mode.
+-   `npm run test:coverage`: Generates a test coverage report.
 
 ## ☁️ Infrastructure
 
-This project leverages the following infrastructure components:
-
--   **Supabase:**
-    -   **Authentication:** Handles user sign-up, sign-in, and session management.
-    -   **PostgreSQL Database:** Provides the relational database for storing application data (e.g., blog posts, user profiles).
-    -   **Storage:** Used for managing and serving static assets like images (e.g., `public/hero.png`, `public/logosft.png`).
-    -   **Edge Functions:** (If used) Serverless functions for custom backend logic.
-    -   **Realtime:** (If used) For real-time data synchronization.
-    -   **Local Development:** Configured via `supabase/config.toml` for local database and authentication emulation.
-
--   **Vercel:**
-    -   **Deployment:** The primary platform for deploying the Next.js application to production.
-    -   **Analytics:** Provides insights into website traffic and user behavior.
-    -   **Speed Insights:** Helps monitor and improve website performance.
-
-## 💻 Development Guide
-
-### Component Structure
--   Use functional components with TypeScript.
--   Implement proper type definitions for props and state.
--   Follow the established folder structure within `app/components/`.
--   Utilize Tailwind CSS for styling.
-
-### Styling Guidelines
--   Prefer Tailwind CSS utility classes for styling.
--   Adhere to the color scheme defined in `tailwind.config.js`.
--   Ensure responsive design principles are applied for various screen sizes.
--   Use custom color variables defined in `tailwind.config.js` for consistency.
-
-### Adding New Features
-1.  Create a new branch for your feature (`git checkout -b feature/your-feature-name`).
-2.  Implement the feature following our coding standards and best practices.
-3.  Add necessary unit and integration tests for new functionality.
-4.  Update relevant documentation (e.g., this README, inline comments).
-5.  Submit a pull request to the `main` branch.
+-   **Supabase**: Used as the primary backend service.
+    -   **Authentication**: Manages user sign-up, login, and sessions for the admin panel.
+    -   **PostgreSQL Database**: Stores all dynamic data, including blog posts, events, and job applications.
+    -   **Storage**: Hosts images and other media files.
+-   **Vercel**: The platform for deploying and hosting the live website.
+    -   **Vercel Analytics**: Provides insights into website traffic.
+    -   **Vercel Speed Insights**: Monitors and helps optimize website performance.
 
 ## 🧪 Testing
 
-The project uses [Jest](https://jestjs.io/) as the test runner and [React Testing Library](https://testing-library.com/react/) for testing React components.
+This project uses [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/react/) for component and integration testing.
 
--   **Configuration:** `jest.config.ts` and `jest.setup.ts` define the testing environment and setup.
--   **Test Files:** Tests are located in `app/__tests__/` and can also be placed alongside components (e.g., `ComponentName.test.tsx`).
--   **Running Tests:**
-    -   `npm run test`: Executes all tests.
-    -   `npm run test:watch`: Runs tests in interactive watch mode, re-running tests on file changes.
-    -   `npm run test:coverage`: Generates a test coverage report, showing which parts of the code are covered by tests.
+-   **Configuration files**: `jest.config.ts` and `jest.setup.ts`.
+-   **Test files**: Located in `app/__tests__/`.
+-   **Run tests**: Use the `npm run test` command to execute the test suite.
 
 ## 🤝 Contributing
 
-We welcome contributions to the Sapienza Foiling Team Website! Please follow these guidelines:
+We welcome contributions! Please read our contribution guidelines to get started.
 
 1.  **Fork the repository.**
-2.  **Create your feature branch:**
-    ```bash
-    git checkout -b feature/YourFeature
-    ```
-3.  **Commit your changes:**
-    ```bash
-    git commit -m 'feat: Add YourFeature'
-    ```
-    *Note: Please use conventional commit messages (e.g., `feat:`, `fix:`, `docs:`, `chore:`).*
-4.  **Push to the branch:**
-    ```bash
-    git push origin feature/YourFeature
-    ```
-5.  **Open a Pull Request:**
-    Submit a pull request to the `main` branch, describing your changes and their purpose.
+2.  **Create a feature branch:** `git checkout -b feature/your-amazing-feature`
+3.  **Commit your changes** using [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/): `git commit -m 'feat: Add some amazing feature'`
+4.  **Push to the branch:** `git push origin feature/your-amazing-feature`
+5.  **Open a Pull Request** to the `main` branch.
 
-### Contribution Guidelines
--   Follow the existing code style and conventions.
--   Write clear, concise, and meaningful commit messages.
--   Update documentation as needed.
--   Ensure your changes are thoroughly tested.
--   Create an issue for major changes or new features before starting work.
--   Review existing issues to avoid duplicate efforts.
+Please ensure your code follows the existing style, includes tests for new features, and updates documentation where necessary.
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## 📞 Contact & Support
 
-### General Inquiries
--   **Email:** sapienzafoilingteam@gmail.com
--   **Website:** [sapienzafoilingteam.vercel.app](https://www.sapienzafoilingteam.vercel.app)
-
-### Social Media
+-   **Email:** [sapienzafoilingteam@gmail.com](mailto:sapienzafoilingteam@gmail.com)
 -   **Instagram:** [@sapienzafoilingteam](https://www.instagram.com/sapienzafoilingteam)
 -   **LinkedIn:** [Sapienza Foiling Team](https://www.linkedin.com/company/sapienza-foiling-team)
--   **Facebook:** [Sapienza Foiling Team](https://www.facebook.com/sapienzafoilingteam)
 
-### Location
-Via Eudossiana 18, 00184 Roma, Italy
-
-## 🙏 Acknowledgments
-
--   Sapienza University of Rome for their continuous support.
--   Our generous sponsors and partners.
--   The SuMoth Challenge organization for promoting sustainable sailing.
--   All dedicated team members and contributors.
--   The open-source community for invaluable tools and resources.
-
-## 📈 Project Status
-
-**Current Version:** 1.0.0
-**Status:** Active Development
-
-Made with ⛵️ by Sapienza Foiling Team
+---
+Made with ⛵️ by the Sapienza Foiling Team.
