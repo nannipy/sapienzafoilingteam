@@ -8,60 +8,50 @@ import { footerTranslations } from '../translations/footer';
 const Footer: React.FC = () => {
   const { language } = useLanguage();
   return (
-  <footer className="bg-gray-50 text-black py-8">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex justify-between items-center">
-      <div className="">
-        {footerTranslations[language].copyright}
+    <footer className="bg-gray-50 text-black py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+           {/* Brand / Logo Area */}
+           <div>
+             <h2 className="text-[8rem] leading-[0.8] font-syne font-black text-black/5 tracking-widest select-none -ml-4">
+               SFT
+             </h2>
+             <p className="mt-8 text-gray-400 font-geist max-w-sm">
+               {footerTranslations[language].description}
+             </p>
+           </div>
+           
+           {/* Quick Links / Contact */}
+           <div className="flex flex-col justify-end items-start md:items-end space-y-4">
+              <a href="mailto:sapienzafoilingteam@gmail.com" className="text-2xl text-black/50 md:text-3xl font-syne font-bold hover:text-[] transition-colors">
+                sapienzafoilingteam@gmail.com
+              </a>
+              <div className="flex space-x-6 mt-4">
+                {[
+                  { Icon: Instagram, href: "https://instagram.com/sapienzafoilingteam" },
+                  { Icon: Linkedin, href: "https://linkedin.com/company/sapienzafoilingteam" }, // Replace with actual LinkedIn URL
+                  { Icon: Facebook, href: "https://facebook.com/sapienzafoilingteam" }, // Replace with actual Facebook URL
+                ].map((social, idx) => (
+                  <a key={idx} href={social.href} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white/5 hover:bg-brand hover:text-white transition-all duration-300">
+                    <social.Icon className="w-6 h-6" />
+                  </a>
+                ))}
+              </div>
+           </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 font-geist">
+          <div>
+            {footerTranslations[language].copyright}
+          </div>
+          <div className="flex gap-6 mt-4 md:mt-0">
+             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+          </div>
+        </div>
       </div>
-      <a
-          href="mailto:sapienzafoilingteam@gmail.com"
-          className="hover:text-[#822433] font-bold transition-colors flex items-center gap-2"
-          aria-label="Email"
-        >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            className="w-8 h-8 hover:scale-110 transition-transform hidden md:block"
-          >
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-          </svg>
-          <span className="text-sm hidden md:block">sapienzafoilingteam@gmail.com</span>
-        </a>
-      
-      <div className="flex space-x-3">
-        {/* Social Media Icons */}
-        <a 
-          href="https://www.instagram.com/sapienzafoilingteam/" 
-          className="hover:text-[#822433] transition-colors"
-          aria-label="Instagram"
-        >
-          <Instagram className="w-8 h-8 hover:scale-110 transition-transform" />
-        </a>
-        <a 
-          href="https://www.linkedin.com/company/sapienza-foiling-team/about/" 
-          className="hover:text-[#822433] transition-colors"
-          aria-label="LinkedIn"
-        >
-          <Linkedin className="w-8 h-8 hover:scale-110 transition-transform" />
-        </a>
-        <a 
-          href="https://www.facebook.com/profile.php?id=61572515878295" 
-          className="hover:text-[#822433] transition-colors"
-          aria-label="Facebook"
-        >
-          <Facebook className="w-8 h-8 hover:scale-110 transition-transform" />
-        </a>
-      </div>
-    </div>
-  </div>
-</footer>
+    </footer>
   );
 }
 

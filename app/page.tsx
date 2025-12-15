@@ -26,7 +26,6 @@ export default function Home() {
       <main className="relative min-h-screen bg-black" data-testid="home-page">
         <HeroSection onChevronClick={handleChevronClick} />
         <EventsSection />
-        <SocialMediaSection />
         <CallToActionSection />
       </main>
     </>

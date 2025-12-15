@@ -7,12 +7,35 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // You can add custom colors here if you want to reference them via theme()
-      // colors: {
-      //   'brand-primary': '#822433',
-      //   'brand-dark': '#6b1d28',
-      //   'brand-accent': '#a34252',
-      // },
+      // Custom V2.0 Colors
+      fontFamily: {
+        geist: ['var(--font-geist)', 'sans-serif'],
+        kelson: ['var(--font-kelson)', 'sans-serif'], // Keep kelson just in case, or replace? User hates it? Let's alias 'syne' to 'kelson' class if we want quick swap, or better: make a new 'syne' class and replace usage.
+        syne: ['var(--font-syne)', 'sans-serif'],
+      },
+      colors: {
+        'brand': {
+          DEFAULT: '#822433', // Sapienza Burgundy
+          dark: '#6b1d28',
+          light: '#a34252',
+        },
+        'void': '#050505', // Deep Black
+        'carbon': '#171717', // Secondary Dark
+      },
+      animation: {
+        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+        'float': 'float 6s ease-in-out infinite',
+      },
+      keyframes: {
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+      },
       typography: (theme) => ({ // Use the theme function for consistency
         DEFAULT: {
           css: {
@@ -110,13 +133,13 @@ module.exports = {
         // Specific styles for prose-lg if needed (example)
         lg: {
           css: {
-              p: {
-                  lineHeight: '1.8', // Slightly more line height for larger text
-              },
-              // Add other lg-specific overrides here if you use prose-lg
-              // Example:
-              // h1: { fontSize: theme('fontSize.4xl') },
-              // h2: { fontSize: theme('fontSize.3xl') },
+            p: {
+              lineHeight: '1.8', // Slightly more line height for larger text
+            },
+            // Add other lg-specific overrides here if you use prose-lg
+            // Example:
+            // h1: { fontSize: theme('fontSize.4xl') },
+            // h2: { fontSize: theme('fontSize.3xl') },
           }
         }
       }),
