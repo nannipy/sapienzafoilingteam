@@ -74,7 +74,7 @@ export const teamTranslations = {
   },
   it: {
     title: 'Il Nostro Team',
-    subtitle: 'Il nostro team si articola in quattro reparti fondamentali, ognuno con un ruolo strategico e un contributo distintivo al successo del progetto.',
+    subtitle: '',
     allDepartments: 'Tutti i Reparti',
     activities: 'Attività Principali',
     competenceAreas: 'Aree di Competenza',
