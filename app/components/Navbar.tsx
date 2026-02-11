@@ -7,35 +7,25 @@ import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 import { navbarTranslations } from '../translations/navbar';
 import posthog from 'posthog-js';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
-  const [isRounded, setIsRounded] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const currentPath = usePathname();
   const { language, setLanguage } = useLanguage();
-  
+
   const navigationItems = [
     { label: navbarTranslations[language].boat, href: '/boat' },
     { label: navbarTranslations[language].team, href: '/team' },
     { label: navbarTranslations[language].sponsor, href: '/sponsor' },
     { label: navbarTranslations[language].contact, href: '/contact' },
-    { label: navbarTranslations[language].blog, href: '/blog'},
+    { label: navbarTranslations[language].blog, href: '/blog' },
   ];
 
   const isCurrentPath = (path: string) => currentPath === path;
 
   const handleMenuToggle = () => {
-    if (!isMobileMenuOpen) {
-      setIsRounded(false);
-      setTimeout(() => {
-        setIsMobileMenuOpen(true);
-      }, 300);
-    } else {
-      setIsMobileMenuOpen(false);
-      setTimeout(() => {
-        setIsRounded(true);
-      }, 300);
-    }
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const handleNavClick = (toPage: string, type: 'menu' | 'cta' | 'link') => {
@@ -48,23 +38,25 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3">
-      <div className={`bg-white text-black font-semibold text-center mx-auto max-w-4xl shadow-xl hover:shadow-xl transition-all duration-300 ${isRounded ? 'rounded-full' : 'rounded-3xl'}`}>
+      <motion.div
+        layout
+        className={`bg-white text-black font-semibold text-center mx-auto max-w-4xl shadow-xl hover:shadow-xl transition-all duration-300 ${!isMobileMenuOpen ? 'rounded-full' : 'rounded-3xl'}`}
+      >
         <div className="flex items-center justify-between px-6 py-3">
           <Link href="/" className="flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
             <Image src="/logosft.svg" alt="Logo" width={40} height={40} className="h-16 w-16" priority />
           </Link>
 
           <div data-testid="desktop-nav" className="hidden md:flex items-center space-x-4">
-            
+
             {navigationItems.map((item) => (
-              
+
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => handleNavClick(item.href, 'menu')}
-                className={`px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-100  ${
-                  isCurrentPath(item.href) ? 'bg-gray-100' : ''
-                }`}
+                className={`px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-100  ${isCurrentPath(item.href) ? 'bg-gray-100' : ''
+                  }`}
               >
                 {item.label}
               </Link>
@@ -83,7 +75,7 @@ const Navbar = () => {
             onClick={handleMenuToggle}
             aria-label="Toggle navigation"
           >
-            {!isRounded ? (
+            {isMobileMenuOpen ? (
               <X className="w-6 h-6" />
             ) : (
               <Menu className="w-6 h-6" />
@@ -91,35 +83,40 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div 
-          data-testid="mobile-menu"
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-          }`}
-        >
-          <div className="px-4 py-2">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`block px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-gray-100 ${
-                  isCurrentPath(item.href) ? 'bg-gray-100' : ''
-                }`}
-                onClick={() => {handleMenuToggle(); handleNavClick(item.href, 'menu');}}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Link
-              href="/career"
-              className="block mt-2 px-4 py-2 bg-[#822433] text-white rounded-lg text-center transition-all duration-300 hover:bg-[#6d1f2b]"
-              onClick={() => {handleMenuToggle(); handleNavClick('career', 'cta');}}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              data-testid="mobile-menu"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className="md:hidden overflow-hidden"
             >
-              {navbarTranslations[language].career}
-            </Link>
-          </div>
-        </div>
-      </div>
+              <div className="px-4 py-2">
+                {navigationItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`block px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-gray-100 ${isCurrentPath(item.href) ? 'bg-gray-100' : ''
+                      }`}
+                    onClick={() => { setIsMobileMenuOpen(false); handleNavClick(item.href, 'menu'); }}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <Link
+                  href="/career"
+                  className="block mt-2 px-4 py-2 bg-[#822433] text-white rounded-lg text-center transition-all duration-300 hover:bg-[#6d1f2b]"
+                  onClick={() => { setIsMobileMenuOpen(false); handleNavClick('career', 'cta'); }}
+                >
+                  {navbarTranslations[language].career}
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
       <button
         onClick={() => setLanguage(language === 'en' ? 'it' : 'en')}
         className={`
@@ -128,17 +125,17 @@ const Navbar = () => {
         aria-label="Switch language"
       >
         {language === 'en' ? (
-          <Image 
-            src="/flags/it-flag.png" 
-            alt="Italian Flag" 
-            width={24} 
+          <Image
+            src="/flags/it-flag.png"
+            alt="Italian Flag"
+            width={24}
             height={24}
           />
         ) : (
-          <Image 
-            src="/flags/en-flag.png" 
-            alt="British Flag" 
-            width={24} 
+          <Image
+            src="/flags/en-flag.png"
+            alt="British Flag"
+            width={24}
             height={24}
           />
         )}

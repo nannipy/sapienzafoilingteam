@@ -44,7 +44,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
         return NextResponse.json({ error: 'Article not found' }, { status: 404 });
       }
       // For other database errors
-      return NextResponse.json({ error: 'Database error: ' + error.message }, { status: 500 });
+      return NextResponse.json({ error: 'Errore interno del database' }, { status: 500 });
     }
 
     // Although single() should error if not found (PGRST116), double-check data
@@ -177,7 +177,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
       if (updateError.code === 'PGRST116') { // Should not happen if auth check passed, but possible race condition
         return NextResponse.json({ error: 'Article not found during update' }, { status: 404 });
       }
-      return NextResponse.json({ error: 'Database error during update: ' + updateError.message }, { status: 500 });
+      return NextResponse.json({ error: 'Errore durante l\'aggiornamento dell\'articolo' }, { status: 500 });
     }
 
     return NextResponse.json(updatedArticle); // 200 OK with updated data
@@ -257,7 +257,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
       // The count property in the response (if not using { returning: 'minimal' }) could be checked,
       // but the ownership check above is the primary guard.
       console.error('DELETE /api/articles/[id] - Supabase delete error:', deleteError);
-      return NextResponse.json({ error: 'Database error during deletion: ' + deleteError.message }, { status: 500 });
+      return NextResponse.json({ error: 'Errore durante l\'eliminazione dell\'articolo' }, { status: 500 });
     }
 
     console.log('DELETE /api/articles/[id] - Success: Deleted article', articleId);

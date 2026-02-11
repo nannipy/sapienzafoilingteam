@@ -8,12 +8,19 @@ import posthog from "posthog-js";
 import { useLanguage } from '../context/LanguageContext';
 import { homeTranslations } from '../translations/home';
 
-interface HeroSectionProps {
-  onChevronClick: () => void;
-}
-
-const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
+const HeroSection: React.FC = () => {
   const { language } = useLanguage();
+
+  const handleChevronClick = () => {
+    const targetElement = document.querySelector('#upcoming-events');
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.getBoundingClientRect().top + window.pageYOffset - 100,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const handleCTAClick = (ctaType: 'learn_more' | 'view_boat') => {
     posthog.capture('hero_cta_clicked', {
       cta_type: ctaType,
@@ -24,7 +31,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
   return (
     <div className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-void">
       {/* Background with overlay */}
-      <div className="absolute inset-0 w-full h-full"> 
+      <div className="absolute inset-0 w-full h-full">
         <Image
           src="/moth_5.jpg"
           alt="Sapienza Foiling Team Regatta"
@@ -69,8 +76,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onChevronClick }) => {
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-12 w-full flex justify-center animate-float">
-        <button 
-          onClick={onChevronClick}
+        <button
+          onClick={handleChevronClick}
           className="p-4 rounded-full hover:bg-white/10 transition-colors group cursor-pointer"
           aria-label="Scroll down"
         >

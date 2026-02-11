@@ -9,8 +9,8 @@ export async function GET() {
       .select('*')
       .order('created_at', { ascending: false });
     if (error) {
-      console.error('API GET /events - Database error:', error.message);
-      return NextResponse.json({ error: error.message }, { status: 400 });
+      console.error('API GET /events - Database error:', error);
+      return NextResponse.json({ error: 'Errore durante il recupero degli eventi' }, { status: 400 });
     }
 
     if (!data) {
@@ -69,7 +69,7 @@ export async function POST(request: Request) {
 
     if (error) {
       console.error("API POST /events - Supabase insert error:", error);
-      return NextResponse.json({ error: error.message }, { status: 400 });
+      return NextResponse.json({ error: 'Errore durante la creazione dell\'evento' }, { status: 400 });
     }
 
     return NextResponse.json(data);

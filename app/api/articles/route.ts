@@ -18,8 +18,8 @@ export async function GET() {
 
 
     if (error) {
-      console.error('API GET /articles - Database error:', error.message);
-      return NextResponse.json({ error: error.message }, { status: 400 });
+      console.error('API GET /articles - Database error:', error);
+      return NextResponse.json({ error: 'Errore durante il recupero degli articoli' }, { status: 400 });
     }
 
     if (!data) {
@@ -76,7 +76,8 @@ export async function POST(request: Request) {
       .single();
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 });
+      console.error('API POST /articles - Database error:', error);
+      return NextResponse.json({ error: 'Errore durante la creazione dell\'articolo' }, { status: 400 });
     }
 
     return NextResponse.json(data);

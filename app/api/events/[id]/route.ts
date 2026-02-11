@@ -4,25 +4,25 @@ import { NextResponse, NextRequest } from 'next/server';
 import { updateEvents, deleteEvent } from '@/app/lib/supabase-admin';
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+    const { id } = await params;
 
-  try {
-    const { data, error } = await supabase.from('events').select('*').eq('id', id).single();
+    try {
+        const { data, error } = await supabase.from('events').select('*').eq('id', id).single();
 
-    if (error) {
-      console.error(`Error fetching event with ID ${id}:`, error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+        if (error) {
+            console.error(`Error fetching event with ID ${id}:`, error);
+            return NextResponse.json({ error: 'Errore durante il recupero dell\'evento' }, { status: 500 });
+        }
+
+        if (!data) {
+            return NextResponse.json({ error: 'Event not found' }, { status: 404 });
+        }
+
+        return NextResponse.json(data);
+    } catch (error: unknown) {
+        console.error(`Unexpected error fetching event with ID ${id}:`, error);
+        return NextResponse.json({ error: 'Si è verificato un errore imprevisto' }, { status: 500 });
     }
-
-    if (!data) {
-      return NextResponse.json({ error: 'Event not found' }, { status: 404 });
-    }
-
-    return NextResponse.json(data);
-  } catch (error: unknown) {
-    console.error(`Unexpected error fetching event with ID ${id}:`, error);
-    return NextResponse.json({ error: (error as Error).message }, { status: 500 });
-  }
 }
 
 
@@ -56,12 +56,12 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         } catch {
             return NextResponse.json({ error: 'Invalid JSON in request body.' }, { status: 400 });
         }
-        
+
         const { id } = await params;
 
         // Controlla se l'ID è valido
         if (!id) {
-             return NextResponse.json({ error: 'Event ID is missing.' }, { status: 400 });
+            return NextResponse.json({ error: 'Event ID is missing.' }, { status: 400 });
         }
 
         // 4. Chiama la funzione di aggiornamento
@@ -75,8 +75,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
     } catch (error: unknown) {
         console.error("API PUT /events/[id] - Server error:", error);
-        const message = error instanceof Error ? error.message : 'An unexpected error occurred';
-        return NextResponse.json({ error: message }, { status: 500 });
+        return NextResponse.json({ error: 'Si è verificato un errore imprevisto' }, { status: 500 });
     }
 }
 

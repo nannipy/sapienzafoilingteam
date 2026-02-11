@@ -11,12 +11,13 @@ export async function POST(request: Request) {
     });
 
     if (error) {
+      console.error('API login - Auth error:', error);
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
     return NextResponse.json({ user: data.user, session: data.session });
   } catch (error: unknown) {
-    console.error("Descrizione Errore:", error); 
+    console.error("Descrizione Errore:", error);
     const errorMessage = 'Si è verificato un errore imprevisto';
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }

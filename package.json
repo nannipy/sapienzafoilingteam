@@ -27,6 +27,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "dompurify": "^3.2.7",
     "framer-motion": "^12.23.12",
+    "isomorphic-dompurify": "^3.0.0-rc.2",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.544.0",
     "marked": "^16.3.0",

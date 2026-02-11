@@ -5,45 +5,60 @@ import { revalidatePath } from 'next/cache';
 import { supabase } from '@/app/lib/supabase';
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const awaitedParams = await params;
-  const position = await getOpenPosition(awaitedParams.id);
-  if (!position) {
-    return new NextResponse('Not Found', { status: 404 });
+  try {
+    const awaitedParams = await params;
+    const position = await getOpenPosition(awaitedParams.id);
+    if (!position) {
+      return new NextResponse('Not Found', { status: 404 });
+    }
+    return NextResponse.json(position);
+  } catch (error: unknown) {
+    console.error('API GET /positions/[id] - Server error:', error);
+    return NextResponse.json({ error: 'Si è verificato un errore imprevisto' }, { status: 500 });
   }
-  return NextResponse.json(position);
 }
 
 export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  try {
     const authHeader = req.headers.get('Authorization');
     const token = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
     if (!token) {
-        return new NextResponse('Unauthorized', { status: 401 });
+      return new NextResponse('Unauthorized', { status: 401 });
     }
     const { data: { user }, error: authError } = await supabase.auth.getUser(token);
     if (authError || !user) {
-        return new NextResponse('Unauthorized', { status: 401 });
+      return new NextResponse('Unauthorized', { status: 401 });
     }
 
-  const data = await req.json();
-  const awaitedParams = await params;
-  const position = await updateOpenPosition(awaitedParams.id, data);
-  revalidatePath('/career');
-  return NextResponse.json(position);
+    const data = await req.json();
+    const awaitedParams = await params;
+    const position = await updateOpenPosition(awaitedParams.id, data);
+    revalidatePath('/career');
+    return NextResponse.json(position);
+  } catch (error: unknown) {
+    console.error('API PUT /positions/[id] - Server error:', error);
+    return NextResponse.json({ error: 'Si è verificato un errore imprevisto' }, { status: 500 });
+  }
 }
 
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  try {
     const authHeader = req.headers.get('Authorization');
     const token = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
     if (!token) {
-        return new NextResponse('Unauthorized', { status: 401 });
+      return new NextResponse('Unauthorized', { status: 401 });
     }
     const { data: { user }, error: authError } = await supabase.auth.getUser(token);
     if (authError || !user) {
-        return new NextResponse('Unauthorized', { status: 401 });
+      return new NextResponse('Unauthorized', { status: 401 });
     }
 
-  const awaitedParams = await params;
-  await deleteOpenPosition(awaitedParams.id);
-  revalidatePath('/career');
-  return new NextResponse(null, { status: 204 });
+    const awaitedParams = await params;
+    await deleteOpenPosition(awaitedParams.id);
+    revalidatePath('/career');
+    return new NextResponse(null, { status: 204 });
+  } catch (error: unknown) {
+    console.error('API DELETE /positions/[id] - Server error:', error);
+    return NextResponse.json({ error: 'Si è verificato un errore imprevisto' }, { status: 500 });
+  }
 }

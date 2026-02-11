@@ -1,31 +1,20 @@
-'use client'
 
 import React from "react";
-import { useLanguage } from "./context/LanguageContext";
-
+import { getEvents } from "./lib/supabase-admin";
 import HeroSection from "./components/HeroSection";
-import SocialMediaSection from "./components/SocialMediaSection";
 import CallToActionSection from "./components/CallToActionSection";
 import EventsSection from "./components/EventsSection";
 
-export default function Home() {
-  useLanguage();
+export const revalidate = 60; // Revalidate every 60 seconds
 
-  const handleChevronClick = () => {
-    const targetElement = document.querySelector('#upcoming-events');
-    if (targetElement) {
-      window.scrollTo({
-        top: targetElement.getBoundingClientRect().top + window.pageYOffset - 100,
-        behavior: 'smooth'
-      });
-    }
-  };
+export default async function Home() {
+  const events = await getEvents();
 
   return (
     <>
       <main className="relative min-h-screen bg-black" data-testid="home-page">
-        <HeroSection onChevronClick={handleChevronClick} />
-        <EventsSection />
+        <HeroSection />
+        <EventsSection events={events} />
         <CallToActionSection />
       </main>
     </>
