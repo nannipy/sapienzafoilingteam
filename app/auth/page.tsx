@@ -84,10 +84,10 @@ const AuthPage = () => {
         });
 
         if (error) throw error;
-        
+
         setSuccess(authTranslations[language].loginSuccess);
         // Redirect to home page after successful login
-        router.push('/blog/admin');
+        router.push('/admin');
       } else {
         // Signup logic
         const { error } = await supabase.auth.signUp({
@@ -96,13 +96,13 @@ const AuthPage = () => {
         });
 
         if (error) throw error;
-        
+
         setSuccess(authTranslations[language].signupSuccess);
         // Switch to login form after successful signup
         setTimeout(() => setIsLogin(true), 1500);
       }
     } catch (error: unknown) {
-      console.error("Descrizione Errore:", error); 
+      console.error("Descrizione Errore:", error);
       const errorMessage = 'Si è verificato un errore imprevisto';
       setError(errorMessage || authTranslations[language].errorOccurred);
     } finally {

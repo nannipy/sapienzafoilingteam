@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import EventForm from '@/app/components/EventForm'; // We will create this reusable component
 import { Event } from '@/app/lib/types';
-import { supabase } from '@/app/lib/supabase';
+import { createEvent } from '@/app/actions/events';
 import { useState } from 'react';
 import { useLanguage } from '@/app/context/LanguageContext';
 import { eventTranslations } from '@/app/translations/event';
@@ -18,19 +18,9 @@ export default function NewEventPage() {
         setIsSubmitting(true);
         setError(null);
         try {
-            const session = (await supabase.auth.getSession()).data.session;
-            if (!session) throw new Error("Authentication session not found.");
-            
-            const response = await fetch('/api/events', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
-                body: JSON.stringify(eventData),
-            });
+            // Server Action call
+            await createEvent(eventData as Omit<Event, 'id' | 'created_at'>);
 
-            if (!response.ok) throw new Error((await response.json()).error || 'Failed to create event.');
-            
-            // Optionally, you can use Next.js's router to pass a success message
-            // For now, we just redirect.
             router.push('/admin/events');
 
         } catch (err: unknown) {
@@ -41,12 +31,12 @@ export default function NewEventPage() {
             setIsSubmitting(false);
         }
     };
-    
+
     return (
-        <EventForm 
-            onSubmit={handleCreate} 
-            isSubmitting={isSubmitting} 
-            error={error} 
+        <EventForm
+            onSubmit={handleCreate}
+            isSubmitting={isSubmitting}
+            error={error}
             pageTitle={eventTranslations[language].admin.newEvent}
             submitButtonText="Publish Event"
         />

@@ -26,36 +26,37 @@ const DepartmentFilter: React.FC<DepartmentFilterProps> = ({ activeSection, setA
             onClick={() => setActiveSection('all')}
             className={`
               relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap
-              ${activeSection === 'all' 
-                ? 'text-white bg-brand ' 
+              ${activeSection === 'all'
+                ? 'text-white bg-brand '
                 : 'text-gray-600 hover:bg-gray-100 bg-gray-50'
               }
             `}
           >
-             {t.allDepartments}
+            {t.allDepartments}
           </button>
 
           {/* Individual Divisions */}
           {divisions.map((id) => {
             const config = divisionsConfig[id];
             const translation = t.divisions[id as keyof typeof t.divisions];
-            
+
             return (
+
               <button
                 key={id}
                 onClick={() => setActiveSection(id)}
                 className={`
                   relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap flex items-center gap-2
-                  ${activeSection === id 
-                    ? 'text-white bg-brand' 
+                  ${activeSection === id
+                    ? 'text-white bg-brand'
                     : 'text-gray-600 hover:bg-gray-100 bg-gray-50'
                   }
                 `}
               >
-                <div className={`w-4 h-4 ${activeSection === id ? 'text-white' : 'text-gray-500'}`}>
-                    {config.icon}
+                <div className={`flex items-center justify-center w-4 h-4 shrink-0 ${activeSection === id ? 'text-white' : 'text-gray-500'}`}>
+                  {config.icon}
                 </div>
-                {translation.name}
+                <span className="leading-none">{translation.name}</span>
               </button>
             );
           })}

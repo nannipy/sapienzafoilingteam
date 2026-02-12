@@ -8,6 +8,7 @@ import { supabase } from '@/app/lib/supabase';
 import { useAdminContext } from '@/app/context/AdminContext';
 import { Event } from '@/app/lib/types';
 import { eventTranslations } from '@/app/translations/event';
+import { getEventsAction } from '@/app/actions/events';
 import { Edit, Trash, PlusCircle, Loader2, ImageIcon, XCircle } from 'lucide-react';
 
 export default function EventAdminPage() {
@@ -29,16 +30,10 @@ export default function EventAdminPage() {
       setLoading(true);
       setError(null);
       try {
-        const session = (await supabase.auth.getSession()).data.session;
-        if (!session) {
-          throw new Error('Session not found, cannot fetch events.');
-        }
-        const response = await fetch('/api/events', {
-          headers: { 'Authorization': `Bearer ${session.access_token}` }
-        });
-        if (!response.ok) throw new Error((await response.json()).error || 'Failed to fetch events');
-        const data = await response.json();
-        setEvents(data);
+        // Auth check is handled inside getEventsAction too, 
+        // but explicit user check here is fine for UI state.
+        const data = await getEventsAction();
+        setEvents(data || []);
       } catch (error: unknown) {
         const message = error instanceof Error ? error.message : 'Failed to load events';
         console.error('Error fetching events:', error);
@@ -68,14 +63,14 @@ export default function EventAdminPage() {
     document.body.appendChild(confirmDialog);
 
     const dialogResult = new Promise((resolve) => {
-        document.getElementById('confirmDelete')?.addEventListener('click', () => {
-            if (confirmDialog.parentNode) document.body.removeChild(confirmDialog);
-            resolve(true);
-        });
-        document.getElementById('cancelDelete')?.addEventListener('click', () => {
-             if (confirmDialog.parentNode) document.body.removeChild(confirmDialog);
-            resolve(false);
-        });
+      document.getElementById('confirmDelete')?.addEventListener('click', () => {
+        if (confirmDialog.parentNode) document.body.removeChild(confirmDialog);
+        resolve(true);
+      });
+      document.getElementById('cancelDelete')?.addEventListener('click', () => {
+        if (confirmDialog.parentNode) document.body.removeChild(confirmDialog);
+        resolve(false);
+      });
     });
 
     if (!(await dialogResult)) return;
@@ -91,7 +86,7 @@ export default function EventAdminPage() {
       });
 
       if (!response.ok) throw new Error((await response.json()).error || 'Failed to delete event');
-      
+
       setEvents(events.filter(a => a.id !== id));
       setSuccess(eventTranslations[language].admin.deleteSuccess);
     } catch (error: unknown) {
@@ -105,20 +100,20 @@ export default function EventAdminPage() {
     <main className="flex-1 p-4 md:p-6 lg:p-10 max-w-7xl mx-auto w-full">
       <div className="min-h-[10px] mb-4 md:mb-6">
         {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded text-sm flex items-center justify-between">
-                <span>{error}</span>
-                <button onClick={() => setError(null)} className="text-red-500 hover:text-red-700">
-                    <XCircle size={16} />
-                </button>
-            </div>
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded text-sm flex items-center justify-between">
+            <span>{error}</span>
+            <button onClick={() => setError(null)} className="text-red-500 hover:text-red-700">
+              <XCircle size={16} />
+            </button>
+          </div>
         )}
         {success && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded text-sm flex items-center justify-between">
-                 <span>{success}</span>
-                <button onClick={() => setSuccess(null)} className="text-green-500 hover:text-green-700">
-                    <XCircle size={16} />
-                </button>
-            </div>
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded text-sm flex items-center justify-between">
+            <span>{success}</span>
+            <button onClick={() => setSuccess(null)} className="text-green-500 hover:text-green-700">
+              <XCircle size={16} />
+            </button>
+          </div>
         )}
       </div>
 
@@ -128,8 +123,8 @@ export default function EventAdminPage() {
             {eventTranslations[language].admin.eventsList}
           </h1>
           <Link href="/admin/events/new" className="px-4 py-2 bg-[#822433] text-white rounded-lg hover:bg-[#6d1f2b] transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm">
-              <PlusCircle size={18} />
-              Create New
+            <PlusCircle size={18} />
+            Create New
           </Link>
         </div>
 

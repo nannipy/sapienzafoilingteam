@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import PositionForm from '../../../components/PositionForm';
 import { OpenPosition } from '../../../lib/types';
-import { supabase } from '../../../lib/supabase';
+import { createPosition } from '@/app/actions/positions';
 
 export default function CreatePositionPage() {
   const router = useRouter();
@@ -15,22 +15,7 @@ export default function CreatePositionPage() {
     setIsSubmitting(true);
     setError(null);
     try {
-      const session = (await supabase.auth.getSession()).data.session;
-      if (!session) throw new Error('User session not found.');
-
-      const response = await fetch('/api/positions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`,
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to create position');
-      }
+      await createPosition(formData);
 
       router.push('/admin/positions');
       router.refresh();

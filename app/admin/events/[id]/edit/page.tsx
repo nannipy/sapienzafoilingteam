@@ -5,6 +5,7 @@ import { use, useEffect, useState } from 'react';
 import EventForm from '@/app/components/EventForm';
 import { Event } from '@/app/lib/types';
 import { supabase } from '@/app/lib/supabase';
+import { getEventAction } from '@/app/actions/events';
 import { useLanguage } from '@/app/context/LanguageContext';
 import { eventTranslations } from '@/app/translations/event';
 import { Loader2 } from 'lucide-react';
@@ -24,16 +25,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
             setLoading(true);
             setError(null);
             try {
-                const session = (await supabase.auth.getSession()).data.session;
-                if (!session) throw new Error("Authentication session not found.");
-
-                const response = await fetch(`/api/events/${id}`, {
-                    headers: { 'Authorization': `Bearer ${session.access_token}` },
-                });
-
-                if (!response.ok) throw new Error((await response.json()).error || 'Failed to fetch event data.');
-                
-                const data = await response.json();
+                const data = await getEventAction(id);
                 setEvent(data);
             } catch (err) {
                 const message = err instanceof Error ? err.message : "An unknown error occurred.";
@@ -74,7 +66,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
             setIsSubmitting(false);
         }
     };
-    
+
     if (loading) {
         return <div className="flex justify-center items-center h-64"><Loader2 className="animate-spin h-8 w-8 text-[#822433]" /></div>;
     }
@@ -84,11 +76,11 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
     }
 
     return (
-        <EventForm 
+        <EventForm
             initialData={event}
-            onSubmit={handleUpdate} 
-            isSubmitting={isSubmitting} 
-            error={error} 
+            onSubmit={handleUpdate}
+            isSubmitting={isSubmitting}
+            error={error}
             pageTitle={eventTranslations[language].admin.editEvent}
             submitButtonText="Save Changes"
         />

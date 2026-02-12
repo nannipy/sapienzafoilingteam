@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { supabase } from '../../../../lib/supabase';
+import { updatePositionAction, getPositionAction } from '@/app/actions/positions';
 import { Loader2 } from 'lucide-react';
 
 export default function EditPositionPage() {
@@ -23,9 +23,9 @@ export default function EditPositionPage() {
       if (!id) return;
       setLoading(true);
       try {
-        const response = await fetch(`/api/positions/${id}`);
-        if (!response.ok) throw new Error('Failed to fetch position');
-        const data = await response.json();
+        const data = await getPositionAction(id);
+        if (!data) throw new Error('Position not found');
+
         const parsedRequirements = typeof data.requirements === 'string' ? JSON.parse(data.requirements) : data.requirements;
         setTitle(data.title);
         setLocation(data.location);
@@ -49,27 +49,13 @@ export default function EditPositionPage() {
     setError(null);
 
     try {
-      const session = (await supabase.auth.getSession()).data.session;
-      if (!session) throw new Error('User session not found.');
-
-      const response = await fetch(`/api/positions/${id}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${session.access_token}`,
-          },
-          body: JSON.stringify({
-            title,
-            location,
-            type,
-            description,
-            requirements: requirements.split('\n'),
-          }),
-        }
-      );
-
-      if (!response.ok) throw new Error('Failed to update position');
+      await updatePositionAction(id, {
+        title,
+        location,
+        type,
+        description,
+        requirements: requirements.split('\n'),
+      });
 
       router.push('/admin/positions');
     } catch (error: unknown) {

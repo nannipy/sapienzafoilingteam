@@ -60,14 +60,14 @@ const SponsorPage = () => {
             {/* Sponsors Grid */}
             <div className="mb-20">
               <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 border-b border-gray-100 pb-4">{t.sponsorsSection.title}</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="flex flex-wrap justify-center gap-8">
                 {sponsors.map(sponsor => (
                   <a
                     href={sponsor.link}
                     onClick={() => handleSponsorClick(sponsor.name)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group"
+                    className="group w-full sm:w-[calc(50%-1rem)] lg:w-[calc((100%-4rem)/3)]"
                     key={sponsor.link}
                   >
                     <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 group-hover:shadow-xl group-hover:border-brand-light transition-all duration-300 flex items-center justify-center h-40 w-full group-hover:scale-[1.02]">

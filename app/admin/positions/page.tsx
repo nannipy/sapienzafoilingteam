@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { supabase } from '../../lib/supabase';
 import { Edit, Trash, PlusCircle, Loader2 } from 'lucide-react';
 import { OpenPosition } from '../../lib/types';
+import { getPositions, deletePositionAction } from '@/app/actions/positions';
 
 export default function PositionsAdminPage() {
   const [positions, setPositions] = useState<OpenPosition[]>([]);
@@ -16,10 +16,8 @@ export default function PositionsAdminPage() {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch('/api/positions');
-        if (!response.ok) throw new Error('Failed to fetch positions');
-        const data = await response.json();
-        setPositions(data);
+        const data = await getPositions();
+        setPositions(data || []);
       } catch (error: unknown) {
         const message = error instanceof Error ? error.message : 'Failed to load positions';
         console.error('Error fetching positions:', error);
@@ -35,16 +33,7 @@ export default function PositionsAdminPage() {
   const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this position?')) {
       try {
-        const session = (await supabase.auth.getSession()).data.session;
-        if (!session) throw new Error('User session not found.');
-
-        const response = await fetch(`/api/positions/${id}`, {
-          method: 'DELETE',
-          headers: { 'Authorization': `Bearer ${session.access_token}` },
-        });
-
-        if (!response.ok) throw new Error('Failed to delete position');
-
+        await deletePositionAction(id);
         setPositions(positions.filter(p => p.id !== id));
       } catch (error: unknown) {
         const message = error instanceof Error ? error.message : 'An error occurred';

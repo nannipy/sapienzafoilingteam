@@ -1,5 +1,5 @@
 // app/blog/page.tsx
-import { supabase } from '../lib/supabase';
+import { createSupabaseServerClient } from '../lib/supabase-server';
 import BlogClientPage from './BlogClientPage';
 import { Article } from '../lib/types';
 
@@ -8,6 +8,7 @@ export const revalidate = 3600;
 
 
 async function getArticles(): Promise<Article[]> {
+  const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from('posts')
     .select('*')

@@ -14,7 +14,7 @@ const SuMothRulebookSection = () => {
     setOpenSection(openSection === sectionId ? null : sectionId);
   };
 
-  const sections = [
+  const sections = React.useMemo(() => [
     {
       id: 'technical-requirements',
       title: t.technicalRequirements.title,
@@ -171,7 +171,7 @@ const SuMothRulebookSection = () => {
         <div className="space-y-8">
           <div className="relative">
             <div className="absolute left-8 top-16 bottom-0 w-0.5 bg-gradient-to-b from-red-900 via-yellow-500 to-red-500 rounded-full"></div>
-            
+
             <div className="space-y-8 mt-2">
               <div className="flex items-start space-x-6 relative">
                 <div className="flex-shrink-0 w-16 h-16 bg-red-900 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg z-10">
@@ -260,7 +260,7 @@ const SuMothRulebookSection = () => {
               </div>
               <p className="text-lg text-gray-600">{t.scoring.possiblePoints}</p>
             </div>
-            
+
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center p-6 bg-red-900/5 rounded-xl">
                 <div className="w-16 h-16 bg-red-900 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -270,7 +270,7 @@ const SuMothRulebookSection = () => {
                 <h5 className="font-semibold text-gray-800 mb-1">{t.scoring.designPhase}</h5>
                 <p className="text-sm text-gray-600">{t.scoring.staticPhase}</p>
               </div>
-              
+
               <div className="text-center p-6 bg-yellow-500/5 rounded-xl">
                 <div className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Settings className="w-8 h-8 text-white" />
@@ -279,7 +279,7 @@ const SuMothRulebookSection = () => {
                 <h5 className="font-semibold text-gray-800 mb-1">{t.scoring.manufacturingPhase}</h5>
                 <p className="text-sm text-gray-600">{t.scoring.dynamicPhase}</p>
               </div>
-              
+
               <div className="text-center p-6 bg-red-500/5 rounded-xl">
                 <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Trophy className="w-8 h-8 text-white" />
@@ -298,7 +298,7 @@ const SuMothRulebookSection = () => {
               </div>
               {t.scoring.bonusPoints}
             </h4>
-            
+
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <h5 className="font-semibold text-green-700 mb-3">{t.scoring.bonusOpps}</h5>
@@ -309,7 +309,7 @@ const SuMothRulebookSection = () => {
                   </div>
                   <p className="text-sm text-gray-600">{t.scoring.fairPlayDesc}</p>
                 </div>
-                
+
                 <div className="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
                   <div className="flex items-center mb-2">
                     <Users className="w-5 h-5 text-blue-600 mr-2" />
@@ -317,7 +317,7 @@ const SuMothRulebookSection = () => {
                   </div>
                   <p className="text-sm text-gray-600">{t.scoring.equalityDesc}</p>
                 </div>
-                
+
                 <div className="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
                   <div className="flex items-center mb-2">
                     <BookOpen className="w-5 h-5 text-purple-600 mr-2" />
@@ -326,7 +326,7 @@ const SuMothRulebookSection = () => {
                   <p className="text-sm text-gray-600">{t.scoring.publicationsDesc}</p>
                 </div>
               </div>
-              
+
               <div>
                 <h5 className="font-semibold text-orange-700 mb-3">{t.scoring.handicap}</h5>
                 <div className="p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
@@ -345,7 +345,7 @@ const SuMothRulebookSection = () => {
         </div>
       ),
     },
-  ];
+  ], [t]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -373,8 +373,8 @@ const SuMothRulebookSection = () => {
       {/* Sections */}
       <div className="space-y-6">
         {sections.map((section) => (
-          <div 
-            key={section.id} 
+          <div
+            key={section.id}
             className={`bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden transition-all duration-500 ${openSection === section.id ? 'shadow-xl scale-[1.02]' : 'hover:shadow-md'}`}>
             <button
               className={`w-full flex justify-between items-center p-6 text-left font-bold text-xl transition-all duration-300 ${openSection === section.id ? 'bg-gray-50' : 'hover:bg-gray-50'}`}
@@ -391,7 +391,7 @@ const SuMothRulebookSection = () => {
                 <ChevronDown className="w-6 h-6" />
               </div>
             </button>
-            
+
             <div className={`transition-all duration-500 ease-in-out ${openSection === section.id ? 'max-h-[3000px] opacity-100' : 'max-h-0 opacity-0'}`}>
               <div className="p-6 pt-0 border-t border-gray-200">
                 <div className={`transition-all duration-500 delay-100 ${openSection === section.id ? 'transform translate-y-0 opacity-100' : 'transform translate-y-4 opacity-0'}`}>
@@ -508,7 +508,7 @@ const SuMothRulebookSection = () => {
         <div className="max-w-4xl mx-auto">
           <div className="relative">
             <div className="absolute left-1/2 transform -translate-x-0.5 h-full w-1 bg-gradient-to-b from-red-900 via-yellow-500 to-red-500 rounded-full"></div>
-            
+
             <div className="space-y-16">
               {/* Design Phase */}
               <div className="flex items-center">

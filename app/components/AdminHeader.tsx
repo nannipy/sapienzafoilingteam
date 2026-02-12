@@ -27,22 +27,21 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
 
   return (
     <div className="z-50 bg-white shadow-md h-16 flex items-center mx-4 sm:mx-8 md:mx-80 rounded-xl">
-      <div className="flex items-center justify-between w-full px-4 sm:px-8 md:px-20">
+      <div className="flex items-center justify-between w-full px-4 sm:px-8 md:px-2">
 
         {/* Left Side: Logo and Navigation */}
         <div className="flex items-center space-x-2 sm:space-x-6">
           <nav className="flex items-center space-x-6 sm:space-x-2 justify-start">
-             {/* Articles List Link */}
-             <Link
-                href="/admin"
-                className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${
-                  currentPath === '/blog/admin' && viewMode === 'list' // Active only if on admin page AND list view
-                    ? 'bg-[#f0e4e6] text-[#822433]'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+            {/* Articles List Link */}
+            <Link
+              href="/admin"
+              className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${currentPath === '/admin' && viewMode === 'list' // Active only if on admin page AND list view
+                ? 'bg-[#f0e4e6] text-[#822433]'
+                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                 }`}
-              >
-                <LayoutDashboard className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
-                <span className="ml-1 hidden sm:inline">{blogTranslations[language].admin.articlesList}</span>
+            >
+              <LayoutDashboard className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
+              <span className="ml-1 hidden sm:inline">{blogTranslations[language].admin.articlesList}</span>
             </Link>
 
             {/* Conditional Edit Article Button/Indicator */}
@@ -56,41 +55,38 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
             )}
 
             {/* Media Management Link */}
-             <Link
-                href="/admin/media"
-                className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${
-                  currentPath === '/blog/admin/media'
-                    ? 'bg-[#f0e4e6] text-[#822433]'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+            <Link
+              href="/admin/media"
+              className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${currentPath === '/admin/media'
+                ? 'bg-[#f0e4e6] text-[#822433]'
+                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                 }`}
-              >
-                <ImageIcon className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
-                <span className="ml-1 hidden sm:inline">Media</span>
-              </Link>
+            >
+              <ImageIcon className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
+              <span className="ml-1 hidden sm:inline">Media</span>
+            </Link>
             {/* Media Management Link */}
-             <Link
-                href="/admin/positions"
-                className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${
-                  currentPath === '/admin/positions'
-                    ? 'bg-[#f0e4e6] text-[#822433]'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+            <Link
+              href="/admin/positions"
+              className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${currentPath === '/admin/positions'
+                ? 'bg-[#f0e4e6] text-[#822433]'
+                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                 }`}
-              >
-                <FileUser className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
-                <span className="ml-1 hidden sm:inline">Open Positions</span>
-              </Link>
-              {/* Events Management Link */}
-              <Link
-                href="/admin/events"
-                className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${
-                  currentPath === '/admin/events'
-                    ? 'bg-[#f0e4e6] text-[#822433]'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+            >
+              <FileUser className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
+              <span className="ml-1 hidden sm:inline">Open Positions</span>
+            </Link>
+            {/* Events Management Link */}
+            <Link
+              href="/admin/events"
+              className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${currentPath === '/admin/events'
+                ? 'bg-[#f0e4e6] text-[#822433]'
+                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                 }`}
-              >
-                <Calendar className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
-                <span className="ml-1 hidden sm:inline">Events</span>
-              </Link>
+            >
+              <Calendar className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
+              <span className="ml-1 hidden sm:inline">Events</span>
+            </Link>
           </nav>
         </div>
 
@@ -112,11 +108,11 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
           </button>
         </div>
 
-         {/* Optional: Add a Mobile Menu Button Here if needed */}
+        {/* Optional: Add a Mobile Menu Button Here if needed */}
 
       </div>
-       {/* Optional: Mobile navigation below the main bar if needed */}
-       {/* <nav className="md:hidden flex items-center space-x-2 border-t mt-2 pt-2"> ... </nav> */}
+      {/* Optional: Mobile navigation below the main bar if needed */}
+      {/* <nav className="md:hidden flex items-center space-x-2 border-t mt-2 pt-2"> ... </nav> */}
     </div>
   );
 }
