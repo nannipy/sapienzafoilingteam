@@ -103,7 +103,7 @@ export default function MediaManagerPage() {
         setAuthUser(null);
         router.push('/auth');
       } else if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
-         setAuthUser(session.user);
+        setAuthUser(session.user);
       }
     });
 
@@ -138,21 +138,21 @@ export default function MediaManagerPage() {
 
       for (const item of listData || []) {
         // Heuristic: Items without metadata or specific placeholder names are treated as folders
-         // Supabase `list` returns items with null metadata for folders created via the UI or empty uploads
+        // Supabase `list` returns items with null metadata for folders created via the UI or empty uploads
         if (!item.metadata) {
-             // Skip the automatically created '.emptyFolderPlaceholder' if present
-             if (item.name !== '.emptyFolderPlaceholder') {
-                 fetchedFolders.push({
-                     type: 'folder',
-                     name: item.name,
-                     id: item.id,
-                 });
-             }
+          // Skip the automatically created '.emptyFolderPlaceholder' if present
+          if (item.name !== '.emptyFolderPlaceholder') {
+            fetchedFolders.push({
+              type: 'folder',
+              name: item.name,
+              id: item.id,
+            });
+          }
         } else {
           // Fetch public URL - consider doing this on demand if many files
-           const { data: urlData } = supabase.storage
-             .from('images')
-             .getPublicUrl(currentPath ? `${currentPath}/${item.name}` : item.name);
+          const { data: urlData } = supabase.storage
+            .from('images')
+            .getPublicUrl(currentPath ? `${currentPath}/${item.name}` : item.name);
 
           fetchedFiles.push({
             type: 'file',
@@ -256,9 +256,9 @@ export default function MediaManagerPage() {
       showNotification('error', 'Errore imprevisto durante il caricamento.');
     } finally {
       setIsProcessing(false);
-       if (fileInputRef.current) {
-           fileInputRef.current.value = '';
-       }
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   };
 
@@ -267,10 +267,10 @@ export default function MediaManagerPage() {
     if (!folderName || folderName.trim() === '') return;
 
     // Basic validation for invalid characters in Supabase paths
-     if (/[#?%]/g.test(folderName)) {
-        showNotification('error', 'Il nome della cartella contiene caratteri non validi (#, ?, %).');
-        return;
-      }
+    if (/[#?%]/g.test(folderName)) {
+      showNotification('error', 'Il nome della cartella contiene caratteri non validi (#, ?, %).');
+      return;
+    }
 
     setIsProcessing(true);
     // Create a placeholder file to represent the folder
@@ -282,12 +282,12 @@ export default function MediaManagerPage() {
         .upload(folderPath, new Blob(['']), { contentType: 'text/plain', upsert: false }); // Use empty blob
 
       if (uploadError) {
-           // Handle specific error for existing folder/file
-           if (uploadError.message.includes('Duplicate')) { // Or check status code if available
-               throw new Error(`Una cartella o file chiamato '${folderName.trim()}' esiste già.`);
-           }
-           throw uploadError; // Re-throw other errors
-       }
+        // Handle specific error for existing folder/file
+        if (uploadError.message.includes('Duplicate')) { // Or check status code if available
+          throw new Error(`Una cartella o file chiamato '${folderName.trim()}' esiste già.`);
+        }
+        throw uploadError; // Re-throw other errors
+      }
 
 
       showNotification('success', 'Cartella creata con successo.');
@@ -304,145 +304,145 @@ export default function MediaManagerPage() {
 
   // Recursive function to list all objects within a folder prefix
   const listAllObjects = async (folderPath: string): Promise<string[]> => {
-      let allObjectPaths: string[] = [];
-      const { data, error } = await supabase.storage.from('images').list(folderPath);
+    let allObjectPaths: string[] = [];
+    const { data, error } = await supabase.storage.from('images').list(folderPath);
 
-      if (error) {
-          console.error(`Error listing objects in ${folderPath}:`, error);
-          throw error; // Propagate error
+    if (error) {
+      console.error('Error listing objects in:', folderPath, error);
+      throw error; // Propagate error
+    }
+
+    if (!data) return [];
+
+    for (const item of data) {
+      const currentItemPath = `${folderPath}/${item.name}`;
+      // Check if it's potentially a sub-folder (no metadata or is placeholder)
+      // We assume anything returned by list is either a file or represents a folder structure
+      if (!item.metadata || item.name === '.emptyFolderPlaceholder') {
+        // If it's the placeholder, add it directly to be deleted.
+        if (item.name === '.emptyFolderPlaceholder') {
+          allObjectPaths.push(currentItemPath);
+        }
+        // Recursively list contents of the sub-folder prefix
+        const subFolderObjects = await listAllObjects(currentItemPath);
+        allObjectPaths = allObjectPaths.concat(subFolderObjects);
+      } else {
+        // It's a file, add its path
+        allObjectPaths.push(currentItemPath);
       }
-
-      if (!data) return [];
-
-      for (const item of data) {
-          const currentItemPath = `${folderPath}/${item.name}`;
-          // Check if it's potentially a sub-folder (no metadata or is placeholder)
-          // We assume anything returned by list is either a file or represents a folder structure
-          if (!item.metadata || item.name === '.emptyFolderPlaceholder') {
-               // If it's the placeholder, add it directly to be deleted.
-               if (item.name === '.emptyFolderPlaceholder') {
-                    allObjectPaths.push(currentItemPath);
-               }
-                // Recursively list contents of the sub-folder prefix
-               const subFolderObjects = await listAllObjects(currentItemPath);
-               allObjectPaths = allObjectPaths.concat(subFolderObjects);
-          } else {
-              // It's a file, add its path
-              allObjectPaths.push(currentItemPath);
-          }
-      }
-      return allObjectPaths;
+    }
+    return allObjectPaths;
   };
 
 
   // Function to delete a single file
-    // Function to delete a single file
-    const handleDeleteFile = async (fileName: string) => {
-        // 1. Construct the full path
-        const filePath = currentPath ? `${currentPath}/${fileName}` : fileName;
-        console.log('[handleDeleteFile] Attempting to delete file with path:', filePath); // <-- Log the exact path
+  // Function to delete a single file
+  const handleDeleteFile = async (fileName: string) => {
+    // 1. Construct the full path
+    const filePath = currentPath ? `${currentPath}/${fileName}` : fileName;
+    console.log('[handleDeleteFile] Attempting to delete file with path:', filePath); // <-- Log the exact path
 
-        // 2. Confirmation
-        if (!confirm(`Sei sicuro di voler eliminare il file "${fileName}"?`)) {
-            console.log('[handleDeleteFile] Deletion cancelled by user.');
-            return;
+    // 2. Confirmation
+    if (!confirm(`Sei sicuro di voler eliminare il file "${fileName}"?`)) {
+      console.log('[handleDeleteFile] Deletion cancelled by user.');
+      return;
+    }
+
+    setIsProcessing(true);
+    try {
+      // 3. Supabase remove call
+      console.log('[handleDeleteFile] Calling Supabase remove...');
+      const { data, error: deleteError } = await supabase.storage
+        .from('images')
+        .remove([filePath]); // Path must be in an array
+
+      // 4. Detailed Error Handling
+      if (deleteError) {
+        console.error('[handleDeleteFile] Supabase storage remove error:', deleteError); // <-- Log the specific Supabase error object
+        // Add specific checks based on common errors
+        if (deleteError.message.includes('Not found')) {
+          throw new Error(`File non trovato sul server (${filePath}). Potrebbe essere già stato eliminato.`);
+        } else if (deleteError.message.includes('Unauthorized') || deleteError.message.includes('policy')) {
+          throw new Error(`Non autorizzato a eliminare il file. Controlla i permessi (RLS).`);
         }
+        // Throw the original error for other cases
+        throw deleteError;
+      }
 
-        setIsProcessing(true);
-        try {
-          // 3. Supabase remove call
-          console.log('[handleDeleteFile] Calling Supabase remove...');
-          const { data, error: deleteError } = await supabase.storage
-            .from('images')
-            .remove([filePath]); // Path must be in an array
+      console.log('[handleDeleteFile] Supabase remove successful. Response data:', data); // Log success data (often minimal)
 
-          // 4. Detailed Error Handling
-          if (deleteError) {
-            console.error('[handleDeleteFile] Supabase storage remove error:', deleteError); // <-- Log the specific Supabase error object
-            // Add specific checks based on common errors
-            if (deleteError.message.includes('Not found')) {
-                 throw new Error(`File non trovato sul server (${filePath}). Potrebbe essere già stato eliminato.`);
-            } else if (deleteError.message.includes('Unauthorized') || deleteError.message.includes('policy')) {
-                 throw new Error(`Non autorizzato a eliminare il file. Controlla i permessi (RLS).`);
-            }
-            // Throw the original error for other cases
-            throw deleteError;
-          }
+      // 5. Success Feedback and Refresh
+      showNotification('success', `File "${fileName}" eliminato.`);
+      await fetchFilesAndFolders(); // Refresh list
 
-          console.log('[handleDeleteFile] Supabase remove successful. Response data:', data); // Log success data (often minimal)
-
-          // 5. Success Feedback and Refresh
-          showNotification('success', `File "${fileName}" eliminato.`);
-          await fetchFilesAndFolders(); // Refresh list
-
-        } catch (error: unknown) { // Changed from any to unknown
-          // This catches errors thrown above or other unexpected errors
-          console.error('[handleDeleteFile] Caught error during delete process:', error);
-          // Type check
-          const errorMessage = error instanceof Error ? error.message : 'Dettagli non disponibili';
-          showNotification('error', `Errore eliminazione file: ${errorMessage}`);
-        } finally {
-          setIsProcessing(false);
-           console.log('[handleDeleteFile] Finished processing.');
-        }
-      };
+    } catch (error: unknown) { // Changed from any to unknown
+      // This catches errors thrown above or other unexpected errors
+      console.error('[handleDeleteFile] Caught error during delete process:', error);
+      // Type check
+      const errorMessage = error instanceof Error ? error.message : 'Dettagli non disponibili';
+      showNotification('error', `Errore eliminazione file: ${errorMessage}`);
+    } finally {
+      setIsProcessing(false);
+      console.log('[handleDeleteFile] Finished processing.');
+    }
+  };
 
   // Function to delete a folder and its contents
   const handleDeleteFolder = async (folderName: string) => {
-     const folderPath = currentPath ? `${currentPath}/${folderName}` : folderName;
-      if (!confirm(`Sei sicuro di voler eliminare la cartella "${folderName}" e TUTTO il suo contenuto? Questa azione è irreversibile.`)) return;
+    const folderPath = currentPath ? `${currentPath}/${folderName}` : folderName;
+    if (!confirm(`Sei sicuro di voler eliminare la cartella "${folderName}" e TUTTO il suo contenuto? Questa azione è irreversibile.`)) return;
 
-      setIsProcessing(true);
-      try {
-          console.log(`Listing objects to delete in: ${folderPath}`);
-          // List all objects (files and placeholders) recursively within the folder path
-          const objectsToDelete = await listAllObjects(folderPath);
+    setIsProcessing(true);
+    try {
+      console.log(`Listing objects to delete in: ${folderPath}`);
+      // List all objects (files and placeholders) recursively within the folder path
+      const objectsToDelete = await listAllObjects(folderPath);
 
-          // If the folder might have been created only as a prefix (without a placeholder),
-          // ensure we try to remove the placeholder if it exists, even if listAllObjects didn't explore it initially
-          const placeholderPath = `${folderPath}/.emptyFolderPlaceholder`;
-          if (!objectsToDelete.includes(placeholderPath)) {
-               // Check if the placeholder actually exists before adding it
-               const { data: placeholderData, error: placeholderError } = await supabase.storage
-                    .from('images')
-                    .download(placeholderPath); // Use download or list with specific name to check existence
-               if (!placeholderError && placeholderData) {
-                   objectsToDelete.push(placeholderPath);
-               } else if (placeholderError && placeholderError.message !== 'The resource was not found') {
-                   // Log unexpected errors during placeholder check but proceed
-                   console.warn(`Error checking for placeholder ${placeholderPath}:`, placeholderError.message);
-               }
-           }
-
-
-          console.log('Objects identified for deletion:', objectsToDelete);
-
-          if (objectsToDelete.length > 0) {
-              const { data, error: deleteError } = await supabase.storage
-                  .from('images')
-                  .remove(objectsToDelete);
-
-              if (deleteError) {
-                  console.error('Error during bulk delete:', deleteError);
-                  throw new Error(`Errore durante l'eliminazione del contenuto della cartella: ${deleteError.message}`);
-              }
-              console.log('Bulk delete result:', data);
-          } else {
-               console.log(`No objects found to delete in ${folderPath}. Folder might be empty or just a prefix.`);
-               // Optional: attempt to remove a placeholder just in case? Usually handled above.
-           }
-
-
-          showNotification('success', `Cartella "${folderName}" eliminata.`);
-          await fetchFilesAndFolders(); // Refresh the list
-      } catch (error: unknown) { // Changed from any to unknown
-          console.error('Error deleting folder:', error);
-          // Type check
-          const errorMessage = error instanceof Error ? error.message : 'Dettagli non disponibili';
-          showNotification('error', `Errore eliminazione cartella: ${errorMessage}`);
-      } finally {
-          setIsProcessing(false);
+      // If the folder might have been created only as a prefix (without a placeholder),
+      // ensure we try to remove the placeholder if it exists, even if listAllObjects didn't explore it initially
+      const placeholderPath = `${folderPath}/.emptyFolderPlaceholder`;
+      if (!objectsToDelete.includes(placeholderPath)) {
+        // Check if the placeholder actually exists before adding it
+        const { data: placeholderData, error: placeholderError } = await supabase.storage
+          .from('images')
+          .download(placeholderPath); // Use download or list with specific name to check existence
+        if (!placeholderError && placeholderData) {
+          objectsToDelete.push(placeholderPath);
+        } else if (placeholderError && placeholderError.message !== 'The resource was not found') {
+          // Log unexpected errors during placeholder check but proceed
+          console.warn(`Error checking for placeholder ${placeholderPath}:`, placeholderError.message);
+        }
       }
+
+
+      console.log('Objects identified for deletion:', objectsToDelete);
+
+      if (objectsToDelete.length > 0) {
+        const { data, error: deleteError } = await supabase.storage
+          .from('images')
+          .remove(objectsToDelete);
+
+        if (deleteError) {
+          console.error('Error during bulk delete:', deleteError);
+          throw new Error(`Errore durante l'eliminazione del contenuto della cartella: ${deleteError.message}`);
+        }
+        console.log('Bulk delete result:', data);
+      } else {
+        console.log(`No objects found to delete in ${folderPath}. Folder might be empty or just a prefix.`);
+        // Optional: attempt to remove a placeholder just in case? Usually handled above.
+      }
+
+
+      showNotification('success', `Cartella "${folderName}" eliminata.`);
+      await fetchFilesAndFolders(); // Refresh the list
+    } catch (error: unknown) { // Changed from any to unknown
+      console.error('Error deleting folder:', error);
+      // Type check
+      const errorMessage = error instanceof Error ? error.message : 'Dettagli non disponibili';
+      showNotification('error', `Errore eliminazione cartella: ${errorMessage}`);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
 
@@ -475,97 +475,97 @@ export default function MediaManagerPage() {
   };
 
   // Function to rename a folder (move all contents)
- const handleRenameFolder = async (oldName: string) => {
-     const newName = prompt('Inserisci il nuovo nome per la cartella:', oldName);
-     if (!newName || newName.trim() === '' || newName === oldName) return;
+  const handleRenameFolder = async (oldName: string) => {
+    const newName = prompt('Inserisci il nuovo nome per la cartella:', oldName);
+    if (!newName || newName.trim() === '' || newName === oldName) return;
 
-     const trimmedNewName = newName.trim();
-      if (/[#?%]/g.test(trimmedNewName)) {
-          showNotification('error', 'Il nome della cartella contiene caratteri non validi (#, ?, %).');
-          return;
+    const trimmedNewName = newName.trim();
+    if (/[#?%]/g.test(trimmedNewName)) {
+      showNotification('error', 'Il nome della cartella contiene caratteri non validi (#, ?, %).');
+      return;
+    }
+
+
+    const oldFolderPath = currentPath ? `${currentPath}/${oldName}` : oldName;
+    const newFolderPath = currentPath ? `${currentPath}/${trimmedNewName}` : trimmedNewName;
+
+    setIsProcessing(true);
+    try {
+      console.log(`Renaming folder from ${oldFolderPath} to ${newFolderPath}`);
+
+      // 1. List all objects in the old folder path recursively
+      const objectsToMove = await listAllObjects(oldFolderPath);
+
+      // Ensure the placeholder is included if it exists, in case listAllObjects missed it
+      // (e.g., if the folder was truly empty except for the placeholder)
+      const oldPlaceholderPath = `${oldFolderPath}/.emptyFolderPlaceholder`;
+      if (!objectsToMove.includes(oldPlaceholderPath)) {
+        const { data: placeholderData, error: placeholderError } = await supabase.storage
+          .from('images')
+          .download(oldPlaceholderPath);
+        if (!placeholderError && placeholderData) {
+          objectsToMove.push(oldPlaceholderPath);
+        } else if (placeholderError && placeholderError.message !== 'The resource was not found') {
+          console.warn(`Error checking for placeholder ${oldPlaceholderPath} during rename:`, placeholderError.message);
+        }
       }
 
+      console.log('Objects identified for moving:', objectsToMove);
 
-     const oldFolderPath = currentPath ? `${currentPath}/${oldName}` : oldName;
-     const newFolderPath = currentPath ? `${currentPath}/${trimmedNewName}` : trimmedNewName;
+      if (objectsToMove.length === 0) {
+        // Folder might be empty or just a prefix. Try creating the new placeholder.
+        console.log("Source folder seems empty or is just a prefix. Attempting to create destination placeholder.");
+        const newPlaceholderPath = `${newFolderPath}/.emptyFolderPlaceholder`;
+        const { error: createError } = await supabase.storage
+          .from('images')
+          .upload(newPlaceholderPath, new Blob(['']), { contentType: 'text/plain', upsert: false });
 
-     setIsProcessing(true);
-     try {
-         console.log(`Renaming folder from ${oldFolderPath} to ${newFolderPath}`);
+        if (createError && !createError.message.includes('Duplicate')) { // Ignore if new folder already exists
+          throw new Error(`Could not create new folder placeholder: ${createError.message}`);
+        }
+        // If old placeholder existed, try removing it (best effort)
+        try {
+          await supabase.storage.from('images').remove([oldPlaceholderPath]);
+        } catch (removeError: unknown) { // Changed from any to unknown
+          // Type check before accessing message
+          const message = removeError instanceof Error ? removeError.message : '';
+          if (message !== 'The resource was not found') {
+            console.warn("Could not remove old placeholder during rename of empty folder:", removeError);
+          }
+        }
 
-         // 1. List all objects in the old folder path recursively
-         const objectsToMove = await listAllObjects(oldFolderPath);
+      } else {
+        // 2. Move each object individually
+        const movePromises = objectsToMove.map(oldObjectPath => {
+          const relativePath = oldObjectPath.substring(oldFolderPath.length + 1); // Get path relative to folder root
+          const newObjectPath = `${newFolderPath}/${relativePath}`;
+          console.log(`Moving ${oldObjectPath} to ${newObjectPath}`);
+          return supabase.storage.from('images').move(oldObjectPath, newObjectPath);
+        });
 
-          // Ensure the placeholder is included if it exists, in case listAllObjects missed it
-         // (e.g., if the folder was truly empty except for the placeholder)
-         const oldPlaceholderPath = `${oldFolderPath}/.emptyFolderPlaceholder`;
-         if (!objectsToMove.includes(oldPlaceholderPath)) {
-              const { data: placeholderData, error: placeholderError } = await supabase.storage
-                    .from('images')
-                    .download(oldPlaceholderPath);
-              if (!placeholderError && placeholderData) {
-                  objectsToMove.push(oldPlaceholderPath);
-              } else if (placeholderError && placeholderError.message !== 'The resource was not found') {
-                   console.warn(`Error checking for placeholder ${oldPlaceholderPath} during rename:`, placeholderError.message);
-               }
-         }
+        const results = await Promise.allSettled(movePromises);
 
-         console.log('Objects identified for moving:', objectsToMove);
+        const errors = results.filter(r => r.status === 'rejected' || (r.status === 'fulfilled' && r.value.error));
+        if (errors.length > 0) {
+          console.error('Errors during folder rename move:', errors);
+          // Note: This might leave the folder in a partially renamed state.
+          // More robust handling might involve copying first, then deleting original on success.
+          throw new Error(`Non è stato possibile rinominare tutti gli elementi (${errors.length} errori).`);
+        }
+      }
 
-         if (objectsToMove.length === 0) {
-             // Folder might be empty or just a prefix. Try creating the new placeholder.
-             console.log("Source folder seems empty or is just a prefix. Attempting to create destination placeholder.");
-              const newPlaceholderPath = `${newFolderPath}/.emptyFolderPlaceholder`;
-              const { error: createError } = await supabase.storage
-                  .from('images')
-                  .upload(newPlaceholderPath, new Blob(['']), { contentType: 'text/plain', upsert: false });
+      showNotification('success', 'Cartella rinominata con successo.');
+      await fetchFilesAndFolders(); // Refresh list
 
-              if (createError && !createError.message.includes('Duplicate')) { // Ignore if new folder already exists
-                  throw new Error(`Could not create new folder placeholder: ${createError.message}`);
-              }
-              // If old placeholder existed, try removing it (best effort)
-               try {
-                   await supabase.storage.from('images').remove([oldPlaceholderPath]);
-               } catch (removeError: unknown) { // Changed from any to unknown
-                   // Type check before accessing message
-                   const message = removeError instanceof Error ? removeError.message : '';
-                   if (message !== 'The resource was not found') {
-                       console.warn("Could not remove old placeholder during rename of empty folder:", removeError);
-                   }
-               }
-
-         } else {
-             // 2. Move each object individually
-             const movePromises = objectsToMove.map(oldObjectPath => {
-                 const relativePath = oldObjectPath.substring(oldFolderPath.length + 1); // Get path relative to folder root
-                 const newObjectPath = `${newFolderPath}/${relativePath}`;
-                 console.log(`Moving ${oldObjectPath} to ${newObjectPath}`);
-                 return supabase.storage.from('images').move(oldObjectPath, newObjectPath);
-             });
-
-             const results = await Promise.allSettled(movePromises);
-
-             const errors = results.filter(r => r.status === 'rejected' || (r.status === 'fulfilled' && r.value.error));
-             if (errors.length > 0) {
-                 console.error('Errors during folder rename move:', errors);
-                 // Note: This might leave the folder in a partially renamed state.
-                 // More robust handling might involve copying first, then deleting original on success.
-                 throw new Error(`Non è stato possibile rinominare tutti gli elementi (${errors.length} errori).`);
-             }
-         }
-
-         showNotification('success', 'Cartella rinominata con successo.');
-         await fetchFilesAndFolders(); // Refresh list
-
-     } catch (error: unknown) { // Changed from any to unknown
-         console.error('Error renaming folder:', error);
-         // Type check
-         const errorMessage = error instanceof Error ? error.message : 'Dettagli non disponibili';
-         showNotification('error', `Errore rinomina cartella: ${errorMessage}`);
-     } finally {
-         setIsProcessing(false);
-     }
- };
+    } catch (error: unknown) { // Changed from any to unknown
+      console.error('Error renaming folder:', error);
+      // Type check
+      const errorMessage = error instanceof Error ? error.message : 'Dettagli non disponibili';
+      showNotification('error', `Errore rinomina cartella: ${errorMessage}`);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
 
   const handleCopyUrl = (fileName: string) => {
@@ -578,19 +578,19 @@ export default function MediaManagerPage() {
           showNotification('error', 'Impossibile copiare l\'URL.');
         });
     } else {
-        // Fallback if URL wasn't pre-fetched (shouldn't happen with current logic)
-        const path = currentPath ? `${currentPath}/${fileName}` : fileName;
-        const { data } = supabase.storage.from('images').getPublicUrl(path);
-        if (data?.publicUrl) {
-           navigator.clipboard.writeText(data.publicUrl)
-            .then(() => showNotification('success', 'URL pubblico copiato!'))
-            .catch(err => {
-                console.error('Failed to copy URL:', err);
-                showNotification('error', 'Impossibile copiare l\'URL.');
-            });
-        } else {
-            showNotification('error', 'URL pubblico non trovato.');
-        }
+      // Fallback if URL wasn't pre-fetched (shouldn't happen with current logic)
+      const path = currentPath ? `${currentPath}/${fileName}` : fileName;
+      const { data } = supabase.storage.from('images').getPublicUrl(path);
+      if (data?.publicUrl) {
+        navigator.clipboard.writeText(data.publicUrl)
+          .then(() => showNotification('success', 'URL pubblico copiato!'))
+          .catch(err => {
+            console.error('Failed to copy URL:', err);
+            showNotification('error', 'Impossibile copiare l\'URL.');
+          });
+      } else {
+        showNotification('error', 'URL pubblico non trovato.');
+      }
     }
   };
 
@@ -615,16 +615,16 @@ export default function MediaManagerPage() {
     // Only set dragging to false if leaving the main drop zone area
     // This basic check might need refinement depending on nested elements
     if (e.currentTarget.contains(e.relatedTarget as Node)) {
-        return;
+      return;
     }
     setIsDragging(false);
   };
 
-   const handleDragOver = (e: React.DragEvent) => {
-       e.preventDefault(); // Necessary to allow dropping
-       e.stopPropagation();
-       setIsDragging(true); // Keep highlighting while over
-   };
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault(); // Necessary to allow dropping
+    e.stopPropagation();
+    setIsDragging(true); // Keep highlighting while over
+  };
 
 
   const handleDrop = (e: React.DragEvent) => {
@@ -657,53 +657,53 @@ export default function MediaManagerPage() {
             <h1 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2 md:mb-0">
               Media
             </h1>
-             {/* Action Buttons - Moved here for better mobile layout */}
-             <div className="flex items-center space-x-1 md:space-x-2 flex-wrap">
-               <button
-                 onClick={handleCreateFolder}
-                 disabled={isProcessing}
-                 className="px-4 py-2 bg-[#822433] text-white rounded-lg hover:bg-[#6d1f2b] transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm"
-                >
-                 <FolderPlus className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-                 Nuova Cartella
-               </button>
-               <input
-                 type="file"
-                 ref={fileInputRef}
-                 onChange={(e) => handleFileUpload(e.target.files)}
-                 className="hidden"
-                 multiple
-                 disabled={isProcessing}
-               />
-               {(isProcessing || isLoading) && <Loader2 className="w-4 h-4 md:w-5 md:h-5 animate-spin text-gray-500 ml-2" />}
-             </div>
+            {/* Action Buttons - Moved here for better mobile layout */}
+            <div className="flex items-center space-x-1 md:space-x-2 flex-wrap">
+              <button
+                onClick={handleCreateFolder}
+                disabled={isProcessing}
+                className="px-4 py-2 bg-[#822433] text-white rounded-lg hover:bg-[#6d1f2b] transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm"
+              >
+                <FolderPlus className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
+                Nuova Cartella
+              </button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={(e) => handleFileUpload(e.target.files)}
+                className="hidden"
+                multiple
+                disabled={isProcessing}
+              />
+              {(isProcessing || isLoading) && <Loader2 className="w-4 h-4 md:w-5 md:h-5 animate-spin text-gray-500 ml-2" />}
+            </div>
           </div>
 
           {/* Breadcrumb */}
           <div className="flex items-center space-x-1 md:space-x-2 mb-4 text-xs md:text-sm overflow-x-auto whitespace-nowrap pb-1">
-          <button
-               onClick={() => setCurrentPath('')}
-               disabled={currentPath === '' || isProcessing || isLoading} // Disable when loading too
-               className="text-blue-600 hover:text-blue-800 disabled:text-gray-400 disabled:cursor-not-allowed"
-             >
-               Root
-             </button>
-             {currentPath.split('/').filter(Boolean).map((folder, index, array) => ( // Filter(Boolean) removes empty strings from split('/') at the start
-               <React.Fragment key={index}>
-                 <span className="text-gray-400">/</span>
-                 <button
-                   onClick={() => setCurrentPath(array.slice(0, index + 1).join('/'))}
-                   disabled={isProcessing || isLoading} // Disable when loading
-                   className="text-blue-600 hover:text-blue-800 disabled:text-gray-400 disabled:cursor-not-allowed"
-                 >
-                   {/* Truncate long folder names in breadcrumb if needed */}
-                   <span className="max-w-[100px] sm:max-w-[150px] truncate inline-block align-bottom">
-                       {folder}
-                   </span>
-                 </button>
-               </React.Fragment>
-             ))}
-           </div>
+            <button
+              onClick={() => setCurrentPath('')}
+              disabled={currentPath === '' || isProcessing || isLoading} // Disable when loading too
+              className="text-blue-600 hover:text-blue-800 disabled:text-gray-400 disabled:cursor-not-allowed"
+            >
+              Root
+            </button>
+            {currentPath.split('/').filter(Boolean).map((folder, index, array) => ( // Filter(Boolean) removes empty strings from split('/') at the start
+              <React.Fragment key={index}>
+                <span className="text-gray-400">/</span>
+                <button
+                  onClick={() => setCurrentPath(array.slice(0, index + 1).join('/'))}
+                  disabled={isProcessing || isLoading} // Disable when loading
+                  className="text-blue-600 hover:text-blue-800 disabled:text-gray-400 disabled:cursor-not-allowed"
+                >
+                  {/* Truncate long folder names in breadcrumb if needed */}
+                  <span className="max-w-[100px] sm:max-w-[150px] truncate inline-block align-bottom">
+                    {folder}
+                  </span>
+                </button>
+              </React.Fragment>
+            ))}
+          </div>
 
           {/* Notifications */}
           {error && (
@@ -745,7 +745,7 @@ export default function MediaManagerPage() {
               </button>
             </p>
             {isProcessing && (
-               <p className="text-xs text-gray-500 mt-2">Caricamento in corso...</p>
+              <p className="text-xs text-gray-500 mt-2">Caricamento in corso...</p>
             )}
           </div>
 
@@ -791,7 +791,7 @@ export default function MediaManagerPage() {
                   <div className="absolute top-1 right-1 flex space-x-1 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150">
                     <button
                       onClick={(e) => { e.stopPropagation(); handleRenameFolder(folder.name); }}
-                       disabled={isProcessing || isLoading}
+                      disabled={isProcessing || isLoading}
                       className="p-1 bg-white rounded-full shadow text-gray-600 hover:text-blue-600 disabled:text-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400"
                       title="Rinomina Cartella"
                     >
@@ -799,7 +799,7 @@ export default function MediaManagerPage() {
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); handleDeleteFolder(folder.name); }}
-                       disabled={isProcessing || isLoading}
+                      disabled={isProcessing || isLoading}
                       className="p-1 bg-white rounded-full shadow text-gray-600 hover:text-red-600 disabled:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-400"
                       title="Elimina Cartella"
                     >
@@ -825,16 +825,16 @@ export default function MediaManagerPage() {
                           sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw" // Optimize image loading
                           className="object-cover"
                           loading="lazy" // Lazy load images below the fold
-                           onError={(e) => {
-                               // Optional: Handle image loading errors, e.g., show placeholder
-                               console.warn(`Failed to load image: ${file.publicUrl}`);
-                               (e.target as HTMLImageElement).style.display = 'none'; // Hide broken image icon
-                               // You might want to show the ImageIcon here instead
-                           }}
+                          onError={(e) => {
+                            // Optional: Handle image loading errors, e.g., show placeholder
+                            console.warn(`Failed to load image: ${file.publicUrl}`);
+                            (e.target as HTMLImageElement).style.display = 'none'; // Hide broken image icon
+                            // You might want to show the ImageIcon here instead
+                          }}
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
-                           <ImageIcon className="w-10 h-10 md:w-12 md:h-12 text-gray-400" />
+                          <ImageIcon className="w-10 h-10 md:w-12 md:h-12 text-gray-400" />
                         </div>
                       )}
                     </div>
@@ -846,7 +846,7 @@ export default function MediaManagerPage() {
                   <div className="absolute top-1 right-1 flex space-x-1 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150">
                     <button
                       onClick={(e) => { e.stopPropagation(); handleCopyUrl(file.name); }}
-                       disabled={isProcessing || isLoading}
+                      disabled={isProcessing || isLoading}
                       className="p-1 bg-white rounded-full shadow text-gray-600 hover:text-green-600 disabled:text-gray-300 focus:outline-none focus:ring-1 focus:ring-green-400"
                       title="Copia URL Pubblico"
                     >
@@ -861,8 +861,8 @@ export default function MediaManagerPage() {
                       <Edit2 className="w-3 h-3 md:w-4 md:h-4" />
                     </button>
                     <button
-                       onClick={(e) => { e.stopPropagation(); handleDeleteFile(file.name); }}
-                       disabled={isProcessing || isLoading}
+                      onClick={(e) => { e.stopPropagation(); handleDeleteFile(file.name); }}
+                      disabled={isProcessing || isLoading}
                       className="p-1 bg-white rounded-full shadow text-gray-600 hover:text-red-600 disabled:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-400"
                       title="Elimina File"
                     >
@@ -872,20 +872,20 @@ export default function MediaManagerPage() {
                 </div>
               ))}
 
-             {/* No items message */}
-               {!isLoading && folders.length === 0 && files.length === 0 && !currentPath && (
-                   <div className="col-span-full text-center py-12 text-gray-500">
-                       <ImageIcon size={48} className="mx-auto mb-4" />
-                       <p>La libreria media è vuota.</p>
-                       <p>Trascina i file o usa il pulsante Carica File.</p>
-                   </div>
-               )}
-               {!isLoading && folders.length === 0 && files.length === 0 && currentPath && (
-                   <div className="col-span-full text-center py-12 text-gray-500">
-                       <Folder size={48} className="mx-auto mb-4" />
-                       <p>Questa cartella è vuota.</p>
-                   </div>
-               )}
+              {/* No items message */}
+              {!isLoading && folders.length === 0 && files.length === 0 && !currentPath && (
+                <div className="col-span-full text-center py-12 text-gray-500">
+                  <ImageIcon size={48} className="mx-auto mb-4" />
+                  <p>La libreria media è vuota.</p>
+                  <p>Trascina i file o usa il pulsante Carica File.</p>
+                </div>
+              )}
+              {!isLoading && folders.length === 0 && files.length === 0 && currentPath && (
+                <div className="col-span-full text-center py-12 text-gray-500">
+                  <Folder size={48} className="mx-auto mb-4" />
+                  <p>Questa cartella è vuota.</p>
+                </div>
+              )}
             </div>
           )}
         </div>

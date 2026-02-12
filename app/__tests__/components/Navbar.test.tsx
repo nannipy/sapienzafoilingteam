@@ -93,7 +93,7 @@ describe('Navbar Component', () => {
     const hamburgerButton = screen.getByRole('button', { name: /toggle navigation/i });
 
     fireEvent.click(hamburgerButton!);
-    const mobileMenu = screen.getByTestId('mobile-menu');
+    screen.getByTestId('mobile-menu');
 
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 350));

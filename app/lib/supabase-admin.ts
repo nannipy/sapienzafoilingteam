@@ -41,7 +41,7 @@ export async function getOpenPosition(id: string) {
   if (!supabaseAdmin) return null;
   const { data, error } = await supabaseAdmin.from('open_positions').select('*').eq('id', id).single();
   if (error) {
-    console.error(`Error fetching open position with id ${id}:`, error);
+    console.error('Error fetching open position with id:', id, error);
     return null;
   }
   return data;
@@ -62,15 +62,15 @@ export async function updateOpenPosition(id: string, position: Partial<OpenPosit
   if (!supabaseAdmin) return null;
   // Usa Partial<OpenPosition> direttamente invece di Record<string, any>
   const updatePayload: Partial<OpenPosition> = { ...position };
-  
+
   // Gestisci la conversione delle requirements
   if ('requirements' in updatePayload && Array.isArray(updatePayload.requirements)) {
     updatePayload.requirements = JSON.stringify(updatePayload.requirements) as unknown as string[];
   }
-  
+
   const { data, error } = await supabaseAdmin.from('open_positions').update(updatePayload).eq('id', id).single();
   if (error) {
-    console.error(`Error updating open position with id ${id}:`, error);
+    console.error('Error updating open position with id:', id, error);
     return null;
   }
   return data;
@@ -80,7 +80,7 @@ export async function deleteOpenPosition(id: string) {
   if (!supabaseAdmin) return null;
   const { data, error } = await supabaseAdmin.from('open_positions').delete().eq('id', id);
   if (error) {
-    console.error(`Error deleting open position with id ${id}:`, error);
+    console.error('Error deleting open position with id:', id, error);
     return null;
   }
   return data;
@@ -123,7 +123,7 @@ export async function deleteEvent(id: string) {
   if (!supabaseAdmin) return null;
   const { data, error } = await supabaseAdmin.from('events').delete().eq('id', id);
   if (error) {
-    console.error(`Error deleting event with id ${id}:`, error);
+    console.error('Error deleting event with id:', id, error);
     return null;
   }
   return data;

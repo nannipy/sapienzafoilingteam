@@ -39,7 +39,7 @@ describe('HeroSection', () => {
     const mockGetBoundingClientRect = jest.fn(() => ({ top: 100 }));
     // Mock document.querySelector to return a fake element
     const mockElement = { getBoundingClientRect: mockGetBoundingClientRect };
-    jest.spyOn(document, 'querySelector').mockReturnValue(mockElement as any);
+    jest.spyOn(document, 'querySelector').mockReturnValue(mockElement as unknown as Element);
 
     fireEvent.click(chevronDown.closest('button')!);
 

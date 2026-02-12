@@ -9,13 +9,13 @@ import { Calendar, ArrowLeft } from 'lucide-react';
 import { Article } from '../../lib/types'; // Using the shared type
 import posthog from 'posthog-js';
 import ShareButtons from '../../components/ShareButtons';
-import DOMPurify from 'dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 
 const calculateReadingTime = (content: string) => {
   if (!content) return 0;
   const wordsPerMinute = 200;
-  // The content is now HTML, so this logic is still needed to strip tags for word count.
-  const text = content.replace(/<[^>]*>/g, '');
+  // Use isomorphic-dompurify to strip HTML tags safely
+  const text = DOMPurify.sanitize(content, { ALLOWED_TAGS: [] });
   const wordCount = text.split(/\s+/).length;
   const readingTime = Math.ceil(wordCount / wordsPerMinute);
   return readingTime;
@@ -39,7 +39,7 @@ export default function ArticleClientPage({ article }: { article: Article }) {
 
   // Format date
   const formatDate = (dateString: string) => {
-    if(!dateString) return '';
+    if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString(language === 'en' ? 'en-US' : 'it-IT', {
       year: 'numeric',
@@ -51,7 +51,7 @@ export default function ArticleClientPage({ article }: { article: Article }) {
   const contentToRender = language === 'en' ? article.content_en : article.content;
   // Sanitize the HTML content before rendering to prevent XSS attacks.
   // DOMPurify is used on the client-side just before rendering the content.
-  const sanitizedContent = typeof window !== 'undefined' ? DOMPurify.sanitize(contentToRender) : contentToRender;
+  const sanitizedContent = DOMPurify.sanitize(contentToRender);
 
   return (
     <main className="min-h-screen bg-gray-50 text-gray-900 pt-24 pb-16 ">
