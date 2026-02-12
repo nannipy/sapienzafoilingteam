@@ -29,7 +29,6 @@ describe('CallToActionSection', () => {
   it('handles call-to-action button click', () => {
     renderWithProvider(<CallToActionSection />);
     const joinButton = screen.getByText(homeTranslations.it.joinUsButton);
-    fireEvent.click(joinButton);
-    expect(mockOpen).toHaveBeenCalledWith('https://forms.gle/vQZf3VMJkiYtFqpZA', '_blank');
+    expect(joinButton.closest('a')).toHaveAttribute('href', '/career');
   });
 });

@@ -9,22 +9,40 @@ const renderWithProvider = (component: React.ReactElement) => {
 
 describe('HeroSection', () => {
   const mockOnChevronClick = jest.fn();
+  const mockOpen = jest.fn();
+  Object.defineProperty(window, 'open', {
+    value: mockOpen,
+    writable: true
+  });
+  Object.defineProperty(window, 'scrollTo', {
+    value: jest.fn(),
+    writable: true
+  });
 
   beforeEach(() => {
     mockOnChevronClick.mockClear();
   });
 
   it('renders the hero section with team name', () => {
-    renderWithProvider(<HeroSection onChevronClick={mockOnChevronClick} />);
-    const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading).toBeInTheDocument();
-    expect(heading).toHaveTextContent('Sapienza Foiling Team');
+    renderWithProvider(<HeroSection />); // onChevronClick prop was removed from component? checking file content... yes, handled internally
+    const headings = screen.getAllByRole('heading', { level: 1 });
+    expect(headings).toHaveLength(2);
+    expect(headings[0]).toHaveTextContent('Sapienza');
+    expect(headings[1]).toHaveTextContent('Foiling Team');
   });
 
-  it('calls onChevronClick when chevron is clicked', () => {
-    renderWithProvider(<HeroSection onChevronClick={mockOnChevronClick} />);
+  it('calls scroll logic when chevron is clicked', () => {
+    renderWithProvider(<HeroSection />);
     const chevronDown = screen.getByTestId('chevron-down');
-    fireEvent.click(chevronDown);
-    expect(mockOnChevronClick).toHaveBeenCalledTimes(1);
+
+    // Mock getBoundingClientRect
+    const mockGetBoundingClientRect = jest.fn(() => ({ top: 100 }));
+    // Mock document.querySelector to return a fake element
+    const mockElement = { getBoundingClientRect: mockGetBoundingClientRect };
+    jest.spyOn(document, 'querySelector').mockReturnValue(mockElement as any);
+
+    fireEvent.click(chevronDown.closest('button')!);
+
+    expect(window.scrollTo).toHaveBeenCalled();
   });
 });

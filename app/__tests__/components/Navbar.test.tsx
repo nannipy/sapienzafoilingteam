@@ -42,17 +42,17 @@ describe('Navbar Component', () => {
 
     expect(screen.getByAltText('Logo')).toBeInTheDocument();
     const desktopNav = screen.getByTestId('desktop-nav');
-    
+
     expect(desktopNav.querySelector('a[href="/boat"]')).toHaveTextContent(navbarTranslations.it.boat);
     expect(desktopNav.querySelector('a[href="/team"]')).toHaveTextContent(navbarTranslations.it.team);
     expect(desktopNav.querySelector('a[href="/sponsor"]')).toHaveTextContent(navbarTranslations.it.sponsor);
     expect(desktopNav.querySelector('a[href="/contact"]')).toHaveTextContent(navbarTranslations.it.contact);
     expect(desktopNav.querySelector('a[href="/blog"]')).toHaveTextContent(navbarTranslations.it.blog);
-    expect(desktopNav.querySelector('a[href="https://forms.gle/vQZf3VMJkiYtFqpZA"]')).toHaveTextContent(navbarTranslations.it.career);
+    expect(desktopNav.querySelector('a[href="/career"]')).toHaveTextContent(navbarTranslations.it.career);
   });
 
   it('renders the logo and navigation items in EN', () => {
-    (useLanguage as jest.Mock).mockReturnValue({ 
+    (useLanguage as jest.Mock).mockReturnValue({
       language: 'en',
       setLanguage: mockSetLanguage,
     });
@@ -65,11 +65,11 @@ describe('Navbar Component', () => {
 
     expect(screen.getByAltText('Logo')).toBeInTheDocument();
     const desktopNav = screen.getByTestId('desktop-nav');
-    
+
     expect(desktopNav.querySelector('a[href="/boat"]')).toHaveTextContent(navbarTranslations.en.boat);
     expect(desktopNav.querySelector('a[href="/team"]')).toHaveTextContent(navbarTranslations.en.team);
     expect(desktopNav.querySelector('a[href="/blog"]')).toHaveTextContent(navbarTranslations.en.blog);
-    expect(desktopNav.querySelector('a[href="https://forms.gle/vQZf3VMJkiYtFqpZA"]')).toHaveTextContent(navbarTranslations.en.career);
+    expect(desktopNav.querySelector('a[href="/career"]')).toHaveTextContent(navbarTranslations.en.career);
   });
 
   it('highlights the current navigation item', () => {
@@ -91,48 +91,48 @@ describe('Navbar Component', () => {
       </LanguageProvider>
     );
     const hamburgerButton = screen.getByRole('button', { name: /toggle navigation/i });
-    const mobileMenu = screen.getByTestId('mobile-menu');
-    
+
     fireEvent.click(hamburgerButton!);
+    const mobileMenu = screen.getByTestId('mobile-menu');
 
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 350));
     });
-    
-    expect(mobileMenu).toHaveClass('max-h-96', 'opacity-100');
-    
+
     fireEvent.click(hamburgerButton!);
+    // After clicking again, it should disappear or start disappearing.
+    // Framer motion removes it from DOM after exit animation.
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 350));
     });
-    
-    expect(mobileMenu).toHaveClass('max-h-0', 'opacity-0');
+
+    expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument();
   });
 
-    it('closes mobile menu when a generic navigation item is clicked', async () => {
+  it('closes mobile menu when a generic navigation item is clicked', async () => {
     render(
       <LanguageProvider>
         <Navbar />
       </LanguageProvider>
     );
     const hamburgerButton = screen.getByRole('button', { name: /toggle navigation/i });
-    const mobileMenu = screen.getByTestId('mobile-menu');
 
     fireEvent.click(hamburgerButton);
+    const mobileMenu = screen.getByTestId('mobile-menu');
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 350));
     });
-    expect(mobileMenu).toHaveClass('max-h-96', 'opacity-100');
+    expect(mobileMenu).toBeInTheDocument();
 
     const teamLinkInMobile = mobileMenu.querySelector(`a[href="/team"]`);
     expect(teamLinkInMobile).toBeInTheDocument();
     fireEvent.click(teamLinkInMobile!);
-    
+
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 350));
     });
-    
-    expect(mobileMenu).toHaveClass('max-h-0', 'opacity-0');
+
+    expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument();
   });
 
   it('closes mobile menu when "Join Us" link is clicked', async () => {
@@ -142,27 +142,28 @@ describe('Navbar Component', () => {
       </LanguageProvider>
     );
     const hamburgerButton = screen.getByRole('button', { name: /toggle navigation/i });
-    const mobileMenu = screen.getByTestId('mobile-menu');
 
     fireEvent.click(hamburgerButton);
+    const mobileMenu = screen.getByTestId('mobile-menu');
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 350));
     });
-    expect(mobileMenu).toHaveClass('max-h-96', 'opacity-100');
 
-    const joinUsLinkInMobile = mobileMenu.querySelector(`a[href="https://forms.gle/vQZf3VMJkiYtFqpZA"]`);
+    expect(mobileMenu).toBeInTheDocument();
+
+    const joinUsLinkInMobile = mobileMenu.querySelector(`a[href="/career"]`);
     expect(joinUsLinkInMobile).toBeInTheDocument();
     fireEvent.click(joinUsLinkInMobile!);
-    
+
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 350));
     });
-    
-    expect(mobileMenu).toHaveClass('max-h-0', 'opacity-0');
+
+    expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument();
   });
 
   it('mostra la bandiera EN e chiama setLanguage("it") quando la lingua corrente è EN', () => {
-    (useLanguage as jest.Mock).mockReturnValue({ 
+    (useLanguage as jest.Mock).mockReturnValue({
       language: 'en',
       setLanguage: mockSetLanguage,
     });
@@ -177,7 +178,7 @@ describe('Navbar Component', () => {
     expect(flagImage).toBeInTheDocument();
     expect(flagImage).toHaveAttribute('src', expect.stringContaining('_next/image?url=%2Fflags%2Fit-flag.png'));
 
-    const languageButton = screen.getByRole('button', { name: /switch language/i }); 
+    const languageButton = screen.getByRole('button', { name: /switch language/i });
     fireEvent.click(languageButton);
 
     expect(mockSetLanguage).toHaveBeenCalledTimes(1);
