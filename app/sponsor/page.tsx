@@ -3,7 +3,6 @@
 
 'use client';
 
-import React from 'react';
 import { HandshakeIcon, Rocket, Users, Target } from 'lucide-react';
 import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
