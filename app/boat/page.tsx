@@ -64,10 +64,7 @@ const BoatPage = () => {
   };
 
   return (
-    <PageLayout
-      title={t.title}
-      Icon={Sailboat}
-    >
+    <PageLayout>
       <div className="px-6 md:px-12 py-16">
         {/* Why Moth Section */}
         <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 mb-16 flex flex-col lg:flex-row items-center gap-8">
@@ -103,8 +100,8 @@ const BoatPage = () => {
                       {language === 'en' ? 'Explore the Boat!' : 'Esplora la Barca!'}
                     </p>
                     <p className="text-xs opacity-90">
-                      {language === 'en' 
-                        ? 'Click on the components to see how we build our sustainable foiling moth.' 
+                      {language === 'en'
+                        ? 'Click on the components to see how we build our sustainable foiling moth.'
                         : 'Clicca sui componenti per vedere come costruiamo il nostro moth foiling sostenibile.'}
                     </p>
                   </div>
