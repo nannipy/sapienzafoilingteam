@@ -23,7 +23,7 @@ const TeamPage = () => {
   };
 
   return (
-    <PageLayout customHero={<TeamHero />}>
+    <PageLayout>
       <DepartmentFilter
         activeSection={activeSection}
         setActiveSection={setActiveSection}

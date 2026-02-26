@@ -19,10 +19,7 @@ const ContactPage = () => {
   const t = contactTranslations[language];
 
   return (
-    <PageLayout
-      title={t.title}
-      Icon={MessageSquare}
-    >
+    <PageLayout>
       {/* Main Content */}
       <div className="px-6 md:px-12 py-16">
         <div className="grid lg:grid-cols-3 gap-8">
