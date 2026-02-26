@@ -33,10 +33,7 @@ export async function isAuthenticated() {
     const { data: { user }, error } = await supabase.auth.getUser();
 
     if (error || !user) {
-        console.log("isAuthenticated check failed:", error?.message || "No user found");
-        // console.log("Cookies:", (await cookies()).getAll().map(c => c.name)); 
     } else {
-        // console.log("isAuthenticated success for user:", user.id);
     }
 
     return !!user;

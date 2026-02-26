@@ -36,19 +36,9 @@ const SponsorPage = () => {
 
   return (
     <PageLayout
-      title={t.title}
-      Icon={HandshakeIcon}
     >
       <div className="px-6 md:px-12 py-16">
-        <div className="text-center mb-12">
-          <a
-            href="mailto:sapienzafoilingteam@gmail.com"
-            onClick={handleContactClick}
-            className="inline-block bg-brand-dark text-white px-10 py-4 rounded-full text-lg font-bold shadow-lg hover:bg-brand transition-all hover:scale-105"
-          >
-            {t.contactButton}
-          </a>
-        </div>
+
 
         {/* Sponsors Grid */}
         <div className="mb-20">
@@ -105,6 +95,15 @@ const SponsorPage = () => {
               </a>
             </div>
           </div>
+        </div>
+        <div className="text-center mb-12">
+          <a
+            href="mailto:sapienzafoilingteam@gmail.com"
+            onClick={handleContactClick}
+            className="inline-block bg-brand-dark text-white px-10 py-4 rounded-full text-lg font-bold shadow-lg hover:bg-brand transition-all hover:scale-105"
+          >
+            {t.contactButton}
+          </a>
         </div>
 
         {/* Partnership Benefits */}

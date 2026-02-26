@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import {
   Sailboat,
   Info,
@@ -8,36 +9,57 @@ import {
   Minus,
   ChevronRight,
   Wrench,
+  X,
+  Lightbulb
 } from 'lucide-react';
 import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 import { boatTranslations } from '../translations/boat';
-import SuMothRulebookSection from '../components/SuMothRulebookSection';
 import { usePostHog } from 'posthog-js/react';
 import Link from 'next/link';
 import PageLayout from '../components/PageLayout';
 
+const SuMothRulebookSection = dynamic(() => import('../components/SuMothRulebookSection'), {
+  loading: () => <div className="h-96 flex items-center justify-center">Loading Rulebook...</div>,
+  ssr: false
+});
+
 const BoatPage = () => {
   const { language } = useLanguage();
-  const [activeSection, setActiveSection] = useState<SectionKey>('foils');
   type SectionKey = 'foils' | 'hull' | 'rig' | 'controls';
+  const [activeSection, setActiveSection] = useState<SectionKey>('foils');
+  const [showTooltip, setShowTooltip] = useState(false);
   const posthog = usePostHog();
   const t = boatTranslations[language];
 
-  const mothParts: Record<SectionKey, {
+  useEffect(() => {
+    const hasSeenTooltip = localStorage.getItem('hasSeenBoatTooltip');
+    if (!hasSeenTooltip) {
+      const timer = setTimeout(() => setShowTooltip(true), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const dismissTooltip = () => {
+    setShowTooltip(false);
+    localStorage.setItem('hasSeenBoatTooltip', 'true');
+  };
+
+  const mothParts = useMemo((): Record<SectionKey, {
     title: string;
     description: string;
     details: string[];
     technicalSpecs: string[];
-  }> = {
+  }> => ({
     foils: t.foils,
     hull: t.hull,
     rig: t.rig,
     controls: t.controls
-  };
+  }), [t]);
 
   const handleSectionClick = (key: SectionKey) => {
     setActiveSection(key);
+    if (showTooltip) dismissTooltip();
     posthog.capture('boat_specification_viewed', { section: key });
   };
 
@@ -51,7 +73,7 @@ const BoatPage = () => {
         <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 mb-16 flex flex-col lg:flex-row items-center gap-8">
           <div className="flex-1">
             <div className="flex items-center mb-6">
-              <Info className="w-10 h-10 text-[#822433] mr-4" />
+              <Info className="w-10 h-10 text-brand mr-4" />
               <h2 className="text-3xl font-bold text-gray-900">{t.whyMoth.title}</h2>
             </div>
             <p className="text-lg text-gray-700 leading-relaxed italic pr-4">
@@ -69,7 +91,33 @@ const BoatPage = () => {
         </div>
 
         {/* Moth Technical Details */}
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-8 relative">
+          {/* Onboarding Tooltip */}
+          {showTooltip && (
+            <div className="absolute -top-12 left-0 z-20 animate-bounce-slow">
+              <div className="bg-brand text-white p-4 rounded-2xl shadow-xl relative max-w-xs">
+                <div className="flex items-start gap-3">
+                  <Lightbulb className="w-5 h-5 flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="text-sm font-bold mb-1">
+                      {language === 'en' ? 'Explore the Boat!' : 'Esplora la Barca!'}
+                    </p>
+                    <p className="text-xs opacity-90">
+                      {language === 'en' 
+                        ? 'Click on the components to see how we build our sustainable foiling moth.' 
+                        : 'Clicca sui componenti per vedere come costruiamo il nostro moth foiling sostenibile.'}
+                    </p>
+                  </div>
+                  <button onClick={dismissTooltip} className="hover:opacity-70 transition-opacity">
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+                {/* Arrow */}
+                <div className="absolute -bottom-2 left-10 w-4 h-4 bg-brand rotate-45" />
+              </div>
+            </div>
+          )}
+
           {/* Navigation Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 sticky top-24">

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
@@ -14,13 +14,13 @@ const Navbar = () => {
   const currentPath = usePathname();
   const { language, setLanguage } = useLanguage();
 
-  const navigationItems = [
+  const navigationItems = useMemo(() => [
     { label: navbarTranslations[language].boat, href: '/boat' },
     { label: navbarTranslations[language].team, href: '/team' },
     { label: navbarTranslations[language].sponsor, href: '/sponsor' },
     { label: navbarTranslations[language].contact, href: '/contact' },
     { label: navbarTranslations[language].blog, href: '/blog' },
-  ];
+  ], [language]);
 
   const isCurrentPath = (path: string) => currentPath === path;
 
@@ -50,11 +50,11 @@ const Navbar = () => {
           <div data-testid="desktop-nav" className="hidden md:flex items-center space-x-4">
 
             {navigationItems.map((item) => (
-
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => handleNavClick(item.href, 'menu')}
+                aria-current={isCurrentPath(item.href) ? 'page' : undefined}
                 className={`px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-100  ${isCurrentPath(item.href) ? 'bg-gray-100' : ''
                   }`}
               >
@@ -63,7 +63,8 @@ const Navbar = () => {
             ))}
             <Link
               href="/career"
-              className="ml-4 px-6 py-2 bg-[#822433] text-white rounded-full transition-all duration-300 hover:bg-[#6d1f2b] hover:shadow-md"
+              aria-current={isCurrentPath('/career') ? 'page' : undefined}
+              className="ml-4 px-6 py-2 bg-brand text-white rounded-full transition-all duration-300 hover:bg-brand-dark hover:shadow-md"
               onClick={() => handleNavClick('career', 'cta')}
             >
               {navbarTranslations[language].career}
@@ -98,6 +99,7 @@ const Navbar = () => {
                   <Link
                     key={item.href}
                     href={item.href}
+                    aria-current={isCurrentPath(item.href) ? 'page' : undefined}
                     className={`block px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-gray-100 ${isCurrentPath(item.href) ? 'bg-gray-100' : ''
                       }`}
                     onClick={() => { setIsMobileMenuOpen(false); handleNavClick(item.href, 'menu'); }}
@@ -107,7 +109,8 @@ const Navbar = () => {
                 ))}
                 <Link
                   href="/career"
-                  className="block mt-2 px-4 py-2 bg-[#822433] text-white rounded-lg text-center transition-all duration-300 hover:bg-[#6d1f2b]"
+                  aria-current={isCurrentPath('/career') ? 'page' : undefined}
+                  className="block mt-2 px-4 py-2 bg-brand text-white rounded-lg text-center transition-all duration-300 hover:bg-brand-dark"
                   onClick={() => { setIsMobileMenuOpen(false); handleNavClick('career', 'cta'); }}
                 >
                   {navbarTranslations[language].career}

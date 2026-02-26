@@ -31,11 +31,12 @@ const HeroSection: React.FC = () => {
   return (
     <div className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-void">
       {/* Background with overlay */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 w-full h-full aspect-[16/9]">
         <Image
           src="/moth_5.jpg"
           alt="Sapienza Foiling Team Regatta"
           fill
+          sizes="100vw"
           className="object-cover object-center opacity-70"
           priority
         />
@@ -43,33 +44,31 @@ const HeroSection: React.FC = () => {
       </div>
 
       <div className="relative z-10 flex flex-col items-center justify-center -mt-20 px-4">
-        {/* Main Title - Kelson Font */}
-        <div className="text-center animate-fade-in-up drop-shadow-2xl">
-          <h1 className=" font-extrabold text-7xl md:text-6xl lg:text-8xl text-white uppercase mb-2 drop-shadow-2xl">
+        {/* Main Title - Distinctive Styling */}
+        <div className="text-center animate-fade-in-up">
+          <h1 className=" font-black text-5xl md:text-7xl lg:text-8xl text-white uppercase mb-[-0.1em] tracking-tighter leading-none opacity-90">
             Sapienza
           </h1>
-          <h1 className=" font-bold text-6xl md:text-6xl lg:text-7xl text-white uppercase drop-shadow-lg">
+          <h1 className=" font-bold text-5xl md:text-6xl lg:text-7xl text-white/80 uppercase tracking-tight leading-none">
             Foiling Team
           </h1>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex md:flex-row gap-6 mt-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-          <Link href="/team">
-            <button
-              onClick={() => handleCTAClick('learn_more')}
-              className="px-8 py-3 rounded-full bg-[#822433] hover:bg-[#6b1d28] text-white font-medium tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(130,36,51,0.5)] border border-white/10"
-            >
-              {homeTranslations[language].learnMoreButton}
-            </button>
+        {/* Action Buttons with Refined States */}
+        <div className="flex flex-col sm:flex-row gap-6 mt-16 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <Link
+            href="/team"
+            onClick={() => handleCTAClick('learn_more')}
+            className="px-10 py-4 rounded-full bg-brand text-white font-bold tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl shadow-brand/20 hover:shadow-brand/40 border border-white/5 uppercase text-sm"
+          >
+            {homeTranslations[language].learnMoreButton}
           </Link>
-          <Link href="/boat">
-            <button
-              onClick={() => handleCTAClick('view_boat')}
-              className="px-8 py-3 rounded-full backdrop-blur-sm bg-white/10 border border-white/20 text-white font-medium tracking-wide transition-all duration-300 hover:scale-105 hover:bg-white/20"
-            >
-              {homeTranslations[language].viewMothButton}
-            </button>
+          <Link
+            href="/boat"
+            onClick={() => handleCTAClick('view_boat')}
+            className="px-10 py-4 rounded-full backdrop-blur-md bg-white/5 border border-white/10 text-white font-bold tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 hover:bg-white/10 uppercase text-sm"
+          >
+            {homeTranslations[language].viewMothButton}
           </Link>
         </div>
       </div>
@@ -83,7 +82,7 @@ const HeroSection: React.FC = () => {
         >
           <ChevronDown
             data-testid="chevron-down"
-            className="text-white w-8 h-8 group-hover:text-[#822433] transition-colors"
+            className="text-white w-8 h-8 group-hover:text-brand transition-colors"
           />
         </button>
       </div>

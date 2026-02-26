@@ -350,7 +350,7 @@ const SuMothRulebookSection = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       {/* Header Section */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-[#822433] via-[#a83545] to-[#822433] rounded-2xl p-8 mb-16 text-white">
+      <div className="relative overflow-hidden bg-gradient-to-r from-brand via-[#a83545] to-brand rounded-2xl p-8 mb-16 text-white">
         <div className="relative z-10">
           <div className="flex items-center justify-center mb-6">
             <div className="p-4 bg-white/20 backdrop-blur-sm rounded-2xl mr-4">

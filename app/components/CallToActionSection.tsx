@@ -12,7 +12,7 @@ const CallToActionSection: React.FC<CallToActionSectionProps> = () => {
   const { language } = useLanguage();
 
   return (
-    <section className="relative py-20 bg-white text-[#822433] overflow-hidden">
+    <section className="relative py-20 bg-white text-brand overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0 opacity-10 animate-slide" />
       </div>
@@ -24,7 +24,7 @@ const CallToActionSection: React.FC<CallToActionSectionProps> = () => {
           <p className="text-xl mb-8">
             {homeTranslations[language].joinTeamDescription}
           </p>
-          <Link href='/career' className="group bg-[#822433] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#6d1f2b] transition-colors">
+          <Link href='/career' className="group bg-brand text-white px-8 py-3 rounded-full font-semibold hover:bg-brand-dark transition-colors">
             {homeTranslations[language].joinUsButton}
             <ArrowRight className="inline ml-2 group-hover:translate-x-1 transition-transform" />
           </Link>

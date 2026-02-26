@@ -19,7 +19,7 @@ import { createArticle, updateArticleAction, deleteArticleAction, getArticles } 
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor").then(mod => mod.default), {
   ssr: false,
-  loading: () => <div className="flex justify-center items-center h-96"><Loader2 className="animate-spin h-8 w-8 text-[#822433]" /></div>,
+  loading: () => <div className="flex justify-center items-center h-96"><Loader2 className="animate-spin h-8 w-8 text-brand" /></div>,
 });
 
 export default function BlogAdminPage() {
@@ -342,7 +342,7 @@ export default function BlogAdminPage() {
             </h1>
             <button
               onClick={handleCreateNew}
-              className="px-4 py-2 bg-[#822433] text-white rounded-lg hover:bg-[#6d1f2b] transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm"
+              className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm"
             >
               <PlusCircle size={18} />
               Create New
@@ -350,7 +350,7 @@ export default function BlogAdminPage() {
           </div>
           {loading ? (
             <div className="flex justify-center py-12">
-              <Loader2 className="animate-spin h-8 w-8 text-[#822433]" />
+              <Loader2 className="animate-spin h-8 w-8 text-brand" />
             </div>
           ) : articles.length === 0 ? (
             <p className="text-center text-gray-500 py-12">{blogTranslations[language].noArticles}</p>
@@ -512,7 +512,7 @@ export default function BlogAdminPage() {
                 onDrop={handleDrop}
                 onClick={() => !isUploading && fileInputRef.current?.click()}
                 className={`relative flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 text-center transition-colors duration-200 ease-in-out group ${isDragging
-                  ? 'border-[#822433] bg-red-50'
+                  ? 'border-brand bg-red-50'
                   : 'border-gray-300 hover:border-gray-400 bg-gray-50'
                   } ${isUploading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                 style={{ minHeight: '150px' }}
@@ -521,7 +521,7 @@ export default function BlogAdminPage() {
 
                 {isUploading && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-75 rounded-lg z-10">
-                    <Loader2 className="w-8 h-8 text-[#822433] animate-spin mb-2" />
+                    <Loader2 className="w-8 h-8 text-brand animate-spin mb-2" />
                     <p className="text-sm text-gray-600"> Uploading... </p>
                   </div>
                 )}
@@ -549,7 +549,7 @@ export default function BlogAdminPage() {
                     <div className="flex flex-col items-center text-gray-500 pointer-events-none">
                       <UploadCloud className="w-10 h-10 mb-2 text-gray-400" />
                       <p className="font-semibold text-sm">
-                        <span className="text-[#822433]">Click to upload</span> or drag and drop
+                        <span className="text-brand">Click to upload</span> or drag and drop
                       </p>
                       <p className="text-xs mt-1">PNG, JPG, GIF (Max 5MB recommended)</p>
                     </div>
@@ -573,7 +573,7 @@ export default function BlogAdminPage() {
                 value={currentArticle.image_alt || ''}
                 onChange={handleInputChange}
                 placeholder={blogTranslations[language].admin.imageAltPlaceholder}
-                className="text-black w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#822433] focus:border-transparent transition-shadow"
+                className="text-black w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-shadow"
                 autoComplete="off"
               />
               <p className="text-xs text-gray-500 mt-1">Describe the image for SEO purposes</p>
@@ -627,7 +627,7 @@ export default function BlogAdminPage() {
               <button
                 type="submit"
                 disabled={isUploading}
-                className="w-full sm:w-auto px-4 py-2 text-sm bg-[#822433] text-white rounded-lg"
+                className="w-full sm:w-auto px-4 py-2 text-sm bg-brand text-white rounded-lg"
               >
                 {isEditing ? 'Save Changes' : 'Publish Article'}
               </button>

@@ -340,18 +340,15 @@ export default function MediaManagerPage() {
   const handleDeleteFile = async (fileName: string) => {
     // 1. Construct the full path
     const filePath = currentPath ? `${currentPath}/${fileName}` : fileName;
-    console.log('[handleDeleteFile] Attempting to delete file with path:', filePath); // <-- Log the exact path
 
     // 2. Confirmation
     if (!confirm(`Sei sicuro di voler eliminare il file "${fileName}"?`)) {
-      console.log('[handleDeleteFile] Deletion cancelled by user.');
       return;
     }
 
     setIsProcessing(true);
     try {
       // 3. Supabase remove call
-      console.log('[handleDeleteFile] Calling Supabase remove...');
       const { data, error: deleteError } = await supabase.storage
         .from('images')
         .remove([filePath]); // Path must be in an array
@@ -369,7 +366,6 @@ export default function MediaManagerPage() {
         throw deleteError;
       }
 
-      console.log('[handleDeleteFile] Supabase remove successful. Response data:', data); // Log success data (often minimal)
 
       // 5. Success Feedback and Refresh
       showNotification('success', `File "${fileName}" eliminato.`);
@@ -383,7 +379,6 @@ export default function MediaManagerPage() {
       showNotification('error', `Errore eliminazione file: ${errorMessage}`);
     } finally {
       setIsProcessing(false);
-      console.log('[handleDeleteFile] Finished processing.');
     }
   };
 
@@ -394,7 +389,6 @@ export default function MediaManagerPage() {
 
     setIsProcessing(true);
     try {
-      console.log(`Listing objects to delete in: ${folderPath}`);
       // List all objects (files and placeholders) recursively within the folder path
       const objectsToDelete = await listAllObjects(folderPath);
 
@@ -415,7 +409,6 @@ export default function MediaManagerPage() {
       }
 
 
-      console.log('Objects identified for deletion:', objectsToDelete);
 
       if (objectsToDelete.length > 0) {
         const { data, error: deleteError } = await supabase.storage
@@ -426,9 +419,7 @@ export default function MediaManagerPage() {
           console.error('Error during bulk delete:', deleteError);
           throw new Error(`Errore durante l'eliminazione del contenuto della cartella: ${deleteError.message}`);
         }
-        console.log('Bulk delete result:', data);
       } else {
-        console.log(`No objects found to delete in ${folderPath}. Folder might be empty or just a prefix.`);
         // Optional: attempt to remove a placeholder just in case? Usually handled above.
       }
 
@@ -491,7 +482,6 @@ export default function MediaManagerPage() {
 
     setIsProcessing(true);
     try {
-      console.log(`Renaming folder from ${oldFolderPath} to ${newFolderPath}`);
 
       // 1. List all objects in the old folder path recursively
       const objectsToMove = await listAllObjects(oldFolderPath);
@@ -510,11 +500,9 @@ export default function MediaManagerPage() {
         }
       }
 
-      console.log('Objects identified for moving:', objectsToMove);
 
       if (objectsToMove.length === 0) {
         // Folder might be empty or just a prefix. Try creating the new placeholder.
-        console.log("Source folder seems empty or is just a prefix. Attempting to create destination placeholder.");
         const newPlaceholderPath = `${newFolderPath}/.emptyFolderPlaceholder`;
         const { error: createError } = await supabase.storage
           .from('images')
@@ -539,7 +527,6 @@ export default function MediaManagerPage() {
         const movePromises = objectsToMove.map(oldObjectPath => {
           const relativePath = oldObjectPath.substring(oldFolderPath.length + 1); // Get path relative to folder root
           const newObjectPath = `${newFolderPath}/${relativePath}`;
-          console.log(`Moving ${oldObjectPath} to ${newObjectPath}`);
           return supabase.storage.from('images').move(oldObjectPath, newObjectPath);
         });
 
@@ -662,7 +649,7 @@ export default function MediaManagerPage() {
               <button
                 onClick={handleCreateFolder}
                 disabled={isProcessing}
-                className="px-4 py-2 bg-[#822433] text-white rounded-lg hover:bg-[#6d1f2b] transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm"
+                className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm"
               >
                 <FolderPlus className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
                 Nuova Cartella

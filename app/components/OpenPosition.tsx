@@ -37,7 +37,7 @@ const OpenPosition: React.FC<OpenPositionProps> = ({ title, location, type, desc
     <div className="bg-white rounded-3xl shadow-lg p-6 mb-6 transition-shadow duration-300 hover:shadow-xl">
       <div className="flex justify-between items-center cursor-pointer">
         <div>
-          <h3 className="text-xl font-bold text-[#822433]">{title}</h3>
+          <h3 className="text-xl font-bold text-brand">{title}</h3>
           <div className="flex items-center text-gray-500 mt-2">
             <div className="flex items-center mr-4">
               <MapPin className="w-4 h-4 mr-1" />
@@ -62,7 +62,7 @@ const OpenPosition: React.FC<OpenPositionProps> = ({ title, location, type, desc
           <a
             href="https://forms.gle/vQZf3VMJkiYtFqpZA"
             target="_blank"
-            className="inline-block bg-[#822433] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#6d1f2b] transition-colors mt-6"
+            className="inline-block bg-brand text-white px-6 py-2 rounded-lg font-semibold hover:bg-brand-dark transition-colors mt-6"
           >
             {careerTranslations[language].spontaneousApplication.applyButton}
           </a>

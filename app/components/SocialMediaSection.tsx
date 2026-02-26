@@ -20,7 +20,7 @@ const SocialMediaSection: React.FC<SocialMediaSectionProps> = () => {
   };
 
   return (
-    <section className="py-12 bg-[#FDF1F3] text-black">
+    <section className="py-12 bg-brand/5 text-black">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h3 className="text-2xl font-semibold mb-8">{homeTranslations[language].followUs}</h3>
@@ -28,7 +28,7 @@ const SocialMediaSection: React.FC<SocialMediaSectionProps> = () => {
             <a 
               href="https://www.instagram.com/sapienzafoilingteam/" 
               onClick={() => handleSocialClick('instagram')}
-              className="hover:text-[#822433] transition-colors"
+              className="hover:text-brand transition-colors"
               aria-label="Instagram"
             >
               <Instagram className="w-8 h-8 hover:scale-110 transition-transform" />
@@ -36,7 +36,7 @@ const SocialMediaSection: React.FC<SocialMediaSectionProps> = () => {
             <a 
               href="https://www.linkedin.com/company/sapienza-foiling-team/about/" 
               onClick={() => handleSocialClick('linkedin')}
-              className="hover:text-[#822433] transition-colors"
+              className="hover:text-brand transition-colors"
               aria-label="LinkedIn"
             >
               <Linkedin className="w-8 h-8 hover:scale-110 transition-transform" />
@@ -44,7 +44,7 @@ const SocialMediaSection: React.FC<SocialMediaSectionProps> = () => {
             <a 
               href="https://www.facebook.com/profile.php?id=61572515878295" 
               onClick={() => handleSocialClick('facebook')}
-              className="hover:text-[#822433] transition-colors"
+              className="hover:text-brand transition-colors"
               aria-label="Facebook"
             >
               <Facebook className="w-8 h-8 hover:scale-110 transition-transform" />

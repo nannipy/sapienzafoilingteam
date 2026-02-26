@@ -19,8 +19,8 @@ module.exports = {
           dark: '#6b1d28',
           light: '#a34252',
         },
-        'void': '#050505', // Deep Black
-        'carbon': '#171717', // Secondary Dark
+        'void': '#0a0808', // Tinted Deep Black
+        'carbon': '#141212', // Tinted Secondary Dark
       },
       animation: {
         'fade-in-up': 'fadeInUp 0.8s ease-out forwards',

@@ -31,7 +31,7 @@ const BottomNav = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors duration-200 ${isActive ? 'text-[#822433]' : 'text-gray-500 hover:text-gray-900'
+              className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors duration-200 ${isActive ? 'text-brand' : 'text-gray-500 hover:text-gray-900'
                 }`}
             >
               <Icon className="w-6 h-6" />

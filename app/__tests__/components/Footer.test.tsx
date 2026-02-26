@@ -42,7 +42,7 @@ describe('Footer Component', () => {
         expect(link).toHaveAttribute('href', socialUrls[index]);
       }
       if (index === 0) {
-        expect(link).toHaveAttribute('class', expect.stringContaining('hover:text-[#822433]'));
+        expect(link).toHaveAttribute('class', expect.stringContaining('hover:text-brand'));
       } else if (index < socialUrls.length) {
         // Social icons have different styling
         expect(link).toHaveAttribute('class', expect.stringContaining('hover:text-white'));

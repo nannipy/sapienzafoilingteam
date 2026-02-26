@@ -49,7 +49,7 @@ export default function PositionsAdminPage() {
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-2">
           <h1 className="text-2xl font-semibold text-gray-800">Open Positions</h1>
           <Link href="/admin/positions/new">
-            <button className="px-4 py-2 bg-[#822433] text-white rounded-lg hover:bg-[#6d1f2b] transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm">
+            <button className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm">
               <PlusCircle size={18} />
               Create New
             </button>
@@ -57,7 +57,7 @@ export default function PositionsAdminPage() {
         </div>
         {loading ? (
           <div className="flex justify-center py-12">
-            <Loader2 className="animate-spin h-8 w-8 text-[#822433]" />
+            <Loader2 className="animate-spin h-8 w-8 text-brand" />
           </div>
         ) : error ? (
           <p className="text-center text-red-500 py-12">{error}</p>

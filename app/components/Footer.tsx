@@ -23,16 +23,23 @@ const Footer: React.FC = () => {
 
           {/* Quick Links / Contact */}
           <div className="flex flex-col justify-end items-start md:items-end space-y-4">
-            <a href="mailto:sapienzafoilingteam@gmail.com" className="text-2xl text-black/50 md:text-3xl font-syne font-bold hover:text-[#822433] transition-colors">
+            <a href="mailto:sapienzafoilingteam@gmail.com" className="text-2xl text-black/70 md:text-3xl font-syne font-bold hover:text-brand transition-colors">
               sapienzafoilingteam@gmail.com
             </a>
             <div className="flex space-x-6 mt-4">
               {[
-                { Icon: Instagram, href: "https://instagram.com/sapienzafoilingteam" },
-                { Icon: Linkedin, href: "https://linkedin.com/company/sapienzafoilingteam" }, // Replace with actual LinkedIn URL
-                { Icon: Facebook, href: "https://facebook.com/sapienzafoilingteam" }, // Replace with actual Facebook URL
+                { Icon: Instagram, href: "https://instagram.com/sapienzafoilingteam", label: "Instagram" },
+                { Icon: Linkedin, href: "https://linkedin.com/company/sapienzafoilingteam", label: "LinkedIn" },
+                { Icon: Facebook, href: "https://facebook.com/sapienzafoilingteam", label: "Facebook" },
               ].map((social, idx) => (
-                <a key={idx} href={social.href} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-white/5 hover:bg-brand hover:text-white transition-all duration-300">
+                <a
+                  key={idx}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="p-3 rounded-full bg-black/5 hover:bg-brand hover:text-white transition-all duration-300"
+                >
                   <social.Icon className="w-6 h-6" />
                 </a>
               ))}
@@ -41,13 +48,13 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 font-geist">
+        <div className="border-t border-black/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 font-geist">
           <div>
             {footerTranslations[language].copyright}
           </div>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="/privacy-policy" className="hover:text-brand transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-brand transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

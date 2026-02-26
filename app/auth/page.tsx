@@ -124,7 +124,7 @@ const AuthPage = () => {
   return (
     <main className="min-h-screen bg-white text-black">
       {/* Hero Section */}
-      <div className="relative h-96 bg-gradient-to-br from-[#822433] to-[#6d1f2b]">
+      <div className="relative h-96 bg-gradient-to-br from-brand to-brand-dark">
         <div className="absolute inset-0" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4">
           <Lock className="w-16 h-16 mb-4 mt-10" />
@@ -177,7 +177,7 @@ const AuthPage = () => {
                       autoComplete="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className={`block w-full pl-10 pr-3 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-[#822433] focus:border-[#822433]`}
+                      className={`block w-full pl-10 pr-3 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-brand focus:border-brand`}
                     />
                   </div>
                   {errors.email && (
@@ -201,7 +201,7 @@ const AuthPage = () => {
                       autoComplete="current-password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className={`block w-full pl-10 pr-3 py-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-[#822433] focus:border-[#822433]`}
+                      className={`block w-full pl-10 pr-3 py-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-brand focus:border-brand`}
                     />
                   </div>
                   {errors.password && (
@@ -225,7 +225,7 @@ const AuthPage = () => {
                         type="password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        className={`block w-full pl-10 pr-3 py-2 border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-[#822433] focus:border-[#822433]`}
+                        className={`block w-full pl-10 pr-3 py-2 border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-brand focus:border-brand`}
                       />
                     </div>
                     {errors.confirmPassword && (
@@ -239,7 +239,7 @@ const AuthPage = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-[#822433] hover:bg-[#6d1f2b] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#822433] transition-colors duration-300"
+                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-brand hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand transition-colors duration-300"
                   >
                     {loading ? (
                       <span className="flex items-center">
@@ -263,7 +263,7 @@ const AuthPage = () => {
                   <button
                     type="button"
                     onClick={toggleAuthMode}
-                    className="ml-1 font-medium text-[#822433] hover:text-[#6d1f2b] focus:outline-none transition-colors duration-300"
+                    className="ml-1 font-medium text-brand hover:text-brand-dark focus:outline-none transition-colors duration-300"
                   >
                     {isLogin ? authTranslations[language].signupNow : authTranslations[language].loginNow}
                   </button>
@@ -275,7 +275,7 @@ const AuthPage = () => {
                 <div className="mt-4 text-center">
                   <button
                     type="button"
-                    className="text-sm font-medium text-[#822433] hover:text-[#6d1f2b] focus:outline-none transition-colors duration-300"
+                    className="text-sm font-medium text-brand hover:text-brand-dark focus:outline-none transition-colors duration-300"
                   >
                     {authTranslations[language].forgotPassword}
                   </button>

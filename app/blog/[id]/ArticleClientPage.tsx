@@ -54,40 +54,46 @@ export default function ArticleClientPage({ article }: { article: Article }) {
   const sanitizedContent = DOMPurify.sanitize(contentToRender);
 
   return (
-    <main className="min-h-screen bg-gray-50 text-gray-900 pt-24 pb-16 ">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative  ">
-        <div className="left-4 top-0 z-50">
+    <main className="min-h-screen bg-[#fffcfd] text-[#1a1718] pt-32 pb-24 ">
+      <div className="container mx-auto px-6 lg:px-8 relative ">
+        <div className="mb-12 max-w-3xl mx-auto">
           <Link
             href="/blog"
-            className="inline-flex items-center bg-gray-100/80 hover:bg-[#822433] hover:text-white p-2 rounded-xl text-[#822433] transition-colors duration-200 mt-4 group"
+            className="inline-flex items-center text-sm font-bold tracking-widest uppercase text-brand hover:text-brand-dark transition-colors duration-300 group"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
             {blogTranslations[language].backToList}
           </Link>
         </div>
 
-        <article className="max-w-3xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden mt-5">
-          <div className="px-6 py-8">
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-[#822433] leading-tight">{article.title}</h1>
+        <article className="max-w-3xl mx-auto mt-8">
+          <header className="mb-16">
+            <h1 className="text-4xl md:text-6xl font-syne font-black mb-8 text-brand-dark leading-[1.1] tracking-tighter break-words overflow-wrap-anywhere">
+              {language === 'en' ? article.title_en : article.title}
+            </h1>
 
-            <div className="flex items-center text-gray-600 text-sm mb-10 border-b border-gray-100 pb-6">
-              <Calendar className="w-4 h-4 mr-2" />
-              <span>{blogTranslations[language].publishedOn} {formatDate(article.created_at)}</span>
+            <div className="flex flex-wrap items-center gap-6 text-gray-500 text-xs font-bold uppercase tracking-widest">
+              <div className="flex items-center bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100">
+                <Calendar className="w-3.5 h-3.5 mr-2 flex-shrink-0 text-brand" />
+                <span>{formatDate(article.created_at)}</span>
+              </div>
             </div>
+          </header>
 
-            <div
-              className="prose prose-lg max-w-none
-                prose-headings:text-[#822433] prose-headings:font-bold
-                prose-p:text-gray-700 prose-p:leading-relaxed
-                prose-a:text-[#822433] prose-a:no-underline hover:prose-a:underline
-                prose-strong:text-gray-900
-                prose-blockquote:border-l-[#822433] prose-blockquote:bg-gray-50 prose-blockquote:py-2 prose-blockquote:px-4
-                prose-code:text-[#82243d3] prose-code:bg-gray-50 prose-code:px-2 prose-code:py-0.5 prose-code:rounded
-                prose-pre:bg-gray-900 prose-pre:text-gray-100
-                prose-img:rounded-lg prose-img:shadow-md
-                prose-ul:marker:text-[#822433]"
-              dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-            />
+          <div
+            className="prose prose-xl max-w-none
+              prose-headings:font-syne prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-brand-dark
+              prose-p:text-gray-800 prose-p:leading-relaxed prose-p:mb-8
+              prose-a:text-brand prose-a:font-bold prose-a:no-underline hover:prose-a:underline
+              prose-strong:text-black prose-strong:font-black
+              prose-blockquote:border-l-4 prose-blockquote:border-brand prose-blockquote:bg-brand/5 prose-blockquote:py-6 prose-blockquote:px-8 prose-blockquote:rounded-r-2xl prose-blockquote:italic prose-blockquote:text-xl
+              prose-code:text-brand prose-code:bg-brand/5 prose-code:px-2 prose-code:py-0.5 prose-code:rounded-md prose-code:font-bold
+              prose-pre:bg-void prose-pre:text-gray-100 prose-pre:rounded-2xl prose-pre:p-6
+              prose-img:rounded-3xl prose-img:shadow-2xl
+              prose-ul:marker:text-brand prose-ul:marker:font-bold"
+            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+          />
+          <div className="mt-20 pt-10 border-t border-gray-100">
             <ShareButtons articleId={article.id} articleTitle={article.title} />
           </div>
         </article>

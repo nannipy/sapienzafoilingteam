@@ -4,6 +4,8 @@ export const blogTranslations = {
     title: 'Blog',
     readMore: 'Read More',
     noArticles: 'No articles found',
+    noArticlesDescription: 'We haven\'t published any articles yet. Check back soon for updates on our latest news!',
+    followSocial: 'In the meantime, follow us on our social media to stay updated.',
     publishedOn: 'Published on',
     backToList: 'Back to Articles',
     admin: {
@@ -35,6 +37,8 @@ export const blogTranslations = {
     title: 'Blog',
     readMore: 'Leggi di più',
     noArticles: 'Nessun articolo trovato',
+    noArticlesDescription: 'Non abbiamo ancora pubblicato articoli. Torna presto per aggiornamenti sulle nostre novità!',
+    followSocial: 'Nel frattempo, seguici sui nostri social per rimanere aggiornato.',
     publishedOn: 'Pubblicato il',
     backToList: 'Torna agli Articoli',
     admin: {

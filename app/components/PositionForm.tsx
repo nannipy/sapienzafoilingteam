@@ -106,7 +106,7 @@ const PositionForm: React.FC<PositionFormProps> = ({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-[#822433] text-white p-3 rounded-md hover:bg-[#6d1f2b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-brand text-white p-3 rounded-md hover:bg-brand-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isSubmitting ? 'Submitting...' : 'Save Position'}
       </button>

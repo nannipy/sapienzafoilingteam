@@ -27,6 +27,7 @@ export default function EventForm({ initialData = {}, onSubmit, isSubmitting, er
     const router = useRouter();
 
     const [currentEvent, setCurrentEvent] = useState<Partial<Event>>(initialData);
+    const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
     
     const [isDragging, setIsDragging] = useState(false);
     const [previewUrl, setPreviewUrl] = useState<string | null>(initialData.image_url || null);
@@ -98,11 +99,22 @@ export default function EventForm({ initialData = {}, onSubmit, isSubmitting, er
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!currentEvent.title?.trim() || !currentEvent.title_en?.trim() || !currentEvent.date?.trim() || !currentEvent.location?.trim()) {
-            // This basic validation can be improved with a more robust library if needed
-            alert('Please fill all required fields.');
+        if (isSubmitting || isUploading) return;
+
+        const errors: Record<string, string> = {};
+        const t = eventTranslations[language].admin.validation;
+
+        if (!currentEvent.title?.trim()) errors.title = t.titleRequired;
+        if (!currentEvent.title_en?.trim()) errors.title_en = t.titleEnRequired;
+        if (!currentEvent.date) errors.date = t.dateRequired;
+        if (!currentEvent.location?.trim()) errors.location = t.locationRequired;
+
+        if (Object.keys(errors).length > 0) {
+            setFieldErrors(errors);
             return;
         }
+
+        setFieldErrors({});
         await onSubmit(currentEvent);
     };
 
@@ -137,39 +149,45 @@ export default function EventForm({ initialData = {}, onSubmit, isSubmitting, er
                     {/* Title IT */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700"><Newspaper size={16} className="inline mr-1 mb-0.5" />{eventTranslations[language].admin.eventTitle} (IT)<span className="text-red-500 ml-1">*</span></label>
-                        <input type="text" name="title" value={currentEvent.title || ''} onChange={handleInputChange} className="mt-1 text-black w-full px-3 py-2 border border-gray-300 rounded-lg" required />
+                        <input type="text" name="title" value={currentEvent.title || ''} onChange={handleInputChange} className={`mt-1 text-black w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent outline-none ${fieldErrors.title ? 'border-red-500' : 'border-gray-300'}`} required />
+                        {fieldErrors.title && <p className="mt-1 text-xs text-red-500">{fieldErrors.title}</p>}
                     </div>
                     {/* Title EN */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700"><Newspaper size={16} className="inline mr-1 mb-0.5" />{eventTranslations[language].admin.eventTitle} (EN)<span className="text-red-500 ml-1">*</span></label>
-                        <input type="text" name="title_en" value={currentEvent.title_en || ''} onChange={handleInputChange} className="mt-1 text-black w-full px-3 py-2 border border-gray-300 rounded-lg" required />
+                        <input type="text" name="title_en" value={currentEvent.title_en || ''} onChange={handleInputChange} className={`mt-1 text-black w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent outline-none ${fieldErrors.title_en ? 'border-red-500' : 'border-gray-300'}`} required />
+                        {fieldErrors.title_en && <p className="mt-1 text-xs text-red-500">{fieldErrors.title_en}</p>}
                     </div>
                     {/* Date */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700"><CalendarDays size={16} className="inline mr-1 mb-0.5" />{eventTranslations[language].admin.eventDate}<span className="text-red-500 ml-1">*</span></label>
-                        <DatePicker selected={currentEvent.date ? new Date(currentEvent.date) : null} onChange={handleDateChange} dateFormat="dd/MM/yyyy" className="mt-1 text-black w-full px-3 py-2 border border-gray-300 rounded-lg" required />
+                        <div className={fieldErrors.date ? 'date-picker-error' : ''}>
+                            <DatePicker selected={currentEvent.date ? new Date(currentEvent.date) : null} onChange={handleDateChange} dateFormat="dd/MM/yyyy" className={`mt-1 text-black w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent outline-none ${fieldErrors.date ? 'border-red-500' : 'border-gray-300'}`} required />
+                        </div>
+                        {fieldErrors.date && <p className="mt-1 text-xs text-red-500">{fieldErrors.date}</p>}
                     </div>
                     {/* Location */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700"><MapPin size={16} className="inline mr-1 mb-0.5" />{eventTranslations[language].admin.eventLocation}<span className="text-red-500 ml-1">*</span></label>
-                        <input type="text" name="location" value={currentEvent.location || ''} onChange={handleInputChange} className="mt-1 text-black w-full px-3 py-2 border border-gray-300 rounded-lg" required />
+                        <input type="text" name="location" value={currentEvent.location || ''} onChange={handleInputChange} className={`mt-1 text-black w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent outline-none ${fieldErrors.location ? 'border-red-500' : 'border-gray-300'}`} required />
+                        {fieldErrors.location && <p className="mt-1 text-xs text-red-500">{fieldErrors.location}</p>}
                     </div>
 
                     {/* Image Upload */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1"><ImageIcon size={16} className="inline mr-1 mb-0.5" />{eventTranslations[language].admin.eventImage} (Optional)</label>
                         <div onDragEnter={handleDragEnter} onDragLeave={handleDragLeave} onDragOver={handleDragOver} onDrop={handleDrop} onClick={() => !isUploading && fileInputRef.current?.click()}
-                            className={`relative flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 text-center transition-colors group ${isDragging ? 'border-[#822433] bg-red-50' : 'border-gray-300 hover:border-gray-400 bg-gray-50'} ${isUploading ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
+                            className={`relative flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 text-center transition-colors group ${isDragging ? 'border-brand bg-red-50' : 'border-gray-300 hover:border-gray-400 bg-gray-50'} ${isUploading ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
                             <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileInputChange} className="hidden" disabled={isUploading} />
                             {isUploading ? (
-                                <div className="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-75 z-10"><Loader2 className="w-8 h-8 text-[#822433] animate-spin mb-2" /><p>Uploading...</p></div>
+                                <div className="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-75 z-10"><Loader2 className="w-8 h-8 text-brand animate-spin mb-2" /><p>Uploading...</p></div>
                             ) : previewUrl ? (
                                 <div className="relative">
                                     <NextImage src={previewUrl} alt="Preview" width={240} height={160} className="mx-auto max-h-40 w-auto rounded-md object-contain" />
                                     <button type="button" onClick={(e) => { e.stopPropagation(); clearImage(); }} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 group-hover:opacity-100" title="Remove image"><XCircle className="w-5 h-5" /></button>
                                 </div>
                             ) : (
-                                <div className="flex flex-col items-center text-gray-500"><UploadCloud className="w-10 h-10 mb-2 text-gray-400" /><p className="font-semibold text-sm"><span className="text-[#822433]">Click to upload</span> or drag and drop</p><p className="text-xs mt-1">PNG, JPG, GIF</p></div>
+                                <div className="flex flex-col items-center text-gray-500"><UploadCloud className="w-10 h-10 mb-2 text-gray-400" /><p className="font-semibold text-sm"><span className="text-brand">Click to upload</span> or drag and drop</p><p className="text-xs mt-1">PNG, JPG, GIF</p></div>
                             )}
                         </div>
                         {uploadError && <p className="mt-2 text-sm text-red-600">{uploadError}</p>}
@@ -185,7 +203,7 @@ export default function EventForm({ initialData = {}, onSubmit, isSubmitting, er
                     {/* Buttons */}
                     <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4 border-t border-gray-200">
                         <button type="button" onClick={() => router.back()} className="w-full sm:w-auto px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
-                        <button type="submit" disabled={isUploading || isSubmitting} className="w-full sm:w-auto px-4 py-2 text-sm bg-[#822433] text-white rounded-lg disabled:bg-gray-400">
+                        <button type="submit" disabled={isUploading || isSubmitting} className="w-full sm:w-auto px-4 py-2 text-sm bg-brand text-white rounded-lg disabled:bg-gray-400">
                             {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin inline" /> : submitButtonText}
                         </button>
                     </div>

@@ -85,7 +85,7 @@ export default function AdminLayout({
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-100 flex justify-center items-center">
-        <Loader2 className="animate-spin h-12 w-12 text-[#822433]" />
+        <Loader2 className="animate-spin h-12 w-12 text-brand" />
       </div>
     );
   }

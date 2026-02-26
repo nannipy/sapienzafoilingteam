@@ -40,10 +40,10 @@ const ContactPage = () => {
                   <h3 className="text-lg font-semibold text-black mb-2">{t.email}</h3>
                   <a
                     href="mailto:sapienzafoilingteam@gmail.com"
-                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-[#fdf1f3] transition-colors duration-200"
+                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-brand/5 transition-colors duration-200"
                   >
-                    <Mail className="w-6 h-6 text-[#822433]" />
-                    <span className="text-[#822433] group-hover:underline">sapienzafoilingteam@gmail.com</span>
+                    <Mail className="w-6 h-6 text-brand" />
+                    <span className="text-brand group-hover:underline">sapienzafoilingteam@gmail.com</span>
                   </a>
                 </div>
 
@@ -55,10 +55,10 @@ const ContactPage = () => {
                     href="https://goo.gl/maps/YOUR_LOCATION"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-[#fdf1f3] transition-colors duration-200"
+                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-brand/5 transition-colors duration-200"
                   >
-                    <MapPin className="w-6 h-6 text-[#822433]" />
-                    <span className="text-[#822433] group-hover:underline">Via Eudossiana 18, 00184 Roma</span>
+                    <MapPin className="w-6 h-6 text-brand" />
+                    <span className="text-brand group-hover:underline">Via Eudossiana 18, 00184 Roma</span>
                   </a>
                 </div>
                 <div className="group">
@@ -67,10 +67,10 @@ const ContactPage = () => {
                     href="https://linktr.ee/sapienzafoilingteam"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-[#fdf1f3] transition-colors duration-200"
+                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-brand/5 transition-colors duration-200"
                   >
-                    <TreePine className="w-6 h-6 text-[#822433]" />
-                    <span className="text-[#822433] group-hover:underline">linktr.ee/sapienzafoilingteam</span>
+                    <TreePine className="w-6 h-6 text-brand" />
+                    <span className="text-brand group-hover:underline">linktr.ee/sapienzafoilingteam</span>
                   </a>
                 </div>
 
@@ -81,7 +81,7 @@ const ContactPage = () => {
                   <div className="flex space-x-9 ml-4">
                     <a
                       href="https://www.instagram.com/sapienzafoilingteam/"
-                      className="hover:text-[#822433] transition-colors"
+                      className="hover:text-brand transition-colors"
                       aria-label="Instagram"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -90,7 +90,7 @@ const ContactPage = () => {
                     </a>
                     <a
                       href="https://www.linkedin.com/company/sapienza-foiling-team/about/"
-                      className="hover:text-[#822433] transition-colors"
+                      className="hover:text-brand transition-colors"
                       aria-label="LinkedIn"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -99,7 +99,7 @@ const ContactPage = () => {
                     </a>
                     <a
                       href="https://www.facebook.com/profile.php?id=61572515878295"
-                      className="hover:text-[#822433] transition-colors"
+                      className="hover:text-brand transition-colors"
                       aria-label="Facebook"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -128,14 +128,14 @@ const ContactPage = () => {
             <div className="text-center">
               <h3 className="text-2xl font-bold text-gray-800 mb-4">{t.joinUs}</h3>
               <p className="text-gray-600 mb-6">{t.joinUsText}</p>
-              <Link href="/career" className="inline-block bg-[#822433] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#6d1f2b] transition-colors">
+              <Link href="/career" className="inline-block bg-brand text-white font-bold py-3 px-6 rounded-lg hover:bg-brand-dark transition-colors">
                 {t.goToCareerPage}
               </Link>
             </div>
             <div className="text-center w-full pt-8 border-t border-gray-100">
               <h3 className="text-2xl font-bold text-gray-800 mb-4">{t.collaborateWithUs}</h3>
               <p className="text-gray-600 mb-6">{t.collaborateWithUsText}</p>
-              <a href="mailto:sapienzafoilingteam@gmail.com" className="inline-block bg-white text-[#822433] border border-[#822433] font-bold py-3 px-6 rounded-lg hover:bg-[#fdf1f3] transition-colors">
+              <a href="mailto:sapienzafoilingteam@gmail.com" className="inline-block bg-white text-brand border border-brand font-bold py-3 px-6 rounded-lg hover:bg-brand/5 transition-colors">
                 {t.contactUs}
               </a>
             </div>

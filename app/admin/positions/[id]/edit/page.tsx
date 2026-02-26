@@ -71,7 +71,7 @@ export default function EditPositionPage() {
     return (
       <main className="flex-1 p-4 md:p-6 lg:p-10 max-w-4xl mx-auto w-full">
         <div className="flex justify-center py-12">
-          <Loader2 className="animate-spin h-8 w-8 text-[#822433]" />
+          <Loader2 className="animate-spin h-8 w-8 text-brand" />
         </div>
       </main>
     );
@@ -150,7 +150,7 @@ export default function EditPositionPage() {
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 bg-[#822433] text-white rounded-lg hover:bg-[#6d1f2b] transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm"
+              className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm"
             >
               {loading && <Loader2 className="animate-spin h-4 w-4" />}
               Update Position

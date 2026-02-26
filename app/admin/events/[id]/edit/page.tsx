@@ -68,7 +68,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
     };
 
     if (loading) {
-        return <div className="flex justify-center items-center h-64"><Loader2 className="animate-spin h-8 w-8 text-[#822433]" /></div>;
+        return <div className="flex justify-center items-center h-64"><Loader2 className="animate-spin h-8 w-8 text-brand" /></div>;
     }
 
     if (!event) {

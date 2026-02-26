@@ -36,7 +36,7 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
             <Link
               href="/admin"
               className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${currentPath === '/admin' && viewMode === 'list' // Active only if on admin page AND list view
-                ? 'bg-[#f0e4e6] text-[#822433]'
+                ? 'bg-brand/10 text-brand'
                 : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                 }`}
             >
@@ -47,7 +47,7 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
             {/* Conditional Edit Article Button/Indicator */}
             {isEditing && viewMode === 'form' && (
               <span
-                className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium bg-[#f0e4e6] text-[#822433] cursor-default`}
+                className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium bg-brand/10 text-brand cursor-default`}
               >
                 <Edit className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
                 <span className="ml-1 hidden sm:inline">Edit Article</span>
@@ -58,7 +58,7 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
             <Link
               href="/admin/media"
               className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${currentPath === '/admin/media'
-                ? 'bg-[#f0e4e6] text-[#822433]'
+                ? 'bg-brand/10 text-brand'
                 : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                 }`}
             >
@@ -69,7 +69,7 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
             <Link
               href="/admin/positions"
               className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${currentPath === '/admin/positions'
-                ? 'bg-[#f0e4e6] text-[#822433]'
+                ? 'bg-brand/10 text-brand'
                 : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                 }`}
             >
@@ -80,7 +80,7 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
             <Link
               href="/admin/events"
               className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${currentPath === '/admin/events'
-                ? 'bg-[#f0e4e6] text-[#822433]'
+                ? 'bg-brand/10 text-brand'
                 : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                 }`}
             >

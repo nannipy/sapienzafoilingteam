@@ -122,7 +122,7 @@ export default function EventAdminPage() {
           <h1 className="text-2xl font-semibold text-gray-800">
             {eventTranslations[language].admin.eventsList}
           </h1>
-          <Link href="/admin/events/new" className="px-4 py-2 bg-[#822433] text-white rounded-lg hover:bg-[#6d1f2b] transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm">
+          <Link href="/admin/events/new" className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm">
             <PlusCircle size={18} />
             Create New
           </Link>
@@ -130,7 +130,7 @@ export default function EventAdminPage() {
 
         {loading ? (
           <div className="flex justify-center py-12">
-            <Loader2 className="animate-spin h-8 w-8 text-[#822433]" />
+            <Loader2 className="animate-spin h-8 w-8 text-brand" />
           </div>
         ) : events.length === 0 ? (
           <p className="text-center text-gray-500 py-12">{eventTranslations[language].noEvents}</p>

@@ -39,20 +39,20 @@ const CookieBanner = () => {
       <div className="flex flex-col gap-2">
         <p className="text-xs text-gray-600">
           {cookie[language].message}
-          <a href="/privacy-policy" className="text-[#822433] hover:underline ml-1 text-xs">
+          <a href="/privacy-policy" className="text-brand hover:underline ml-1 text-xs">
             {cookie[language].privacyLink}
           </a>
         </p>
         <div className="flex justify-end gap-2">
           <button
             onClick={handleReject}
-            className="px-3 py-1 text-xs text-gray-600 hover:bg-gray-200 rounded-md transition-colors"
+            className="px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-200 rounded-md transition-colors min-w-[80px]"
           >
             {cookie[language].reject}
           </button>
           <button
             onClick={handleAccept}
-            className="px-3 py-1 text-xs text-white bg-[#822433] rounded-md hover:bg-[#6d1f2b] transition-colors"
+            className="px-4 py-2.5 text-sm text-white bg-brand rounded-md hover:bg-brand-dark transition-colors min-w-[80px]"
           >
             {cookie[language].accept}
           </button>
