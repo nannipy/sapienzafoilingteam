@@ -90,7 +90,7 @@ export default function MediaManagerPage() {
       const { data: { session }, error: sessionError } = await supabase.auth.getSession();
       if (sessionError || !session) {
         console.error('Authentication error or no session:', sessionError);
-        router.push('/auth');
+        router.push('/login');
       } else {
         setAuthUser(session.user);
       }
@@ -101,7 +101,7 @@ export default function MediaManagerPage() {
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_OUT' || !session) {
         setAuthUser(null);
-        router.push('/auth');
+        router.push('/login');
       } else if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
         setAuthUser(session.user);
       }

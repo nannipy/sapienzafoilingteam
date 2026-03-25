@@ -40,13 +40,13 @@ export default function AdminLayout({
              setUser(session.user);
         } else {
             // No session, redirect to login
-            router.push('/auth');
+            router.push('/login');
             return; // Stop further execution in this effect run
         }
 
       } catch (error) {
         console.error('Error in auth check logic:', error);
-        router.push('/auth'); // Redirect on unexpected errors
+        router.push('/login'); // Redirect on unexpected errors
       } finally {
         setLoading(false);
       }
@@ -60,7 +60,7 @@ export default function AdminLayout({
             if (!session) {
                 // If user logs out, ensure redirect happens if not already on auth page
                 // Check current route if needed before pushing
-                // router.push('/auth');
+                // router.push('/login');
             }
             // No need to setLoading here, it's for initial load
         }
@@ -78,7 +78,7 @@ export default function AdminLayout({
     await supabase.auth.signOut();
     // setUser(null); // Auth listener should handle this
     // Context provider will reset viewMode/isEditing based on user becoming null
-    router.push('/auth');
+    router.push('/login');
     // setLoading(false); // Handled by redirect/unmount
   }, [router]); // Added useCallback
 
