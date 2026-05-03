@@ -25,12 +25,12 @@ export default function PresentationAperitivoPage() {
         setTimeout(() => setCopied(false), 2000);
     };
 
-    // Scroll to top of form section when registered
+    // Scroll to success banner when registered
     useEffect(() => {
         if (isRegistered) {
-            const section = document.getElementById('payment-start');
+            const section = document.getElementById('success-banner');
             if (section) {
-                const offset = 80; // Space for fixed navbar if any
+                const offset = 100; // Adjusted offset for better visibility of the banner
                 const bodyRect = document.body.getBoundingClientRect().top;
                 const elementRect = section.getBoundingClientRect().top;
                 const elementPosition = elementRect - bodyRect;
@@ -77,14 +77,14 @@ export default function PresentationAperitivoPage() {
                                 initial={{ opacity: 0, y: 40 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                                className="w-full rounded-[2.5rem] overflow-hidden shadow-2xl flex items-center justify-center relative"
+                                className="w-full rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center relative"
                             >
                                 <picture className="w-full">
                                     <source media="(max-width: 768px)" srcSet="/evento.png" />
                                     <img
                                         src="/evento.png"
                                         alt="Locandina Aperitivo di Presentazione"
-                                        className="w-full h-auto max-h-[85vh] object-contain"
+                                        className="w-full h-auto max-auto object-contain"
                                     />
                                 </picture>
                             </motion.div>
@@ -129,7 +129,7 @@ export default function PresentationAperitivoPage() {
                                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                                         className="space-y-8"
                                     >
-                                        <div className="p-8 md:p-10 rounded-[2.5rem] bg-gradient-to-br from-green-500/10 to-green-500/5 border border-green-500/20 flex flex-col sm:flex-row items-start sm:items-center gap-6 relative overflow-hidden">
+                                        <div id="success-banner" className="p-8 md:p-10 rounded-[2.5rem] bg-gradient-to-br from-green-500/10 to-green-500/5 border border-green-500/20 flex flex-col sm:flex-row items-start sm:items-center gap-6 relative overflow-hidden">
                                             <div className="absolute -right-10 -top-10 w-40 h-40 bg-green-500/20 blur-3xl rounded-full" />
                                             <CheckCircle2 className="w-16 h-16 text-green-400 flex-shrink-0" />
                                             <div className="relative z-10">
@@ -203,7 +203,7 @@ export default function PresentationAperitivoPage() {
                                                                 </div>
                                                             </div>
                                                         )}
-                                                        
+
                                                         <a
                                                             href={calendarUrl}
                                                             target="_blank"
