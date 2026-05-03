@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { presentationTranslations } from '../translations/presentation';
 import PageLayout from '../components/PageLayout';
@@ -17,13 +17,32 @@ export default function PresentationAperitivoPage() {
 
     const iban = "IT00 X 00000 00000 000000000000"; // Placeholder IBAN
     const holder = "Federico Romeo";
-    const calendarUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Presentazione+SFT+%26+Aperitivo&dates=20260509T150000Z/20260509T180000Z&details=Ti+aspettiamo+al+Centro+Velico+3V+per+scoprire+il+nostro+progetto+e+goderci+un+aperitivo+al+tramonto!&location=Centro+Velico+3V,+Trevignano+Romano";
+    const calendarUrl = "https://www.google.com/calendar/event?action=TEMPLATE&text=Presentazione+SFT+%26+Aperitivo&dates=20260509T150000Z/20260509T180000Z&details=Ti+aspettiamo+al+Centro+Velico+3V+per+scoprire+il+nostro+progetto+e+goderci+un+aperitivo+al+tramonto!&location=Centro+Velico+3V,+Trevignano+Romano";
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(iban);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
+
+    // Scroll to top of form section when registered
+    useEffect(() => {
+        if (isRegistered) {
+            const section = document.getElementById('payment-start');
+            if (section) {
+                const offset = 80; // Space for fixed navbar if any
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = section.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    }, [isRegistered]);
 
     // Stagger config for smooth reveals
     const staggerContainer = {
@@ -104,6 +123,7 @@ export default function PresentationAperitivoPage() {
                                 ) : (
                                     <motion.div
                                         key="payment-container"
+                                        id="payment-start"
                                         initial={{ opacity: 0, x: 20 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
