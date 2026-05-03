@@ -24,26 +24,15 @@ export default function PresentationAperitivoPage() {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
-
-    // Scroll to success banner when registered
-    useEffect(() => {
-        if (isRegistered) {
-            const section = document.getElementById('success-banner');
-            if (section) {
-                const offset = 100; // Adjusted offset for better visibility of the banner
-                const bodyRect = document.body.getBoundingClientRect().top;
-                const elementRect = section.getBoundingClientRect().top;
-                const elementPosition = elementRect - bodyRect;
-                const offsetPosition = elementPosition - offset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }
-    }, [isRegistered]);
-
+// Scroll to top when registered
+useEffect(() => {
+    if (isRegistered) {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+}, [isRegistered]);
     // Stagger config for smooth reveals
     const staggerContainer = {
         hidden: { opacity: 0 },
