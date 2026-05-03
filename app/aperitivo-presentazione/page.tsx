@@ -58,18 +58,16 @@ export default function PresentationAperitivoPage() {
                                 initial={{ opacity: 0, y: 40 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                                className="w-full bg-[#Fdfbf7] rounded-[2.5rem] overflow-hidden shadow-2xl p-4 sm:p-8 flex items-center justify-center relative"
+                                className="w-full rounded-[2.5rem] overflow-hidden shadow-2xl flex items-center justify-center relative"
                             >
                                 <picture className="w-full">
                                     <source media="(max-width: 768px)" srcSet="/evento.png" />
                                     <img
                                         src="/evento.png"
                                         alt="Locandina Aperitivo di Presentazione"
-                                        className="w-full h-auto max-h-[75vh] object-contain drop-shadow-xl"
+                                        className="w-full h-auto max-h-[85vh] object-contain"
                                     />
                                 </picture>
-                                {/* Subtle inner shadow for depth */}
-                                <div className="absolute inset-0 shadow-[inset_0_0_80px_rgba(0,0,0,0.04)] pointer-events-none rounded-[2.5rem]" />
                             </motion.div>
                         </div>
 
