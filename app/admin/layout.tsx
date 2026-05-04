@@ -30,18 +30,18 @@ export default function AdminLayout({
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
         if (sessionError) {
-            console.error("Error fetching session:", sessionError.message);
-            // Potentially redirect or show error, but often just means no session
+          console.error("Error fetching session:", sessionError.message);
+          // Potentially redirect or show error, but often just means no session
         }
 
         if (session) {
-             // Verify the session server-side or check expiry if needed
-             // For simplicity, we assume getSession() gives a valid one if present
-             setUser(session.user);
+          // Verify the session server-side or check expiry if needed
+          // For simplicity, we assume getSession() gives a valid one if present
+          setUser(session.user);
         } else {
-            // No session, redirect to login
-            router.push('/login');
-            return; // Stop further execution in this effect run
+          //  No session, redirect to login
+          router.push('/login');
+          return; // Stop further execution in this effect run
         }
 
       } catch (error) {
@@ -55,20 +55,20 @@ export default function AdminLayout({
 
     // Listen for auth changes (login/logout elsewhere)
     const { data: authListener } = supabase.auth.onAuthStateChange(
-        (_event, session) => {
-            setUser(session?.user ?? null);
-            if (!session) {
-                // If user logs out, ensure redirect happens if not already on auth page
-                // Check current route if needed before pushing
-                // router.push('/login');
-            }
-            // No need to setLoading here, it's for initial load
+      (_event, session) => {
+        setUser(session?.user ?? null);
+        if (!session) {
+          // If user logs out, ensure redirect happens if not already on auth page
+          // Check current route if needed before pushing
+          // router.push('/login');
         }
+        // No need to setLoading here, it's for initial load
+      }
     );
 
     // Cleanup listener on unmount
     return () => {
-        authListener?.subscription.unsubscribe();
+      authListener?.subscription.unsubscribe();
     };
 
   }, [router]); // Only depends on router
@@ -92,13 +92,13 @@ export default function AdminLayout({
 
   // If loading finished but still no user (redirect should have happened, but belts & suspenders)
   if (!user) {
-     return (
-        <div className="min-h-screen bg-gray-100 flex justify-center items-center">
-             <p>Redirecting to login...</p>
-             {/* Or a proper "Not Authorized" component */}
-        </div>
-     );
-   }
+    return (
+      <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+        <p>Redirecting to login...</p>
+        {/* Or a proper "Not Authorized" component */}
+      </div>
+    );
+  }
 
   // Wrap the content with AdminProvider, passing the user
   return (
@@ -107,7 +107,7 @@ export default function AdminLayout({
         {/* Pass user explicitly if Header needs it directly, or let it use context */}
         <AdminHeader onLogout={handleLogout} />
         <div className=""> {/* Padding top matching header height */}
-             {children}
+          {children}
         </div>
       </div>
     </AdminProvider>
