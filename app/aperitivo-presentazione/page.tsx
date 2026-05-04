@@ -15,7 +15,7 @@ export default function PresentationAperitivoPage() {
     const [isRegistered, setIsRegistered] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState('paypal');
 
-    const iban = " IT46 J036 6901 6001 1458 6258 543 ";
+    const iban = " IT46J0366901600114586258543 ";
     const holder = "Federico Romeo";
     const calendarUrl = "https://www.google.com/calendar/event?action=TEMPLATE&text=Presentazione+SFT+%26+Aperitivo&dates=20260509T150000Z/20260509T180000Z&details=Ti+aspettiamo+al+Centro+Velico+3V+per+scoprire+il+nostro+progetto+e+goderci+un+aperitivo+al+tramonto!&location=Centro+Velico+3V,+Trevignano+Romano";
 
