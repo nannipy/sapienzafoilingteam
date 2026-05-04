@@ -8,15 +8,15 @@ export async function submitRegistration(data: {
     dietaryOther?: string;
 }) {
     const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-    // Il bot di Telegram ha bisogno di un Chat ID numerico, non del nickname.
-    // L'utente (@gio1927a) dovrà avviare il bot e ottenere il suo chat_id.
-    const CHAT_ID = process.env.TELEGRAM_CHAT_ID; 
 
-    // Se le variabili d'ambiente non sono impostate, non facciamo fallire il form
-    // ma logghiamo un avviso nel server.
-    if (!BOT_TOKEN || !CHAT_ID) {
-        console.warn("⚠️ Variabili d'ambiente TELEGRAM_BOT_TOKEN o TELEGRAM_CHAT_ID mancanti.");
-        // Simuliamo un ritardo e restituiamo successo per non bloccare l'UI
+    // 👇 aggiungi qui tutti i destinatari
+    const CHAT_IDS = [
+        process.env.TELEGRAM_CHAT_ID, // quello che hai già
+        "5901269690"                  // nuovo utente
+    ].filter(Boolean); // rimuove eventuali undefined
+
+    if (!BOT_TOKEN || CHAT_IDS.length === 0) {
+        console.warn("⚠️ Config Telegram mancante");
         await new Promise(resolve => setTimeout(resolve, 1000));
         return { success: true };
     }
@@ -30,26 +30,26 @@ export async function submitRegistration(data: {
     `;
 
     try {
-        const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                chat_id: CHAT_ID,
-                text: message,
-                parse_mode: 'Markdown',
-            }),
-        });
-
-        if (!response.ok) {
-            console.error('Errore invio messaggio Telegram:', await response.text());
-            return { success: false, error: 'Failed to send telegram message' };
-        }
+        // 👇 invio a tutti
+        await Promise.all(
+            CHAT_IDS.map(chatId =>
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'Markdown',
+                    }),
+                })
+            )
+        );
 
         return { success: true };
     } catch (error) {
-        console.error('Errore API Telegram:', error);
+        console.error('Errore invio Telegram:', error);
         return { success: false, error: 'Internal server error' };
     }
 }
