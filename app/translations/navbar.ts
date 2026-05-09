@@ -7,6 +7,7 @@ export const navbarTranslations = {
     contact: 'Contact',
     blog: 'Blog',
     career: 'Join Us',
+    signature: 'Support us (2€)',
   },
   it: {
     home: 'Home',
@@ -16,5 +17,6 @@ export const navbarTranslations = {
     contact: 'Contatti',
     blog: 'Blog',
     career: 'Unisciti a Noi',
+    signature: 'Supportaci (2€)',
   },
 };
