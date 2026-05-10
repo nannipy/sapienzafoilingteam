@@ -44,18 +44,6 @@ const HeroSection: React.FC = () => {
       </div>
 
       <div className="relative z-10 flex flex-col items-center justify-center -mt-20 px-4">
-        {/* Next Event Banner */}
-        <div className="mb-8 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-          <Link
-            href="/aperitivo-presentazione"
-            className="group flex items-center gap-3 px-6 py-2 rounded-full bg-brand/20 border border-brand/50 backdrop-blur-md text-white/80 text-sm font-bold tracking-widest uppercase transition-all hover:bg-brand/30 hover:scale-105"
-          >
-            <span className="relative flex h-3 w-3">
-            </span>
-            {homeTranslations[language].nextEventBanner}
-          </Link>
-        </div>
-
         {/* Main Title - Distinctive Styling */}
         <div className="text-center animate-fade-in-up">
           <h1 className=" font-black text-5xl md:text-7xl lg:text-8xl text-white uppercase mb-[-0.1em] tracking-tighter leading-none opacity-90">
