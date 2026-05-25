@@ -19,6 +19,9 @@ const sponsors = [
   { name: 'Solidworks', link: 'https://www.solidworks.com', logo: 'solidworks.svg', width: 250, height: 80 },
   { name: 'Comaryachts', link: 'https://www.comaryachts.it', logo: 'comar.svg', width: 250 },
   { name: 'Notion', link: 'https://www.notion.so', logo: 'notion.svg', width: 100, height: 40 },
+  { name: 'Ansys', link: 'https://www.ansys.com/', logo: 'ansys.svg', width: 200, height: 80 },
+  { name: 'Easy Composites', link: 'https://www.easycomposites.co.uk/', logo: 'easycomposites.svg', width: 250 },
+  { name: 'ESSS', link: 'https://www.esss.co/', logo: 'ESSS.svg', width: 200, height: 80 },
 ];
 
 const SponsorPage = () => {
