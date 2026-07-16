@@ -1,106 +1,79 @@
 'use server';
 
-import { supabaseAdmin } from '@/app/lib/supabase-admin';
 import { revalidatePath } from 'next/cache';
 import { Article } from '@/app/lib/types';
 import { requireAuth } from '@/app/lib/supabase-server';
+import {
+  getArticles as dbGetArticles,
+  createArticle as dbCreateArticle,
+  updateArticle as dbUpdateArticle,
+  deleteArticle as dbDeleteArticle,
+} from '@/app/lib/db/articles';
+
+function generateSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[àáâãäå]/g, 'a')
+    .replace(/[èéêë]/g, 'e')
+    .replace(/[ìíîï]/g, 'i')
+    .replace(/[òóôõö]/g, 'o')
+    .replace(/[ùúûü]/g, 'u')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    + `-${Date.now()}`;
+}
 
 export async function getArticles() {
-    await requireAuth();
-
-    if (!supabaseAdmin) throw new Error('Server configuration error');
-
-    const { data, error } = await supabaseAdmin
-        .from('posts')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-    if (error) {
-        throw new Error(error.message);
-    }
-    return data as Article[];
+  await requireAuth();
+  return await dbGetArticles();
 }
 
 export async function createArticle(articleData: Partial<Article>) {
-    const user = await requireAuth();
+  const user = await requireAuth();
 
-    if (!supabaseAdmin) throw new Error('Server configuration error');
+  if (!articleData.title || !articleData.content || !articleData.title_en || !articleData.content_en) {
+    throw new Error('Campi obbligatori mancanti');
+  }
 
-    if (!articleData.title || !articleData.content || !articleData.title_en || !articleData.content_en) {
-        throw new Error('Missing required fields');
-    }
+  const data = await dbCreateArticle({
+    title: articleData.title,
+    slug: generateSlug(articleData.title),
+    content: articleData.content,
+    title_en: articleData.title_en,
+    content_en: articleData.content_en,
+    image_url: articleData.image_url || null,
+    image_alt: articleData.image_alt || null,
+    author_id: user.id,
+  } as Omit<Article, 'id' | 'created_at'>);
 
-    const { data, error } = await supabaseAdmin
-        .from('posts')
-        .insert([
-            {
-                title: articleData.title,
-                slug: articleData.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
-                content: articleData.content,
-                title_en: articleData.title_en,
-                content_en: articleData.content_en,
-                image_url: articleData.image_url || null,
-                image_alt: articleData.image_alt || null,
-                author_id: user.id
-            }
-        ])
-        .select()
-        .single();
-
-    if (error) {
-        throw new Error(error.message);
-    }
-
-    revalidatePath('/blog');
-    revalidatePath('/admin'); // Admin list
-    return data;
+  revalidatePath('/blog');
+  revalidatePath('/admin');
+  return data;
 }
 
 export async function updateArticleAction(id: string, articleData: Partial<Article>) {
-    await requireAuth();
+  await requireAuth();
 
-    if (!supabaseAdmin) throw new Error('Server configuration error');
+  const data = await dbUpdateArticle(id, {
+    title: articleData.title,
+    content: articleData.content,
+    title_en: articleData.title_en,
+    content_en: articleData.content_en,
+    image_url: articleData.image_url || null,
+    image_alt: articleData.image_alt || null,
+  });
 
-    const { data, error } = await supabaseAdmin
-        .from('posts')
-        .update({
-            title: articleData.title,
-            content: articleData.content,
-            title_en: articleData.title_en,
-            content_en: articleData.content_en,
-            image_url: articleData.image_url || null,
-            image_alt: articleData.image_alt || null,
-            // Don't update slug usually, or update if title changes? better keep it stable for SEO or optional
-        })
-        .eq('id', id)
-        .select()
-        .single();
-
-    if (error) {
-        throw new Error(error.message);
-    }
-
-    revalidatePath('/blog');
-    revalidatePath(`/blog/${id}`);
-    revalidatePath('/admin');
-    return data;
+  revalidatePath('/blog');
+  revalidatePath(`/blog/${id}`);
+  revalidatePath('/admin');
+  return data;
 }
 
 export async function deleteArticleAction(id: string) {
-    await requireAuth();
-
-    if (!supabaseAdmin) throw new Error('Server configuration error');
-
-    const { error } = await supabaseAdmin
-        .from('posts')
-        .delete()
-        .eq('id', id);
-
-    if (error) {
-        throw new Error(error.message);
-    }
-
-    revalidatePath('/blog');
-    revalidatePath('/admin');
-    return { success: true };
+  await requireAuth();
+  await dbDeleteArticle(id);
+  revalidatePath('/blog');
+  revalidatePath('/admin');
+  return { success: true };
 }

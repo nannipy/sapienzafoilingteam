@@ -33,7 +33,7 @@ const HeroSection: React.FC = () => {
       {/* Background with overlay */}
       <div className="absolute inset-0 w-full h-full aspect-[16/9]">
         <Image
-          src="/hero.jpeg"
+          src="/hero.png"
           alt="Sapienza Foiling Team Regatta"
           fill
           sizes="100vw"

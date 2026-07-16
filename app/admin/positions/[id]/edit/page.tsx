@@ -26,12 +26,11 @@ export default function EditPositionPage() {
         const data = await getPositionAction(id);
         if (!data) throw new Error('Position not found');
 
-        const parsedRequirements = typeof data.requirements === 'string' ? JSON.parse(data.requirements) : data.requirements;
         setTitle(data.title);
         setLocation(data.location);
         setType(data.type);
         setDescription(data.description);
-        setRequirements(Array.isArray(parsedRequirements) ? parsedRequirements.join('\n') : '');
+        setRequirements(data.requirements.join('\n'));
       } catch (error: unknown) {
         const message = error instanceof Error ? error.message : 'An error occurred';
         console.error('Error fetching position:', error);
@@ -54,7 +53,7 @@ export default function EditPositionPage() {
         location,
         type,
         description,
-        requirements: requirements.split('\n'),
+        requirements: requirements.split('\n').filter(Boolean),
       });
 
       router.push('/admin/positions');

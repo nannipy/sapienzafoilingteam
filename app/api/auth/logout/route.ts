@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/app/lib/supabase';
+import { createSupabaseServerClient } from '@/app/lib/supabase-server';
 
 export async function POST() {
   try {
+    const supabase = await createSupabaseServerClient();
     const { error } = await supabase.auth.signOut();
 
     if (error) {
@@ -10,9 +11,7 @@ export async function POST() {
     }
 
     return NextResponse.json({ success: true });
-  } catch (error: unknown) {
-    console.error("Descrizione Errore:", error); 
-    const errorMessage = 'Si è verificato un errore imprevisto';
-    return NextResponse.json({ error: errorMessage }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: 'Si è verificato un errore imprevisto' }, { status: 500 });
   }
 }

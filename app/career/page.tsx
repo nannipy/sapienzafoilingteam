@@ -15,8 +15,6 @@ async function getOpenPositions(): Promise<OpenPosition[]> {
 
   if (error) {
     console.error('Error fetching open positions:', error.message);
-    // In a real app, you might want to show a specific error page.
-    // Throwing an error will be caught by the nearest error.js/tsx boundary.
     throw new Error('Failed to fetch open positions');
   }
 

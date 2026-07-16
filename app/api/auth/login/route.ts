@@ -1,24 +1,19 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/app/lib/supabase';
+import { createSupabaseServerClient } from '@/app/lib/supabase-server';
 
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
+    const supabase = await createSupabaseServerClient();
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-      console.error('API login - Auth error:', error);
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
-    return NextResponse.json({ user: data.user, session: data.session });
-  } catch (error: unknown) {
-    console.error("Descrizione Errore:", error);
-    const errorMessage = 'Si è verificato un errore imprevisto';
-    return NextResponse.json({ error: errorMessage }, { status: 500 });
+    return NextResponse.json({ user: data.user });
+  } catch {
+    return NextResponse.json({ error: 'Si è verificato un errore imprevisto' }, { status: 500 });
   }
 }
