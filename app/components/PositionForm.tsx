@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { OpenPosition } from '../lib/types';
+import { OpenPositionParsed } from '../lib/types';
 
 interface PositionFormProps {
-  initialData?: OpenPosition | null;
-  onSubmit: (data: Omit<OpenPosition, 'id'>) => void;
+  initialData?: OpenPositionParsed | null;
+  onSubmit: (data: Omit<OpenPositionParsed, 'id'>) => void;
   isSubmitting: boolean;
   error: string | null;
 }
@@ -34,16 +34,15 @@ const PositionForm: React.FC<PositionFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const newPosition: Omit<OpenPosition, 'id'> = {
+    onSubmit({
       title,
       location,
       type,
       description,
-      requirements: requirements.split('\n').filter(req => req.trim() !== ''),
+      requirements: requirements.split('\n').filter((r) => r.trim() !== ''),
       created_at: initialData?.created_at || new Date().toISOString(),
       order_index: initialData?.order_index || 0,
-    };
-    onSubmit(newPosition);
+    });
   };
 
   return (

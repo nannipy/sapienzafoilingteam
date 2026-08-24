@@ -1,6 +1,6 @@
 
 import React from "react";
-import { getEvents } from "./lib/supabase-admin";
+import { getEvents } from "./lib/db/events";
 import HeroSection from "./components/HeroSection";
 import CallToActionSection from "./components/CallToActionSection";
 import EventsSection from "./components/EventsSection";

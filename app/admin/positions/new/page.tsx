@@ -3,19 +3,19 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import PositionForm from '../../../components/PositionForm';
-import { OpenPosition } from '../../../lib/types';
-import { createPosition } from '@/app/actions/positions';
+import { OpenPositionParsed } from '../../../lib/types';
+import { createPositionAction } from '@/app/actions/positions';
 
 export default function CreatePositionPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (formData: Omit<OpenPosition, 'id'>) => {
+  const handleSubmit = async (formData: Omit<OpenPositionParsed, 'id'>) => {
     setIsSubmitting(true);
     setError(null);
     try {
-      await createPosition(formData);
+      await createPositionAction(formData);
 
       router.push('/admin/positions');
       router.refresh();

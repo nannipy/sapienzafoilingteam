@@ -3,11 +3,11 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Edit, Trash, PlusCircle, Loader2 } from 'lucide-react';
-import { OpenPosition } from '../../lib/types';
+import { OpenPositionParsed } from '../../lib/types';
 import { getPositions, deletePositionAction } from '@/app/actions/positions';
 
 export default function PositionsAdminPage() {
-  const [positions, setPositions] = useState<OpenPosition[]>([]);
+  const [positions, setPositions] = useState<OpenPositionParsed[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

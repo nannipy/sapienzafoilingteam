@@ -1,0 +1,36 @@
+version: 2
+
+# NOTE: Dependabot supports *version* updates for the bun ecosystem but not
+# *security* updates (https://docs.github.com/en/code-security/reference/supply-chain-security/supported-ecosystems-and-repositories).
+# Since this repository ships only bun.lock, the weekly version-update PRs below
+# plus the `bun audit` step in .github/workflows/security.yml are what keep
+# vulnerable transitive dependencies out of the tree.
+updates:
+    - package-ecosystem: "bun"
+      directory: "/"
+      schedule:
+          interval: "weekly"
+      open-pull-requests-limit: 10
+      groups:
+          # Patch/minor bumps are the ones that close advisories without churn,
+          # so batch them into a single reviewable PR per area.
+          production-dependencies:
+              dependency-type: "production"
+              update-types: ["minor", "patch"]
+          development-dependencies:
+              dependency-type: "development"
+              update-types: ["minor", "patch"]
+      ignore:
+          # Major bumps of the framework and its React peers are coordinated
+          # upgrades, not routine dependency maintenance.
+          - dependency-name: "next"
+            update-types: ["version-update:semver-major"]
+          - dependency-name: "react"
+            update-types: ["version-update:semver-major"]
+          - dependency-name: "react-dom"
+            update-types: ["version-update:semver-major"]
+
+    - package-ecosystem: "github-actions"
+      directory: "/"
+      schedule:
+          interval: "weekly"

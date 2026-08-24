@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
-//import { useRouter } from 'next/navigation'; // Keep useRouter if needed for other things
 import Link from 'next/link';
 import { useLanguage } from '../context/LanguageContext';
 import { blogTranslations } from '../translations/blog';

@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import EventForm from '@/app/components/EventForm'; // We will create this reusable component
 import { Event } from '@/app/lib/types';
-import { createEvent } from '@/app/actions/events';
+import { createEventAction } from '@/app/actions/events';
 import { useState } from 'react';
 import { useLanguage } from '@/app/context/LanguageContext';
 import { eventTranslations } from '@/app/translations/event';
@@ -19,7 +19,7 @@ export default function NewEventPage() {
         setError(null);
         try {
             // Server Action call
-            await createEvent(eventData as Omit<Event, 'id' | 'created_at'>);
+            await createEventAction(eventData as Omit<Event, 'id' | 'created_at'>);
 
             router.push('/admin/events');
 

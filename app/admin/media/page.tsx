@@ -84,18 +84,17 @@ export default function MediaManagerPage() {
     }, NOTIFICATION_TIMEOUT);
   };
 
-  // --- Authentication ---
   useEffect(() => {
-    const checkSession = async () => {
-      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-      if (sessionError || !session) {
-        console.error('Authentication error or no session:', sessionError);
+    const checkAuth = async () => {
+      // getUser() verifica il token con il server Supabase (getSession() non lo fa)
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (error || !user) {
         router.push('/login');
       } else {
-        setAuthUser(session.user);
+        setAuthUser(user);
       }
     };
-    checkSession();
+    checkAuth();
 
     // Listen for auth changes (login/logout)
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {

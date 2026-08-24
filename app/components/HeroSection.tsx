@@ -33,7 +33,7 @@ const HeroSection: React.FC = () => {
       {/* Background with overlay */}
       <div className="absolute inset-0 w-full h-full aspect-[16/9]">
         <Image
-          src="/hero.jpeg"
+          src="/hero.png"
           alt="Sapienza Foiling Team Regatta"
           fill
           sizes="100vw"
@@ -45,7 +45,7 @@ const HeroSection: React.FC = () => {
 
       <div className="relative z-10 flex flex-col items-center justify-center -mt-20 px-4">
         {/* Main Title - Distinctive Styling */}
-        <div className="text-center animate-fade-in-up">
+        <div className="text-center animate-fade-in-up mb-15">
           <h1 className=" font-black text-5xl md:text-7xl lg:text-8xl text-white uppercase mb-[-0.1em] tracking-tighter leading-none opacity-90">
             Sapienza
           </h1>
@@ -55,7 +55,7 @@ const HeroSection: React.FC = () => {
         </div>
 
         {/* Action Buttons with Refined States */}
-        <div className="flex flex-col sm:flex-row gap-6 mt-16 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+        <div className="flex flex-col sm:flex-row gap-6 mt-60 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <Link
             href="/team"
             onClick={() => handleCTAClick('learn_more')}

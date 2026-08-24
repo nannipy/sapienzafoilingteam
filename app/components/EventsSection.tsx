@@ -20,6 +20,7 @@ const EventCard = ({ event, isPast = false, language }: { event: Event; isPast?:
         src={event.image_url || '/placeholder.jpg'}
         alt={event.image_alt || event.title}
         fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-void via-void/80 to-transparent" />

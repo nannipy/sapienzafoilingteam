@@ -16,8 +16,6 @@ async function getArticles(): Promise<Article[]> {
 
   if (error) {
     console.error('Error fetching articles:', error.message);
-    // In a real app, you might want to show a specific error page.
-    // Throwing an error will be caught by the nearest error.js/tsx boundary.
     throw new Error('Failed to fetch articles');
   }
 

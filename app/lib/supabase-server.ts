@@ -28,17 +28,6 @@ export async function createSupabaseServerClient() {
     );
 }
 
-export async function isAuthenticated() {
-    const supabase = await createSupabaseServerClient();
-    const { data: { user }, error } = await supabase.auth.getUser();
-
-    if (error || !user) {
-    } else {
-    }
-
-    return !!user;
-}
-
 export async function verifySession() {
     const supabase = await createSupabaseServerClient();
     const { data: { user }, error } = await supabase.auth.getUser();
