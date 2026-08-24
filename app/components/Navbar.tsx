@@ -7,7 +7,6 @@ import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 import { navbarTranslations } from '../translations/navbar';
 import posthog from 'posthog-js';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -38,10 +37,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3">
-      <motion.div
-        layout
-        className={`bg-white text-black font-semibold text-center mx-auto max-w-4xl shadow-xl hover:shadow-xl transition-all duration-300 ${!isMobileMenuOpen ? 'rounded-full' : 'rounded-3xl'}`}
-      >
+      <div className="bg-white text-black font-semibold text-center mx-auto max-w-4xl rounded-full shadow-xl hover:shadow-xl transition-shadow duration-300">
         <div className="flex items-center justify-between px-6 py-3">
           <Link href="/" className="flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
             <Image src="/logosft.svg" alt="Logo" width={40} height={40} className="h-16 w-16" priority />
@@ -84,42 +80,37 @@ const Navbar = () => {
           </button>
         </div>
 
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              data-testid="mobile-menu"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="md:hidden overflow-hidden"
+      </div>
+
+      {isMobileMenuOpen && (
+        <div
+          data-testid="mobile-menu"
+          className="md:hidden mx-auto mt-2 max-w-4xl rounded-3xl bg-white text-center text-black font-semibold shadow-xl animate-fade-in"
+        >
+          <div className="px-4 py-3">
+            {navigationItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isCurrentPath(item.href) ? 'page' : undefined}
+                className={`block px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-gray-100 ${isCurrentPath(item.href) ? 'bg-gray-100' : ''
+                  }`}
+                onClick={() => { setIsMobileMenuOpen(false); handleNavClick(item.href, 'menu'); }}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link
+              href="/career"
+              aria-current={isCurrentPath('/career') ? 'page' : undefined}
+              className="block mt-2 px-4 py-2 bg-brand text-white rounded-lg text-center transition-all duration-300 hover:bg-brand-dark"
+              onClick={() => { setIsMobileMenuOpen(false); handleNavClick('career', 'cta'); }}
             >
-              <div className="px-4 py-2">
-                {navigationItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    aria-current={isCurrentPath(item.href) ? 'page' : undefined}
-                    className={`block px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-gray-100 ${isCurrentPath(item.href) ? 'bg-gray-100' : ''
-                      }`}
-                    onClick={() => { setIsMobileMenuOpen(false); handleNavClick(item.href, 'menu'); }}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-                <Link
-                  href="/career"
-                  aria-current={isCurrentPath('/career') ? 'page' : undefined}
-                  className="block mt-2 px-4 py-2 bg-brand text-white rounded-lg text-center transition-all duration-300 hover:bg-brand-dark"
-                  onClick={() => { setIsMobileMenuOpen(false); handleNavClick('career', 'cta'); }}
-                >
-                  {navbarTranslations[language].career}
-                </Link>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
+              {navbarTranslations[language].career}
+            </Link>
+          </div>
+        </div>
+      )}
       <button
         onClick={() => setLanguage(language === 'en' ? 'it' : 'en')}
         className={`
