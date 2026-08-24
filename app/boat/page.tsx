@@ -82,6 +82,7 @@ const BoatPage = () => {
               src="/moth.png"
               alt="Moth Model"
               fill
+              sizes="(max-width: 768px) 256px, 320px"
               className="object-contain"
             />
           </div>
