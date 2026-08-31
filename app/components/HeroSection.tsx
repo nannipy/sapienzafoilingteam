@@ -12,10 +12,12 @@ const HeroSection: React.FC = () => {
   const { language } = useLanguage();
 
   const handleChevronClick = () => {
-    const targetElement = document.querySelector('#upcoming-events');
+    const targetElement = document.querySelector('#upcoming-events') || document.querySelector('#events') || document.querySelector('section');
     if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
       window.scrollTo({
-        top: targetElement.getBoundingClientRect().top + window.pageYOffset - 100,
+        top: window.innerHeight,
         behavior: 'smooth'
       });
     }

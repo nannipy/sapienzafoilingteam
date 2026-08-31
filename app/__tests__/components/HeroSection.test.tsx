@@ -38,11 +38,24 @@ describe('HeroSection', () => {
     // Mock getBoundingClientRect
     const mockGetBoundingClientRect = jest.fn(() => ({ top: 100 }));
     // Mock document.querySelector to return a fake element
-    const mockElement = { getBoundingClientRect: mockGetBoundingClientRect };
+    const mockElement = { scrollIntoView: jest.fn() };
     jest.spyOn(document, 'querySelector').mockReturnValue(mockElement as unknown as Element);
 
     fireEvent.click(chevronDown.closest('button')!);
 
-    expect(window.scrollTo).toHaveBeenCalled();
+    expect(mockElement.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+  });
+
+  it('scrolls down screen height when target element is not found', () => {
+    renderWithProvider(<HeroSection />);
+    const chevronDown = screen.getByTestId('chevron-down');
+    jest.spyOn(document, 'querySelector').mockReturnValue(null);
+
+    fireEvent.click(chevronDown.closest('button')!);
+
+    expect(window.scrollTo).toHaveBeenCalledWith({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
   });
 });

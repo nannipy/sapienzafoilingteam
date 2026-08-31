@@ -64,7 +64,7 @@ const EventsSection: React.FC<EventsSectionProps> = ({ events }) => {
   }, [events]);
 
   return (
-    <div className="bg-brand py-32 relative overflow-hidden">
+    <div id="events" className="bg-brand py-32 relative overflow-hidden">
       {/* Intentional Pattern Background */}
       <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-light/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
