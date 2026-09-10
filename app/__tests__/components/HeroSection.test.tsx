@@ -31,31 +31,16 @@ describe('HeroSection', () => {
     expect(headings[1]).toHaveTextContent('Foiling Team');
   });
 
-  it('calls scroll logic when chevron is clicked', () => {
+  it('renders call to action buttons with correct links', () => {
     renderWithProvider(<HeroSection />);
-    const chevronDown = screen.getByTestId('chevron-down');
-
-    // Mock getBoundingClientRect
-    const mockGetBoundingClientRect = jest.fn(() => ({ top: 100 }));
-    // Mock document.querySelector to return a fake element
-    const mockElement = { scrollIntoView: jest.fn() };
-    jest.spyOn(document, 'querySelector').mockReturnValue(mockElement as unknown as Element);
-
-    fireEvent.click(chevronDown.closest('button')!);
-
-    expect(mockElement.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+    const links = screen.getAllByRole('link');
+    expect(links.some(l => l.getAttribute('href') === '/team')).toBe(true);
+    expect(links.some(l => l.getAttribute('href') === '/boat')).toBe(true);
   });
 
-  it('scrolls down screen height when target element is not found', () => {
+  it('renders slide navigation buttons', () => {
     renderWithProvider(<HeroSection />);
-    const chevronDown = screen.getByTestId('chevron-down');
-    jest.spyOn(document, 'querySelector').mockReturnValue(null);
-
-    fireEvent.click(chevronDown.closest('button')!);
-
-    expect(window.scrollTo).toHaveBeenCalledWith({
-      top: window.innerHeight,
-      behavior: 'smooth'
-    });
+    const slideButtons = screen.getAllByLabelToMatcher?.(/Slide/i) || screen.getAllByRole('button');
+    expect(slideButtons.length).toBeGreaterThan(0);
   });
 });

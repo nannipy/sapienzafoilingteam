@@ -2,6 +2,7 @@
 import React from "react";
 import { getEvents } from "./lib/db/events";
 import HeroSection from "./components/HeroSection";
+import FleetShowcaseSection from "./components/FleetShowcaseSection";
 import CallToActionSection from "./components/CallToActionSection";
 import EventsSection from "./components/EventsSection";
 
@@ -14,6 +15,7 @@ export default async function Home() {
     <>
       <main className="relative min-h-screen bg-black" data-testid="home-page">
         <HeroSection />
+        <FleetShowcaseSection />
         <EventsSection events={events} />
         <CallToActionSection />
       </main>

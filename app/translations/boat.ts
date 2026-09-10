@@ -1,197 +1,230 @@
 export const boatTranslations = {
   en: {
-    title: 'Our Moth',
-    workInProgress: {
-      title: 'Fleet Under Construction',
-      description: 'As a newly formed team, we are working on building our first boat. In the meantime, we invite you to discover all the technical details of the Moth, one of the most innovative classes in the sailing world, to which our boat will also belong.'
-    },
-    whyMoth: {
-      title: 'Why SuMoth?',
-      description: 'We chose to participate in the SuMoth Challenge because we share the values it pursues: innovation, technology, and sustainability. The Moth is one of the most innovative boats in the sailing world, capable of "flying" above water thanks to the use of foils. Its advanced design and technical challenges allow us to explore cutting-edge engineering solutions. For us, building a Moth means pushing beyond the limits of technology and science applied to nautical. The use of eco-compatible materials for construction pushes us to explore and test sustainable techniques that can have a concrete impact on construction methods in the nautical field.'
-    },
-    mainComponents: 'Main Components',
-    foils: {
-      title: 'The Foils',
-      description: 'The foils are underwater wings that generate hydrodynamic lift, allowing the boat to rise from the water.',
-      details: [
-        'Main foil: Generates most of the lift',
-        'Rudder T-Foil: Controls longitudinal trim',
-        'Flap: Adjusts lift during navigation',
-        'Supports: Carbon structures for fixing'
-      ],
-      technicalSpecs: [
-        'Material: Pre-preg carbon',
-        'Main foil span: ~80 cm',
-        'Wing profile: Specific for high speeds',
-        'Adjustments: Rake and ride height'
-      ]
-    },
-    hull: {
-      title: 'The Hull',
-      description: 'The Moth hull is designed to minimize weight and maximize aerodynamics when flying on foils.',
-      details: [
-        'Ultra-light carbon structure',
-        'Design optimized for flight',
-        'Automatic drainage system',
-        'Ergonomic cockpit'
-      ],
-      technicalSpecs: [
-        'Length: 3.355m',
-        'Width: 2.25m',
-        'Minimum weight: 30kg',
-        'Material: Pre-preg carbon'
-      ]
-    },
-    rig: {
-      title: 'The Sail',
-      description: 'The Moth sail is highly efficient and fully adjustable to optimize performance.',
-      details: [
-        'High modulus carbon mast',
-        'High aspect ratio sail',
-        'Dynamic adjustment system',
-        'Carbon boom'
-      ],
-      technicalSpecs: [
-        'Sail area: 8m²',
-        'Mast height: ~5.5m',
-        'Mast material: Pre-preg carbon',
-        'Controls: Cunningham, vang, base'
-      ]
-    },
-    controls: {
-      title: 'Flight Controls',
-      description: 'Flight controls allow the helmsman to manage trim and power during flight.',
-      details: [
-        'Ride height controls',
-        'Automatic wand system',
-        'Foil rake adjustment',
-        'Rudder flap control'
-      ],
-      technicalSpecs: [
-        'Wand type: Mechanical/hydraulic',
-        'Lever ratios: Adjustable',
-        'Emergency system: Quick release',
-        'Feedback: Real-time ride height'
-      ]
-    },
-    characteristics: 'Characteristics',
-    technicalSpecs: 'Technical Specifications',
-    joinProject: {
-      title: 'Want to be part of the project?',
-      description: 'If you are a student passionate about sailing and engineering and want to contribute to building our fleet, send a spontaneous application.',
-      contactButton: 'Contact Us',
-      joinButton: 'Join the Team'
+    title: 'Meravijosa',
+    subtitle: 'The Sustainable Foiling Moth of Sapienza University of Rome',
+    badge: 'SuMoth Challenge // Stage S2',
+    description: 'Explore the engineering architecture of Meravijosa: select the components on the 3D model to discover its circular materials, mechanical control systems, and custom onboard telemetry.',
+    exploreCta: 'Click on the pins or tabs to inspect each component',
+    partnersTitle: 'Technical Partners & Mentors',
+    partnersDesc: 'Built with the generous support of FluidoDesign for composites manufacturing, Lega Navale di Ventotene for hydrofoils and rig, Comar Yachts for repurposed epoxy resin, and Harken & Gottifredi Maffioli for deck hardware and bio-based lines.',
+    galleryTitle: 'Tested on the Water // Lake Garda',
+    components: {
+      hull: {
+        id: '01',
+        tab: 'Hull',
+        title: 'B-PET Sandwich Hull',
+        subsystem: 'STRUCTURE & CIRCULAR MATERIALS',
+        desc: 'Laminated with ±45° biaxial basalt fiber skins, an industrial-excess PET foam core, and out-of-shelf-life epoxy resin donated by Comar Yachts to eliminate chemical waste.',
+        photo: '/images/boat-01-wing-sft-detail.jpg',
+        photoLabel: 'Laminated hull & wing detail // SFT',
+        material: 'Biaxial Basalt & rPET Core',
+        feature: 'Repurposed Comar Epoxy',
+        bullets: [
+          'Female tooling mold CNC-milled in MDF at Sapienza and hand-faired with longboards',
+          'Mast step reinforced with an upcycled carbon windsurf mast section'
+        ]
+      },
+      foils: {
+        id: '02',
+        tab: 'Foils',
+        title: 'Foils',
+        subsystem: 'LIFT & HYDRODYNAMICS',
+        desc: 'Complete foil set loaned by Lega Navale Italiana di Ventotene. The team executed a precision surface refit to restore original laminar hydrodynamic profiles.',
+        photo: '/images/hero-03.jpg',
+        photoLabel: 'Foils in full flight // Lake Garda',
+        material: 'Loaned Foil Platform',
+        feature: 'Mirror-Finish Surface Refit',
+        bullets: [
+          'Microballoon edge fairing and wet sanding up to 1000-grit to delay cavitation',
+          'Oversized modular foil box with custom shims for pitch and rake trim at the beach'
+        ]
+      },
+      wand: {
+        id: '03',
+        tab: 'Wand',
+        title: 'Mechanical Bow Wand Sensor',
+        subsystem: 'MECHANICAL FLIGHT CONTROL',
+        desc: '100% mechanical autonomous flight control: the bow paddle skims the water surface and mechanically modulates the main foil flap in real time with zero electrical power consumption.',
+        photo: '/images/hero-04.jpg',
+        photoLabel: 'Wand paddle and foil in paddock',
+        material: 'In-House 3D Printed PETG',
+        feature: 'Upcycled Carbon & Aluminum Rods',
+        bullets: [
+          'Additive manufacturing using recyclable PETG and fiber-reinforced filament',
+          'Dry-assembled mechanical linkages for quick on-site tuning and repairability'
+        ]
+      },
+      wings: {
+        id: '04',
+        tab: 'Wings',
+        title: 'Lost-Core Wingbars & Deck',
+        subsystem: 'CREW ERGONOMICS & DECK LAYOUT',
+        desc: 'Wingbars shaped with lost-core male molding using rPET cores and basalt tapes. Deck panels reinforced with basalt and Kevlar, with control lines guided underdeck.',
+        photo: '/images/boat-01-wing-sft-detail.jpg',
+        photoLabel: 'Wingbars and hiking straps',
+        material: 'rPET Sandwich + Basalt + Kevlar',
+        feature: 'Harken Fly & Gottifredi Maffioli',
+        bullets: [
+          'Hull-to-wing interface reinforced with internal carbon plates repurposed from offcuts',
+          'Deck layout validated with a 1:1 scale mock-up from recycled cardboard'
+        ]
+      },
+      rig: {
+        id: '05',
+        tab: 'Rig',
+        title: 'Upcycled Rig',
+        subsystem: 'PROPULSION & TEXTILE RIGGING',
+        desc: 'Mast, boom, and mainsail on loan from Lega Navale di Ventotene. The luff pocket was reinforced with Dacron stitching and rigged with bio-based Dyneema textile loops.',
+        photo: '/images/sponsor-05-full-sail-partners.jpg',
+        photoLabel: 'Refurbished rig sailing on Lake Garda',
+        material: 'Reconditioned Rig + Dacron',
+        feature: 'Bio-Based Dyneema Shrouds',
+        bullets: [
+          'Heavy metallic chainplates replaced by lightweight textile Dyneema loops',
+          'Tailored sleeve repairs to restore clean aerodynamic twist and draft'
+        ]
+      },
+      pcb: {
+        id: '06',
+        tab: 'Electronics',
+        title: 'Custom PCB & Telemetry Box',
+        subsystem: 'ONBOARD SENSORS & DATA LOGGING',
+        desc: 'Custom-designed PCB developed in-house to capture flight telemetry autonomously during sailing sessions without requiring helmsman interaction.',
+        photo: '/images/elettronica.jpeg',
+        photoLabel: 'Meravijosa sailing with telemetry logging',
+        material: 'Custom PCB + 3D Printed PETG',
+        feature: 'ESP32 & 2000mAh LiPo Battery',
+        bullets: [
+          'Integrated 9-axis IMU, u-blox GPS module, and MicroSD card logging',
+          'Waterproof 3D-printed enclosure with compressed TPU gasket and power switch'
+        ]
+      }
     },
     rulebook: {
-      title: 'SuMoth Challenge Rulebook Highlights',
-      description: 'Explore the key regulations and guidelines of the Foiling SuMoth Challenge, providing essential information for participants and enthusiasts.',
-      technicalRequirements: {
-        title: 'Technical Requirements',
-      },
-      challengeStages: {
-        title: 'Challenge Stages',
-      },
-      competitionScoring: {
-        title: 'Competition & Scoring',
-      },
+      badge: 'SuMoth Challenge Regulations',
+      title: 'Official Rulebook',
+      desc: 'Meravijosa is engineered in compliance with the SuMoth Challenge technical guidelines, promoting sustainable manufacturing, circular materials, and foiling safety.',
+      button: 'See the Rulebook'
     },
+    joinProject: {
+      title: 'Want to be part of the project?',
+      description: 'If you are a student passionate about sailing and engineering and want to contribute to our fleet, send a spontaneous application.',
+      contactButton: 'Contact Us',
+      joinButton: 'Join the Team'
+    }
   },
   it: {
-    title: 'Il nostro Moth',
-    
-    workInProgress: {
-      title: 'Flotta in Costruzione',
-      description: 'Come team appena formato, stiamo lavorando alla costruzione della nostra prima imbarcazione. Nel frattempo, ti invitiamo a scoprire tutti i dettagli tecnici del Moth, una delle classi più innovative nel mondo della vela, alla quale anche la nostra barca apparterrà.'
+    title: 'Meravijosa',
+    subtitle: 'Il Moth Foiling Sostenibile della Sapienza Università di Roma',
+    badge: 'SuMoth Challenge // Stage S2',
+    description: 'Esplora l\'architettura ingegneristica di Meravijosa: seleziona i componenti sul modello 3D per scoprire i materiali, i sistemi di controllo meccanico e l\'elettronica di telemetria custom.',
+    exploreCta: 'Clicca sui pin o sui tab per ispezionare ciascun componente',
+    partnersTitle: 'Partner Tecnici & Mentors',
+    partnersDesc: 'Realizzato grazie al supporto di FluidoDesign per il laboratorio compositi, Lega Navale di Ventotene per hydrofoil e rig, Comar Yachts per la resina epossidica, Harken e Gottifredi Maffioli per attrezzature e cime bio-based.',
+    galleryTitle: 'Collaudo sul Campo // Lago di Garda',
+    components: {
+      hull: {
+        id: '01',
+        tab: 'Scafo',
+        title: 'Scafo',
+        subsystem: 'STRUTTURA & MATERIALI',
+        desc: 'Costruito con pelli in fibra di basalto biassiale (±45°), anima in schiuma PET recuperata da sfridi industriali e resina epossidica donata da Comar Yachts oltre la data di scadenza per azzerare i rifiuti chimici.',
+        photo: '/images/boat-01-wing-sft-detail.jpg',
+        photoLabel: 'Scafo laminato & terrazza SFT',
+        material: 'Basalto Biassiale & Core rPET',
+        feature: 'Resina Donata da Comar',
+        bullets: [
+          'Stampo femmina in MDF fresato su CNC autocostruita in Sapienza e rifinito a mano',
+          'Mast step rinforzato con sezione tubolare upcycled da un albero windsurf rotto'
+        ]
+      },
+      foils: {
+        id: '02',
+        tab: 'Foil',
+        title: 'Foils',
+        subsystem: 'PORTANZA & IDRODINAMICA',
+        desc: 'Set completo di foil concesso in prestito dalla Lega Navale Italiana di Ventotene. Il team ha eseguito un accurato refit superficiale per ripristinare la geometria dei profili idrodinamici.',
+        photo: '/images/hero-03.jpg',
+        photoLabel: 'Foil in volo sul Lago di Garda',
+        material: 'Foil Pre-2015 su Prestito',
+        feature: 'Refit Superficiale a Specchio',
+        bullets: [
+          'Stuccatura bordi d\'uscita e wet-sanding fino a 1000 grit per ritardare la cavitazione',
+          'Scassa foil modulare sovradimensionata per regolare incidenza e rake direttamente a riva'
+        ]
+      },
+      wand: {
+        id: '03',
+        tab: 'Wand',
+        title: 'Wand',
+        subsystem: 'CONTROLLO VOLO MECCANICO',
+        desc: 'Sistema di controllo del volo 100% meccanico: la bacchetta tocca la superficie dell\'acqua e trasmette istantaneamente l\'angolo al flap del main foil tramite leveraggi interni, senza alcun consumo elettrico.',
+        photo: '/images/hero-04.jpg',
+        photoLabel: 'Bacchetta wand e foil in paddock',
+        material: 'Paddle Stampa 3D in PETG',
+        feature: 'Aste Carbonio & Alluminio',
+        bullets: [
+          'Manifattura additiva in-house con materiali riciclabili ad alta resistenza all\'urto',
+          'Assemblaggio a secco con viteria per consentire riparazioni e regolazioni veloci'
+        ]
+      },
+      wings: {
+        id: '04',
+        tab: 'Terrazze',
+        title: 'Terrazze',
+        subsystem: 'TERRAZZE & CALPESTIO',
+        desc: 'Terrazze sagomate con tecnica a perdere lost-core su anime in rPET e nastri di basalto. La coperta calpestabile è rinforzata in Kevlar, mentre le manovre sono guidate sotto-coperta con bozzelli Harken.',
+        photo: '/images/hero-04.jpg',
+        photoLabel: 'Terrazze e cinghie di richiamo',
+        material: 'Sandwich rPET + Basalto + Kevlar',
+        feature: 'Bozzelli Harken & Cime Maffioli',
+        bullets: [
+          'Interfaccia scafo-ali rinforzata con piastre interne di carbonio recuperate da scarti',
+          'Layout di coperta validato con un mock-up in scala reale 1:1 in cartone riciclato'
+        ]
+      },
+      rig: {
+        id: '05',
+        tab: 'Sartie',
+        title: 'Sartie',
+        subsystem: 'PROPULSIONE & RIG TESSUTO',
+        desc: 'Albero, boma e randa concessi in prestito dalla Lega Navale di Ventotene. La tasca dell\'albero è stata restaurata con cuciture strutturali in Dacron, abbinata a sartie tessili in Dyneema bio-based.',
+        photo: '/images/sponsor-05-full-sail-partners.jpg',
+        photoLabel: 'Rig ricondizionato sul Lago di Garda',
+        material: 'Rig Pre-2015 + Dacron',
+        feature: 'Sartie Tessili Dyneema Bio-Based',
+        bullets: [
+          'Eliminazione delle pesanti lande metalliche tradizionali a favore di stroppi tessili',
+          'Riparazione sartoriale della randa per ripristinare il corretto profilo alare'
+        ]
+      },
+      pcb: {
+        id: '06',
+        tab: 'Elettronica',
+        title: 'Elettronica & PCB di Bordo',
+        subsystem: 'TELEMETRIA & ACQUISIZIONE DATI',
+        desc: 'Scheda elettronica (PCB) disegnata e realizzata in-house per registrare la dinamica di volo in totale autonomia, senza richiedere interazioni da parte del timoniere durante la navigazione.',
+        photo: '/images/elettronica.jpeg',
+        photoLabel: 'Meravijosa in navigazione // Telemetria attiva',
+        material: 'Custom PCB + Scatola Stagna PETG',
+        feature: 'Microcontrollore ESP32 & LiPo 2000mAh',
+        bullets: [
+          'Sensore inerziale IMU a 9 assi, modulo GPS u-blox e data logging su MicroSD',
+          'Contenitore stagno stampato in 3D con guarnizione in TPU compressa per la massima impermeabilità'
+        ]
+      }
     },
-    whyMoth: {
-      title: 'Perché il SuMoth?',
-      description: 'Abbiamo scelto di partecipare alla SuMoth Challenge perché condividiamo i valori che persegue: innovazione, tecnologia e sostenibilità. Il Moth è una delle imbarcazioni più innovative nel mondo della vela, capace di "volare" sopra l\'acqua grazie all\'uso dei foil. Il suo design avanzato e le sfide tecniche che comporta, che ci permettono di esplorare soluzioni ingegneristiche all\'avanguardia. Per noi, costruire un Moth significa spingerci oltre i limiti della tecnologia e della scienza applicata alla nautica. L\'utilizzo di materiali eco-compatibili per la costruzione ci spinge ad esplorare e testare tecniche sostenibili che possono avere un impatto concreto sui metodi di costruzione in ambito nautico.'
+    rulebook: {
+      badge: 'Regolamento SuMoth Challenge',
+      title: 'Regolamento Ufficiale',
+      desc: 'Meravijosa è progettata e costruita nel pieno rispetto delle linee guida della SuMoth Challenge, integrando sostenibilità dei materiali, ciclo di vita circolare e sicurezza in volo.',
+      button: 'Vedi il Regolamento'
     },
-    mainComponents: 'Componenti Principali',
-    foils: {
-      title: 'I Foil',
-      description: 'I foil sono ali sottomarine che generano portanza idrodinamica, permettendo all\'imbarcazione di sollevarsi dall\'acqua.',
-      details: [
-        'Foil principale: Genera la maggior parte della portanza',
-        'T-Foil del timone: Controlla l\'assetto longitudinale',
-        'Flap: Regola la portanza durante la navigazione',
-        'Supporti: Strutture in carbonio per il fissaggio'
-      ],
-      technicalSpecs: [
-        'Materiale: Carbonio pre-preg',
-        'Span foil principale: ~80 cm',
-        'Profilo alare: Specifico per alte velocità',
-        'Regolazioni: Rake e ride height'
-      ]
-    },
-    hull: {
-      title: 'Lo Scafo',
-      description: 'Lo scafo del Moth è progettato per minimizzare il peso e massimizzare l\'aerodinamica quando vola sui foil.',
-      details: [
-        'Struttura ultra-leggera in carbonio',
-        'Design ottimizzato per il volo',
-        'Sistema di svuotamento automatico',
-        'Pozzetto ergonomico'
-      ],
-      technicalSpecs: [
-        'Lunghezza: 3.355m',
-        'Larghezza: 2.25m',
-        'Peso minimo: 30kg',
-        'Materiale: Carbonio pre-preg'
-      ]
-    },
-    rig: {
-      title: 'La Vela',
-      description: 'La vela del Moth è altamente efficiente e completamente regolabile per ottimizzare le prestazioni.',
-      details: [
-        'Albero in carbonio ad alta modularità',
-        'Vela ad alto aspect ratio',
-        'Sistema di regolazione dinamica',
-        'Boma in carbonio'
-      ],
-      technicalSpecs: [
-        'Superficie velica: 8m²',
-        'Altezza albero: ~5.5m',
-        'Materiale albero: Carbonio pre-preg',
-        'Controlli: Cunningham, vang, base'
-      ]
-    },
-    controls: {
-      title: 'I controlli di volo',
-      description: 'I controlli di volo permettono al timoniere di gestire l\'assetto e la potenza durante il volo.',
-      details: [
-        'Controlli ride height',
-        'Sistema wand automatico',
-        'Regolazione rake foil',
-        'Comando flap del timone'
-      ],
-      technicalSpecs: [
-        'Tipo wand: Meccanica/idraulica',
-        'Rapporti di leva: Regolabili',
-        'Sistema di emergenza: Quick release',
-        'Feedback: Real-time ride height'
-      ]
-    },
-    characteristics: 'Caratteristiche',
-    technicalSpecs: 'Specifiche Tecniche',
     joinProject: {
       title: 'Vuoi far parte del progetto?',
       description: 'Se sei uno studente appassionato di vela e ingegneria e vuoi contribuire alla costruzione della nostra flotta, invia una candidatura spontanea.',
       contactButton: 'Contattaci',
       joinButton: 'Unisciti al Team'
-    },
-    rulebook: {
-      title: 'Punti Salienti del Regolamento SuMoth Challenge',
-      description: 'Esplora le principali normative e linee guida della Foiling SuMoth Challenge, fornendo informazioni essenziali per partecipanti e appassionati.',
-      technicalRequirements: {
-        title: 'Requisiti Tecnici',
-      },
-      challengeStages: {
-        title: 'Fasi della Sfida',
-      },
-      competitionScoring: {
-        title: 'Competizione e Punteggio',
-      },
-    },
+    }
   }
 };

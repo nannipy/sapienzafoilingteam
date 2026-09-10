@@ -17,7 +17,7 @@ const EventCard = ({ event, isPast = false, language }: { event: Event; isPast?:
     {/* Image Background */}
     <div className="absolute inset-0">
       <Image
-        src={event.image_url || '/placeholder.jpg'}
+        src={event.image_url || '/gallery/garda-racing.jpg'}
         alt={event.image_alt || event.title}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

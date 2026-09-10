@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meravijosa | Design 03: Bento Specsheet Lab — Sapienza Foiling Team</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            syne: ['Syne', 'sans-serif'],
+            sans: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              DEFAULT: '#822433', // Sapienza Burgundy
+              dark: '#6b1d28',
+              light: '#a34252',
+            },
+            void: '#0a0808',
+            carbon: '#141212',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0a0808;
+      color: #F1F5F9;
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+    }
+    .bento-card {
+      background: rgba(20, 18, 18, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bento-card:hover {
+      border-color: rgba(163, 66, 82, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px -10px rgba(130, 36, 51, 0.25);
+    }
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease-out;
+    }
+  </style>
+  <script>
+    if (window.location.protocol.startsWith("http")) {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("img").forEach(img => {
+          const src = img.getAttribute("src");
+          if (src && src.startsWith("../public/")) {
+            img.src = src.replace("../public/", "/");
+          }
+        });
+      });
+    }
+  </script>
+</head>
+<body class="selection:bg-brand selection:text-white">
+
+  <!-- ==================== SFT FLOATING NAVBAR ==================== -->
+  <nav class="fixed top-0 left-0 right-0 z-50 px-4 py-3">
+    <div class="bg-white text-black font-semibold text-center mx-auto max-w-4xl rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100">
+      <div class="flex items-center justify-between px-6 py-2.5">
+        <!-- Logo -->
+        <a href="/" class="flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
+          <img 
+            src="../public/logosft.svg" 
+            alt="Sapienza Foiling Team Logo" 
+            class="h-12 w-12 object-contain"
+            onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='/logosft.svg';}"
+          />
+        </a>
+
+        <!-- Desktop Navigation Items -->
+        <div class="hidden md:flex items-center space-x-2 text-sm">
+          <a href="/boat" class="px-4 py-2 rounded-full transition-all duration-300 bg-brand text-white font-bold shadow-sm">
+            Moth
+          </a>
+          <a href="/team" class="px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-100 text-gray-700">
+            Team
+          </a>
+          <a href="/sponsor" class="px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-100 text-gray-700">
+            Sponsor
+          </a>
+          <a href="/contact" class="px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-100 text-gray-700">
+            Contatti
+          </a>
+          <a href="/blog" class="px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-100 text-gray-700">
+            Blog
+          </a>
+          <a href="/name-on-wings" class="px-4 py-2 rounded-full bg-gray-900 text-white hover:bg-brand transition-all duration-300 text-xs uppercase tracking-wider font-bold">
+            Supportaci
+          </a>
+        </div>
+
+        <!-- Tag -->
+        <div class="flex items-center gap-2">
+          <span class="px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-mono font-bold">
+            DESIGN 03 // BENTO
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="max-w-7xl mx-auto px-6 pt-36 md:pt-44 pb-20">
+    
+    <!-- Header with Filter Controls -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6 border-b border-white/10 pb-8">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/20 border border-brand/40 text-brand-light text-xs font-mono uppercase tracking-wider mb-3">
+          <span class="w-2 h-2 rounded-full bg-brand-light animate-pulse"></span>
+          Bento Specsheet Hub // ITA 9352
+        </div>
+        <h1 class="text-4xl md:text-6xl font-black font-syne uppercase tracking-tight text-white leading-none">
+          INGEGNERIA DI <span class="text-brand-light">MERAVIJOSA</span>
+        </h1>
+        <p class="text-sm md:text-base text-white/70 font-light mt-3 max-w-xl leading-relaxed">
+          Esplora l'architettura tecnica del Moth: filtra per sottosistema e usa il selettore nella finestra principale per passare istantaneamente tra il render 3D e le fotografie delle regate.
+        </p>
+      </div>
+
+      <!-- Quick Category Filters -->
+      <div class="flex flex-col items-start md:items-end gap-3">
+        <div class="flex items-center gap-2 text-xs font-mono">
+          <span class="text-white/40">VARIANTE:</span>
+          <a href="meravijosa-blueprint.html" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/70 transition-colors">01. Blueprint</a>
+          <a href="meravijosa-scrollytelling.html" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/70 transition-colors">02. Scrolly</a>
+          <span class="px-3 py-1.5 rounded-full bg-brand text-white font-bold">03. Bento</span>
+        </div>
+
+        <div class="flex flex-wrap gap-1.5 text-xs font-mono">
+          <button onclick="filterBento('all')" class="filter-btn px-3 py-1.5 rounded-full bg-brand text-white font-bold">Tutti</button>
+          <button onclick="filterBento('hydro')" class="filter-btn px-3 py-1.5 rounded-full bg-white/5 text-white/70 hover:text-white">Idrodinamica</button>
+          <button onclick="filterBento('structure')" class="filter-btn px-3 py-1.5 rounded-full bg-white/5 text-white/70 hover:text-white">Scafo Bio</button>
+          <button onclick="filterBento('aero')" class="filter-btn px-3 py-1.5 rounded-full bg-white/5 text-white/70 hover:text-white">Rig & Vele</button>
+          <button onclick="filterBento('control')" class="filter-btn px-3 py-1.5 rounded-full bg-white/5 text-white/70 hover:text-white">Sistemi di Volo</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== BENTO GRID ==================== -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+      <!-- BENTO 1: Giant 3D Showcase Tile with A/B Toggle (Col Span 8) -->
+      <div id="card-3d" class="bento-card md:col-span-8 rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden group">
+        <!-- Ambient light -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand/25 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <!-- Card Top Bar with Switcher -->
+        <div class="flex items-center justify-between z-10 mb-4">
+          <div>
+            <span class="text-xs font-mono text-brand-light uppercase tracking-widest block">VIEWPORT PRINCIPALE</span>
+            <h3 id="viewportTitle" class="text-2xl font-black font-syne uppercase text-white mt-0.5">Render 3D Isometrico</h3>
+          </div>
+
+          <!-- A/B Switch: Render vs Foto Reale -->
+          <div class="inline-flex p-1 rounded-full bg-black/60 border border-white/15 backdrop-blur-md text-xs font-mono">
+            <button 
+              id="btnShowRender" 
+              onclick="toggleHeroMedia('render')" 
+              class="px-3.5 py-1.5 rounded-full bg-brand text-white font-bold transition-all shadow"
+            >
+              Render 3D
+            </button>
+            <button 
+              id="btnShowPhoto" 
+              onclick="toggleHeroMedia('photo')" 
+              class="px-3.5 py-1.5 rounded-full text-white/60 hover:text-white transition-all"
+            >
+              Foto in Acqua
+            </button>
+          </div>
+        </div>
+
+        <!-- Central Media Viewport -->
+        <div class="relative w-full h-[380px] md:h-[440px] flex items-center justify-center my-2 overflow-hidden rounded-2xl">
+          <!-- 3D Render Image -->
+          <img 
+            id="heroRenderImg" 
+            src="../public/images/meravijosa.png" 
+            alt="Meravijosa Render 3D" 
+            class="w-full h-full object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)] transition-all duration-500 tilt-card"
+            onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='/images/meravijosa.png';}"
+          />
+          <!-- Real Action Photo -->
+          <img 
+            id="heroRealPhoto" 
+            src="../public/images/hero-03.jpg" 
+            alt="Meravijosa in volo reale sul Garda" 
+            class="hidden w-full h-full object-cover rounded-2xl transition-all duration-500"
+            onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='/images/hero-03.jpg';}"
+          />
+        </div>
+
+        <!-- Viewport Bottom Quick Specs -->
+        <div class="z-10 pt-4 border-t border-white/10 grid grid-cols-3 gap-4 text-xs font-mono">
+          <div>
+            <div class="text-white/40 text-[10px]">CLASSE</div>
+            <div class="text-white font-bold">International Moth</div>
+          </div>
+          <div>
+            <div class="text-white/40 text-[10px]">COLORE</div>
+            <div class="text-brand-light font-bold">Rosso Corsa Sapienza</div>
+          </div>
+          <div class="text-right">
+            <div class="text-white/40 text-[10px]">STATUS REGATA</div>
+            <div class="text-emerald-400 font-bold">Stazzata SuMoth</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BENTO 2: Eco-Sustainability & Bio-Composites (Col Span 4) -->
+      <div data-category="structure" class="bento-card md:col-span-4 rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">SOSTENIBILITÀ</span>
+            <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono font-bold">STAGE 2</span>
+          </div>
+          <h3 class="text-2xl font-black font-syne uppercase text-white mb-2">Matrice Bio-Composita</h3>
+          <p class="text-xs text-white/70 font-light leading-relaxed mb-6">
+            Meravijosa sostituisce la fibra di carbonio tradizionale dello scafo con <strong>fibra di lino naturale unidirezionale</strong> impregnata di bio-resina epossidica a base biologica.
+          </p>
+
+          <div class="space-y-4 font-mono text-xs">
+            <div>
+              <div class="flex justify-between text-[11px] mb-1">
+                <span class="text-white/60">Fibra di Lino Naturale</span>
+                <span class="text-white font-bold">65% Vol.</span>
+              </div>
+              <div class="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                <div class="h-full bg-emerald-400 rounded-full" style="width: 65%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[11px] mb-1">
+                <span class="text-white/60">Bio-Resina Epossidica</span>
+                <span class="text-white font-bold">42% Carbonio Rinnovabile</span>
+              </div>
+              <div class="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                <div class="h-full bg-brand-light rounded-full" style="width: 75%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[11px] mb-1">
+                <span class="text-white/60">Taglio CO2 vs Carbonio Vergine</span>
+                <span class="text-emerald-400 font-bold">-45% Life-Cycle</span>
+              </div>
+              <div class="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-emerald-500 to-teal-300 rounded-full" style="width: 85%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-white/50">
+          <span>VALUTAZIONE LCA:</span>
+          <span class="text-white font-bold">A+ SUMOTH SCORE</span>
+        </div>
+      </div>
+
+      <!-- BENTO 3: Telemetry & Flight Performance (Col Span 4) -->
+      <div data-category="hydro" class="bento-card md:col-span-4 rounded-3xl p-8 flex flex-col justify-between">
+        <div>
+          <div class="text-xs font-mono text-brand-light uppercase tracking-widest mb-3">TELEMETRIA DINAMICA</div>
+          <h3 class="text-2xl font-black font-syne uppercase text-white mb-4">Metriche di Volo</h3>
+          
+          <div class="grid grid-cols-2 gap-3 font-mono text-xs">
+            <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5">
+              <div class="text-[10px] text-white/40 uppercase">TAKEOFF</div>
+              <div class="text-2xl font-bold font-syne text-white mt-0.5">8.0 KTS</div>
+              <div class="text-[10px] text-brand-light">Decollo rapido</div>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5">
+              <div class="text-[10px] text-white/40 uppercase">VMAX GARDA</div>
+              <div class="text-2xl font-bold font-syne text-white mt-0.5">32.4 KTS</div>
+              <div class="text-[10px] text-white/60">Punta registrata</div>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5">
+              <div class="text-[10px] text-white/40 uppercase">QUOTA VOLO</div>
+              <div class="text-2xl font-bold font-syne text-white mt-0.5">50 CM</div>
+              <div class="text-[10px] text-white/60">Sopra il pelo d'acqua</div>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5">
+              <div class="text-[10px] text-white/40 uppercase">ROLLIO MEDIO</div>
+              <div class="text-2xl font-bold font-syne text-white mt-0.5">-3.5°</div>
+              <div class="text-[10px] text-white/60">Sopravento</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-white/10 text-xs font-mono text-white/60 flex items-center justify-between">
+          <span>Portanza Totale @ 15 kts:</span>
+          <span class="text-brand-light font-bold">1450 N</span>
+        </div>
+      </div>
+
+      <!-- BENTO 4: Main Foil & Flap Component Card (Col Span 4) -->
+      <div data-category="hydro" class="bento-card md:col-span-4 rounded-3xl p-8 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono text-brand-light uppercase tracking-widest">IDRODINAMICA</span>
+            <span class="text-xs font-mono text-white/40">01</span>
+          </div>
+          <h3 class="text-2xl font-black font-syne uppercase text-white mb-2">Main Foil & Flap</h3>
+          <p class="text-xs text-white/75 font-light leading-relaxed mb-4">
+            Ala principale a T con profilo NACA a basso attrito. Il flap posteriore risponde alla bacchetta per modulare l'altezza senza perdite di portanza.
+          </p>
+
+          <div class="rounded-2xl overflow-hidden border border-white/10 aspect-[16/9] mb-4 group bg-black/40">
+            <img src="../public/images/hero-02.jpg" alt="Foil in acqua" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='/images/hero-02.jpg';}">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 font-mono text-xs">
+            <div class="p-2.5 rounded-xl bg-white/5 border border-white/5">
+              <span class="text-white/40 text-[10px] block">APERTURA</span>
+              <span class="text-white font-bold">820 mm</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white/5 border border-white/5">
+              <span class="text-white/40 text-[10px] block">PESO FOIL</span>
+              <span class="text-white font-bold">2.4 kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BENTO 5: Bow Wand Sensor Card (Col Span 4) -->
+      <div data-category="control" class="bento-card md:col-span-4 rounded-3xl p-8 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono text-brand-light uppercase tracking-widest">CONTROLLO VOLO</span>
+            <span class="text-xs font-mono text-white/40">02</span>
+          </div>
+          <h3 class="text-2xl font-black font-syne uppercase text-white mb-2">Sensore Bacchetta</h3>
+          <p class="text-xs text-white/75 font-light leading-relaxed mb-4">
+            Sfiora la superficie dell'acqua trasmettendo la correzione al flap in meno di 20 millisecondi tramite aste meccaniche interne.
+          </p>
+
+          <div class="rounded-2xl overflow-hidden border border-white/10 aspect-[16/9] mb-4 group bg-black/40">
+            <img src="../public/images/boat-02-foil-wand-transport.jpg" alt="Bacchetta wand e foil" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='/images/boat-02-foil-wand-transport.jpg';}">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 font-mono text-xs">
+            <div class="p-2.5 rounded-xl bg-white/5 border border-white/5">
+              <span class="text-white/40 text-[10px] block">TEMPO REAZIONE</span>
+              <span class="text-emerald-400 font-bold">&lt; 20 ms</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white/5 border border-white/5">
+              <span class="text-white/40 text-[10px] block">SISTEMA</span>
+              <span class="text-white font-bold">100% Meccanico</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BENTO 6: Rig Alare & Albero Carbonio (Col Span 6) -->
+      <div data-category="aero" class="bento-card md:col-span-6 rounded-3xl p-8 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono text-brand-light uppercase tracking-widest">PROPULSIONE & RIG</span>
+            <span class="text-xs font-mono text-white/40">03</span>
+          </div>
+          <h3 class="text-2xl font-black font-syne uppercase text-white mb-2">Rig Alare 8m² & Albero Carbonio</h3>
+          <p class="text-xs text-white/75 font-light leading-relaxed mb-4">
+            Randa square-top camberata su albero rastremato autoclave da 5.50 metri per una risposta dinamica rapida e controllo della svergolatura sotto raffica.
+          </p>
+
+          <div class="rounded-2xl overflow-hidden border border-white/10 aspect-[16/9] mb-4 group bg-black/40">
+            <img src="../public/images/sponsor-05-full-sail-partners.jpg" alt="Vela da regata Meravijosa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='/images/sponsor-05-full-sail-partners.jpg';}">
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 font-mono text-xs">
+            <div class="p-2.5 rounded-xl bg-white/5 border border-white/5">
+              <span class="text-white/40 text-[10px] block">AREA</span>
+              <span class="text-white font-bold">8.00 m²</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white/5 border border-white/5">
+              <span class="text-white/40 text-[10px] block">ALBERO</span>
+              <span class="text-white font-bold">5.50 m</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white/5 border border-white/5">
+              <span class="text-white/40 text-[10px] block">VANG</span>
+              <span class="text-white font-bold">32:1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BENTO 7: Terrazze Carbon Wings & Timone (Col Span 6) -->
+      <div data-category="structure" class="bento-card md:col-span-6 rounded-3xl p-8 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono text-brand-light uppercase tracking-widest">TIMONE & TERRAZZE</span>
+            <span class="text-xs font-mono text-white/40">04</span>
+          </div>
+          <h3 class="text-2xl font-black font-syne uppercase text-white mb-2">Terrazze Wings 2.25m & Timone T</h3>
+          <p class="text-xs text-white/75 font-light leading-relaxed mb-4">
+            Le terrazze a sbalzo offrono la leva necessaria per contrastare la forza del rig da 8m². Il timone a T è regolabile in corsa tramite twist-grip sulla barra.
+          </p>
+
+          <div class="rounded-2xl overflow-hidden border border-white/10 aspect-[16/9] mb-4 group bg-black/40">
+            <img src="../public/images/boat-01-wing-sft-detail.jpg" alt="Terrazze con logo SFT" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='/images/boat-01-wing-sft-detail.jpg';}">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 font-mono text-xs">
+            <div class="p-2.5 rounded-xl bg-white/5 border border-white/5">
+              <span class="text-white/40 text-[10px] block">BAGLIO TERRAZZE</span>
+              <span class="text-white font-bold">2.25 Metri</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white/5 border border-white/5">
+              <span class="text-white/40 text-[10px] block">REGOLAZIONE PITCH</span>
+              <span class="text-brand-light font-bold">±10° Twist-Grip</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== SFT OFFICIAL FOOTER ==================== -->
+  <footer class="bg-carbon text-white py-12 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+        <div>
+          <h2 class="text-[7rem] md:text-[8rem] leading-[0.8] font-syne font-black text-white/5 tracking-widest select-none -ml-3">
+            SFT
+          </h2>
+          <p class="mt-6 text-white/50 font-sans max-w-sm leading-relaxed text-sm">
+            Progettiamo e costruiamo il futuro delle barche foiling sostenibili. Promuoviamo l'innovazione alla Sapienza Università di Roma.
+          </p>
+        </div>
+
+        <div class="flex flex-col justify-end items-start md:items-end space-y-4">
+          <a href="mailto:sapienzafoilingteam@gmail.com" class="text-xl md:text-2xl font-syne font-bold text-white/90 hover:text-brand-light transition-colors">
+            sapienzafoilingteam@gmail.com
+          </a>
+          <div class="flex space-x-4 mt-4">
+            <a href="https://instagram.com/sapienzafoilingteam" target="_blank" class="p-3 rounded-full bg-white/5 hover:bg-brand text-white transition-all text-xs font-mono font-bold">
+              Instagram
+            </a>
+            <a href="https://linkedin.com/company/sapienzafoilingteam" target="_blank" class="p-3 rounded-full bg-white/5 hover:bg-brand text-white transition-all text-xs font-mono font-bold">
+              LinkedIn
+            </a>
+            <a href="https://facebook.com/sapienzafoilingteam" target="_blank" class="p-3 rounded-full bg-white/5 hover:bg-brand text-white transition-all text-xs font-mono font-bold">
+              Facebook
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-white/40 font-mono">
+        <div>© 2025 Sapienza Foiling Team</div>
+        <div class="flex gap-6 mt-4 md:mt-0">
+          <a href="/privacy-policy" class="hover:text-brand-light transition-colors">Privacy Policy</a>
+          <a href="/boat" class="hover:text-brand-light transition-colors">Moth Technical Specs</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleHeroMedia(mode) {
+      const renderImg = document.getElementById('heroRenderImg');
+      const photoImg = document.getElementById('heroRealPhoto');
+      const btnRender = document.getElementById('btnShowRender');
+      const btnPhoto = document.getElementById('btnShowPhoto');
+      const title = document.getElementById('viewportTitle');
+
+      if (mode === 'render') {
+        renderImg.classList.remove('hidden');
+        photoImg.classList.add('hidden');
+        btnRender.className = "px-3.5 py-1.5 rounded-full bg-brand text-white font-bold transition-all shadow";
+        btnPhoto.className = "px-3.5 py-1.5 rounded-full text-white/60 hover:text-white transition-all";
+        title.innerText = "Render 3D Isometrico";
+      } else {
+        renderImg.classList.add('hidden');
+        photoImg.classList.remove('hidden');
+        btnPhoto.className = "px-3.5 py-1.5 rounded-full bg-brand text-white font-bold transition-all shadow";
+        btnRender.className = "px-3.5 py-1.5 rounded-full text-white/60 hover:text-white transition-all";
+        title.innerText = "Meravijosa in Volo sul Garda";
+      }
+    }
+
+    function filterBento(category) {
+      const cards = document.querySelectorAll('[data-category]');
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.className = "filter-btn px-3 py-1.5 rounded-full bg-white/5 text-white/70 hover:text-white transition-all";
+      });
+      event.currentTarget.className = "filter-btn px-3 py-1.5 rounded-full bg-brand text-white font-bold shadow";
+    }
+
+    const card3d = document.getElementById('card-3d');
+    const renderImg = document.getElementById('heroRenderImg');
+
+    card3d.addEventListener('mousemove', (e) => {
+      const rect = card3d.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      const rotX = -(y / rect.height) * 12;
+      const rotY = (x / rect.width) * 12;
+      renderImg.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.03, 1.03, 1.03)`;
+    });
+
+    card3d.addEventListener('mouseleave', () => {
+      renderImg.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
+  </script>
+</body>
+</html>

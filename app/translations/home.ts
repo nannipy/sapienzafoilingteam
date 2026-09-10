@@ -13,6 +13,7 @@ export const homeTranslations = {
     learnMoreButton: 'Learn More',
     viewMothButton: 'View Moth',
     nextEventBanner: 'Next Event: May 9 - Sunset Aperitivo',
+    heroSubtitle: 'Designing, engineering, and sailing the next generation of high-performance, sustainable foiling boats.',
     socialLinks: {
       instagram: 'Instagram',
       linkedin: 'LinkedIn',
@@ -33,6 +34,7 @@ export const homeTranslations = {
     learnMoreButton: 'Scopri di più',
     viewMothButton: 'Vedi il Moth',
     nextEventBanner: 'Prossimo Evento: 9 Maggio - Aperitivo di presentazione',
+    heroSubtitle: 'Progettiamo, costruiamo e navighiamo la prossima generazione di imbarcazioni foiling sostenibili ad alte prestazioni.',
     socialLinks: {
       instagram: 'Instagram',
       linkedin: 'LinkedIn',
