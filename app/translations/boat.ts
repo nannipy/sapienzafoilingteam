@@ -7,7 +7,6 @@ export const boatTranslations = {
     exploreCta: 'Click on the pins or tabs to inspect each component',
     partnersTitle: 'Technical Partners & Mentors',
     partnersDesc: 'Built with the generous support of FluidoDesign for composites manufacturing, Lega Navale di Ventotene for hydrofoils and rig, Comar Yachts for repurposed epoxy resin, and Harken & Gottifredi Maffioli for deck hardware and bio-based lines.',
-    galleryTitle: 'Tested on the Water // Lake Garda',
     components: {
       hull: {
         id: '01',
@@ -121,7 +120,6 @@ export const boatTranslations = {
     exploreCta: 'Clicca sui pin o sui tab per ispezionare ciascun componente',
     partnersTitle: 'Partner Tecnici & Mentors',
     partnersDesc: 'Realizzato grazie al supporto di FluidoDesign per il laboratorio compositi, Lega Navale di Ventotene per hydrofoil e rig, Comar Yachts per la resina epossidica, Harken e Gottifredi Maffioli per attrezzature e cime bio-based.',
-    galleryTitle: 'Collaudo sul Campo // Lago di Garda',
     components: {
       hull: {
         id: '01',

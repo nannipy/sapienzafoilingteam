@@ -296,63 +296,6 @@ const BoatPage = () => {
             </div>
           </div>
 
-          {/* Photo Gallery on Lake Garda */}
-          <div className="mt-14 pt-10 border-t border-gray-100">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <span className="text-xs font-mono uppercase tracking-widest text-brand font-bold">
-                  {language === 'it' ? 'Collaudo in Regata' : 'Field Testing'}
-                </span>
-                <h3 className="text-2xl font-black font-syne uppercase text-gray-900 mt-0.5">
-                  {t.galleryTitle}
-                </h3>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              <div className="group relative rounded-2xl overflow-hidden border border-gray-200 aspect-[4/3] bg-gray-100 shadow-sm">
-                <Image
-                  src="/images/hero-02.jpg"
-                  alt="Volo 9352"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-all duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 text-white text-xs font-mono">
-                  {language === 'it' ? 'Assetto in volo // Riva del Garda' : 'Foiling flight // Lake Garda'}
-                </div>
-              </div>
-
-              <div className="group relative rounded-2xl overflow-hidden border border-gray-200 aspect-[4/3] bg-gray-100 shadow-sm">
-                <Image
-                  src="/images/boat-01-wing-sft-detail.jpg"
-                  alt="Dettaglio ala e scafo"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-all duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 text-white text-xs font-mono">
-                  {language === 'it' ? 'Dettaglio terrazza & logo SFT' : 'Wing frame & SFT graphics'}
-                </div>
-              </div>
-
-              <div className="group relative rounded-2xl overflow-hidden border border-gray-200 aspect-[4/3] bg-gray-100 shadow-sm">
-                <Image
-                  src="/images/boat-02-foil-wand-transport.jpg"
-                  alt="Paddock e wand"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-all duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 text-white text-xs font-mono">
-                  {language === 'it' ? 'Allineamento bacchetta wand & foil' : 'Bow wand & foil alignment'}
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
