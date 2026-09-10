@@ -40,7 +40,7 @@ describe('HeroSection', () => {
 
   it('renders slide navigation buttons', () => {
     renderWithProvider(<HeroSection />);
-    const slideButtons = screen.getAllByLabelToMatcher?.(/Slide/i) || screen.getAllByRole('button');
+    const slideButtons = screen.getAllByRole('button');
     expect(slideButtons.length).toBeGreaterThan(0);
   });
 });
