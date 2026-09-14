@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import {
-  Send,
-  Brain,
   ArrowRight,
   ExternalLink,
   BookOpen,
@@ -17,6 +15,7 @@ import {
   Award,
   Layers,
   Compass,
+  Brain,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
@@ -30,7 +29,6 @@ interface CareerClientPageProps {
 }
 
 const FORM_URL = 'https://forms.gle/93FhyCgbpSruYaM66';
-const EMAIL_APPLY_URL = 'mailto:sapienzafoilingteam@gmail.com?subject=Candidatura%20Sapienza%20Foiling%20Team';
 const THESIS_EMAIL_URL = 'mailto:sapienzafoilingteam@gmail.com?subject=Richiesta%20Tesi%20o%20Tirocinio%20Sapienza%20Foiling%20Team';
 const SUMOTH_URL = 'https://www.sumoth.org';
 
@@ -56,33 +54,50 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
 
   return (
     <PageLayout>
-      <div className="px-6 md:px-12 py-8 space-y-16 md:space-y-24">
+      <div className="px-6 md:px-12 py-8 space-y-16 md:space-y-20">
         {/* ============================================================ */}
         {/* HERO SECTION                                                 */}
         {/* ============================================================ */}
         <section className="pt-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand/10 border border-brand/20 text-brand text-xs font-semibold tracking-wider uppercase mb-5">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>{t.hero.kicker}</span>
+          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-2 items-start">
-            {/* Left Col: Main headline & description */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            {/* Left Col: Title & Description */}
             <div className="lg:col-span-7 space-y-6">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-black font-syne uppercase tracking-tight text-gray-900 leading-[1.05]">
                 {t.hero.title}
               </h1>
 
-              <p className="text-base sm:text-2xl text-gray-600 leading-relaxed font-light mt-48">
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-light">
                 {t.hero.description}
               </p>
 
+              {/* Quick tags */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                <div className="flex items-center gap-2 text-xs font-medium text-gray-700 bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5">
+                  <Compass className="w-4 h-4 text-brand flex-shrink-0" />
+                  <span>Sapienza Roma</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs font-medium text-gray-700 bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5">
+                  <Layers className="w-4 h-4 text-brand flex-shrink-0" />
+                  <span>4 Reparti</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs font-medium text-gray-700 bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5 col-span-2 sm:col-span-1">
+                  <Award className="w-4 h-4 text-brand flex-shrink-0" />
+                  <span>SuMoth Challenge</span>
+                </div>
+              </div>
             </div>
 
-            {/* Right Col: Red Application Status Card */}
+            {/* Right Col: Red Status Card */}
             <div className="lg:col-span-5">
               <div className="bg-gradient-to-br from-brand via-brand to-brand-dark text-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-brand/20 border border-brand-light/40 relative overflow-hidden">
-                {/* Background decorative glow */}
                 <div className="absolute -right-10 -top-10 w-44 h-44 bg-white/10 rounded-full blur-2xl pointer-events-none" />
 
                 <div className="relative z-10 space-y-5">
-                  {/* Status header with live pulse dot */}
                   <div className="flex items-center justify-between gap-3 border-b border-white/20 pb-4">
                     <span className="text-[11px] font-mono tracking-widest uppercase text-white/80 font-semibold">
                       {t.hero.statusCard.label}
@@ -123,10 +138,10 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
         </section>
 
         {/* ============================================================ */}
-        {/* 3-STEP SELECTION PROCESS ("COME FUNZIONA")                   */}
+        {/* SELECTION PROCESS ("COME FUNZIONA")                          */}
         {/* ============================================================ */}
         <section className="pt-6 border-t border-gray-100">
-          <div className="mb-10 text-center sm:text-left">
+          <div className="mb-8 text-center sm:text-left">
             <span className="text-xs font-mono font-bold tracking-widest text-brand uppercase">
               {t.process.kicker}
             </span>
@@ -138,8 +153,8 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
             </p>
           </div>
 
-          <div className="space-y-6">
-            {/* Step 01 */}
+          <div className="space-y-5">
+            {/* Step 01: Application */}
             <div className="bg-gray-50/70 border border-gray-200/80 rounded-3xl p-6 sm:p-8 hover:border-gray-300 transition-colors">
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="w-14 h-14 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center flex-shrink-0 text-brand font-black text-xl font-syne">
@@ -150,14 +165,11 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
                     <h3 className="text-xl sm:text-2xl font-black font-syne uppercase text-gray-900">
                       {t.process.step1.title}
                     </h3>
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand/10 text-brand">
-                      Step 1
-                    </span>
                   </div>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     {t.process.step1.description}
                   </p>
-                  <div className="flex flex-wrap gap-2 pt-2">
+                  <div className="flex flex-wrap gap-2 pt-1">
                     <span className="inline-flex items-center gap-1.5 text-xs text-gray-700 bg-white border border-gray-200 rounded-lg px-3 py-1.5 font-medium">
                       <FileCheck className="w-3.5 h-3.5 text-brand" />
                       Curriculum Vitae (CV)
@@ -168,66 +180,30 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
                     </span>
                     <span className="inline-flex items-center gap-1.5 text-xs text-gray-700 bg-white border border-gray-200 rounded-lg px-3 py-1.5 font-medium">
                       <FileCheck className="w-3.5 h-3.5 text-brand" />
-                      Portfolio (opzionale per ruoli tecnici/design)
+                      Portfolio / Progetti (opzionale)
                     </span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs font-mono text-gray-600 bg-white border border-gray-200 rounded-xl px-3 py-2 mt-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                    <span>{t.process.step1.callout}</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Step 02 */}
+            {/* Step 02: Regulations */}
             <div className="bg-gray-50/70 border border-gray-200/80 rounded-3xl p-6 sm:p-8 hover:border-gray-300 transition-colors">
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="w-14 h-14 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center flex-shrink-0 text-brand font-black text-xl font-syne">
                   {t.process.step2.number}
                 </div>
-                <div className="flex-1 space-y-6">
+                <div className="flex-1 space-y-5">
                   <div className="space-y-2">
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <h3 className="text-xl sm:text-2xl font-black font-syne uppercase text-gray-900">
-                        {t.process.step2.title}
-                      </h3>
-                      <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand/10 text-brand">
-                        Step 2
-                      </span>
-                    </div>
+                    <h3 className="text-xl sm:text-2xl font-black font-syne uppercase text-gray-900">
+                      {t.process.step2.title}
+                    </h3>
                     <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                       {t.process.step2.description}
                     </p>
                   </div>
 
-                  {/* Split info cards: General & Specific */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm space-y-2">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-brand" />
-                        <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-gray-900">
-                          {t.process.step2.general.title}
-                        </h4>
-                      </div>
-                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                        {t.process.step2.general.description}
-                      </p>
-                    </div>
-
-                    <div className="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm space-y-2">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-brand" />
-                        <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-gray-900">
-                          {t.process.step2.specific.title}
-                        </h4>
-                      </div>
-                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                        {t.process.step2.specific.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Red Study Material Guide Banner */}
+                  {/* Red Study Guide Card */}
                   <div className="bg-gradient-to-r from-brand via-brand to-brand-dark text-white rounded-2xl p-6 border border-brand-light/40 shadow-lg shadow-brand/15 relative overflow-hidden">
                     <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
                       <div className="space-y-3 max-w-2xl">
@@ -242,7 +218,6 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
                           {t.process.step2.handbook.description}
                         </p>
 
-                        {/* Handbook tags */}
                         <div className="flex flex-wrap gap-1.5 pt-1">
                           {t.process.step2.handbook.tags.map((tag, idx) => (
                             <span
@@ -274,27 +249,22 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
               </div>
             </div>
 
-            {/* Step 03 */}
+            {/* Step 03: Interview */}
             <div className="bg-gray-50/70 border border-gray-200/80 rounded-3xl p-6 sm:p-8 hover:border-gray-300 transition-colors">
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="w-14 h-14 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center flex-shrink-0 text-brand font-black text-xl font-syne">
                   {t.process.step3.number}
                 </div>
                 <div className="flex-1 space-y-3">
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <h3 className="text-xl sm:text-2xl font-black font-syne uppercase text-gray-900">
-                      {t.process.step3.title}
-                    </h3>
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand/10 text-brand">
-                      Step 3
-                    </span>
-                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black font-syne uppercase text-gray-900">
+                    {t.process.step3.title}
+                  </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     {t.process.step3.description}
                   </p>
-                  <div className="flex items-center gap-2 text-xs font-mono text-gray-600 bg-white border border-gray-200 rounded-xl px-3 py-2 mt-2">
+                  <div className="inline-flex items-center gap-2 text-xs font-mono text-gray-600 bg-white border border-gray-200 rounded-lg px-3 py-1.5 mt-1">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                    <span>{t.process.step3.callout}</span>
+                    <span>Confronto diretto con Team Leader e Responsabili di Reparto</span>
                   </div>
                 </div>
               </div>
@@ -306,31 +276,28 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
         {/* RED MID-PAGE CTA BANNER                                      */}
         {/* ============================================================ */}
         <section>
-          <div className="bg-gradient-to-r from-brand via-brand-dark to-brand text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden border border-brand-light/40 shadow-xl shadow-brand/20">
-            <div className="relative z-10 max-w-3xl space-y-4">
-              <span className="text-xs font-mono uppercase tracking-widest text-white/90 font-semibold">
-                Sapienza Foiling Team
-              </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-syne uppercase tracking-tight text-white">
+          <div className="bg-gradient-to-r from-brand via-brand-dark to-brand text-white rounded-3xl p-8 sm:p-10 relative overflow-hidden border border-brand-light/40 shadow-xl shadow-brand/20">
+            <div className="relative z-10 max-w-2xl space-y-3">
+              <h2 className="text-2xl sm:text-3xl font-black font-syne uppercase tracking-tight text-white">
                 {t.banner.title}
               </h2>
-              <p className="text-sm sm:text-base text-white/90 font-light leading-relaxed max-w-2xl">
+              <p className="text-sm sm:text-base text-white/90 font-light leading-relaxed">
                 {t.banner.description}
               </p>
-              <div className="pt-3 flex flex-wrap gap-4">
+              <div className="pt-2 flex flex-wrap gap-3">
                 <a
                   href={FORM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => handleApplyClick('mid_banner_form')}
-                  className="inline-flex items-center gap-2 bg-white text-brand px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl group"
+                  className="inline-flex items-center gap-2 bg-white text-brand px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl group"
                 >
                   <span>{t.banner.cta}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </a>
                 <Link
                   href="/team"
-                  className="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white border border-white/30 px-6 py-3.5 rounded-xl font-semibold text-xs uppercase tracking-wider transition-all backdrop-blur-sm"
+                  className="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white border border-white/30 px-6 py-3 rounded-xl font-semibold text-xs uppercase tracking-wider transition-all backdrop-blur-sm"
                 >
                   <span>{t.banner.secondary}</span>
                 </Link>
@@ -340,95 +307,53 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
         </section>
 
         {/* ============================================================ */}
-        {/* CANDIDATURA & INVITO APERTO                                  */}
-        {/* ============================================================ */}
-        <section className="pt-6 border-t border-gray-100">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-gray-200 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="space-y-4 max-w-2xl">
-              <span className="text-xs font-mono font-bold tracking-widest text-brand uppercase">
-                {language === 'en' ? 'OPEN INVITATION' : 'INVITO APERTO'}
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-black font-syne uppercase text-gray-900">
-                {t.spontaneousApplication.title}
-              </h3>
-              <p className="text-sm sm:text-base text-gray-600 font-light leading-relaxed">
-                {t.spontaneousApplication.description}
-              </p>
-              <div className="flex flex-wrap gap-3 pt-2">
-                <a
-                  href={FORM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => handleApplyClick('spontaneous_form')}
-                  className="inline-flex items-center gap-2 bg-brand text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-brand-light transition-all shadow-md"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>{t.spontaneousApplication.applyButton}</span>
-                </a>
-                <a
-                  href={EMAIL_APPLY_URL}
-                  onClick={() => handleApplyClick('spontaneous_email')}
-                  className="inline-flex items-center gap-2 bg-gray-100 text-gray-800 hover:bg-gray-200 px-5 py-3 rounded-xl font-semibold text-xs uppercase tracking-wider transition-all"
-                >
-                  <span>{t.spontaneousApplication.emailButton}</span>
-                </a>
-              </div>
-            </div>
-
-            <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-brand/10 border border-brand/20 flex items-center justify-center flex-shrink-0 text-brand">
-              <Send className="w-14 h-14 sm:w-16 sm:h-16" />
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================================ */}
         {/* TESI DI LAUREA E TIROCINI CURRICULARI                        */}
         {/* ============================================================ */}
         <section className="pt-6 border-t border-gray-100">
-          <div className="bg-brand/5 border border-brand/10 rounded-3xl p-6 sm:p-10 lg:p-12">
-            <div className="max-w-3xl mb-8">
+          <div className="bg-brand/5 border border-brand/10 rounded-3xl p-6 sm:p-8 lg:p-10">
+            <div className="max-w-2xl mb-6">
               <span className="text-xs font-mono font-bold tracking-widest text-brand uppercase">
                 {t.thesisInternship.badge}
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-syne uppercase tracking-tight text-gray-900 mt-1">
+              <h2 className="text-2xl sm:text-3xl font-black font-syne uppercase tracking-tight text-gray-900 mt-1">
                 {t.thesisInternship.title}
               </h2>
-              <p className="text-sm sm:text-base text-gray-600 mt-1 font-light">
+              <p className="text-sm text-gray-600 mt-1 font-light">
                 {t.thesisInternship.subtitle}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-brand/10 text-brand flex items-center justify-center">
-                  <Brain className="w-6 h-6" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-brand/10 text-brand flex items-center justify-center">
+                  <Brain className="w-5 h-5" />
                 </div>
-                <h3 className="text-xl font-bold font-syne text-gray-900">
+                <h3 className="text-lg font-bold font-syne text-gray-900">
                   {t.thesisInternship.thesis.title}
                 </h3>
-                <p className="text-sm text-gray-600 font-light leading-relaxed">
+                <p className="text-xs sm:text-sm text-gray-600 font-light leading-relaxed">
                   {t.thesisInternship.thesis.description}
                 </p>
               </div>
 
-              <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-brand/10 text-brand flex items-center justify-center">
-                  <GraduationCap className="w-6 h-6" />
+              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-brand/10 text-brand flex items-center justify-center">
+                  <GraduationCap className="w-5 h-5" />
                 </div>
-                <h3 className="text-xl font-bold font-syne text-gray-900">
+                <h3 className="text-lg font-bold font-syne text-gray-900">
                   {t.thesisInternship.internship.title}
                 </h3>
-                <p className="text-sm text-gray-600 font-light leading-relaxed">
+                <p className="text-xs sm:text-sm text-gray-600 font-light leading-relaxed">
                   {t.thesisInternship.internship.description}
                 </p>
               </div>
             </div>
 
-            <div className="text-center sm:text-left">
+            <div>
               <a
                 href={THESIS_EMAIL_URL}
                 onClick={() => handleApplyClick('thesis_internship_button')}
-                className="inline-flex items-center gap-2 bg-brand text-white px-7 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-brand-light transition-all shadow-md"
+                className="inline-flex items-center gap-2 bg-brand text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-brand-light transition-all shadow-md"
               >
                 <span>{t.thesisInternship.contactButton}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -438,10 +363,10 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
         </section>
 
         {/* ============================================================ */}
-        {/* FAQ ACCORDION (DOMANDE FREQUENTI)                            */}
+        {/* FAQ ACCORDION                                                */}
         {/* ============================================================ */}
         <section className="pt-6 border-t border-gray-100">
-          <div className="mb-8">
+          <div className="mb-6">
             <span className="text-xs font-mono font-bold tracking-widest text-brand uppercase">
               {t.faq.kicker}
             </span>
@@ -450,32 +375,33 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
             </h2>
           </div>
 
-          {/* Accordion list */}
           <div className="space-y-3">
             {t.faq.items.map((item, index) => {
               const isOpen = openFaqIndex === index;
               return (
                 <div
                   key={index}
-                  className={`rounded-2xl border transition-all ${isOpen
-                    ? 'border-brand/40 bg-white shadow-sm'
-                    : 'border-gray-200 bg-gray-50/50 hover:bg-gray-50'
-                    }`}
+                  className={`rounded-2xl border transition-all ${
+                    isOpen
+                      ? 'border-brand/40 bg-white shadow-sm'
+                      : 'border-gray-200 bg-gray-50/50 hover:bg-gray-50'
+                  }`}
                 >
                   <button
                     type="button"
                     onClick={() => toggleFaq(index)}
-                    className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 select-none"
+                    className="w-full text-left p-5 flex items-center justify-between gap-4 select-none"
                     aria-expanded={isOpen}
                   >
                     <span className="text-base sm:text-lg font-bold font-syne text-gray-900 pr-2">
                       {item.q}
                     </span>
                     <span
-                      className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${isOpen
-                        ? 'bg-brand text-white'
-                        : 'bg-gray-200 text-gray-600'
-                        }`}
+                      className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
+                        isOpen
+                          ? 'bg-brand text-white'
+                          : 'bg-gray-200 text-gray-600'
+                      }`}
                     >
                       {isOpen ? (
                         <ChevronUp className="w-4 h-4" />
@@ -492,10 +418,10 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: 'easeInOut' }}
+                        transition={{ duration: 0.2, ease: 'easeInOut' }}
                         className="overflow-hidden"
                       >
-                        <div className="px-5 pb-6 sm:px-6 sm:pb-6 text-sm sm:text-base text-gray-600 font-light leading-relaxed border-t border-gray-100 pt-4">
+                        <div className="px-5 pb-5 text-sm sm:text-base text-gray-600 font-light leading-relaxed border-t border-gray-100 pt-3">
                           {item.a}
                         </div>
                       </motion.div>
@@ -506,13 +432,13 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
             })}
           </div>
 
-          {/* Direct contact footer */}
-          <div className="mt-8 p-6 bg-gray-50 rounded-2xl border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-            <div className="space-y-1">
+          {/* Contact footer */}
+          <div className="mt-8 p-5 bg-gray-50 rounded-2xl border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
               <h4 className="text-sm font-bold text-gray-900">
                 {t.faq.stillHaveQuestions}
               </h4>
-              <p className="text-xs text-gray-600">
+              <p className="text-xs text-gray-500">
                 {t.faq.contactDirectly}
               </p>
             </div>
