@@ -26,7 +26,7 @@ interface CareerClientPageProps {
   initialPositions: OpenPositionType[];
 }
 
-const FORM_URL = 'https://forms.gle/93FhyCgbpSruYaM66';
+const FORM_URL = 'https://forms.gle/CtcSzXuULJP5bdFK6';
 const SUMOTH_URL = 'https://www.sumoth.org';
 
 const CareerClientPage: React.FC<CareerClientPageProps> = () => {
@@ -61,7 +61,6 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
             <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand/10 border border-brand/20 text-brand text-xs font-semibold tracking-wider uppercase">
-                  <Sparkles className="w-3.5 h-3.5" />
                   <span>{t.hero.kicker}</span>
                 </div>
 
@@ -72,22 +71,6 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
                 <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed font-light">
                   {t.hero.description}
                 </p>
-              </div>
-
-              {/* Quick highlight tags */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-gray-700 bg-gray-50 border border-gray-200/80 rounded-2xl px-3.5 py-3">
-                  <Compass className="w-4 h-4 text-brand flex-shrink-0" />
-                  <span>Sapienza Roma</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-gray-700 bg-gray-50 border border-gray-200/80 rounded-2xl px-3.5 py-3">
-                  <Layers className="w-4 h-4 text-brand flex-shrink-0" />
-                  <span>4 Reparti</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-gray-700 bg-gray-50 border border-gray-200/80 rounded-2xl px-3.5 py-3 col-span-2 sm:col-span-1">
-                  <Award className="w-4 h-4 text-brand flex-shrink-0" />
-                  <span>SuMoth Challenge</span>
-                </div>
               </div>
             </div>
 
