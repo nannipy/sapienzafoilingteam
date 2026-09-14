@@ -9,13 +9,11 @@ import {
   CheckCircle2,
   ChevronDown,
   ChevronUp,
-  GraduationCap,
   Sparkles,
   FileCheck,
   Award,
   Layers,
   Compass,
-  Brain,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
@@ -29,7 +27,6 @@ interface CareerClientPageProps {
 }
 
 const FORM_URL = 'https://forms.gle/93FhyCgbpSruYaM66';
-const THESIS_EMAIL_URL = 'mailto:sapienzafoilingteam@gmail.com?subject=Richiesta%20Tesi%20o%20Tirocinio%20Sapienza%20Foiling%20Team';
 const SUMOTH_URL = 'https://www.sumoth.org';
 
 const CareerClientPage: React.FC<CareerClientPageProps> = () => {
@@ -59,11 +56,6 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
         {/* HERO SECTION                                                 */}
         {/* ============================================================ */}
         <section className="pt-2">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand/10 border border-brand/20 text-brand text-xs font-semibold tracking-wider uppercase mb-5">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{t.hero.kicker}</span>
-          </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* Left Col: Title & Description */}
             <div className="lg:col-span-7 space-y-6">
@@ -74,22 +66,6 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-light">
                 {t.hero.description}
               </p>
-
-              {/* Quick tags */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                <div className="flex items-center gap-2 text-xs font-medium text-gray-700 bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5">
-                  <Compass className="w-4 h-4 text-brand flex-shrink-0" />
-                  <span>Sapienza Roma</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs font-medium text-gray-700 bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5">
-                  <Layers className="w-4 h-4 text-brand flex-shrink-0" />
-                  <span>4 Reparti</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs font-medium text-gray-700 bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5 col-span-2 sm:col-span-1">
-                  <Award className="w-4 h-4 text-brand flex-shrink-0" />
-                  <span>SuMoth Challenge</span>
-                </div>
-              </div>
             </div>
 
             {/* Right Col: Red Status Card */}
@@ -306,61 +282,7 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
           </div>
         </section>
 
-        {/* ============================================================ */}
-        {/* TESI DI LAUREA E TIROCINI CURRICULARI                        */}
-        {/* ============================================================ */}
-        <section className="pt-6 border-t border-gray-100">
-          <div className="bg-brand/5 border border-brand/10 rounded-3xl p-6 sm:p-8 lg:p-10">
-            <div className="max-w-2xl mb-6">
-              <span className="text-xs font-mono font-bold tracking-widest text-brand uppercase">
-                {t.thesisInternship.badge}
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-black font-syne uppercase tracking-tight text-gray-900 mt-1">
-                {t.thesisInternship.title}
-              </h2>
-              <p className="text-sm text-gray-600 mt-1 font-light">
-                {t.thesisInternship.subtitle}
-              </p>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
-              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
-                <div className="w-10 h-10 rounded-xl bg-brand/10 text-brand flex items-center justify-center">
-                  <Brain className="w-5 h-5" />
-                </div>
-                <h3 className="text-lg font-bold font-syne text-gray-900">
-                  {t.thesisInternship.thesis.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-600 font-light leading-relaxed">
-                  {t.thesisInternship.thesis.description}
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
-                <div className="w-10 h-10 rounded-xl bg-brand/10 text-brand flex items-center justify-center">
-                  <GraduationCap className="w-5 h-5" />
-                </div>
-                <h3 className="text-lg font-bold font-syne text-gray-900">
-                  {t.thesisInternship.internship.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-600 font-light leading-relaxed">
-                  {t.thesisInternship.internship.description}
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <a
-                href={THESIS_EMAIL_URL}
-                onClick={() => handleApplyClick('thesis_internship_button')}
-                className="inline-flex items-center gap-2 bg-brand text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-brand-light transition-all shadow-md"
-              >
-                <span>{t.thesisInternship.contactButton}</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-        </section>
 
         {/* ============================================================ */}
         {/* FAQ ACCORDION                                                */}
@@ -381,11 +303,10 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
               return (
                 <div
                   key={index}
-                  className={`rounded-2xl border transition-all ${
-                    isOpen
-                      ? 'border-brand/40 bg-white shadow-sm'
-                      : 'border-gray-200 bg-gray-50/50 hover:bg-gray-50'
-                  }`}
+                  className={`rounded-2xl border transition-all ${isOpen
+                    ? 'border-brand/40 bg-white shadow-sm'
+                    : 'border-gray-200 bg-gray-50/50 hover:bg-gray-50'
+                    }`}
                 >
                   <button
                     type="button"
@@ -397,11 +318,10 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
                       {item.q}
                     </span>
                     <span
-                      className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
-                        isOpen
-                          ? 'bg-brand text-white'
-                          : 'bg-gray-200 text-gray-600'
-                      }`}
+                      className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${isOpen
+                        ? 'bg-brand text-white'
+                        : 'bg-gray-200 text-gray-600'
+                        }`}
                     >
                       {isOpen ? (
                         <ChevronUp className="w-4 h-4" />

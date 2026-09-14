@@ -65,22 +65,6 @@ export const careerTranslations = {
     spontaneousApplication: {
       applyButton: 'Apply Now',
     },
-    thesisInternship: {
-      badge: 'ACADEMICS',
-      title: 'Thesis & Internships',
-      subtitle: 'Earn degree credits (CFU) working with the team',
-      thesis: {
-        title: 'Degree Theses (BSc / MSc)',
-        description:
-          'Thesis projects supervised with Sapienza professors: bio-composites, CFD/FEM simulations, telemetry IoT, and LCA analysis.',
-      },
-      internship: {
-        title: 'Curricular Internships',
-        description:
-          'Count your design, shipyard, and testing hours towards curricular internship credits required by your degree program.',
-      },
-      contactButton: 'Ask About Thesis / Internship',
-    },
     faq: {
       kicker: 'FAQ',
       title: 'FREQUENTLY ASKED QUESTIONS',
@@ -95,7 +79,7 @@ export const careerTranslations = {
         },
         {
           q: 'When does recruiting happen?',
-          a: 'Main intake is at the start of the academic year (October/November), but we accept applications year-round for specific needs and theses.',
+          a: 'Main intake is at the start of the academic year (October/November), but we accept applications year-round for specific needs.',
         },
         {
           q: 'Is there a written exam?',
@@ -180,22 +164,6 @@ export const careerTranslations = {
     spontaneousApplication: {
       applyButton: 'Candidati Ora',
     },
-    thesisInternship: {
-      badge: 'PERCORSI ACCADEMICI',
-      title: 'Tesi e Tirocini Curriculari',
-      subtitle: 'Convalida l’attività nel team nel tuo piano di studi a La Sapienza',
-      thesis: {
-        title: 'Tesi Triennali e Magistrali',
-        description:
-          'Progetti di tesi seguiti con docenti Sapienza: simulazioni CFD/FEM, materiali bio-compositi, sensoristica IoT e analisi di sostenibilità LCA.',
-      },
-      internship: {
-        title: 'Tirocini Curriculari (CFU)',
-        description:
-          'Riconoscimento dei crediti formativi (CFU) per le ore svolte in progettazione, cantiere e test in acqua.',
-      },
-      contactButton: 'Scrivici per Tesi o Tirocinio',
-    },
     faq: {
       kicker: 'DOMANDE FREQUENTI',
       title: 'FAQ',
@@ -210,7 +178,7 @@ export const careerTranslations = {
         },
         {
           q: 'Quando si svolgono le selezioni?',
-          a: 'La finestra principale è a inizio anno accademico (ottobre/novembre), ma raccogliamo candidature tutto l’anno per ingressi mirati e tesi.',
+          a: 'La finestra principale è a inizio anno accademico (ottobre/novembre), ma raccogliamo candidature tutto l’anno per specifiche esigenze di reparto.',
         },
         {
           q: 'C’è una prova scritta?',
