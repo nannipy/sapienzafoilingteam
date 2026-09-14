@@ -1,113 +1,532 @@
 'use client';
 
-import React from 'react';
-import { Briefcase, Send, Brain, Users } from 'lucide-react';
+import React, { useState } from 'react';
+import Link from 'next/link';
+import {
+  Send,
+  Brain,
+  ArrowRight,
+  ExternalLink,
+  BookOpen,
+  CheckCircle2,
+  ChevronDown,
+  ChevronUp,
+  GraduationCap,
+  Sparkles,
+  FileCheck,
+  Award,
+  Layers,
+  Compass,
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { careerTranslations } from '../translations/career';
 import { usePostHog } from 'posthog-js/react';
-import OpenPosition from '../components/OpenPosition';
+import PageLayout from '../components/PageLayout';
 import { OpenPosition as OpenPositionType } from '../lib/types';
 
 interface CareerClientPageProps {
   initialPositions: OpenPositionType[];
 }
 
-const CareerClientPage: React.FC<CareerClientPageProps> = ({ initialPositions: openPositions }) => {
+const FORM_URL = 'https://forms.gle/93FhyCgbpSruYaM66';
+const EMAIL_APPLY_URL = 'mailto:sapienzafoilingteam@gmail.com?subject=Candidatura%20Sapienza%20Foiling%20Team';
+const THESIS_EMAIL_URL = 'mailto:sapienzafoilingteam@gmail.com?subject=Richiesta%20Tesi%20o%20Tirocinio%20Sapienza%20Foiling%20Team';
+const SUMOTH_URL = 'https://www.sumoth.org';
+
+const CareerClientPage: React.FC<CareerClientPageProps> = () => {
   const { language } = useLanguage();
   const posthog = usePostHog();
+  const t = careerTranslations[language];
 
-  const handleApplyClick = (position: string) => {
-    posthog.capture('apply_clicked', { position });
+  // Accordion state: open the first question by default
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  const toggleFaq = (index: number) => {
+    const nextState = openFaqIndex === index ? null : index;
+    setOpenFaqIndex(nextState);
+    if (nextState !== null) {
+      posthog.capture('recruiting_faq_expanded', { questionIndex: index });
+    }
+  };
+
+  const handleApplyClick = (source: string) => {
+    posthog.capture('apply_clicked', { source });
   };
 
   return (
-    <main className="min-h-screen bg-white text-black">
+    <PageLayout>
+      <div className="px-6 md:px-12 py-8 space-y-16 md:space-y-24">
+        {/* ============================================================ */}
+        {/* HERO SECTION                                                 */}
+        {/* ============================================================ */}
+        <section className="pt-2">
 
-      <div className="max-w-7xl mx-auto sm:px-6 py-36">
-        {/* Open Positions */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-12">{careerTranslations[language].openPositions.title}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {openPositions.length > 0 ? (
-              openPositions.map((position) => (
-                <OpenPosition key={position.id} {...position} />
-              ))
-            ) : (
-              <div className="col-span-3 bg-gray-50 rounded-3xl p-12 text-center border-2 border-dashed border-gray-200">
-                <Briefcase className="w-16 h-16 text-gray-300 mx-auto mb-6" />
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                  {language === 'en' ? 'No open positions right now' : 'Nessuna posizione aperta al momento'}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-2 items-start">
+            {/* Left Col: Main headline & description */}
+            <div className="lg:col-span-7 space-y-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black font-syne uppercase tracking-tight text-gray-900 leading-[1.05]">
+                {t.hero.title}
+              </h1>
+
+              <p className="text-base sm:text-2xl text-gray-600 leading-relaxed font-light mt-48">
+                {t.hero.description}
+              </p>
+
+            </div>
+
+            {/* Right Col: Red Application Status Card */}
+            <div className="lg:col-span-5">
+              <div className="bg-gradient-to-br from-brand via-brand to-brand-dark text-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-brand/20 border border-brand-light/40 relative overflow-hidden">
+                {/* Background decorative glow */}
+                <div className="absolute -right-10 -top-10 w-44 h-44 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+
+                <div className="relative z-10 space-y-5">
+                  {/* Status header with live pulse dot */}
+                  <div className="flex items-center justify-between gap-3 border-b border-white/20 pb-4">
+                    <span className="text-[11px] font-mono tracking-widest uppercase text-white/80 font-semibold">
+                      {t.hero.statusCard.label}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-white border border-white/30 text-xs font-semibold backdrop-blur-sm">
+                      <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                      {t.hero.statusCard.badge}
+                    </span>
+                  </div>
+
+                  <p className="text-sm text-white/95 leading-relaxed font-light">
+                    {t.hero.statusCard.subtext}
+                  </p>
+
+                  <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                    <a
+                      href={FORM_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => handleApplyClick('hero_status_card')}
+                      className="flex-1 inline-flex items-center justify-center gap-2 bg-white text-brand px-5 py-3.5 rounded-xl font-bold text-sm tracking-wide uppercase hover:bg-gray-100 transition-all shadow-md group"
+                    >
+                      <span>{t.hero.statusCard.ctaButton}</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                    </a>
+
+                    <Link
+                      href="/team"
+                      className="inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 text-white border border-white/30 px-4 py-3.5 rounded-xl font-medium text-sm transition-all backdrop-blur-sm"
+                    >
+                      <span>{t.hero.statusCard.secondaryCta}</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* 3-STEP SELECTION PROCESS ("COME FUNZIONA")                   */}
+        {/* ============================================================ */}
+        <section className="pt-6 border-t border-gray-100">
+          <div className="mb-10 text-center sm:text-left">
+            <span className="text-xs font-mono font-bold tracking-widest text-brand uppercase">
+              {t.process.kicker}
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black font-syne uppercase tracking-tight text-gray-900 mt-1">
+              {t.process.title}
+            </h2>
+            <p className="text-sm font-mono text-gray-500 uppercase tracking-wider mt-1">
+              {t.process.subtitle}
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {/* Step 01 */}
+            <div className="bg-gray-50/70 border border-gray-200/80 rounded-3xl p-6 sm:p-8 hover:border-gray-300 transition-colors">
+              <div className="flex flex-col md:flex-row gap-6 items-start">
+                <div className="w-14 h-14 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center flex-shrink-0 text-brand font-black text-xl font-syne">
+                  {t.process.step1.number}
+                </div>
+                <div className="flex-1 space-y-3">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <h3 className="text-xl sm:text-2xl font-black font-syne uppercase text-gray-900">
+                      {t.process.step1.title}
+                    </h3>
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand/10 text-brand">
+                      Step 1
+                    </span>
+                  </div>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                    {t.process.step1.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    <span className="inline-flex items-center gap-1.5 text-xs text-gray-700 bg-white border border-gray-200 rounded-lg px-3 py-1.5 font-medium">
+                      <FileCheck className="w-3.5 h-3.5 text-brand" />
+                      Curriculum Vitae (CV)
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 text-xs text-gray-700 bg-white border border-gray-200 rounded-lg px-3 py-1.5 font-medium">
+                      <FileCheck className="w-3.5 h-3.5 text-brand" />
+                      Lettera Motivazionale
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 text-xs text-gray-700 bg-white border border-gray-200 rounded-lg px-3 py-1.5 font-medium">
+                      <FileCheck className="w-3.5 h-3.5 text-brand" />
+                      Portfolio (opzionale per ruoli tecnici/design)
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-mono text-gray-600 bg-white border border-gray-200 rounded-xl px-3 py-2 mt-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                    <span>{t.process.step1.callout}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 02 */}
+            <div className="bg-gray-50/70 border border-gray-200/80 rounded-3xl p-6 sm:p-8 hover:border-gray-300 transition-colors">
+              <div className="flex flex-col md:flex-row gap-6 items-start">
+                <div className="w-14 h-14 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center flex-shrink-0 text-brand font-black text-xl font-syne">
+                  {t.process.step2.number}
+                </div>
+                <div className="flex-1 space-y-6">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <h3 className="text-xl sm:text-2xl font-black font-syne uppercase text-gray-900">
+                        {t.process.step2.title}
+                      </h3>
+                      <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand/10 text-brand">
+                        Step 2
+                      </span>
+                    </div>
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                      {t.process.step2.description}
+                    </p>
+                  </div>
+
+                  {/* Split info cards: General & Specific */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-brand" />
+                        <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-gray-900">
+                          {t.process.step2.general.title}
+                        </h4>
+                      </div>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                        {t.process.step2.general.description}
+                      </p>
+                    </div>
+
+                    <div className="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-brand" />
+                        <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-gray-900">
+                          {t.process.step2.specific.title}
+                        </h4>
+                      </div>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                        {t.process.step2.specific.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Red Study Material Guide Banner */}
+                  <div className="bg-gradient-to-r from-brand via-brand to-brand-dark text-white rounded-2xl p-6 border border-brand-light/40 shadow-lg shadow-brand/15 relative overflow-hidden">
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+                      <div className="space-y-3 max-w-2xl">
+                        <div className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider font-semibold text-white bg-white/20 px-2.5 py-1 rounded-md backdrop-blur-sm">
+                          <BookOpen className="w-3.5 h-3.5" />
+                          <span>{t.process.step2.handbook.badge}</span>
+                        </div>
+                        <h4 className="text-lg sm:text-xl font-bold font-syne uppercase text-white">
+                          {t.process.step2.handbook.title}
+                        </h4>
+                        <p className="text-xs sm:text-sm text-white/90 font-light leading-relaxed">
+                          {t.process.step2.handbook.description}
+                        </p>
+
+                        {/* Handbook tags */}
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          {t.process.step2.handbook.tags.map((tag, idx) => (
+                            <span
+                              key={idx}
+                              className="text-[11px] font-medium bg-white/15 hover:bg-white/25 text-white px-2.5 py-1 rounded-md transition-colors"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="flex-shrink-0">
+                        <a
+                          href={SUMOTH_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => handleApplyClick('sumoth_guide_external')}
+                          className="inline-flex items-center gap-2 bg-white text-brand px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-gray-100 transition-all shadow-md group"
+                        >
+                          <BookOpen className="w-4 h-4 text-brand" />
+                          <span>{t.process.step2.handbook.action}</span>
+                          <ExternalLink className="w-3.5 h-3.5 text-brand group-hover:translate-x-0.5 transition-transform" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 03 */}
+            <div className="bg-gray-50/70 border border-gray-200/80 rounded-3xl p-6 sm:p-8 hover:border-gray-300 transition-colors">
+              <div className="flex flex-col md:flex-row gap-6 items-start">
+                <div className="w-14 h-14 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center flex-shrink-0 text-brand font-black text-xl font-syne">
+                  {t.process.step3.number}
+                </div>
+                <div className="flex-1 space-y-3">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <h3 className="text-xl sm:text-2xl font-black font-syne uppercase text-gray-900">
+                      {t.process.step3.title}
+                    </h3>
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand/10 text-brand">
+                      Step 3
+                    </span>
+                  </div>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                    {t.process.step3.description}
+                  </p>
+                  <div className="flex items-center gap-2 text-xs font-mono text-gray-600 bg-white border border-gray-200 rounded-xl px-3 py-2 mt-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                    <span>{t.process.step3.callout}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* RED MID-PAGE CTA BANNER                                      */}
+        {/* ============================================================ */}
+        <section>
+          <div className="bg-gradient-to-r from-brand via-brand-dark to-brand text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden border border-brand-light/40 shadow-xl shadow-brand/20">
+            <div className="relative z-10 max-w-3xl space-y-4">
+              <span className="text-xs font-mono uppercase tracking-widest text-white/90 font-semibold">
+                Sapienza Foiling Team
+              </span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-syne uppercase tracking-tight text-white">
+                {t.banner.title}
+              </h2>
+              <p className="text-sm sm:text-base text-white/90 font-light leading-relaxed max-w-2xl">
+                {t.banner.description}
+              </p>
+              <div className="pt-3 flex flex-wrap gap-4">
+                <a
+                  href={FORM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => handleApplyClick('mid_banner_form')}
+                  className="inline-flex items-center gap-2 bg-white text-brand px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl group"
+                >
+                  <span>{t.banner.cta}</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </a>
+                <Link
+                  href="/team"
+                  className="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white border border-white/30 px-6 py-3.5 rounded-xl font-semibold text-xs uppercase tracking-wider transition-all backdrop-blur-sm"
+                >
+                  <span>{t.banner.secondary}</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* CANDIDATURA & INVITO APERTO                                  */}
+        {/* ============================================================ */}
+        <section className="pt-6 border-t border-gray-100">
+          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-gray-200 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="space-y-4 max-w-2xl">
+              <span className="text-xs font-mono font-bold tracking-widest text-brand uppercase">
+                {language === 'en' ? 'OPEN INVITATION' : 'INVITO APERTO'}
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-black font-syne uppercase text-gray-900">
+                {t.spontaneousApplication.title}
+              </h3>
+              <p className="text-sm sm:text-base text-gray-600 font-light leading-relaxed">
+                {t.spontaneousApplication.description}
+              </p>
+              <div className="flex flex-wrap gap-3 pt-2">
+                <a
+                  href={FORM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => handleApplyClick('spontaneous_form')}
+                  className="inline-flex items-center gap-2 bg-brand text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-brand-light transition-all shadow-md"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>{t.spontaneousApplication.applyButton}</span>
+                </a>
+                <a
+                  href={EMAIL_APPLY_URL}
+                  onClick={() => handleApplyClick('spontaneous_email')}
+                  className="inline-flex items-center gap-2 bg-gray-100 text-gray-800 hover:bg-gray-200 px-5 py-3 rounded-xl font-semibold text-xs uppercase tracking-wider transition-all"
+                >
+                  <span>{t.spontaneousApplication.emailButton}</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-brand/10 border border-brand/20 flex items-center justify-center flex-shrink-0 text-brand">
+              <Send className="w-14 h-14 sm:w-16 sm:h-16" />
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* TESI DI LAUREA E TIROCINI CURRICULARI                        */}
+        {/* ============================================================ */}
+        <section className="pt-6 border-t border-gray-100">
+          <div className="bg-brand/5 border border-brand/10 rounded-3xl p-6 sm:p-10 lg:p-12">
+            <div className="max-w-3xl mb-8">
+              <span className="text-xs font-mono font-bold tracking-widest text-brand uppercase">
+                {t.thesisInternship.badge}
+              </span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-syne uppercase tracking-tight text-gray-900 mt-1">
+                {t.thesisInternship.title}
+              </h2>
+              <p className="text-sm sm:text-base text-gray-600 mt-1 font-light">
+                {t.thesisInternship.subtitle}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                <div className="w-12 h-12 rounded-xl bg-brand/10 text-brand flex items-center justify-center">
+                  <Brain className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold font-syne text-gray-900">
+                  {t.thesisInternship.thesis.title}
                 </h3>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-                  {careerTranslations[language].openPositions.noPositions}
+                <p className="text-sm text-gray-600 font-light leading-relaxed">
+                  {t.thesisInternship.thesis.description}
                 </p>
-                <div className="flex justify-center gap-4">
-                  <a
-                    href="#spontaneous-application"
-                    className="bg-brand text-white px-8 py-3 rounded-xl font-semibold hover:bg-brand-dark transition-all hover:scale-105"
+              </div>
+
+              <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                <div className="w-12 h-12 rounded-xl bg-brand/10 text-brand flex items-center justify-center">
+                  <GraduationCap className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold font-syne text-gray-900">
+                  {t.thesisInternship.internship.title}
+                </h3>
+                <p className="text-sm text-gray-600 font-light leading-relaxed">
+                  {t.thesisInternship.internship.description}
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center sm:text-left">
+              <a
+                href={THESIS_EMAIL_URL}
+                onClick={() => handleApplyClick('thesis_internship_button')}
+                className="inline-flex items-center gap-2 bg-brand text-white px-7 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-brand-light transition-all shadow-md"
+              >
+                <span>{t.thesisInternship.contactButton}</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* FAQ ACCORDION (DOMANDE FREQUENTI)                            */}
+        {/* ============================================================ */}
+        <section className="pt-6 border-t border-gray-100">
+          <div className="mb-8">
+            <span className="text-xs font-mono font-bold tracking-widest text-brand uppercase">
+              {t.faq.kicker}
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black font-syne uppercase tracking-tight text-gray-900 mt-1">
+              {t.faq.title}
+            </h2>
+          </div>
+
+          {/* Accordion list */}
+          <div className="space-y-3">
+            {t.faq.items.map((item, index) => {
+              const isOpen = openFaqIndex === index;
+              return (
+                <div
+                  key={index}
+                  className={`rounded-2xl border transition-all ${isOpen
+                    ? 'border-brand/40 bg-white shadow-sm'
+                    : 'border-gray-200 bg-gray-50/50 hover:bg-gray-50'
+                    }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleFaq(index)}
+                    className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 select-none"
+                    aria-expanded={isOpen}
                   >
-                    {careerTranslations[language].spontaneousApplication.applyButton}
-                  </a>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+                    <span className="text-base sm:text-lg font-bold font-syne text-gray-900 pr-2">
+                      {item.q}
+                    </span>
+                    <span
+                      className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${isOpen
+                        ? 'bg-brand text-white'
+                        : 'bg-gray-200 text-gray-600'
+                        }`}
+                    >
+                      {isOpen ? (
+                        <ChevronUp className="w-4 h-4" />
+                      ) : (
+                        <ChevronDown className="w-4 h-4" />
+                      )}
+                    </span>
+                  </button>
 
-        {/* Spontaneous Application */}
-        <div className="mb-16" id="spontaneous-application">
-          <div className="bg-white rounded-3xl p-8 shadow-lg flex flex-col lg:flex-row items-center">
-            <div className="flex-1 mb-6 lg:mb-0 lg:mr-6 text-center lg:text-left">
-              <h2 className="text-3xl font-bold mb-4">{careerTranslations[language].spontaneousApplication.title}</h2>
-              <p className="text-lg text-gray-600 mb-6">{careerTranslations[language].spontaneousApplication.description}</p>
-              <a
-                href="mailto:sapienzafoilingteam@gmail.com"
-                onClick={() => handleApplyClick('spontaneous')}
-                className="inline-block bg-brand text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-dark transition-colors"
-              >
-                <Send className="w-5 h-5 mr-2 inline-block" />
-                {careerTranslations[language].spontaneousApplication.applyButton}
-              </a>
-            </div>
-            <div className="flex-shrink-0">
-              <Send className="w-32 h-32 text-brand" />
-            </div>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        key="content"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: 'easeInOut' }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-5 pb-6 sm:px-6 sm:pb-6 text-sm sm:text-base text-gray-600 font-light leading-relaxed border-t border-gray-100 pt-4">
+                          {item.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
-        </div>
 
-        {/* Thesis and Internship */}
-        <div className="bg-brand/5 rounded-3xl">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <h2 className="text-3xl font-bold text-center mb-12">{careerTranslations[language].thesisInternship.title}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-white p-6 rounded-xl shadow-lg">
-                <div className="flex items-center mb-4">
-                  <Brain className="w-8 h-8 text-brand mr-3" />
-                  <h3 className="text-xl font-semibold">{careerTranslations[language].thesisInternship.thesis.title}</h3>
-                </div>
-                <p className="text-gray-600">{careerTranslations[language].thesisInternship.thesis.description}</p>
-              </div>
-              <div className="bg-white p-6 rounded-xl shadow-lg">
-                <div className="flex items-center mb-4">
-                  <Users className="w-8 h-8 text-brand mr-3" />
-                  <h3 className="text-xl font-semibold">{careerTranslations[language].thesisInternship.internship.title}</h3>
-                </div>
-                <p className="text-gray-600">{careerTranslations[language].thesisInternship.internship.description}</p>
-              </div>
+          {/* Direct contact footer */}
+          <div className="mt-8 p-6 bg-gray-50 rounded-2xl border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div className="space-y-1">
+              <h4 className="text-sm font-bold text-gray-900">
+                {t.faq.stillHaveQuestions}
+              </h4>
+              <p className="text-xs text-gray-600">
+                {t.faq.contactDirectly}
+              </p>
             </div>
-            <div className="text-center mt-12">
-              <a
-                href="mailto:sapienzafoilingteam@gmail.com"
-                onClick={() => handleApplyClick('thesis_internship')}
-                className="inline-block bg-brand text-white px-8 py-3 rounded-2xl font-semibold hover:bg-brand-dark transition-colors"
-              >
-                {careerTranslations[language].thesisInternship.contactButton}
-              </a>
-            </div>
+            <a
+              href="mailto:sapienzafoilingteam@gmail.com"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand hover:text-brand-dark transition-colors"
+            >
+              <span>sapienzafoilingteam@gmail.com</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
           </div>
-        </div>
+        </section>
       </div>
-    </main>
+    </PageLayout>
   );
 };
 
