@@ -51,21 +51,44 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
 
   return (
     <PageLayout>
-      <div className="px-6 md:px-12 py-8 space-y-16 md:space-y-20">
+      <div className="px-6 md:px-12 py-8 space-y-12 md:space-y-16">
         {/* ============================================================ */}
         {/* HERO SECTION                                                 */}
         {/* ============================================================ */}
         <section className="pt-2">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-            {/* Left Col: Title & Description */}
-            <div className="lg:col-span-7 space-y-6">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black font-syne uppercase tracking-tight text-gray-900 leading-[1.05]">
-                {t.hero.title}
-              </h1>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+            {/* Left Col: Title, Description & Highlights */}
+            <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand/10 border border-brand/20 text-brand text-xs font-semibold tracking-wider uppercase">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>{t.hero.kicker}</span>
+                </div>
 
-              <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-light">
-                {t.hero.description}
-              </p>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black font-syne uppercase tracking-tight text-gray-900 leading-[1.02]">
+                  {t.hero.title}
+                </h1>
+
+                <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed font-light">
+                  {t.hero.description}
+                </p>
+              </div>
+
+              {/* Quick highlight tags */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-gray-700 bg-gray-50 border border-gray-200/80 rounded-2xl px-3.5 py-3">
+                  <Compass className="w-4 h-4 text-brand flex-shrink-0" />
+                  <span>Sapienza Roma</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-gray-700 bg-gray-50 border border-gray-200/80 rounded-2xl px-3.5 py-3">
+                  <Layers className="w-4 h-4 text-brand flex-shrink-0" />
+                  <span>4 Reparti</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-gray-700 bg-gray-50 border border-gray-200/80 rounded-2xl px-3.5 py-3 col-span-2 sm:col-span-1">
+                  <Award className="w-4 h-4 text-brand flex-shrink-0" />
+                  <span>SuMoth Challenge</span>
+                </div>
+              </div>
             </div>
 
             {/* Right Col: Red Status Card */}
