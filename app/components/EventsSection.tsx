@@ -13,7 +13,7 @@ interface EventsSectionProps {
 }
 
 const EventCard = ({ event, isPast = false, language }: { event: Event; isPast?: boolean; language: 'en' | 'it' }) => (
-  <div className="group relative overflow-hidden rounded-3xl glass-panel border border-white/5 hover:border-brand/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 w-full max-w-md mx-auto h-[300px]">
+  <div className="group relative overflow-hidden rounded-3xl bg-carbon/60 border border-white/10 hover:border-brand/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 w-full max-w-md mx-auto h-[300px]">
     {/* Image Background */}
     <div className="absolute inset-0">
       <Image
@@ -67,8 +67,14 @@ const EventsSection: React.FC<EventsSectionProps> = ({ events }) => {
     <div id="events" className="bg-brand py-32 relative overflow-hidden">
       {/* Intentional Pattern Background */}
       <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-light/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-white/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
+      <div
+        className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none -translate-y-1/2 translate-x-1/2 opacity-70"
+        style={{ background: 'radial-gradient(circle, rgba(163, 66, 82, 0.4) 0%, transparent 70%)' }}
+      />
+      <div
+        className="absolute bottom-0 left-0 w-[300px] h-[300px] pointer-events-none translate-y-1/2 -translate-x-1/2 opacity-50"
+        style={{ background: 'radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%)' }}
+      />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {upcomingEvents.length > 0 ? (

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@700;800;900&display=swap"
+    rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -36,21 +39,25 @@
       color: #1a1718;
       font-family: 'Outfit', sans-serif;
     }
+
     .blueprint-paper {
       background-color: #FAFBFD;
-      background-image: 
+      background-image:
         radial-gradient(circle at 50% 50%, rgba(130, 36, 51, 0.03) 0%, transparent 70%),
         linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
       background-size: 100% 100%, 32px 32px, 32px 32px;
     }
+
     .active-card {
       border-color: #822433 !important;
       box-shadow: 0 8px 24px rgba(130, 36, 51, 0.12) !important;
     }
+
     .active-hotspot {
       position: relative;
     }
+
     .active-hotspot::before {
       content: '';
       position: absolute;
@@ -60,6 +67,7 @@
       animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
       pointer-events: none;
     }
+
     .active-hotspot::after {
       content: '';
       position: absolute;
@@ -68,8 +76,11 @@
       border: 1px dashed rgba(130, 36, 51, 0.35);
       pointer-events: none;
     }
+
     @keyframes ping-slow {
-      75%, 100% {
+
+      75%,
+      100% {
         transform: scale(1.15);
         opacity: 0;
       }
@@ -88,25 +99,24 @@
     }
   </script>
 </head>
+
 <body class="selection:bg-brand selection:text-white">
 
   <!-- ==================== SFT FLOATING NAVBAR ==================== -->
   <nav class="fixed top-0 left-0 right-0 z-50 px-4 py-3">
-    <div class="bg-white text-black font-semibold text-center mx-auto max-w-4xl rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100">
+    <div
+      class="bg-white text-black font-semibold text-center mx-auto max-w-4xl rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100">
       <div class="flex items-center justify-between px-6 py-2.5">
         <!-- Logo -->
         <a href="/" class="flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
-          <img 
-            src="../public/logosft.svg" 
-            alt="Sapienza Foiling Team Logo" 
-            class="h-11 w-11 object-contain"
-            onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='/logosft.svg';}"
-          />
+          <img src="../public/logosft.svg" alt="Sapienza Foiling Team Logo" class="h-11 w-11 object-contain"
+            onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='/logosft.svg';}" />
         </a>
 
         <!-- Desktop Navigation Items -->
         <div class="hidden md:flex items-center space-x-2 text-sm">
-          <a href="/boat" class="px-4 py-2 rounded-full transition-all duration-300 bg-brand text-white font-bold shadow-sm">
+          <a href="/boat"
+            class="px-4 py-2 rounded-full transition-all duration-300 bg-brand text-white font-bold shadow-sm">
             Moth
           </a>
           <a href="/team" class="px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-100 text-gray-700">
@@ -121,7 +131,8 @@
           <a href="/blog" class="px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-100 text-gray-700">
             Blog
           </a>
-          <a href="/name-on-wings" class="px-4 py-2 rounded-full bg-gray-900 text-white hover:bg-brand transition-all duration-300 text-xs uppercase tracking-wider font-bold">
+          <a href="/name-on-wings"
+            class="px-4 py-2 rounded-full bg-gray-900 text-white hover:bg-brand transition-all duration-300 text-xs uppercase tracking-wider font-bold">
             Supportaci
           </a>
         </div>
@@ -129,7 +140,7 @@
         <!-- SuMoth Tag -->
         <div class="flex items-center">
           <span class="px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-mono font-bold">
-            MERAVIJOSA 9352
+            MERAVIJOSA
           </span>
         </div>
       </div>
@@ -139,12 +150,15 @@
   <!-- ==================== MAIN PAGE CONTAINER ==================== -->
   <main class="min-h-screen bg-brand-dark pt-28 md:pt-32 pb-16">
     <div class="relative z-10 mx-4">
-      <div class="max-w-7xl mx-auto rounded-3xl shadow-2xl overflow-hidden min-h-[600px] bg-white border border-gray-100">
-        
+      <div
+        class="max-w-7xl mx-auto rounded-3xl shadow-2xl overflow-hidden min-h-[600px] bg-white border border-gray-100">
+
         <!-- Header -->
-        <div class="px-8 md:px-12 pt-10 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-gray-100">
+        <div
+          class="px-8 md:px-12 pt-10 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-gray-100">
           <div class="shrink-0">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-mono uppercase tracking-wider mb-3">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-mono uppercase tracking-wider mb-3">
               <span class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
               SuMoth Challenge // Sapienza Foiling Team
             </div>
@@ -154,7 +168,8 @@
           </div>
           <div class="max-w-xl">
             <p class="text-sm md:text-base text-gray-600 font-light leading-relaxed">
-              Il Moth foiling sostenibile della Sapienza. Seleziona i componenti sul modello 3D per scoprire la struttura, i sistemi meccanici e l'elettronica di bordo.
+              Il Moth foiling sostenibile della Sapienza. Seleziona i componenti sul modello 3D per scoprire la
+              struttura, i sistemi meccanici e l'elettronica di bordo.
             </p>
           </div>
         </div>
@@ -162,44 +177,52 @@
         <!-- ==================== BLUEPRINT WORKSPACE ==================== -->
         <div class="px-8 md:px-12 py-10">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
+
             <!-- LEFT: 3D Render Viewport (Span 7) -->
-            <div class="lg:col-span-7 blueprint-paper rounded-3xl border border-gray-200 p-6 md:p-8 relative overflow-hidden shadow-sm">
+            <div
+              class="lg:col-span-7 blueprint-paper rounded-3xl border border-gray-200 p-6 md:p-8 relative overflow-hidden shadow-sm">
               <div class="flex justify-between items-center text-[11px] font-mono text-gray-400 mb-2">
                 <span>VISTA ISOMETRICA 3D // CAD BLUEPRINT</span>
-                <span class="text-brand font-bold">MERAVIJOSA 9352</span>
+                <span class="text-brand font-bold">MERAVIJOSA </span>
               </div>
 
               <!-- 3D Render Container -->
-              <div class="relative w-full aspect-[3/4] max-h-[580px] mx-auto flex items-center justify-center rounded-2xl overflow-hidden">
-                
+              <div
+                class="relative w-full aspect-[3/4] max-h-[580px] mx-auto flex items-center justify-center rounded-2xl overflow-hidden">
+
                 <!-- Technical Blueprint CAD Architectural Background -->
                 <div class="absolute inset-0 pointer-events-none select-none z-0">
-                  <div
-                    class="absolute inset-0 opacity-45"
-                    style="background-image: linear-gradient(to right, rgba(130, 36, 51, 0.14) 1px, transparent 1px), linear-gradient(to bottom, rgba(130, 36, 51, 0.14) 1px, transparent 1px), linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px); background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;"
-                  ></div>
+                  <div class="absolute inset-0 opacity-45"
+                    style="background-image: linear-gradient(to right, rgba(130, 36, 51, 0.14) 1px, transparent 1px), linear-gradient(to bottom, rgba(130, 36, 51, 0.14) 1px, transparent 1px), linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px); background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;">
+                  </div>
 
-                  <svg class="w-full h-full text-brand/25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 650" fill="none">
-                    <circle cx="250" cy="460" r="180" stroke="currentColor" stroke-width="0.75" stroke-dasharray="4 4" />
+                  <svg class="w-full h-full text-brand/25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 650"
+                    fill="none">
+                    <circle cx="250" cy="460" r="180" stroke="currentColor" stroke-width="0.75"
+                      stroke-dasharray="4 4" />
                     <circle cx="250" cy="460" r="120" stroke="currentColor" stroke-width="0.5" />
                     <circle cx="250" cy="460" r="60" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 2" />
 
-                    <line x1="280" y1="20" x2="280" y2="620" stroke="currentColor" stroke-width="0.75" stroke-dasharray="6 3" />
+                    <line x1="280" y1="20" x2="280" y2="620" stroke="currentColor" stroke-width="0.75"
+                      stroke-dasharray="6 3" />
                     <text x="284" y="32" fill="currentColor" font-size="7" font-family="monospace">CL / MAST AXIS</text>
 
-                    <line x1="30" y1="475" x2="470" y2="475" stroke="currentColor" stroke-width="0.75" stroke-dasharray="8 4" />
-                    <text x="35" y="470" fill="currentColor" font-size="7" font-family="monospace">DWL 0.00 [DESIGN WATERLINE]</text>
+                    <line x1="30" y1="475" x2="470" y2="475" stroke="currentColor" stroke-width="0.75"
+                      stroke-dasharray="8 4" />
+                    <text x="35" y="470" fill="currentColor" font-size="7" font-family="monospace">DWL 0.00 [DESIGN
+                      WATERLINE]</text>
 
                     <line x1="120" y1="510" x2="430" y2="510" stroke="currentColor" stroke-width="0.75" />
                     <line x1="120" y1="504" x2="120" y2="516" stroke="currentColor" stroke-width="0.75" />
                     <line x1="430" y1="504" x2="430" y2="516" stroke="currentColor" stroke-width="0.75" />
-                    <text x="275" y="505" fill="currentColor" font-size="8" font-family="monospace" text-anchor="middle">LWL 3.355 m</text>
+                    <text x="275" y="505" fill="currentColor" font-size="8" font-family="monospace"
+                      text-anchor="middle">LWL 3.355 m</text>
 
                     <line x1="215" y1="60" x2="215" y2="420" stroke="currentColor" stroke-width="0.75" />
                     <line x1="208" y1="60" x2="222" y2="60" stroke="currentColor" stroke-width="0.75" />
                     <line x1="208" y1="420" x2="222" y2="420" stroke="currentColor" stroke-width="0.75" />
-                    <text x="205" y="240" fill="currentColor" font-size="7.5" font-family="monospace" text-anchor="end">H: 5.50 m</text>
+                    <text x="205" y="240" fill="currentColor" font-size="7.5" font-family="monospace"
+                      text-anchor="end">H: 5.50 m</text>
 
                     <g stroke="currentColor" stroke-width="0.75">
                       <path d="M30,40 L40,40 M35,35 L35,45" />
@@ -208,122 +231,118 @@
                       <path d="M460,610 L470,610 M465,605 L465,615" />
                     </g>
 
-                    <rect x="20" y="590" width="165" height="38" stroke="currentColor" stroke-width="0.75" fill="rgba(255,255,255,0.7)" />
-                    <text x="28" y="602" fill="currentColor" font-size="6.5" font-family="monospace" font-weight="bold">SAPIENZA FOILING TEAM</text>
-                    <text x="28" y="612" fill="currentColor" font-size="6" font-family="monospace">PROGETTO: MERAVIJOSA ITA 9352</text>
-                    <text x="28" y="621" fill="currentColor" font-size="5.5" font-family="monospace">NAVAL CAD // ORTHO ISOMETRIC</text>
+                    <rect x="20" y="590" width="165" height="38" stroke="currentColor" stroke-width="0.75"
+                      fill="rgba(255,255,255,0.7)" />
+                    <text x="28" y="602" fill="currentColor" font-size="6.5" font-family="monospace"
+                      font-weight="bold">SAPIENZA FOILING TEAM</text>
+                    <text x="28" y="612" fill="currentColor" font-size="6" font-family="monospace">PROGETTO: MERAVIJOSA
+                      ITA 9352</text>
+                    <text x="28" y="621" fill="currentColor" font-size="5.5" font-family="monospace">NAVAL CAD // ORTHO
+                      ISOMETRIC</text>
                   </svg>
                 </div>
 
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-brand/10 rounded-full blur-[70px] pointer-events-none"></div>
+                <div
+                  class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-brand/10 rounded-full blur-[70px] pointer-events-none">
+                </div>
 
                 <!-- 3D Isolated Image -->
-                <img 
-                  id="boatRender"
-                  src="../public/images/meravijosa.png" 
-                  alt="Meravijosa 3D Render" 
+                <img id="boatRender" src="../public/images/meravijosa.png" alt="Meravijosa 3D Render"
                   class="w-full h-full object-contain filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.15)] transition-all duration-500 relative z-10"
-                  onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='/images/meravijosa.png';}"
-                />
+                  onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='/images/meravijosa.png';}" />
 
                 <!-- HOTSPOT 1: Scafo (Hull) -->
-                <button 
-                  data-hotspot="hull"
-                  onclick="selectComponent('hull', true)" 
+                <button data-hotspot="hull" onclick="selectComponent('hull', true)"
                   class="hotspot-btn group absolute top-[73%] left-[65%] -translate-x-1/2 -translate-y-1/2 z-20 focus:outline-none"
-                  aria-label="Scafo"
-                >
+                  aria-label="Scafo">
                   <div class="relative flex items-center justify-center">
-                    <span class="w-8 h-8 rounded-full bg-brand border-2 border-white text-xs font-mono font-bold flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
+                    <span
+                      class="w-8 h-8 rounded-full bg-brand border-2 border-white text-xs font-mono font-bold flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
                       01
                     </span>
                   </div>
-                  <span class="hidden md:block absolute right-10 top-1/2 -translate-y-1/2 bg-gray-900 text-white font-mono text-[11px] px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
+                  <span
+                    class="hidden md:block absolute right-10 top-1/2 -translate-y-1/2 bg-gray-900 text-white font-mono text-[11px] px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
                     Scafo B-PET
                   </span>
                 </button>
 
                 <!-- HOTSPOT 2: Foil & Timone -->
-                <button 
-                  data-hotspot="foils"
-                  onclick="selectComponent('foils', true)" 
+                <button data-hotspot="foils" onclick="selectComponent('foils', true)"
                   class="hotspot-btn group absolute top-[88%] left-[59%] -translate-x-1/2 -translate-y-1/2 z-20 focus:outline-none"
-                  aria-label="Foil & Timone"
-                >
+                  aria-label="Foil & Timone">
                   <div class="relative flex items-center justify-center">
-                    <span class="w-8 h-8 rounded-full bg-brand border-2 border-white text-xs font-mono font-bold flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
+                    <span
+                      class="w-8 h-8 rounded-full bg-brand border-2 border-white text-xs font-mono font-bold flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
                       02
                     </span>
                   </div>
-                  <span class="hidden md:block absolute left-10 top-1/2 -translate-y-1/2 bg-gray-900 text-white font-mono text-[11px] px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
+                  <span
+                    class="hidden md:block absolute left-10 top-1/2 -translate-y-1/2 bg-gray-900 text-white font-mono text-[11px] px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
                     Foil & Timone
                   </span>
                 </button>
 
                 <!-- HOTSPOT 3: Sensore Wand -->
-                <button 
-                  data-hotspot="wand"
-                  onclick="selectComponent('wand', true)" 
+                <button data-hotspot="wand" onclick="selectComponent('wand', true)"
                   class="hotspot-btn group absolute top-[70%] left-[76%] -translate-x-1/2 -translate-y-1/2 z-20 focus:outline-none"
-                  aria-label="Bacchetta Wand"
-                >
+                  aria-label="Bacchetta Wand">
                   <div class="relative flex items-center justify-center">
-                    <span class="w-8 h-8 rounded-full bg-brand border-2 border-white text-xs font-mono font-bold flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
+                    <span
+                      class="w-8 h-8 rounded-full bg-brand border-2 border-white text-xs font-mono font-bold flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
                       03
                     </span>
                   </div>
-                  <span class="hidden md:block absolute left-10 top-1/2 -translate-y-1/2 bg-gray-900 text-white font-mono text-[11px] px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
+                  <span
+                    class="hidden md:block absolute left-10 top-1/2 -translate-y-1/2 bg-gray-900 text-white font-mono text-[11px] px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
                     Bacchetta Wand
                   </span>
                 </button>
 
                 <!-- HOTSPOT 4: Wingbars & Coperta -->
-                <button 
-                  data-hotspot="wings"
-                  onclick="selectComponent('wings', true)" 
+                <button data-hotspot="wings" onclick="selectComponent('wings', true)"
                   class="hotspot-btn group absolute top-[63%] left-[32%] -translate-x-1/2 -translate-y-1/2 z-20 focus:outline-none"
-                  aria-label="Wingbars"
-                >
+                  aria-label="Wingbars">
                   <div class="relative flex items-center justify-center">
-                    <span class="w-8 h-8 rounded-full bg-brand border-2 border-white text-xs font-mono font-bold flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
+                    <span
+                      class="w-8 h-8 rounded-full bg-brand border-2 border-white text-xs font-mono font-bold flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
                       04
                     </span>
                   </div>
-                  <span class="hidden md:block absolute left-10 top-1/2 -translate-y-1/2 bg-gray-900 text-white font-mono text-[11px] px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
+                  <span
+                    class="hidden md:block absolute left-10 top-1/2 -translate-y-1/2 bg-gray-900 text-white font-mono text-[11px] px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
                     Wingbars & Deck
                   </span>
                 </button>
 
                 <!-- HOTSPOT 5: Rig & Vele -->
-                <button 
-                  data-hotspot="rig"
-                  onclick="selectComponent('rig', true)" 
+                <button data-hotspot="rig" onclick="selectComponent('rig', true)"
                   class="hotspot-btn group absolute top-[28%] left-[56%] -translate-x-1/2 -translate-y-1/2 z-20 focus:outline-none"
-                  aria-label="Rig & Vele"
-                >
+                  aria-label="Rig & Vele">
                   <div class="relative flex items-center justify-center">
-                    <span class="w-8 h-8 rounded-full bg-brand border-2 border-white text-xs font-mono font-bold flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
+                    <span
+                      class="w-8 h-8 rounded-full bg-brand border-2 border-white text-xs font-mono font-bold flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
                       05
                     </span>
                   </div>
-                  <span class="hidden md:block absolute left-10 top-1/2 -translate-y-1/2 bg-gray-900 text-white font-mono text-[11px] px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
+                  <span
+                    class="hidden md:block absolute left-10 top-1/2 -translate-y-1/2 bg-gray-900 text-white font-mono text-[11px] px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
                     Rig & Vele
                   </span>
                 </button>
 
                 <!-- HOTSPOT 06: Elettronica & PCB di Bordo (Center-Hull Box) -->
-                <button 
-                  data-hotspot="pcb"
-                  onclick="selectComponent('pcb', true)" 
+                <button data-hotspot="pcb" onclick="selectComponent('pcb', true)"
                   class="hotspot-btn group absolute top-[74%] left-[40%] -translate-x-1/2 -translate-y-1/2 z-20 focus:outline-none"
-                  aria-label="Elettronica PCB"
-                >
+                  aria-label="Elettronica PCB">
                   <div class="relative flex items-center justify-center">
-                    <span class="w-8 h-8 rounded-full bg-brand border-2 border-white text-xs font-mono font-bold flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
+                    <span
+                      class="w-8 h-8 rounded-full bg-brand border-2 border-white text-xs font-mono font-bold flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
                       06
                     </span>
                   </div>
-                  <span class="hidden md:block absolute bottom-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white font-mono text-[11px] px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
+                  <span
+                    class="hidden md:block absolute bottom-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white font-mono text-[11px] px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
                     Custom PCB Telemetria
                   </span>
                 </button>
@@ -338,13 +357,17 @@
             <!-- RIGHT: Clean Simplified Detail Card & Component Filters (Span 5) -->
             <div class="lg:col-span-5 flex flex-col gap-4">
               <!-- Component Switcher Tabs - Above Detail Card, Single Row -->
-              <div class="flex flex-nowrap items-center justify-between gap-1 sm:gap-1.5 w-full text-[10px] sm:text-[11px] font-mono" id="topTabsContainer"></div>
+              <div
+                class="flex flex-nowrap items-center justify-between gap-1 sm:gap-1.5 w-full text-[10px] sm:text-[11px] font-mono"
+                id="topTabsContainer"></div>
 
-              <div id="detailCard" class="bg-white rounded-3xl border border-gray-200 p-7 shadow-sm transition-all duration-300">
-                
+              <div id="detailCard"
+                class="bg-white rounded-3xl border border-gray-200 p-7 shadow-sm transition-all duration-300">
+
                 <!-- Category Badge -->
                 <div class="flex items-center justify-between mb-3">
-                  <span id="compBadge" class="px-3 py-0.5 rounded-full bg-brand/10 text-brand text-xs font-mono font-bold uppercase">
+                  <span id="compBadge"
+                    class="px-3 py-0.5 rounded-full bg-brand/10 text-brand text-xs font-mono font-bold uppercase">
                     COMPONENTE 01
                   </span>
                   <span id="compSubsystem" class="text-[11px] font-mono text-gray-400 uppercase tracking-wider">
@@ -359,20 +382,19 @@
 
                 <!-- Short Clear Description -->
                 <p id="compDesc" class="text-sm text-gray-600 font-light leading-relaxed mb-5">
-                  Laminato con pelli in fibra di basalto biassiale, core in schiuma PET recuperata da sfridi industriali e resina epossidica donata da Comar Yachts.
+                  Laminato con pelli in fibra di basalto biassiale, core in schiuma PET recuperata da sfridi industriali
+                  e resina epossidica donata da Comar Yachts.
                 </p>
 
                 <!-- Embedded Photo -->
-                <div class="relative rounded-2xl overflow-hidden border border-gray-100 mb-5 group aspect-video bg-gray-100">
-                  <img 
-                    id="compPhoto" 
-                    src="../public/images/boat-01-wing-sft-detail.jpg" 
-                    alt="Foto Componente" 
+                <div
+                  class="relative rounded-2xl overflow-hidden border border-gray-100 mb-5 group aspect-video bg-gray-100">
+                  <img id="compPhoto" src="../public/images/boat-01-wing-sft-detail.jpg" alt="Foto Componente"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='/images/boat-01-wing-sft-detail.jpg';}"
-                  />
+                    onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='/images/boat-01-wing-sft-detail.jpg';}" />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                  <div class="absolute bottom-2.5 left-3.5 right-3.5 flex items-center justify-between text-[11px] font-mono text-white">
+                  <div
+                    class="absolute bottom-2.5 left-3.5 right-3.5 flex items-center justify-between text-[11px] font-mono text-white">
                     <span id="compPhotoLabel">Scafo laminato & terrazza</span>
                     <span class="text-brand-light font-bold">SAPIENZA FOILING TEAM</span>
                   </div>
@@ -393,8 +415,10 @@
                 <!-- Two Core Highlights -->
                 <div class="border-t border-gray-100 pt-3.5">
                   <ul id="compBullets" class="space-y-1.5 text-xs text-gray-700 font-light">
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand"></span> Stampo femmina in MDF fresato a CNC e rifinito a mano</li>
-                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand"></span> Mast step rinforzato con albero windsurf upcycled</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand"></span> Stampo
+                      femmina in MDF fresato a CNC e rifinito a mano</li>
+                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand"></span> Mast
+                      step rinforzato con albero windsurf upcycled</li>
                   </ul>
                 </div>
               </div>
@@ -403,40 +427,49 @@
               <div class="p-5 rounded-3xl bg-gray-50 border border-gray-200 text-xs text-gray-600">
                 <div class="font-bold text-gray-900 font-syne mb-1">Collaborazioni & Ringraziamenti</div>
                 <p class="font-light text-[11px] leading-relaxed">
-                  Realizzato grazie al supporto di <strong>FluidoDesign</strong> per il laboratorio compositi, <strong>Lega Navale Ventotene</strong> per il prestito di rig e foil, <strong>Comar Yachts</strong> per la resina, <strong>Harken</strong> e <strong>Gottifredi Maffioli</strong> per le attrezzature di coperta.
+                  Realizzato grazie al supporto di <strong>FluidoDesign</strong> per il laboratorio compositi,
+                  <strong>Lega Navale Ventotene</strong> per il prestito di rig e foil, <strong>Comar Yachts</strong>
+                  per la resina, <strong>Harken</strong> e <strong>Gottifredi Maffioli</strong> per le attrezzature di
+                  coperta.
                 </p>
               </div>
             </div>
           </div>
 
-          </div>
+        </div>
 
-          <!-- ==================== SUMOTH RULEBOOK LINK ==================== -->
-          <div class="mt-12 pt-8 border-t border-gray-100">
-            <div class="bg-gradient-to-r from-gray-900 via-[#181a20] to-gray-900 rounded-2xl border border-gray-800 p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl relative overflow-hidden">
-              <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: linear-gradient(to right, #822433 1px, transparent 1px), linear-gradient(to bottom, #822433 1px, transparent 1px); background-size: 24px 24px;"></div>
-              <div class="relative z-10 max-w-2xl">
-                <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded border border-[#822433]/40 bg-[#822433]/10 text-brand text-[11px] font-mono uppercase tracking-wider mb-3">
-                  <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
-                  Regolamento SuMoth Challenge
-                </div>
-                <h3 class="text-xl md:text-2xl font-bold text-white font-syne mb-2">
-                  Regolamento Ufficiale
-                </h3>
-                <p class="text-gray-300 text-sm leading-relaxed font-light">
-                  Meravijosa è progettata e costruita nel pieno rispetto delle linee guida della SuMoth Challenge, integrando sostenibilità dei materiali, ciclo di vita circolare e sicurezza in volo.
-                </p>
+        <!-- ==================== SUMOTH RULEBOOK LINK ==================== -->
+        <div class="mt-12 pt-8 border-t border-gray-100">
+          <div
+            class="bg-gradient-to-r from-gray-900 via-[#181a20] to-gray-900 rounded-2xl border border-gray-800 p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.04] pointer-events-none"
+              style="background-image: linear-gradient(to right, #822433 1px, transparent 1px), linear-gradient(to bottom, #822433 1px, transparent 1px); background-size: 24px 24px;">
+            </div>
+            <div class="relative z-10 max-w-2xl">
+              <div
+                class="inline-flex items-center gap-2 px-2.5 py-1 rounded border border-[#822433]/40 bg-[#822433]/10 text-brand text-[11px] font-mono uppercase tracking-wider mb-3">
+                <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                Regolamento SuMoth Challenge
               </div>
-              <div class="relative z-10 flex-shrink-0">
-                <a href="https://sumoth.org/challenge/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-brand hover:bg-brand-dark text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all shadow-lg hover:shadow-brand/25 hover:scale-[1.02]">
-                  <span>Vedi il Regolamento</span>
-                  <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-                </a>
-              </div>
+              <h3 class="text-xl md:text-2xl font-bold text-white font-syne mb-2">
+                Regolamento Ufficiale
+              </h3>
+              <p class="text-gray-300 text-sm leading-relaxed font-light">
+                Meravijosa è progettata e costruita nel pieno rispetto delle linee guida della SuMoth Challenge,
+                integrando sostenibilità dei materiali, ciclo di vita circolare e sicurezza in volo.
+              </p>
+            </div>
+            <div class="relative z-10 flex-shrink-0">
+              <a href="https://sumoth.org/challenge/" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-brand hover:bg-brand-dark text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all shadow-lg hover:shadow-brand/25 hover:scale-[1.02]">
+                <span>Vedi il Regolamento</span>
+                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+              </a>
             </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
   </main>
 
@@ -445,33 +478,40 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
         <div>
-          <h2 class="text-[6rem] md:text-[7rem] leading-[0.8] font-syne font-black text-black/5 tracking-widest select-none -ml-3">
+          <h2
+            class="text-[6rem] md:text-[7rem] leading-[0.8] font-syne font-black text-black/5 tracking-widest select-none -ml-3">
             SFT
           </h2>
           <p class="mt-4 text-gray-500 font-sans max-w-sm leading-relaxed text-sm">
-            Progettiamo e costruiamo il futuro delle barche foiling sostenibili. Promuoviamo l'innovazione alla Sapienza Università di Roma.
+            Progettiamo e costruiamo il futuro delle barche foiling sostenibili. Promuoviamo l'innovazione alla Sapienza
+            Università di Roma.
           </p>
         </div>
 
         <div class="flex flex-col justify-end items-start md:items-end space-y-3">
-          <a href="mailto:sapienzafoilingteam@gmail.com" class="text-xl font-syne font-bold text-gray-800 hover:text-brand transition-colors">
+          <a href="mailto:sapienzafoilingteam@gmail.com"
+            class="text-xl font-syne font-bold text-gray-800 hover:text-brand transition-colors">
             sapienzafoilingteam@gmail.com
           </a>
           <div class="flex space-x-3 mt-2">
-            <a href="https://instagram.com/sapienzafoilingteam" target="_blank" class="p-2.5 rounded-full bg-black/5 hover:bg-brand hover:text-white transition-all text-xs font-mono font-bold">
+            <a href="https://instagram.com/sapienzafoilingteam" target="_blank"
+              class="p-2.5 rounded-full bg-black/5 hover:bg-brand hover:text-white transition-all text-xs font-mono font-bold">
               Instagram
             </a>
-            <a href="https://linkedin.com/company/sapienzafoilingteam" target="_blank" class="p-2.5 rounded-full bg-black/5 hover:bg-brand hover:text-white transition-all text-xs font-mono font-bold">
+            <a href="https://linkedin.com/company/sapienzafoilingteam" target="_blank"
+              class="p-2.5 rounded-full bg-black/5 hover:bg-brand hover:text-white transition-all text-xs font-mono font-bold">
               LinkedIn
             </a>
-            <a href="https://facebook.com/sapienzafoilingteam" target="_blank" class="p-2.5 rounded-full bg-black/5 hover:bg-brand hover:text-white transition-all text-xs font-mono font-bold">
+            <a href="https://facebook.com/sapienzafoilingteam" target="_blank"
+              class="p-2.5 rounded-full bg-black/5 hover:bg-brand hover:text-white transition-all text-xs font-mono font-bold">
               Facebook
             </a>
           </div>
         </div>
       </div>
 
-      <div class="border-t border-black/10 pt-5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-mono">
+      <div
+        class="border-t border-black/10 pt-5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-mono">
         <div>© 2025 Sapienza Foiling Team</div>
         <div class="flex gap-5 mt-3 md:mt-0">
           <a href="/privacy-policy" class="hover:text-brand transition-colors">Privacy Policy</a>
@@ -583,22 +623,22 @@
       document.getElementById('compSubsystem').innerText = data.subsystem;
       document.getElementById('compTitle').innerText = data.title;
       document.getElementById('compDesc').innerText = data.desc;
-      
+
       const photoEl = document.getElementById('compPhoto');
       photoEl.src = data.photo;
-      photoEl.onerror = function() {
-        if(!this.dataset.retried) {
+      photoEl.onerror = function () {
+        if (!this.dataset.retried) {
           this.dataset.retried = 1;
           this.src = data.photoAlt;
         }
       };
-      
+
       document.getElementById('compPhotoLabel').innerText = data.photoLabel;
       document.getElementById('specMaterial').innerText = data.material;
       document.getElementById('specFeature').innerText = data.feature;
 
       const bulletsContainer = document.getElementById('compBullets');
-      bulletsContainer.innerHTML = data.bullets.map(b => 
+      bulletsContainer.innerHTML = data.bullets.map(b =>
         `<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand"></span> ${b}</li>`
       ).join('');
 
@@ -641,11 +681,10 @@
         return `
           <button 
             onclick="selectComponent('${key}')"
-            class="flex-1 text-center px-1.5 sm:px-2 py-1 rounded-full border text-[10px] sm:text-[11px] transition-all whitespace-nowrap ${
-              isActive 
-                ? 'bg-brand text-white border-brand font-bold shadow-sm' 
-                : 'bg-white text-gray-700 border-gray-200 hover:border-brand hover:text-brand hover:bg-brand/5'
-            }"
+            class="flex-1 text-center px-1.5 sm:px-2 py-1 rounded-full border text-[10px] sm:text-[11px] transition-all whitespace-nowrap ${isActive
+            ? 'bg-brand text-white border-brand font-bold shadow-sm'
+            : 'bg-white text-gray-700 border-gray-200 hover:border-brand hover:text-brand hover:bg-brand/5'
+          }"
           >
             ${names[key] || item.title}
           </button>
@@ -656,4 +695,5 @@
     selectComponent('hull');
   </script>
 </body>
+
 </html>

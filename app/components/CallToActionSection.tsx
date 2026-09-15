@@ -13,11 +13,16 @@ const CallToActionSection: React.FC<CallToActionSectionProps> = () => {
 
   return (
     <section className="relative py-24 bg-void text-white overflow-hidden border-t border-white/5">
-      {/* Ambient Burgundy Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[900px] h-[300px] md:h-[400px] bg-brand/20 rounded-full blur-[140px] pointer-events-none" />
+      {/* Ambient Burgundy Glow - Pure radial gradient without GPU blur passes */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[800px] h-[300px] md:h-[400px] pointer-events-none opacity-60"
+        style={{
+          background: 'radial-gradient(ellipse, rgba(130, 36, 51, 0.3) 0%, rgba(130, 36, 51, 0.05) 50%, transparent 70%)',
+        }}
+      />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto p-10 md:p-16 rounded-3xl bg-white/[0.03] backdrop-blur-2xl border border-white/10 shadow-2xl text-center relative overflow-hidden">
+        <div className="max-w-4xl mx-auto p-10 md:p-16 rounded-3xl bg-carbon/80 md:backdrop-blur-xl border border-white/10 shadow-2xl text-center relative overflow-hidden">
           {/* Subtle top rim light */}
           <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-brand-light to-transparent" />
 

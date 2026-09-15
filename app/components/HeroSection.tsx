@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import posthog from "posthog-js";
@@ -28,7 +28,6 @@ const heroSlides = [
     src: '/images/events-06-racing-water.jpg',
     alt: 'Sapienza Foiling Moth 9352 Racing in SuMoth Challenge',
   },
-
   {
     src: '/images/sponsor-03-sail-partners-2.jpg',
     alt: 'Sapienza Foiling Moth 9352 Racing in SuMoth Challenge',
@@ -39,38 +38,95 @@ const heroSlides = [
   },
 ];
 
-// Append first slide to allow seamless infinite forward sliding without reverse rewinding
-const extendedSlides = [...heroSlides, heroSlides[0]];
-
 const HeroSection: React.FC = () => {
   const { language } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isTransitionEnabled, setIsTransitionEnabled] = useState(true);
+  const [loadedSlides, setLoadedSlides] = useState<number[]>([0]);
+  const [isInView, setIsInView] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const touchStartXRef = useRef<number | null>(null);
 
-  // Auto-advance slides every 5 seconds
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIsTransitionEnabled(true);
-      setCurrentSlide((prev) => prev + 1);
-    }, 5000);
-    return () => clearInterval(timer);
+  // Mark slides as loaded when needed
+  const markSlideLoaded = useCallback((index: number) => {
+    setLoadedSlides((prev) => (prev.includes(index) ? prev : [...prev, index]));
   }, []);
 
-  const handleTransitionEnd = () => {
-    if (currentSlide >= heroSlides.length) {
-      setIsTransitionEnabled(false);
-      setCurrentSlide(0);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setIsTransitionEnabled(true);
-        });
-      });
+  const goToSlide = useCallback((index: number) => {
+    markSlideLoaded(index);
+    setCurrentSlide(index);
+  }, [markSlideLoaded]);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => {
+      const next = (prev + 1) % heroSlides.length;
+      markSlideLoaded(next);
+      return next;
+    });
+  }, [markSlideLoaded]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentSlide((prev) => {
+      const next = (prev - 1 + heroSlides.length) % heroSlides.length;
+      markSlideLoaded(next);
+      return next;
+    });
+  }, [markSlideLoaded]);
+
+  // Pause timer when out of viewport to save mobile CPU/GPU
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      return;
     }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    const el = containerRef.current;
+    if (el) observer.observe(el);
+
+    return () => {
+      if (el) observer.unobserve(el);
+    };
+  }, []);
+
+  // Preload the next slide ahead of transition
+  useEffect(() => {
+    const nextIndex = (currentSlide + 1) % heroSlides.length;
+    markSlideLoaded(nextIndex);
+  }, [currentSlide, markSlideLoaded]);
+
+  // Auto-advance slides every 5 seconds only when visible and active
+  useEffect(() => {
+    if (!isInView) return;
+
+    const timer = setInterval(() => {
+      if (typeof document !== 'undefined' && document.hidden) return;
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [isInView, nextSlide]);
+
+  // Touch swipe support for smooth mobile interaction
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
   };
 
-  const goToSlide = (index: number) => {
-    setIsTransitionEnabled(true);
-    setCurrentSlide(index);
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null) return;
+    const diff = touchStartXRef.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+    touchStartXRef.current = null;
   };
 
   const handleCTAClick = (ctaType: 'learn_more' | 'view_boat') => {
@@ -80,24 +136,27 @@ const HeroSection: React.FC = () => {
     });
   };
 
-  const activeIndex = currentSlide % heroSlides.length;
-
   return (
-    <div className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-void">
-      {/* Edge-to-edge Continuous Sliding Track - Zero Black Flashes */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <div
-          className={`flex w-full h-full ${isTransitionEnabled ? 'transition-transform duration-1000 ease-in-out' : ''
-            }`}
-          style={{
-            transform: `translate3d(-${currentSlide * 100}%, 0, 0)`,
-          }}
-          onTransitionEnd={handleTransitionEnd}
-        >
-          {extendedSlides.map((slide, index) => (
+    <div
+      ref={containerRef}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-void select-none"
+    >
+      {/* High-performance Crossfade Image Stack - Zero 800vw layer or GPU layer thrashing */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+        {heroSlides.map((slide, index) => {
+          const isCurrent = index === currentSlide;
+          const isLoaded = loadedSlides.includes(index);
+
+          if (!isLoaded) return null;
+
+          return (
             <div
-              key={`${slide.src}-${index}`}
-              className="w-full h-full flex-shrink-0 relative"
+              key={slide.src}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                isCurrent ? 'opacity-100 z-0' : 'opacity-0 -z-10 pointer-events-none'
+              }`}
             >
               <Image
                 src={slide.src}
@@ -105,19 +164,29 @@ const HeroSection: React.FC = () => {
                 fill
                 sizes="100vw"
                 className="object-cover object-center"
-                priority
+                priority={index === 0}
               />
             </div>
-          ))}
-        </div>
+          );
+        })}
 
         {/* Cinematic Vignette & Atmospheric Gradients on top of track */}
         <div className="absolute inset-0 bg-gradient-to-t from-void via-void/40 to-black/30 pointer-events-none z-10" />
-        <div className="absolute inset-0 bg-radial-vignette opacity-80 pointer-events-none z-10" />
+        <div
+          className="absolute inset-0 pointer-events-none z-10 opacity-75"
+          style={{
+            background: 'radial-gradient(ellipse at center, transparent 35%, rgba(10, 8, 8, 0.85) 100%)',
+          }}
+        />
       </div>
 
-      {/* Ambient Burgundy Glow Accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] md:w-[800px] h-[300px] md:h-[450px] bg-brand/25 rounded-full blur-[130px] pointer-events-none z-10" />
+      {/* Ambient Burgundy Glow Accent - Efficient CSS radial gradient (0 blur calculation overhead) */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] md:w-[750px] h-[340px] md:h-[450px] pointer-events-none z-10 opacity-60"
+        style={{
+          background: 'radial-gradient(circle, rgba(130, 36, 51, 0.35) 0%, rgba(130, 36, 51, 0.08) 50%, transparent 70%)',
+        }}
+      />
 
       <div className="relative z-20 flex flex-col items-center justify-center px-4 max-w-5xl mx-auto">
         {/* Main Title - Distinctive Glowing Styling */}
@@ -147,7 +216,7 @@ const HeroSection: React.FC = () => {
           <Link
             href="/boat"
             onClick={() => handleCTAClick('view_boat')}
-            className="px-9 py-4 rounded-full backdrop-blur-xl bg-white/10 border border-white/20 text-white font-bold tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 hover:bg-white/20 hover:border-brand/50 shadow-xl uppercase text-xs sm:text-sm text-center"
+            className="px-9 py-4 rounded-full bg-white/10 md:backdrop-blur-md border border-white/20 text-white font-bold tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 hover:bg-white/20 hover:border-brand/50 shadow-xl uppercase text-xs sm:text-sm text-center"
           >
             {homeTranslations[language].viewMothButton}
           </Link>
@@ -160,10 +229,11 @@ const HeroSection: React.FC = () => {
           <button
             key={idx}
             onClick={() => goToSlide(idx)}
-            className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer ${idx === activeIndex
-              ? 'w-8 bg-brand-light shadow-[0_0_12px_rgba(163,66,82,0.8)]'
-              : 'w-2 bg-white/30 hover:bg-white/60'
-              }`}
+            className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+              idx === currentSlide
+                ? 'w-8 bg-brand-light shadow-[0_0_12px_rgba(163,66,82,0.8)]'
+                : 'w-2 bg-white/30 hover:bg-white/60'
+            }`}
             aria-label={`Slide ${idx + 1}`}
           />
         ))}

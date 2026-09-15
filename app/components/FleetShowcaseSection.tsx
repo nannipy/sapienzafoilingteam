@@ -40,9 +40,19 @@ const FleetShowcaseSection: React.FC = () => {
 
   return (
     <section className="relative py-24 bg-void text-white overflow-hidden border-t border-white/5">
-      {/* Background Ambient Burgundy Glows */}
-      <div className="absolute top-1/4 -left-40 w-[500px] h-[500px] bg-brand/20 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 -right-40 w-[500px] h-[500px] bg-brand/15 rounded-full blur-[140px] pointer-events-none" />
+      {/* Background Ambient Burgundy Glows - Zero-cost radial gradient */}
+      <div
+        className="absolute top-1/4 -left-40 w-[500px] h-[500px] pointer-events-none opacity-60"
+        style={{
+          background: 'radial-gradient(circle, rgba(130, 36, 51, 0.3) 0%, rgba(130, 36, 51, 0.05) 50%, transparent 70%)',
+        }}
+      />
+      <div
+        className="absolute bottom-10 -right-40 w-[500px] h-[500px] pointer-events-none opacity-50"
+        style={{
+          background: 'radial-gradient(circle, rgba(130, 36, 51, 0.25) 0%, rgba(130, 36, 51, 0.05) 50%, transparent 70%)',
+        }}
+      />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -66,7 +76,7 @@ const FleetShowcaseSection: React.FC = () => {
         {/* Bento Grid with Clean Garda Photography */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16">
           {/* Main Feature Card */}
-          <div className="md:col-span-8 group relative rounded-3xl overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-xl h-[420px] md:h-[500px] transition-all duration-500 hover:border-brand/40 hover:shadow-2xl">
+          <div className="md:col-span-8 group relative rounded-3xl overflow-hidden border border-white/10 bg-carbon h-[420px] md:h-[500px] transition-all duration-500 hover:border-brand/40 hover:shadow-2xl">
             <Image
               src="/images/IMG_3090.jpg"
               alt="Sapienza Foiling Moth in flight"
@@ -88,7 +98,7 @@ const FleetShowcaseSection: React.FC = () => {
               </div>
               <Link
                 href="/boat"
-                className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-md transition-all group-hover:bg-brand group-hover:border-transparent flex-shrink-0"
+                className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold uppercase tracking-wider transition-all group-hover:bg-brand group-hover:border-transparent flex-shrink-0"
               >
                 <span>{isItalian ? 'Dettagli Tecnici' : 'Explore Tech'}</span>
                 <ArrowUpRight className="w-4 h-4" />
@@ -97,7 +107,7 @@ const FleetShowcaseSection: React.FC = () => {
           </div>
 
           {/* Secondary Feature Card */}
-          <div className="md:col-span-4 group relative rounded-3xl overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-xl h-[420px] md:h-[500px] transition-all duration-500 hover:border-brand/40 hover:shadow-2xl">
+          <div className="md:col-span-4 group relative rounded-3xl overflow-hidden border border-white/10 bg-carbon h-[420px] md:h-[500px] transition-all duration-500 hover:border-brand/40 hover:shadow-2xl">
             <Image
               src="/images/IMG_0631.jpeg"
               alt="Sapienza Moth sailing on Garda"
@@ -119,7 +129,7 @@ const FleetShowcaseSection: React.FC = () => {
           </div>
 
           {/* Bottom Card 1 */}
-          <div className="md:col-span-6 group relative rounded-3xl overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-xl h-[280px] transition-all duration-500 hover:border-brand/40 hover:shadow-2xl">
+          <div className="md:col-span-6 group relative rounded-3xl overflow-hidden border border-white/10 bg-carbon h-[280px] transition-all duration-500 hover:border-brand/40 hover:shadow-2xl">
             <Image
               src="/images/team-03-crew-rigging.jpg"
               alt="Sailing action"
@@ -141,7 +151,7 @@ const FleetShowcaseSection: React.FC = () => {
           </div>
 
           {/* Bottom Card 2 */}
-          <div className="md:col-span-6 group relative rounded-3xl overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-xl h-[280px] transition-all duration-500 hover:border-brand/40 hover:shadow-2xl">
+          <div className="md:col-span-6 group relative rounded-3xl overflow-hidden border border-white/10 bg-carbon h-[280px] transition-all duration-500 hover:border-brand/40 hover:shadow-2xl">
             <Image
               src="/images/boat-03-water-launch.jpg"
               alt="Race preparation"

@@ -67,7 +67,7 @@ const BoatPage = () => {
             <div className="lg:col-span-7 bg-[#FAFBFD] rounded-3xl border border-gray-200 p-6 md:p-8 relative overflow-hidden shadow-sm">
               <div className="flex justify-between items-center text-[11px] font-mono text-gray-400 mb-2">
                 <span>// CAD BLUEPRINT</span>
-                <span className="text-brand font-bold">MERAVIJOSA 9352</span>
+                <span className="text-brand font-bold">MERAVIJOSA </span>
               </div>
 
               {/* 3D Model Image with Hotspots and CAD Blueprint Background */}
