@@ -4,8 +4,7 @@ import { useRouter } from 'next/navigation';
 import { use, useEffect, useState } from 'react';
 import EventForm from '@/app/components/EventForm';
 import { Event } from '@/app/lib/types';
-import { supabase } from '@/app/lib/supabase';
-import { getEventAction } from '@/app/actions/events';
+import { getEventAction, updateEventAction } from '@/app/actions/events';
 import { useLanguage } from '@/app/context/LanguageContext';
 import { eventTranslations } from '@/app/translations/event';
 import { Loader2 } from 'lucide-react';
@@ -45,19 +44,8 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
         setIsSubmitting(true);
         setError(null);
         try {
-            const session = (await supabase.auth.getSession()).data.session;
-            if (!session) throw new Error("Authentication session not found.");
-
-            const response = await fetch(`/api/events/${id}`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
-                body: JSON.stringify(eventData),
-            });
-
-            if (!response.ok) throw new Error((await response.json()).error || 'Failed to update event.');
-
+            await updateEventAction(id, eventData);
             router.push('/admin/events');
-
         } catch (err) {
             const message = err instanceof Error ? err.message : eventTranslations[language].admin.error;
             console.error("Error updating event:", message);

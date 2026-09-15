@@ -4,11 +4,10 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import NextImage from 'next/image';
 import { useLanguage } from '@/app/context/LanguageContext';
-import { supabase } from '@/app/lib/supabase';
 import { useAdminContext } from '@/app/context/AdminContext';
 import { Event } from '@/app/lib/types';
 import { eventTranslations } from '@/app/translations/event';
-import { getEventsAction } from '@/app/actions/events';
+import { getEventsAction, deleteEventAction } from '@/app/actions/events';
 import { Edit, Trash, PlusCircle, Loader2, ImageIcon, XCircle } from 'lucide-react';
 
 export default function EventAdminPage() {
@@ -77,16 +76,7 @@ export default function EventAdminPage() {
 
     setError(null); setSuccess(null);
     try {
-      const session = (await supabase.auth.getSession()).data.session;
-      if (!session) throw new Error("User session not found.");
-
-      const response = await fetch(`/api/events/${id}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${session.access_token}` }
-      });
-
-      if (!response.ok) throw new Error((await response.json()).error || 'Failed to delete event');
-
+      await deleteEventAction(id);
       setEvents(events.filter(a => a.id !== id));
       setSuccess(eventTranslations[language].admin.deleteSuccess);
     } catch (error: unknown) {

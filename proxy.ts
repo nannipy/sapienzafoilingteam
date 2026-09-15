@@ -2,6 +2,21 @@ import { type NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 
 export default async function proxy(request: NextRequest) {
+  const host = request.headers.get('host') || ''
+
+  // Redirect *.vercel.app and www.* to https://sapienzafoilingteam.com (301 Permanent Redirect)
+  if (host.includes('vercel.app') || host.startsWith('www.')) {
+    const url = request.nextUrl.clone()
+    url.host = 'sapienzafoilingteam.com'
+    url.protocol = 'https'
+    url.port = ''
+    const redirectResponse = NextResponse.redirect(url, 301)
+    if (host.includes('vercel.app')) {
+      redirectResponse.headers.set('X-Robots-Tag', 'noindex, nofollow')
+    }
+    return redirectResponse
+  }
+
   let response = NextResponse.next({ request: { headers: request.headers } })
 
   const supabase = createServerClient(

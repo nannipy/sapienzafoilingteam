@@ -21,24 +21,24 @@ const EventCard = ({ event, isPast = false, language }: { event: Event; isPast?:
         alt={event.image_alt || event.title}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40"
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-void via-void/80 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-void/85 via-void/30 to-transparent" />
     </div>
 
     {/* Content */}
-    <div className="relative z-10 p-8 h-full flex flex-col justify-end">
+    <div className="relative z-10 p-8 h-full flex flex-col justify-end drop-shadow-md">
       <h3 className="text-2xl font-syne font-bold text-white mb-2 leading-tight group-hover:text-brand-light transition-colors">
         {language === 'en' ? event.title_en : event.title}
       </h3>
 
-      <div className="flex flex-col gap-1 text-gray-300 text-sm font-geist">
+      <div className="flex flex-col gap-1 text-gray-200 text-sm font-geist">
         <span className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-brand"></span>
           {new Date(event.date).toLocaleDateString(language, { year: 'numeric', month: 'long', day: 'numeric' })}
         </span>
         <span className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-gray-500"></span>
+          <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
           {event.location}
         </span>
       </div>
