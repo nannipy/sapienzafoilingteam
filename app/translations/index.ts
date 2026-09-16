@@ -20,6 +20,7 @@ export { sponsorTranslations } from './sponsor';
 export { sumothRulebookTranslations } from './sumothRulebook';
 export { teamTranslations } from './team';
 export { upcomingEventsTranslations } from './upcomingEvents';
+export { recruitingPopupTranslations } from './recruitingPopup';
 
 import { authTranslations } from './auth';
 import { blogTranslations } from './blog';
