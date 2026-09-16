@@ -6,6 +6,7 @@ import {
   ArrowRight,
   ExternalLink,
   BookOpen,
+  Calendar,
   CheckCircle2,
   ChevronDown,
   ChevronUp,
@@ -90,6 +91,11 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
                     </span>
                   </div>
 
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/15 border border-white/25 text-white text-xs font-semibold backdrop-blur-sm">
+                    <Calendar className="w-3.5 h-3.5 text-white flex-shrink-0" />
+                    <span>{t.hero.statusCard.deadline}</span>
+                  </div>
+
                   <p className="text-sm text-white/95 leading-relaxed font-light">
                     {t.hero.statusCard.subtext}
                   </p>
@@ -152,6 +158,10 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
                     {t.process.step1.description}
                   </p>
                   <div className="flex flex-wrap gap-2 pt-1">
+                    <span className="inline-flex items-center gap-1.5 text-xs text-brand bg-brand/10 border border-brand/20 rounded-lg px-3 py-1.5 font-semibold">
+                      <Calendar className="w-3.5 h-3.5 text-brand" />
+                      {t.process.step1.deadlineBadge}
+                    </span>
                     <span className="inline-flex items-center gap-1.5 text-xs text-gray-700 bg-white border border-gray-200 rounded-lg px-3 py-1.5 font-medium">
                       <FileCheck className="w-3.5 h-3.5 text-brand" />
                       Curriculum Vitae (CV)

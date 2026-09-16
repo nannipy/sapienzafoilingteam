@@ -8,8 +8,9 @@ export const careerTranslations = {
       statusCard: {
         label: 'STATUS',
         badge: 'Applications Open',
+        deadline: 'Application Deadline: October 4th',
         subtext:
-          'Choose up to 2 departments and submit your CV and a brief motivation letter. Include a portfolio or past projects if applying for technical or design roles.',
+          'Choose up to 2 departments and submit your CV and a brief motivation letter by October 4th. Include a portfolio or past projects if applying for technical or design roles.',
         ctaButton: 'Apply Now',
         secondaryCta: 'Departments',
       },
@@ -22,7 +23,8 @@ export const careerTranslations = {
         number: '01',
         title: 'APPLICATION',
         description:
-          'Fill out the form with your CV, motivation letter, and optional portfolio (for CAD/FEM/design). We review all submissions to select candidates for the interview.',
+          'Fill out the form with your CV, motivation letter, and optional portfolio (for CAD/FEM/design). Applications close on October 4th. We review all submissions to select candidates for the interview.',
+        deadlineBadge: 'Deadline: October 4th',
       },
       step2: {
         number: '02',
@@ -55,7 +57,7 @@ export const careerTranslations = {
     banner: {
       title: 'Ready to join?',
       description:
-        'Applications are open to all Sapienza students across all degree programs.',
+        'Applications are open to all Sapienza students across all degree programs until October 4th.',
       cta: 'Apply Now',
       secondary: 'Departments',
     },
@@ -79,7 +81,7 @@ export const careerTranslations = {
         },
         {
           q: 'When does recruiting happen?',
-          a: 'Main intake is at the start of the academic year (October/November), but we accept applications year-round for specific needs.',
+          a: 'The main intake is at the start of the academic year: for this session, the application deadline is October 4th. We also accept applications year-round for specific department needs.',
         },
         {
           q: 'Is there a written exam?',
@@ -107,8 +109,9 @@ export const careerTranslations = {
       statusCard: {
         label: 'STATO',
         badge: 'Candidature Aperte',
+        deadline: 'Scadenza candidature: 4 ottobre',
         subtext:
-          'Scegli fino a 2 reparti e inviaci CV e una breve lettera motivazionale. Se ti candidi per ruoli tecnici o design, allega anche un portfolio o progetti svolti.',
+          'Scegli fino a 2 reparti e inviaci CV e una breve lettera motivazionale entro il 4 ottobre. Se ti candidi per ruoli tecnici o design, allega anche un portfolio o progetti svolti.',
         ctaButton: 'Candidati Ora',
         secondaryCta: 'I Reparti',
       },
@@ -121,7 +124,8 @@ export const careerTranslations = {
         number: '01',
         title: 'CANDIDATURA',
         description:
-          'Compila il form con CV, lettera motivazionale ed eventuale portfolio (CAD/FEM/design). Valutiamo tutte le candidature per selezionare chi accede al colloquio.',
+          'Compila il form con CV, lettera motivazionale ed eventuale portfolio (CAD/FEM/design). Le candidature chiudono il 4 ottobre. Valutiamo tutte le candidature per selezionare chi accede al colloquio.',
+        deadlineBadge: 'Scadenza: 4 Ottobre',
       },
       step2: {
         number: '02',
@@ -154,7 +158,7 @@ export const careerTranslations = {
     banner: {
       title: 'Vuoi unirti a noi?',
       description:
-        'Le candidature sono aperte a tutti gli studenti regolarmente iscritti a La Sapienza.',
+        'Le candidature sono aperte a tutti gli studenti regolarmente iscritti a La Sapienza fino al 4 ottobre.',
       cta: 'Candidati Ora',
       secondary: 'Scopri i Reparti',
     },
@@ -178,7 +182,7 @@ export const careerTranslations = {
         },
         {
           q: 'Quando si svolgono le selezioni?',
-          a: 'La finestra principale è a inizio anno accademico (ottobre/novembre), ma raccogliamo candidature tutto l’anno per specifiche esigenze di reparto.',
+          a: 'La finestra principale è a inizio anno accademico: per questa sessione la data limite per candidarsi è il 4 ottobre. Raccogliamo comunque candidature tutto l’anno per specifiche esigenze di reparto.',
         },
         {
           q: 'C’è una prova scritta?',
