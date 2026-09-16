@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -153,6 +154,12 @@ export default function RootLayout({
             <SpeedInsights />
             <CookieBanner />
             <RecruitingPopup />
+            <Script
+              defer
+              src="https://cloud.umami.is/script.js"
+              data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID || "8e192a5d-4d99-4f60-98eb-b89d5a77bdf0"}
+              strategy="afterInteractive"
+            />
           </LanguageProvider>
         </PHProvider>
       </body>
