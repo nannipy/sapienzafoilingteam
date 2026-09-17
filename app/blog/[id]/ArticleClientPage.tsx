@@ -6,36 +6,33 @@ import Link from 'next/link';
 import { useLanguage } from '../../context/LanguageContext';
 import { blogTranslations } from '../../translations/blog';
 import { Calendar, ArrowLeft } from 'lucide-react';
-import { Article } from '../../lib/types'; // Using the shared type
+import { Article } from '../../lib/types';
 import posthog from 'posthog-js';
 import ShareButtons from '../../components/ShareButtons';
-import DOMPurify from 'isomorphic-dompurify';
 
-const calculateReadingTime = (content: string) => {
-  if (!content) return 0;
-  const wordsPerMinute = 200;
-  // Use isomorphic-dompurify to strip HTML tags safely
-  const text = DOMPurify.sanitize(content, { ALLOWED_TAGS: [] });
-  const wordCount = text.split(/\s+/).length;
-  const readingTime = Math.ceil(wordCount / wordsPerMinute);
-  return readingTime;
-};
+interface ArticleClientPageProps {
+  article: Article;
+  readingTime?: number;
+  readingTimeEn?: number;
+}
 
-export default function ArticleClientPage({ article }: { article: Article }) {
+export default function ArticleClientPage({
+  article,
+  readingTime = 0,
+  readingTimeEn = 0,
+}: ArticleClientPageProps) {
   const { language } = useLanguage();
 
   useEffect(() => {
     if (article) {
-      // The content passed to calculateReadingTime should be the HTML content,
-      // as the function strips HTML tags.
-      const readingTime = calculateReadingTime(language === 'en' ? article.content_en : article.content);
+      const activeReadingTime = language === 'en' ? (readingTimeEn || readingTime) : readingTime;
       posthog.capture('blog_post_viewed', {
         post_id: article.id,
         post_title: article.title,
-        reading_time: readingTime
+        reading_time: activeReadingTime,
       });
     }
-  }, [article, language]);
+  }, [article, language, readingTime, readingTimeEn]);
 
   // Format date
   const formatDate = (dateString: string) => {
@@ -44,14 +41,11 @@ export default function ArticleClientPage({ article }: { article: Article }) {
     return date.toLocaleDateString(language === 'en' ? 'en-US' : 'it-IT', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
   };
 
   const contentToRender = language === 'en' ? article.content_en : article.content;
-  // Sanitize the HTML content before rendering to prevent XSS attacks.
-  // DOMPurify is used on the client-side just before rendering the content.
-  const sanitizedContent = DOMPurify.sanitize(contentToRender);
 
   return (
     <main className="min-h-screen bg-[#fffcfd] text-[#1a1718] pt-32 pb-24 ">
@@ -91,7 +85,7 @@ export default function ArticleClientPage({ article }: { article: Article }) {
               prose-pre:bg-void prose-pre:text-gray-100 prose-pre:rounded-2xl prose-pre:p-6
               prose-img:rounded-3xl prose-img:shadow-2xl
               prose-ul:marker:text-brand prose-ul:marker:font-bold"
-            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+            dangerouslySetInnerHTML={{ __html: contentToRender }}
           />
           <div className="mt-20 pt-10 border-t border-gray-100">
             <ShareButtons articleId={article.id} articleTitle={article.title} />

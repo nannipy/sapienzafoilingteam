@@ -57,20 +57,12 @@ const HeroSection: React.FC = () => {
   }, [markSlideLoaded]);
 
   const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => {
-      const next = (prev + 1) % heroSlides.length;
-      markSlideLoaded(next);
-      return next;
-    });
-  }, [markSlideLoaded]);
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  }, []);
 
   const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => {
-      const next = (prev - 1 + heroSlides.length) % heroSlides.length;
-      markSlideLoaded(next);
-      return next;
-    });
-  }, [markSlideLoaded]);
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  }, []);
 
   // Pause timer when out of viewport to save mobile CPU/GPU
   useEffect(() => {
@@ -93,8 +85,9 @@ const HeroSection: React.FC = () => {
     };
   }, []);
 
-  // Preload the next slide ahead of transition
+  // Preload the current and next slide ahead of transition
   useEffect(() => {
+    markSlideLoaded(currentSlide);
     const nextIndex = (currentSlide + 1) % heroSlides.length;
     markSlideLoaded(nextIndex);
   }, [currentSlide, markSlideLoaded]);

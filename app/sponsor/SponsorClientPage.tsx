@@ -3,7 +3,7 @@
 
 'use client';
 
-import { HandshakeIcon, Rocket, Users, Target } from 'lucide-react';
+import { Rocket, Users, Target } from 'lucide-react';
 import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 import { sponsorTranslations } from '../translations/sponsor';

@@ -3,40 +3,13 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, Gauge, Sparkles, Wind, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const FleetShowcaseSection: React.FC = () => {
   const { language } = useLanguage();
 
   const isItalian = language === 'it';
-
-  const specs = [
-    {
-      icon: Gauge,
-      value: '30+ KTS',
-      label: isItalian ? 'Velocità Massima' : 'Top Speed',
-      detail: isItalian ? 'Raggiunta sul Lago di Garda' : 'Recorded at Lake Garda',
-    },
-    {
-      icon: Wind,
-      value: '8.0 KTS',
-      label: isItalian ? 'Velocità di Decollo' : 'Takeoff Velocity',
-      detail: isItalian ? 'Foiling immediato con brezza leggera' : 'Immediate foiling in light breeze',
-    },
-    {
-      icon: Sparkles,
-      value: '100%',
-      label: isItalian ? 'Bio-Resina & Lino' : 'Bio-Resin & Flax',
-      detail: isItalian ? 'Compositi sostenibili ad alte prestazioni' : 'High-performance sustainable composites',
-    },
-    {
-      icon: ShieldCheck,
-      value: '30 KG',
-      label: isItalian ? 'Peso Scafo & Rig' : 'Hull & Rig Weight',
-      detail: isItalian ? 'Design ultraleggero da regata' : 'Ultralight racing design',
-    },
-  ];
 
   return (
     <section className="relative py-24 bg-void text-white overflow-hidden border-t border-white/5">
@@ -69,7 +42,7 @@ const FleetShowcaseSection: React.FC = () => {
           <p className="max-w-md text-white/70 text-sm md:text-base font-light leading-relaxed">
             {isItalian
               ? 'Il nostro Moth foiling da competizione combina aerodinamica avanzata, controllo autonomo del pitch e materiali sostenibili.'
-              : 'Our competition foiling Moth fuses advanced aerodynamics, dynamic pitch control, and next-gen bio-composites.'}
+              : 'Our competition foiling Moth fuses advanced aerodynamics, dynamic pitch control, and next-gen composites.'}
           </p>
         </div>
 
@@ -166,8 +139,8 @@ const FleetShowcaseSection: React.FC = () => {
               </h4>
               <p className="text-white/70 text-xs font-light mt-0.5">
                 {isItalian
-                  ? 'Utilizzo pionieristico di fibre naturali e bio-resine per abbattere l’impronta ecologica.'
-                  : 'Pioneering natural flax fibers and bio-resins to minimize carbon lifecycle footprint.'}
+                  ? 'Fibra di basalto, core in rPET e resine rigenerate per abbattere l’impronta ecologica.'
+                  : 'Basalt fiber, rPET cores, and repurposed resins to minimize carbon lifecycle footprint.'}
               </p>
             </div>
           </div>

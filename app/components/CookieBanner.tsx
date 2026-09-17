@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useLanguage } from '../context/LanguageContext';
 import { cookie } from '../translations/cookie';
 import posthog from 'posthog-js';
@@ -39,9 +40,9 @@ const CookieBanner = () => {
       <div className="flex flex-col gap-2">
         <p className="text-xs text-gray-600">
           {cookie[language].message}
-          <a href="/privacy-policy" className="text-brand hover:underline ml-1 text-xs">
+          <Link href="/privacy-policy" className="text-brand hover:underline ml-1 text-xs">
             {cookie[language].privacyLink}
-          </a>
+          </Link>
         </p>
         <div className="flex justify-end gap-2">
           <button

@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import ClientModals from "./components/ClientModals";
 import "./globals.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { LanguageProvider } from "./context/LanguageContext";
-import CookieBanner from "./components/CookieBanner";
-import RecruitingPopup from "./components/RecruitingPopup";
 
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -152,8 +151,7 @@ export default function RootLayout({
             <Footer />
             <Analytics />
             <SpeedInsights />
-            <CookieBanner />
-            <RecruitingPopup />
+            <ClientModals />
             <Script
               defer
               src="https://cloud.umami.is/script.js"

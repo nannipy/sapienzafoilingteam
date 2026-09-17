@@ -10,11 +10,7 @@ import {
   CheckCircle2,
   ChevronDown,
   ChevronUp,
-  Sparkles,
   FileCheck,
-  Award,
-  Layers,
-  Compass,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
@@ -24,7 +20,7 @@ import PageLayout from '../components/PageLayout';
 import { OpenPosition as OpenPositionType } from '../lib/types';
 
 interface CareerClientPageProps {
-  initialPositions: OpenPositionType[];
+  initialPositions?: OpenPositionType[];
 }
 
 const FORM_URL = 'https://forms.gle/CtcSzXuULJP5bdFK6';

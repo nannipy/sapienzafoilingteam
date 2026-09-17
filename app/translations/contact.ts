@@ -12,11 +12,11 @@ export const contactTranslations = {
       facebook: 'Facebook'
     },
     joinUs: 'Join Us',
-    joinUsText: 'Check out our open positions and join our team!',
-    goToCareerPage: 'Go to Career Page',
-    collaborateWithUs: 'Collaborate with Us',
-    collaborateWithUsText: 'Contact us for collaborations or sponsorships.',
-    contactUs: 'Contact Us'
+    joinUsText: 'Explore open positions, join our engineering departments, and build a racing foiler.',
+    goToCareerPage: 'View Open Positions',
+    collaborateWithUs: 'Partner With Us',
+    collaborateWithUsText: 'Collaborate with us as a technical mentor, material supplier, or official sponsor.',
+    contactUs: 'Get in Touch'
   },
   it: {
     title: 'Contattaci',
@@ -31,10 +31,10 @@ export const contactTranslations = {
       facebook: 'Facebook'
     },
     joinUs: 'Unisciti a Noi',
-    joinUsText: 'Scopri le nostre posizioni aperte e unisciti al nostro team!',
-    goToCareerPage: 'Vai alla Pagina Carriere',
+    joinUsText: 'Scopri i reparti aperti, candidati al team e costruisci con noi un foiler da competizione.',
+    goToCareerPage: 'Scopri i Reparti Aperti',
     collaborateWithUs: 'Collabora con Noi',
-    collaborateWithUsText: 'Contattaci per collaborazioni o sponsorizzazioni.',
-    contactUs: 'Contattaci'
+    collaborateWithUsText: 'Collabora con noi come partner tecnico, fornitore di materiali o sponsor ufficiale.',
+    contactUs: 'Scrivici per Collaborare'
   }
 };

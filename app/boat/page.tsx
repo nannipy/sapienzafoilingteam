@@ -3,7 +3,7 @@ import BoatClientPage from './BoatClientPage';
 
 export const metadata: Metadata = {
   title: 'Meravijosa Moth Foiling | Specifiche Tecniche & Design',
-  description: 'Scopri Meravijosa, il foiling Moth ad alte prestazioni del Sapienza Foiling Team per la SuMoth Challenge. Scafo, foil in bio-compositi di lino, wand sensor e controllo del pitch.',
+  description: 'Scopri Meravijosa, il foiling Moth ad alte prestazioni del Sapienza Foiling Team per la SuMoth Challenge. Scafo, foil in compositi, wand sensor e controllo del pitch.',
   alternates: {
     canonical: '/boat',
   },

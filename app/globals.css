@@ -39,3 +39,80 @@ body {
 .animate-bounce-slow {
   animation: bounce-slow 3s infinite;
 }
+
+@layer components {
+  .premium-form-theme input, 
+  .premium-form-theme select {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    font-family: var(--font-geist) !important;
+    border-radius: 1rem !important;
+    padding: 1rem 1.25rem !important;
+    transition: all 0.3s ease !important;
+  }
+  .premium-form-theme input:focus, 
+  .premium-form-theme select:focus {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  .premium-form-theme label {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-weight: 600 !important;
+    font-family: var(--font-geist) !important;
+    font-size: 0.875rem !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    margin-bottom: 0.5rem !important;
+    display: flex !important;
+  }
+  .premium-form-theme .bg-white\/5 {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    border-radius: 1rem !important;
+  }
+  .premium-form-theme .bg-white\/5:hover {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+  }
+  .premium-form-theme .bg-brand\/20 {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+    border-radius: 1rem !important;
+  }
+  .premium-form-theme .border-brand {
+    border-color: white !important;
+  }
+  .premium-form-theme .bg-brand {
+    background-color: white !important;
+  }
+  .premium-form-theme .text-white\/60 { color: rgba(255, 255, 255, 0.5) !important; }
+  .premium-form-theme .text-white\/40 { color: rgba(255, 255, 255, 0.3) !important; border-color: rgba(255, 255, 255, 0.1) !important; }
+  .premium-form-theme .text-white { color: white !important; }
+  .premium-form-theme button[type="submit"] {
+    background-color: white !important;
+    color: black !important;
+    border-radius: 1rem !important;
+    font-family: var(--font-syne) !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    padding: 1.25rem !important;
+    transform: translateY(0);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 0 0 0 rgba(255,255,255,0) !important;
+  }
+  .premium-form-theme button[type="submit"]:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.2) !important;
+  }
+  .premium-form-theme button[type="submit"]:disabled {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+  .premium-form-theme .bg-void { background-color: #050505 !important; }
+}

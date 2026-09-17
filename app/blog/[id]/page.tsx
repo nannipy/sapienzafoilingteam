@@ -1,22 +1,21 @@
 import type { Metadata } from 'next';
-import { supabase } from '../../lib/supabase';
+import { getArticle, getArticles } from '@/app/lib/db/articles';
 import { Article } from '../../lib/types';
 import ArticleClientPage from './ArticleClientPage';
 import { notFound } from 'next/navigation';
 import { marked } from 'marked';
+import DOMPurify from 'isomorphic-dompurify';
 
-async function getArticle(id: string): Promise<Article | null> {
-  const { data, error } = await supabase
-    .from('posts')
-    .select('*')
-    .eq('id', id)
-    .single();
+export const revalidate = 3600;
 
-  if (error || !data) {
-    return null;
+export async function generateStaticParams() {
+  try {
+    const articles = await getArticles();
+    return articles.map((article) => ({ id: article.id }));
+  } catch (error) {
+    console.error('Error generating static params for articles:', error);
+    return [];
   }
-
-  return data;
 }
 
 export async function generateMetadata({ 
@@ -65,24 +64,41 @@ export default async function ArticlePage({
 }: { 
   params: Promise<{ id: string }> 
 }) {
-  // Await the params Promise to get the actual parameters
   const { id } = await params;
-  
   const article = await getArticle(id);
   
   if (!article) {
-    notFound(); // Triggers the not-found page
+    notFound();
   }
 
-  // Render markdown to HTML on the server
-  const contentHtml = await marked(article.content || '');
-  const contentEnHtml = await marked(article.content_en || '');
+  // Render markdown to HTML and sanitize safely on the server
+  const rawHtml = await marked(article.content || '');
+  const rawHtmlEn = await marked(article.content_en || '');
 
-  const articleWithHtml = {
-      ...article,
-      content: contentHtml,
-      content_en: contentEnHtml
-  }
+  const sanitizedContent = DOMPurify.sanitize(rawHtml);
+  const sanitizedContentEn = DOMPurify.sanitize(rawHtmlEn);
 
-  return <ArticleClientPage article={articleWithHtml} />;
+  const calculateReadingTime = (html: string) => {
+    if (!html) return 0;
+    const text = html.replace(/<[^>]*>/g, ' ').trim();
+    const wordCount = text.split(/\s+/).filter(Boolean).length;
+    return Math.ceil(wordCount / 200);
+  };
+
+  const readingTime = calculateReadingTime(sanitizedContent);
+  const readingTimeEn = calculateReadingTime(sanitizedContentEn);
+
+  const articleWithHtml: Article = {
+    ...article,
+    content: sanitizedContent,
+    content_en: sanitizedContentEn,
+  };
+
+  return (
+    <ArticleClientPage
+      article={articleWithHtml}
+      readingTime={readingTime}
+      readingTimeEn={readingTimeEn}
+    />
+  );
 }

@@ -1,43 +1,37 @@
 import 'server-only';
-
+import { cache } from 'react';
 import { supabaseAdmin } from '@/app/lib/supabase-admin';
 import { Article } from '@/app/lib/types';
 
-export async function getArticles(): Promise<Article[]> {
+export const getArticles = cache(async (): Promise<Article[]> => {
   const { data, error } = await supabaseAdmin
     .from('posts')
     .select('*')
     .order('created_at', { ascending: false });
 
-  if (error) throw new Error(error.message);
-  return data as Article[];
-}
+  if (error) {
+    console.error('Error fetching articles:', error.message);
+    throw new Error('Failed to fetch articles');
+  }
 
-export async function getArticleById(id: string): Promise<Article> {
+  return data || [];
+});
+
+export const getArticle = cache(async (id: string): Promise<Article | null> => {
   const { data, error } = await supabaseAdmin
     .from('posts')
     .select('*')
     .eq('id', id)
     .single();
 
-  if (error) throw new Error(error.message);
-  return data as Article;
-}
+  if (error || !data) {
+    return null;
+  }
 
-export async function getArticleBySlug(slug: string): Promise<Article> {
-  const { data, error } = await supabaseAdmin
-    .from('posts')
-    .select('*')
-    .eq('slug', slug)
-    .single();
+  return data;
+});
 
-  if (error) throw new Error(error.message);
-  return data as Article;
-}
-
-export async function createArticle(
-  payload: Omit<Article, 'id' | 'created_at'>
-): Promise<Article> {
+export async function createArticle(payload: Omit<Article, 'id' | 'created_at'>): Promise<Article> {
   const { data, error } = await supabaseAdmin
     .from('posts')
     .insert([payload])
@@ -45,13 +39,10 @@ export async function createArticle(
     .single();
 
   if (error) throw new Error(error.message);
-  return data as Article;
+  return data;
 }
 
-export async function updateArticle(
-  id: string,
-  payload: Partial<Omit<Article, 'id' | 'created_at'>>
-): Promise<Article> {
+export async function updateArticle(id: string, payload: Partial<Article>): Promise<Article> {
   const { data, error } = await supabaseAdmin
     .from('posts')
     .update(payload)
@@ -60,7 +51,7 @@ export async function updateArticle(
     .single();
 
   if (error) throw new Error(error.message);
-  return data as Article;
+  return data;
 }
 
 export async function deleteArticle(id: string): Promise<void> {

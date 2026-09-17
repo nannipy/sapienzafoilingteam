@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { useLanguage } from '../context/LanguageContext';
 import { homeTranslations } from '../translations/home';
