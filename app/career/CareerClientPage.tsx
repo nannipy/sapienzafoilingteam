@@ -23,7 +23,7 @@ interface CareerClientPageProps {
   initialPositions?: OpenPositionType[];
 }
 
-const FORM_URL = 'https://forms.gle/CtcSzXuULJP5bdFK6';
+const FORM_URL = 'https://forms.gle/L5zNXj3dBEpFaX8c9';
 const SUMOTH_URL = 'https://www.sumoth.org';
 
 const CareerClientPage: React.FC<CareerClientPageProps> = () => {

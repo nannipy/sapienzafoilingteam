@@ -60,7 +60,7 @@ const OpenPosition: React.FC<OpenPositionProps> = ({ title, location, type, desc
             ))}
           </ul>
           <a
-            href="https://forms.gle/CtcSzXuULJP5bdFK6"
+            href="https://forms.gle/L5zNXj3dBEpFaX8c9"
             target="_blank"
             className="inline-block bg-brand text-white px-6 py-2 rounded-lg font-semibold hover:bg-brand-dark transition-colors mt-6"
           >
