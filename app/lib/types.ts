@@ -1,4 +1,5 @@
 export type Article = {
+  status?: 'draft' | 'published';
   id: string;
   title: string;
   slug: string;

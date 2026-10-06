@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { Instagram, Linkedin, Facebook } from "lucide-react";
 import { useLanguage } from '../context/LanguageContext';
 import { footerTranslations } from '../translations/footer';
@@ -7,6 +8,8 @@ import { footerTranslations } from '../translations/footer';
 
 const Footer: React.FC = () => {
   const { language } = useLanguage();
+  const pathname = usePathname();
+  if (pathname?.startsWith("/admin")) return null;
   return (
     <footer className="bg-gray-50 text-black py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

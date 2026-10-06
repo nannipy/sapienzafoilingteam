@@ -3,18 +3,17 @@ import { cache } from 'react';
 import { supabaseAdmin } from '@/app/lib/supabase-admin';
 import { Article } from '@/app/lib/types';
 
-export const getArticles = cache(async (): Promise<Article[]> => {
+export const getArticles = cache(async (includeDrafts = false): Promise<Article[]> => {
   const { data, error } = await supabaseAdmin
-    .from('posts')
-    .select('*')
-    .order('created_at', { ascending: false });
+    .from('posts').select('*').order('created_at', { ascending: false });
 
   if (error) {
     console.error('Error fetching articles:', error.message);
     throw new Error('Failed to fetch articles');
   }
 
-  return data || [];
+  // Missing status identifies legacy published articles before the migration.
+  return (data || []).filter(article => includeDrafts || (article.status ?? 'published') === 'published');
 });
 
 export const getArticle = cache(async (id: string): Promise<Article | null> => {
@@ -24,7 +23,7 @@ export const getArticle = cache(async (id: string): Promise<Article | null> => {
     .eq('id', id)
     .single();
 
-  if (error || !data) {
+  if (error || !data || (data.status ?? 'published') !== 'published') {
     return null;
   }
 

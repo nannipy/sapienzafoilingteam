@@ -30,11 +30,15 @@ export default async function proxy(request: NextRequest) {
   if (isAdminRoute && !user) {
     const loginUrl = new URL('/login', request.url)
     loginUrl.searchParams.set('redirectTo', request.nextUrl.pathname)
-    return NextResponse.redirect(loginUrl)
+    const redirectResponse = NextResponse.redirect(loginUrl)
+    response.cookies.getAll().forEach(cookie => redirectResponse.cookies.set(cookie))
+    return redirectResponse
   }
 
   if (isLoginPage && user) {
-    return NextResponse.redirect(new URL('/admin', request.url))
+    const redirectResponse = NextResponse.redirect(new URL('/admin', request.url))
+    response.cookies.getAll().forEach(cookie => redirectResponse.cookies.set(cookie))
+    return redirectResponse
   }
 
   return response

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { supabase } from './lib/supabase';
+import { getArticles } from './lib/db/articles';
 
 export const revalidate = 3600; // Revalidate sitemap every hour
 
@@ -65,15 +65,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let blogRoutes: MetadataRoute.Sitemap = [];
   try {
-    const { data: posts } = await supabase
-      .from('posts')
-      .select('id, updated_at, created_at')
-      .order('created_at', { ascending: false });
+    const posts = await getArticles();
 
     if (posts && posts.length > 0) {
       blogRoutes = posts.map((post) => ({
         url: `${baseUrl}/blog/${post.id}`,
-        lastModified: post.updated_at ? new Date(post.updated_at) : new Date(post.created_at || Date.now()),
+        lastModified: new Date(post.created_at),
         changeFrequency: 'monthly' as const,
         priority: 0.7,
       }));

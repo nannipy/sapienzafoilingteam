@@ -35,6 +35,8 @@ const Navbar = () => {
     });
   };
 
+  if (currentPath?.startsWith("/admin")) return null;
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3">
       <div className="bg-white text-black font-semibold text-center mx-auto max-w-4xl rounded-full shadow-xl hover:shadow-xl transition-shadow duration-300">

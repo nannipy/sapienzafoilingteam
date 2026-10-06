@@ -47,32 +47,7 @@ export default function EventAdminPage() {
 
   const handleDelete = async (id: string) => {
     // Custom confirmation dialog logic
-    const confirmDialog = document.createElement('div');
-    confirmDialog.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60]';
-    confirmDialog.innerHTML = `
-        <div class="bg-white rounded-lg p-6 max-w-sm mx-4 shadow-xl">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Confirm Deletion</h3>
-            <p class="text-gray-600 mb-6">Are you sure you want to delete this event? This action cannot be undone.</p>
-            <div class="flex justify-end gap-4">
-                <button class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg" id="cancelDelete">Cancel</button>
-                <button class="px-4 py-2 bg-red-600 text-white hover:bg-red-700 rounded-lg" id="confirmDelete">Delete</button>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(confirmDialog);
-
-    const dialogResult = new Promise((resolve) => {
-      document.getElementById('confirmDelete')?.addEventListener('click', () => {
-        if (confirmDialog.parentNode) document.body.removeChild(confirmDialog);
-        resolve(true);
-      });
-      document.getElementById('cancelDelete')?.addEventListener('click', () => {
-        if (confirmDialog.parentNode) document.body.removeChild(confirmDialog);
-        resolve(false);
-      });
-    });
-
-    if (!(await dialogResult)) return;
+    if (!window.confirm(language === 'en' ? 'Delete this event permanently?' : 'Eliminare definitivamente questo evento?')) return;
 
     setError(null); setSuccess(null);
     try {
@@ -114,7 +89,7 @@ export default function EventAdminPage() {
           </h1>
           <Link href="/admin/events/new" className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm">
             <PlusCircle size={18} />
-            Create New
+            {language === 'en' ? 'New event' : 'Nuovo evento'}
           </Link>
         </div>
 
@@ -131,11 +106,11 @@ export default function EventAdminPage() {
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                      <th scope="col" className="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                      <th scope="col" className="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
-                      <th scope="col" className="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
-                      <th scope="col" className="px-4 md:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                      <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{language === 'en' ? 'Title' : 'Titolo'}</th>
+                      <th scope="col" className="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{language === 'en' ? 'Date' : 'Data'}</th>
+                      <th scope="col" className="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{language === 'en' ? 'Location' : 'Luogo'}</th>
+                      <th scope="col" className="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{language === 'en' ? 'Image' : 'Immagine'}</th>
+                      <th scope="col" className="px-4 md:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">{language === 'en' ? 'Actions' : 'Azioni'}</th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
@@ -144,7 +119,7 @@ export default function EventAdminPage() {
                       const formattedDate = date.toLocaleDateString(language === 'en' ? 'en-US' : 'it-IT', { year: 'numeric', month: 'short', day: 'numeric' });
                       return (
                         <tr key={event.id} className="hover:bg-gray-50 transition-colors duration-150">
-                          <td className="px-4 md:px-6 py-4"><div className="text-sm font-medium text-gray-900 truncate max-w-[150px] md:max-w-none">{language === 'en' ? event.title_en : event.title}</div></td>
+                          <td className="px-4 md:px-6 py-4"><div className="text-sm font-medium text-gray-900 break-words">{language === 'en' ? event.title_en : event.title}</div></td>
                           <td className="hidden md:table-cell px-4 md:px-6 py-4 whitespace-nowrap"><div className="text-sm text-gray-500">{formattedDate}</div></td>
                           <td className="hidden md:table-cell px-4 md:px-6 py-4 whitespace-nowrap"><div className="text-sm text-gray-500">{event.location}</div></td>
                           <td className="hidden md:table-cell px-4 md:px-6 py-4 whitespace-nowrap">
@@ -156,13 +131,13 @@ export default function EventAdminPage() {
                           </td>
                           <td className="px-4 md:px-6 py-4 text-right text-sm font-medium">
                             <div className="flex justify-end items-center gap-2">
-                              <Link href={`/admin/events/${event.id}/edit`} className="p-1 text-indigo-600 hover:text-indigo-800 flex items-center gap-1" title="Edit">
+                              <Link href={`/admin/events/${event.id}/edit`} className="p-1 text-indigo-600 hover:text-indigo-800 flex items-center gap-1" title={language === 'en' ? 'Edit' : 'Modifica'}>
                                 <Edit size={16} className="md:size-18" />
-                                <span className="hidden md:inline">Edit</span>
+                                <span className="hidden md:inline">{language === 'en' ? 'Edit' : 'Modifica'}</span>
                               </Link>
-                              <button onClick={() => handleDelete(event.id)} className="p-1 text-red-600 hover:text-red-800 flex items-center gap-1" title="Delete">
+                              <button onClick={() => handleDelete(event.id)} className="p-1 text-red-600 hover:text-red-800 flex items-center gap-1" title={language === 'en' ? 'Delete' : 'Elimina'}>
                                 <Trash size={16} className="md:size-18" />
-                                <span className="hidden md:inline">Delete</span>
+                                <span className="hidden md:inline">{language === 'en' ? 'Delete' : 'Elimina'}</span>
                               </button>
                             </div>
                           </td>

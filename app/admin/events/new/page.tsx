@@ -38,7 +38,7 @@ export default function NewEventPage() {
             isSubmitting={isSubmitting}
             error={error}
             pageTitle={eventTranslations[language].admin.newEvent}
-            submitButtonText="Publish Event"
+            submitButtonText={language === 'en' ? 'Publish Event' : 'Pubblica evento'}
         />
     );
 }

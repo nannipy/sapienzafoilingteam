@@ -70,7 +70,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
             isSubmitting={isSubmitting}
             error={error}
             pageTitle={eventTranslations[language].admin.editEvent}
-            submitButtonText="Save Changes"
+            submitButtonText={language === 'en' ? 'Save Changes' : 'Salva modifiche'}
         />
     );
 }

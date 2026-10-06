@@ -136,11 +136,11 @@ export default function EventForm({ initialData = {}, onSubmit, isSubmitting, er
     return (
         <main className="flex-1 p-4 md:p-6 lg:p-10 max-w-4xl mx-auto w-full">
              <div className="bg-white p-4 md:p-6 lg:p-8 rounded-xl shadow-md border border-gray-200 animate-fade-in">
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-6">
                     <h1 className="text-2xl font-semibold text-gray-800">{pageTitle}</h1>
                     <button type="button" onClick={() => router.push('/admin/events')} className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm">
                         <LayoutDashboard size={16} />
-                        Back To List
+                        {language === 'en' ? 'Back to list' : 'Torna alla lista'}
                     </button>
                 </div>
                 {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded text-sm mb-4">{error}</div>}
@@ -202,7 +202,7 @@ export default function EventForm({ initialData = {}, onSubmit, isSubmitting, er
 
                     {/* Buttons */}
                     <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4 border-t border-gray-200">
-                        <button type="button" onClick={() => router.back()} className="w-full sm:w-auto px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
+                        <button type="button" onClick={() => router.back()} className="w-full sm:w-auto px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg">{language === 'en' ? 'Cancel' : 'Annulla'}</button>
                         <button type="submit" disabled={isUploading || isSubmitting} className="w-full sm:w-auto px-4 py-2 text-sm bg-brand text-white rounded-lg disabled:bg-gray-400">
                             {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin inline" /> : submitButtonText}
                         </button>

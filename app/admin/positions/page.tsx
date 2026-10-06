@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '../../context/LanguageContext';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Edit, Trash, PlusCircle, Loader2 } from 'lucide-react';
@@ -7,6 +8,8 @@ import { OpenPositionParsed } from '../../lib/types';
 import { getPositions, deletePositionAction } from '@/app/actions/positions';
 
 export default function PositionsAdminPage() {
+  const { language } = useLanguage();
+  const en = language === 'en';
   const [positions, setPositions] = useState<OpenPositionParsed[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -31,7 +34,7 @@ export default function PositionsAdminPage() {
   }, []);
 
   const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this position?')) {
+    if (confirm(en ? 'Delete this position permanently?' : 'Eliminare definitivamente questa posizione?')) {
       try {
         await deletePositionAction(id);
         setPositions(positions.filter(p => p.id !== id));
@@ -47,12 +50,10 @@ export default function PositionsAdminPage() {
     <main className="flex-1 p-4 md:p-6 lg:p-10 max-w-7xl mx-auto w-full">
       <div className="bg-white p-4 md:p-6 lg:p-8 rounded-xl shadow-md border border-gray-200 animate-fade-in">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-2">
-          <h1 className="text-2xl font-semibold text-gray-800">Open Positions</h1>
-          <Link href="/admin/positions/new">
-            <button className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm">
+          <h1 className="text-2xl font-semibold text-gray-800">{en ? 'Open Positions' : 'Posizioni aperte'}</h1>
+          <Link href="/admin/positions/new" className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors flex items-center justify-center gap-2 text-sm font-medium shadow-sm">
               <PlusCircle size={18} />
-              Create New
-            </button>
+              {en ? 'New position' : 'Nuova posizione'}
           </Link>
         </div>
         {loading ? (
@@ -62,7 +63,7 @@ export default function PositionsAdminPage() {
         ) : error ? (
           <p className="text-center text-red-500 py-12">{error}</p>
         ) : positions.length === 0 ? (
-          <p className="text-center text-gray-500 py-12">No open positions found.</p>
+          <p className="text-center text-gray-500 py-12">{en ? 'No open positions found.' : 'Nessuna posizione aperta.'}</p>
         ) : (
           <div className="overflow-x-auto -mx-4 md:mx-0">
             <div className="inline-block min-w-full align-middle">
@@ -70,17 +71,17 @@ export default function PositionsAdminPage() {
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                      <th scope="col" className="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
-                      <th scope="col" className="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                      <th scope="col" className="px-4 md:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                      <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{en ? 'Title' : 'Titolo'}</th>
+                      <th scope="col" className="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{en ? 'Location' : 'Luogo'}</th>
+                      <th scope="col" className="hidden md:table-cell px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{en ? 'Type' : 'Tipo'}</th>
+                      <th scope="col" className="px-4 md:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">{en ? 'Actions' : 'Azioni'}</th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {positions.map((position) => (
                       <tr key={position.id} className="hover:bg-gray-50 transition-colors duration-150">
                         <td className="px-4 md:px-6 py-4">
-                          <div className="text-sm font-medium text-gray-900 truncate max-w-[150px] md:max-w-none">{position.title}</div>
+                          <div className="text-sm font-medium text-gray-900 break-words">{position.title}</div>
                         </td>
                         <td className="hidden md:table-cell px-4 md:px-6 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-500">{position.location}</div>
@@ -90,13 +91,13 @@ export default function PositionsAdminPage() {
                         </td>
                         <td className="px-4 md:px-6 py-4 text-right text-sm font-medium">
                           <div className="flex justify-end items-center gap-2">
-                            <Link href={`/admin/positions/${position.id}/edit`} className="p-1 text-indigo-600 hover:text-indigo-800 flex items-center gap-1" title="Edit">
+                            <Link href={`/admin/positions/${position.id}/edit`} className="p-1 text-indigo-600 hover:text-indigo-800 flex items-center gap-1" title={en ? 'Edit' : 'Modifica'}>
                               <Edit size={16} className="md:size-18" />
-                              <span className="hidden md:inline">Edit</span>
+                              <span className="hidden md:inline">{en ? 'Edit' : 'Modifica'}</span>
                             </Link>
-                            <button onClick={() => handleDelete(position.id)} className="p-1 text-red-600 hover:text-red-800 flex items-center gap-1" title="Delete">
+                            <button onClick={() => handleDelete(position.id)} className="p-1 text-red-600 hover:text-red-800 flex items-center gap-1" title={en ? 'Delete' : 'Elimina'}>
                               <Trash size={16} className="md:size-18" />
-                              <span className="hidden md:inline">Delete</span>
+                              <span className="hidden md:inline">{en ? 'Delete' : 'Elimina'}</span>
                             </button>
                           </div>
                         </td>

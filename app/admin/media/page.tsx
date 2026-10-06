@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 // Removed unused LanguageContext and translations
 import { supabase } from '../../lib/supabase';
-import { User } from '@supabase/supabase-js'; // Added specific user type
+import { useAdminContext } from '../../context/AdminContext';
+import { getMediaItems } from '@/app/actions/media';
 import {
   Folder,
   FolderPlus,
@@ -52,17 +52,18 @@ const ALLOWED_FILE_TYPES = [
 ];
 
 export default function MediaManagerPage() {
-  const router = useRouter();
+  const { user: authUser } = useAdminContext();
   const [files, setFiles] = useState<FileItem[]>([]);
   const [folders, setFolders] = useState<FolderItem[]>([]);
   const [currentPath, setCurrentPath] = useState('');
-  const [isLoading, setIsLoading] = useState(true); // General loading state
+  const [loadedPath, setLoadedPath] = useState<string | null>(null);
+  const isLoading = loadedPath !== currentPath;
   const [isProcessing, setIsProcessing] = useState(false); // For actions like upload, delete, rename
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const [authUser, setAuthUser] = useState<User | null>(null); // Store user object
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const loadSequence = useRef(0);
   const notificationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // --- Notifications ---
@@ -84,69 +85,29 @@ export default function MediaManagerPage() {
     }, NOTIFICATION_TIMEOUT);
   };
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      // getUser() verifica il token con il server Supabase (getSession() non lo fa)
-      const { data: { user }, error } = await supabase.auth.getUser();
-      if (error || !user) {
-        router.push('/login');
-      } else {
-        setAuthUser(user);
-      }
-    };
-    checkAuth();
-
-    // Listen for auth changes (login/logout)
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_OUT' || !session) {
-        setAuthUser(null);
-        router.push('/login');
-      } else if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
-        setAuthUser(session.user);
-      }
-    });
-
-    // Cleanup listener on unmount
-    return () => {
-      authListener?.subscription.unsubscribe();
-      if (notificationTimeoutRef.current) {
-        clearTimeout(notificationTimeoutRef.current);
-      }
-    };
-  }, [router]);
+  useEffect(() => () => {
+    if (notificationTimeoutRef.current) clearTimeout(notificationTimeoutRef.current);
+  }, []);
 
   // --- Data Fetching ---
   const fetchFilesAndFolders = useCallback(async () => {
     if (!authUser) return; // Don't fetch if user is not authenticated yet
 
-    setIsLoading(true);
+    const sequence = ++loadSequence.current;
     try {
-      const { data: listData, error: listError } = await supabase
-        .storage
-        .from('images')
-        .list(currentPath || undefined, { // Use undefined for root path
-          limit: 500, // Increased limit, consider pagination for very large folders
-          offset: 0,
-          sortBy: { column: 'name', order: 'asc' }
-        });
-
-      if (listError) throw listError;
+      const listData = await getMediaItems(currentPath);
 
       const fetchedFolders: FolderItem[] = [];
       const fetchedFiles: FileItem[] = [];
 
       for (const item of listData || []) {
-        // Heuristic: Items without metadata or specific placeholder names are treated as folders
-        // Supabase `list` returns items with null metadata for folders created via the UI or empty uploads
-        if (!item.metadata) {
-          // Skip the automatically created '.emptyFolderPlaceholder' if present
-          if (item.name !== '.emptyFolderPlaceholder') {
-            fetchedFolders.push({
-              type: 'folder',
-              name: item.name,
-              id: item.id,
-            });
-          }
+        if (item.name === '.emptyFolderPlaceholder') continue;
+        if (!item.id) {
+          fetchedFolders.push({
+            type: 'folder',
+            name: item.name,
+            id: item.id,
+          });
         } else {
           // Fetch public URL - consider doing this on demand if many files
           const { data: urlData } = supabase.storage
@@ -156,34 +117,41 @@ export default function MediaManagerPage() {
           fetchedFiles.push({
             type: 'file',
             name: item.name,
-            id: item.id!, // Assert non-null ID for files based on having metadata
+            id: item.id,
             updated_at: item.updated_at!,
             created_at: item.created_at!,
             last_accessed_at: item.last_accessed_at!,
             metadata: {
-              size: item.metadata.size ?? 0,
-              mimetype: item.metadata.mimetype ?? 'application/octet-stream',
+              size: item.metadata?.size ?? 0,
+              mimetype: item.metadata?.mimetype ?? 'application/octet-stream',
             },
             publicUrl: urlData?.publicUrl || '',
           });
         }
       }
 
+      if (sequence !== loadSequence.current) return;
+      setError(null);
       setFolders(fetchedFolders);
       setFiles(fetchedFiles);
 
     } catch (error: unknown) { // Changed from any to unknown
+      if (sequence !== loadSequence.current) return;
       console.error('Error fetching files/folders:', error);
       // Type check before accessing message
       const errorMessage = error instanceof Error ? error.message : 'Dettagli non disponibili';
-      showNotification('error', `Errore nel caricamento: ${errorMessage}`);
+      setFiles([]);
+      setFolders([]);
+      setError(`Errore nel caricamento: ${errorMessage}`);
     } finally {
-      setIsLoading(false);
+      if (sequence === loadSequence.current) setLoadedPath(currentPath);
     }
   }, [authUser, currentPath]); // Dependency array includes authUser and currentPath
 
   // Fetch data when authenticated user or current path changes
   useEffect(() => {
+    // State updates happen after the external storage request resolves.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchFilesAndFolders();
   }, [fetchFilesAndFolders]); // fetchFilesAndFolders is memoized by useCallback
 
@@ -304,25 +272,11 @@ export default function MediaManagerPage() {
   // Recursive function to list all objects within a folder prefix
   const listAllObjects = async (folderPath: string): Promise<string[]> => {
     let allObjectPaths: string[] = [];
-    const { data, error } = await supabase.storage.from('images').list(folderPath);
-
-    if (error) {
-      console.error('Error listing objects in:', folderPath, error);
-      throw error; // Propagate error
-    }
-
-    if (!data) return [];
+    const data = await getMediaItems(folderPath);
 
     for (const item of data) {
       const currentItemPath = `${folderPath}/${item.name}`;
-      // Check if it's potentially a sub-folder (no metadata or is placeholder)
-      // We assume anything returned by list is either a file or represents a folder structure
-      if (!item.metadata || item.name === '.emptyFolderPlaceholder') {
-        // If it's the placeholder, add it directly to be deleted.
-        if (item.name === '.emptyFolderPlaceholder') {
-          allObjectPaths.push(currentItemPath);
-        }
-        // Recursively list contents of the sub-folder prefix
+      if (!item.id) {
         const subFolderObjects = await listAllObjects(currentItemPath);
         allObjectPaths = allObjectPaths.concat(subFolderObjects);
       } else {
@@ -348,7 +302,7 @@ export default function MediaManagerPage() {
     setIsProcessing(true);
     try {
       // 3. Supabase remove call
-      const { data, error: deleteError } = await supabase.storage
+      const { error: deleteError } = await supabase.storage
         .from('images')
         .remove([filePath]); // Path must be in an array
 
@@ -410,7 +364,7 @@ export default function MediaManagerPage() {
 
 
       if (objectsToDelete.length > 0) {
-        const { data, error: deleteError } = await supabase.storage
+        const { error: deleteError } = await supabase.storage
           .from('images')
           .remove(objectsToDelete);
 
@@ -635,9 +589,9 @@ export default function MediaManagerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 mt-5"> {/* Adjusted padding top */}
-      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-6"> {/* Adjusted padding */}
-        <div className="bg-white rounded-lg shadow p-4 md:p-6">
+    <div className="w-full"> {/* Adjusted padding top */}
+      <div className="max-w-7xl mx-auto p-4 md:p-6 lg:p-10"> {/* Adjusted padding */}
+        <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6 lg:p-8">
           {/* Header */}
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4 md:mb-6">
             <h1 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2 md:mb-0">
@@ -692,9 +646,10 @@ export default function MediaManagerPage() {
           </div>
 
           {/* Notifications */}
-          {error && (
+          {error && !isLoading && (
             <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md flex items-center justify-between text-sm">
-              <span>{error}</span>
+              <span role="alert">{error}</span>
+              <button onClick={() => { setLoadedPath(null); fetchFilesAndFolders(); }} className="ml-2 shrink-0 rounded border border-red-300 px-3 py-1">Riprova</button>
               <button onClick={() => setError(null)} className="ml-2">
                 <XCircle className="w-4 h-4" />
               </button>
@@ -859,14 +814,14 @@ export default function MediaManagerPage() {
               ))}
 
               {/* No items message */}
-              {!isLoading && folders.length === 0 && files.length === 0 && !currentPath && (
+              {!isLoading && !error && folders.length === 0 && files.length === 0 && !currentPath && (
                 <div className="col-span-full text-center py-12 text-gray-500">
                   <ImageIcon size={48} className="mx-auto mb-4" />
                   <p>La libreria media è vuota.</p>
-                  <p>Trascina i file o usa il pulsante Carica File.</p>
+                  <p>Trascina i file o usa il pulsante di caricamento.</p>
                 </div>
               )}
-              {!isLoading && folders.length === 0 && files.length === 0 && currentPath && (
+              {!isLoading && !error && folders.length === 0 && files.length === 0 && currentPath && (
                 <div className="col-span-full text-center py-12 text-gray-500">
                   <Folder size={48} className="mx-auto mb-4" />
                   <p>Questa cartella è vuota.</p>

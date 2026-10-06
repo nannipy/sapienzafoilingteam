@@ -1,32 +1,25 @@
-/* styles/globals.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Admin styles stay scoped to the workspace. */
+.admin-shell { color-scheme: light; background: #f5f3f4; }
+.admin-shell main { min-width: 0; padding-top: 2rem; }
+.admin-shell h1 { letter-spacing: -.025em; }
+.admin-shell main > .bg-white,
+.admin-shell main > div > .bg-white { box-shadow: none; border-color: #e5dfe1; }
+.admin-shell input:not([type="hidden"]):not([type="file"]),
+.admin-shell textarea:not(.w-md-editor-text-input), .admin-shell select { color: #1a1718; background: white; }
+.admin-shell button:not(.w-md-editor button),
+.admin-shell a:not(.w-md-editor a) { min-height: 40px; min-width: 40px; }
+.admin-shell button:disabled { cursor: not-allowed; opacity: .55; }
+.admin-shell :is(button, a, input, textarea, select):focus-visible {
+  outline: 2px solid #822433; outline-offset: 3px;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.admin-shell :is(.text-indigo-600, .text-blue-600) { color: #822433; }
+.admin-shell table td:first-child { overflow-wrap: anywhere; }
+.admin-shell .react-datepicker-wrapper { width: 100%; }
+@media (max-width: 767px) {
+  .admin-shell :is(button, a):not(.w-md-editor *) { min-height: 44px; min-width: 44px; }
+  .admin-shell input, .admin-shell textarea:not(.w-md-editor-text-input), .admin-shell select { font-size: 16px; }
+  .admin-shell .group > .absolute { opacity: 1; position: static; padding: .5rem; justify-content: flex-end; flex-wrap: wrap; }
 }
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-geist), var(--font-kelson), Arial, Helvetica, sans-serif;
-}
-
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+@media (prefers-reduced-motion: reduce) {
+  .admin-shell *, .admin-shell *::before, .admin-shell *::after { animation: none !important; transition: none !important; }
 }

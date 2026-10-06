@@ -1,118 +1,45 @@
-// components/AdminHeader.tsx
 'use client';
 
-import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { FileText, FilePenLine, Image as ImageIcon, LogOut, FileUser, Calendar, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import { blogTranslations } from '../translations/blog';
-import { useAdminContext } from '../../app/context/AdminContext';
-import {
-  LayoutDashboard,
-  Edit,
-  Image as ImageIcon,
-  LogOut,
-  FileUser,
-  Calendar
-} from 'lucide-react';
+import { useAdminContext } from '../context/AdminContext';
 
-type AdminHeaderProps = {
-  onLogout?: () => void;
-};
-
-export default function AdminHeader({ onLogout }: AdminHeaderProps) {
-  const { language } = useLanguage();
-  const currentPath = usePathname();
-  const { user, viewMode, isEditing } = useAdminContext(); // Consume context
-
+export default function AdminHeader({ onLogout }: { onLogout?: () => void }) {
+  const path = usePathname();
+  const { user, setViewMode, setIsEditing } = useAdminContext();
+  const { language, setLanguage } = useLanguage();
+  const en = language === 'en';
+  const links = [
+    { href: '/admin', label: en ? 'Articles' : 'Articoli', icon: FileText },
+    { href: '/admin/drafts', label: en ? 'Drafts' : 'Bozze', icon: FilePenLine },
+    { href: '/admin/media', label: 'Media', icon: ImageIcon },
+    { href: '/admin/positions', label: en ? 'Open positions' : 'Posizioni aperte', icon: FileUser },
+    { href: '/admin/events', label: en ? 'Events' : 'Eventi', icon: Calendar },
+  ];
   return (
-    <div className="z-50 bg-white shadow-md h-16 flex items-center mx-4 sm:mx-8 md:mx-80 rounded-xl">
-      <div className="flex items-center justify-between w-full px-4 sm:px-8 md:px-2">
-
-        {/* Left Side: Logo and Navigation */}
-        <div className="flex items-center space-x-2 sm:space-x-6">
-          <nav className="flex items-center space-x-6 sm:space-x-2 justify-start">
-            {/* Articles List Link */}
-            <Link
-              href="/admin"
-              className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${currentPath === '/admin' && viewMode === 'list' // Active only if on admin page AND list view
-                ? 'bg-brand/10 text-brand'
-                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-            >
-              <LayoutDashboard className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
-              <span className="ml-1 hidden sm:inline">{blogTranslations[language].admin.articlesList}</span>
-            </Link>
-
-            {/* Conditional Edit Article Button/Indicator */}
-            {isEditing && viewMode === 'form' && (
-              <span
-                className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium bg-brand/10 text-brand cursor-default`}
-              >
-                <Edit className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
-                <span className="ml-1 hidden sm:inline">Edit Article</span>
-              </span>
-            )}
-
-            {/* Media Management Link */}
-            <Link
-              href="/admin/media"
-              className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${currentPath === '/admin/media'
-                ? 'bg-brand/10 text-brand'
-                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-            >
-              <ImageIcon className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
-              <span className="ml-1 hidden sm:inline">Media</span>
-            </Link>
-            {/* Media Management Link */}
-            <Link
-              href="/admin/positions"
-              className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${currentPath === '/admin/positions'
-                ? 'bg-brand/10 text-brand'
-                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-            >
-              <FileUser className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
-              <span className="ml-1 hidden sm:inline">Open Positions</span>
-            </Link>
-            {/* Events Management Link */}
-            <Link
-              href="/admin/events"
-              className={`flex items-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-150 ${currentPath === '/admin/events'
-                ? 'bg-brand/10 text-brand'
-                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-            >
-              <Calendar className="h-6 w-6 sm:h-5 sm:w-5 flex-shrink-0" />
-              <span className="ml-1 hidden sm:inline">Events</span>
-            </Link>
-          </nav>
-        </div>
-
-        {/* Right Side: User Info and Logout */}
-        <div className="flex items-center space-x-2 sm:space-x-4">
-          <div className="text-right hidden md:block">
-            <p className="text-xs text-gray-500 hidden md:block">Logged in as:</p>
-            <p className="text-xs sm:text-sm font-medium text-gray-800 truncate max-w-[150px] lg:max-w-[200px]" title={user?.email ?? ''}>
-              {user?.email?.split('@')[0]}
-            </p>
+    <header className="border-b border-gray-200 bg-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div className="flex min-h-20 items-center justify-between gap-3 py-3">
+          <div className="min-w-0">
+            <p className="text-xs font-semibold uppercase tracking-widest text-brand">Sapienza Foiling Team</p>
+            <p className="mt-1 text-lg font-semibold">{en ? 'Administration' : 'Amministrazione'}</p>
           </div>
-          <button
-            onClick={onLogout}
-            title="Logout"
-            className="flex items-center justify-center px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium text-red-600 hover:bg-red-50 hover:text-red-800 transition-colors duration-150 border border-red-200"
-          >
-            <LogOut className="h-4 w-4" />
-            <span className="ml-1 hidden sm:inline">Logout</span>
-          </button>
+          <div className="flex shrink-0 items-center gap-2">
+            <span className="hidden max-w-40 truncate text-sm text-gray-500 lg:block">{user?.email}</span>
+            <button type="button" onClick={() => setLanguage(en ? 'it' : 'en')} className="rounded-lg border px-3 text-sm" aria-label={en ? 'Switch to Italian' : 'Passa a inglese'}>{en ? 'IT' : 'EN'}</button>
+            <Link href="/" className="hidden items-center gap-1 rounded-lg border px-3 text-sm sm:flex">{en ? 'View site' : 'Vai al sito'}<ArrowUpRight size={16} /></Link>
+            <button type="button" onClick={onLogout} className="flex items-center gap-2 rounded-lg border px-3 text-sm text-gray-600" aria-label={en ? 'Log out' : 'Esci'}><LogOut size={16} /><span className="hidden sm:inline">{en ? 'Log out' : 'Esci'}</span></button>
+          </div>
         </div>
-
-        {/* Optional: Add a Mobile Menu Button Here if needed */}
-
+        <nav aria-label={en ? 'Administration navigation' : 'Navigazione amministrazione'} className="flex flex-wrap gap-1 pb-3">
+          {links.map(({ href, label, icon: Icon }) => {
+            const active = href === '/admin' ? path === href : path.startsWith(href);
+            return <Link key={href} href={href} onClick={() => { setViewMode('list'); setIsEditing(false); }} aria-current={active ? 'page' : undefined} className={`flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium ${active ? 'bg-brand/10 text-brand' : 'text-gray-600 hover:bg-gray-50'}`}><Icon size={18} />{label}</Link>;
+          })}
+        </nav>
       </div>
-      {/* Optional: Mobile navigation below the main bar if needed */}
-      {/* <nav className="md:hidden flex items-center space-x-2 border-t mt-2 pt-2"> ... </nav> */}
-    </div>
+    </header>
   );
 }

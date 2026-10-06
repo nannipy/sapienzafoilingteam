@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export async function createSupabaseServerClient() {
     const cookieStore = await cookies();
@@ -42,7 +43,7 @@ export async function verifySession() {
 export async function requireAuth() {
     const user = await verifySession();
     if (!user) {
-        throw new Error('Unauthorized');
+        redirect('/login');
     }
     return user;
 }
