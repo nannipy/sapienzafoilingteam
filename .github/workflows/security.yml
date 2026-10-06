@@ -45,5 +45,11 @@ jobs:
             # would also downgrade @eslint/eslintrc off its required ^4.3.0, which
             # changed load-function APIs between majors. Dev-only, unreachable from
             # the shipped app.
+            # GHSA-vfj7-8cjw-p6xm (braces): no upstream fixed release exists.
+            # The committed Bun patch caps parsing and recursive AST traversal at
+            # depth 100. This regression check must pass before the version-only
+            # audit exception is used. Remove patch/exception after an upstream fix.
+            - name: Verify braces security patch
+              run: node --test tests/security/braces-depth.test.cjs
             - name: Run bun audit
-              run: bun audit --audit-level=high --ignore=GHSA-mh99-v99m-4gvg --ignore=GHSA-rgw5-rvv9-x895 --ignore=GHSA-5p4m-2wfm-xmqj --ignore=GHSA-2883-xcg3-v3hh
+              run: bun audit --audit-level=high --ignore=GHSA-mh99-v99m-4gvg --ignore=GHSA-rgw5-rvv9-x895 --ignore=GHSA-5p4m-2wfm-xmqj --ignore=GHSA-2883-xcg3-v3hh --ignore=GHSA-vfj7-8cjw-p6xm

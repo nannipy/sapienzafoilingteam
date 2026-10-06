@@ -37,3 +37,13 @@ La lettura dei media passa da un'azione server autenticata, con paginazione, sen
 Verificati con la sessione reale il caricamento della radice e della cartella `blog`, incluse le immagini. `media-verificati.png` documenta il risultato. Upload e cancellazione non sono stati eseguiti durante questa verifica.
 
 Il messaggio di hydration sul `body.className` è stato ricondotto all'estensione Video Speed Controller: il browser aggiunge `vsc-initialized` prima dell'hydration. Il browser senza estensione non presenta il messaggio. Disabilitare l'estensione per localhost risolve questa causa; non sono stati nascosti gli avvisi né modificati i font.
+
+## Correzioni sicurezza del 6 ottobre 2026
+
+Next.js ed eslint-config-next sono aggiornati alla 16.3.8; source-map-js è vincolato ad almeno 1.2.2. Questi aggiornamenti correggono GHSA-vcvr-r3jv-pc5j e GHSA-68fv-2mgg-jv7q.
+
+Per GHSA-vfj7-8cjw-p6xm non esiste una release corretta di braces. `patches/braces@3.0.3.patch`, applicata automaticamente da Bun, limita a 100 la profondità del parser (parentesi e graffe) e dei tre percorsi ricorsivi compile/expand/stringify, anche per AST forniti dal chiamante. Gli input troppo profondi producono un errore di validazione prima dell'esaurimento dello stack. I normali glob mantengono il comportamento precedente.
+
+La CI esegue `node --test tests/security/braces-depth.test.cjs` prima dell'audit: 8 test coprono gli input ostili e il comportamento ordinario. L'eccezione audit aggiunta per questo solo advisory è necessaria perché l'audit controlla la versione e non riconosce la patch. Rimuovere patch ed eccezione quando sarà disponibile una release upstream corretta. Le eccezioni preesistenti restano documentate nel workflow.
+
+Verificati installazione pulita con lockfile congelato e applicazione automatica della patch, test di sicurezza e audit con le eccezioni documentate.

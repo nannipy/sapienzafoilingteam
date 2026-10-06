@@ -32,7 +32,7 @@
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.544.0",
     "marked": "^16.4.2",
-    "next": "^16.3.5",
+    "next": "^16.3.8",
     "posthog-js": "^1.430.3",
     "react": "^19.3.0",
     "react-datepicker": "^8.10.0",
@@ -43,7 +43,8 @@
     "postcss": "^8.5.28",
     "sharp": "^0.35.4",
     "nanoid": "^3.3.18",
-    "jsdom": "26.1.0"
+    "jsdom": "26.1.0",
+    "source-map-js": "^1.2.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.10.0",
@@ -55,7 +56,7 @@
     "@types/react-dom": "^19.3.0",
     "autoprefixer": "^10.6.0",
     "eslint": "^9.39.5",
-    "eslint-config-next": "^16.3.5",
+    "eslint-config-next": "^16.3.8",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.5.1",
     "jest-environment-jsdom": "^30.5.1",
@@ -64,5 +65,8 @@
     "ts-jest": "^29.4.12",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
+  },
+  "patchedDependencies": {
+    "braces@3.0.3": "patches/braces@3.0.3.patch"
   }
 }
