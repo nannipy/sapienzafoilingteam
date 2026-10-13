@@ -1,69 +1,42 @@
-
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
-import { teamTranslations } from '../translations/team';
-import PageLayout from '../components/PageLayout';
-import TeamHero from './components/TeamHero';
-import DepartmentFilter from './components/DepartmentFilter';
-import DepartmentCard from './components/DepartmentCard';
-import DepartmentDetail from './components/DepartmentDetail';
-import { divisionsConfig } from './config';
+import { people, leadership, departments } from './roster';
+import PersonCard from './components/PersonCard';
 
-const TeamClientPage = () => {
+export default function TeamClientPage() {
   const { language } = useLanguage();
-  const [activeSection, setActiveSection] = useState('all');
-  const t = teamTranslations[language];
-
-  // Helper to get division data safely
-  const getDivisionData = (id: string) => {
-    return t.divisions[id as keyof typeof t.divisions];
-  };
-
-  return (
-    <PageLayout>
-      <DepartmentFilter
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
-      />
-
-      <div className="px-6 md:px-12 py-5">
-        <AnimatePresence mode="wait">
-          {activeSection === 'all' ? (
-            <motion.div
-              key="all"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
-            >
-              {Object.keys(divisionsConfig).map((id) => (
-                <div key={id} className="h-full">
-                  <DepartmentCard
-                    id={id}
-                    config={divisionsConfig[id]}
-                    name={getDivisionData(id).name}
-                    description={getDivisionData(id).description}
-                    onClick={() => setActiveSection(id)}
-                  />
-                </div>
-              ))}
-            </motion.div>
-          ) : (
-            <DepartmentDetail
-              key={activeSection}
-              id={activeSection}
-              config={divisionsConfig[activeSection]}
-              data={getDivisionData(activeSection)}
-            />
-          )}
-        </AnimatePresence>
+  const it = language === 'it';
+  return <main className="sft-root sft-team-page">
+    <div className="sft-team-container">
+      <header className="sft-team-intro">
+        <h1 className="sft-display">{it ? 'Il team' : 'The team'}</h1>
+        <nav aria-label={it ? 'Reparti del team' : 'Team departments'} className="sft-team-index">
+          {departments.map(department => <a key={department.id} href={`#${department.id}`}>{department.name[language]}</a>)}
+        </nav>
+      </header>
+      <section className="sft-team-leadership" aria-labelledby="team-leadership">
+        <h2 id="team-leadership" className="sft-eyebrow">{it ? 'Guida del team' : 'Team leadership'}</h2>
+        <div className="sft-team-leaders-grid">
+          {leadership.map(({person, role}) => <PersonCard key={person} person={people[person]} role={role[language]} />)}
+        </div>
+      </section>
+    </div>
+    <div className="sft-team-departments">
+      <div className="sft-team-container">
+        {departments.map(department => <section key={department.id} id={department.id} className="sft-team-department" aria-labelledby={`${department.id}-heading`}>
+          <div className="sft-team-department-heading">
+            <Image className="sft-department-icon" src={department.icon} alt="" width={64} height={64} sizes="64px" />
+            <p className="sft-eyebrow">{it ? 'Reparto' : 'Department'}</p>
+            <h2 id={`${department.id}-heading`} className="sft-display">{department.name[language]}</h2>
+            <p className="sft-team-department-description">{department.description[language]}</p>
+          </div>
+          <div className="sft-team-heads-grid">
+            {department.heads.map(person => <PersonCard key={person} person={people[person]} role={it ? 'Capo reparto' : 'Department Head'} />)}
+          </div>
+        </section>)}
       </div>
-    </PageLayout>
-  );
-};
-
-export default TeamClientPage;
+    </div>
+  </main>;
+}

@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import ClientModals from "./components/ClientModals";
 import "./globals.css";
+import "@sft/design-system/styles.next.css";
+import "./design-system.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { LanguageProvider } from "./context/LanguageContext";
@@ -147,7 +149,7 @@ export default function RootLayout({
           </Suspense>
           <LanguageProvider>
             <Navbar />
-            {children}
+            <div id="main-content" tabIndex={-1}>{children}</div>
             <Footer />
             <Analytics />
             <SpeedInsights />

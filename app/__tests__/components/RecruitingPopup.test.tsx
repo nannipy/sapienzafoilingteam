@@ -31,6 +31,7 @@ const renderWithProvider = (component: React.ReactElement) => {
 describe('RecruitingPopup', () => {
   beforeEach(() => {
     jest.useFakeTimers();
+    jest.setSystemTime(new Date('2026-09-16T12:00:00Z'));
     localStorage.clear();
   });
 

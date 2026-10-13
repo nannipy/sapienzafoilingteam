@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import HeroSection from '../../components/HeroSection';
 import { LanguageProvider } from '../../context/LanguageContext';
 
@@ -26,9 +26,9 @@ describe('HeroSection', () => {
   it('renders the hero section with team name', () => {
     renderWithProvider(<HeroSection />); // onChevronClick prop was removed from component? checking file content... yes, handled internally
     const headings = screen.getAllByRole('heading', { level: 1 });
-    expect(headings).toHaveLength(2);
+    expect(headings).toHaveLength(1);
     expect(headings[0]).toHaveTextContent('Sapienza');
-    expect(headings[1]).toHaveTextContent('Foiling Team');
+    expect(headings[0]).toHaveTextContent('Foiling Team');
   });
 
   it('renders call to action buttons with correct links', () => {
@@ -43,4 +43,20 @@ describe('HeroSection', () => {
     const slideButtons = screen.getAllByRole('button');
     expect(slideButtons.length).toBeGreaterThan(0);
   });
+  it('scorre automaticamente e permette di mettere in pausa la galleria', () => {
+    jest.useFakeTimers();
+    const view = renderWithProvider(<HeroSection />);
+    try {
+      act(() => { jest.advanceTimersByTime(5000); });
+      expect(screen.getByAltText('Il Moth del team in regata')).toBeInTheDocument();
+      fireEvent.click(screen.getByRole('button', {name: 'Pausa galleria'}));
+      act(() => { jest.advanceTimersByTime(10000); });
+      expect(screen.getByAltText('Il Moth del team in regata')).toBeInTheDocument();
+      expect(screen.getByRole('button', {name: 'Riprendi galleria'})).toBeInTheDocument();
+    } finally {
+      view.unmount();
+      jest.useRealTimers();
+    }
+  });
+
 });

@@ -21,6 +21,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  useEffect(() => { document.documentElement.lang = language; }, [language]);
+
   const setLanguageCallback = useCallback((lang: Language) => {
     setLanguage(lang);
     localStorage.setItem('language', lang);

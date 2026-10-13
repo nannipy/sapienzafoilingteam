@@ -1,238 +1,171 @@
-'use client';
-
-import React, { useState, useEffect, useRef, useCallback } from "react";
+"use client";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
+  Pause,
+  Play,
+} from "lucide-react";
+import { Button } from "@sft/design-system";
+import { EditorialHero } from "@sft/design-system/identity";
+import { useLanguage } from "../context/LanguageContext";
+import { homeTranslations } from "../translations/home";
 import posthog from "posthog-js";
-import { useLanguage } from '../context/LanguageContext';
-import { homeTranslations } from '../translations/home';
-
-const heroSlides = [
-  {
-    src: '/images/hero-01.jpg',
-    alt: 'Sapienza Foiling Team Moth Flight - Panoramic Lake Garda',
-  },
-  {
-    src: '/images/hero-02.jpg',
-    alt: 'Sapienza Foiling Moth 9352 Racing in SuMoth Challenge',
-  },
-  {
-    src: '/images/events-01-sumoth-village-aerial.jpg',
-    alt: 'Sapienza Foiling Moth 9352 Racing in SuMoth Challenge',
-  },
-  {
-    src: '/images/events-03-competitors-lineup.jpg',
-    alt: 'Sapienza Foiling Moth 9352 Racing in SuMoth Challenge',
-  },
-  {
-    src: '/images/events-06-racing-water.jpg',
-    alt: 'Sapienza Foiling Moth 9352 Racing in SuMoth Challenge',
-  },
-  {
-    src: '/images/sponsor-03-sail-partners-2.jpg',
-    alt: 'Sapienza Foiling Moth 9352 Racing in SuMoth Challenge',
-  },
-  {
-    src: '/images/hero-05.jpg',
-    alt: 'Sapienza Foiling Moth High Altitude Foil Flight',
-  },
+const slides = [
+  [
+    "/images/hero-01.jpg",
+    "La squadra prepara il Moth nel paddock",
+    "The team preparing the Moth in the paddock",
+  ],
+  [
+    "/images/hero-02.jpg",
+    "Il Moth del team in regata",
+    "The team’s Moth racing",
+  ],
+  [
+    "/images/events-01-sumoth-village-aerial.jpg",
+    "Il villaggio della SuMoth Challenge",
+    "The SuMoth Challenge village",
+  ],
+  [
+    "/images/events-03-competitors-lineup.jpg",
+    "Le imbarcazioni alla SuMoth Challenge",
+    "Boats at the SuMoth Challenge",
+  ],
+  [
+    "/images/events-06-racing-water.jpg",
+    "La regata sul Garda",
+    "Racing on Lake Garda",
+  ],
+  [
+    "/images/sponsor-03-sail-partners-2.jpg",
+    "I partner sulla vela del team",
+    "Team partners on the sail",
+  ],
+  [
+    "/images/hero-05.jpg",
+    "Il Moth in volo sull’acqua",
+    "The Moth foiling on the water",
+  ],
 ];
-
-const HeroSection: React.FC = () => {
+export default function HeroSection() {
   const { language } = useLanguage();
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [loadedSlides, setLoadedSlides] = useState<number[]>([0]);
-  const [isInView, setIsInView] = useState(true);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const touchStartXRef = useRef<number | null>(null);
-
-  // Mark slides as loaded when needed
-  const markSlideLoaded = useCallback((index: number) => {
-    setLoadedSlides((prev) => (prev.includes(index) ? prev : [...prev, index]));
-  }, []);
-
-  const goToSlide = useCallback((index: number) => {
-    markSlideLoaded(index);
-    setCurrentSlide(index);
-  }, [markSlideLoaded]);
-
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-  }, []);
-
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-  }, []);
-
-  // Pause timer when out of viewport to save mobile CPU/GPU
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const start = useRef<number | null>(null);
+  const it = language === "it";
+  const t = homeTranslations[language];
+  const step = (n: number) =>
+    setCurrent((c) => (c + n + slides.length) % slides.length);
   useEffect(() => {
-    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-
-    const el = containerRef.current;
-    if (el) observer.observe(el);
-
-    return () => {
-      if (el) observer.unobserve(el);
-    };
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
   }, []);
-
-  // Preload the current and next slide ahead of transition
   useEffect(() => {
-    markSlideLoaded(currentSlide);
-    const nextIndex = (currentSlide + 1) % heroSlides.length;
-    markSlideLoaded(nextIndex);
-  }, [currentSlide, markSlideLoaded]);
-
-  // Auto-advance slides every 5 seconds only when visible and active
-  useEffect(() => {
-    if (!isInView) return;
-
-    const timer = setInterval(() => {
-      if (typeof document !== 'undefined' && document.hidden) return;
-      nextSlide();
+    if (paused || reducedMotion) return;
+    const timer = window.setInterval(() => {
+      if (!document.hidden) setCurrent((c) => (c + 1) % slides.length);
     }, 5000);
-
-    return () => clearInterval(timer);
-  }, [isInView, nextSlide]);
-
-  // Touch swipe support for smooth mobile interaction
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartXRef.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartXRef.current === null) return;
-    const diff = touchStartXRef.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
-      }
-    }
-    touchStartXRef.current = null;
-  };
-
-  const handleCTAClick = (ctaType: 'learn_more' | 'view_boat') => {
-    posthog.capture('hero_cta_clicked', {
-      cta_type: ctaType,
-      section: 'hero'
-    });
-  };
-
+    return () => window.clearInterval(timer);
+  }, [paused, reducedMotion]);
+  const track = (type: string) =>
+    posthog.capture("hero_cta_clicked", { cta_type: type, section: "hero" });
   return (
     <div
-      ref={containerRef}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-void select-none"
+      className="sft-site-hero-wrap"
+      onTouchStart={(e) => {
+        start.current = e.touches[0].clientX;
+      }}
+      onTouchEnd={(e) => {
+        if (start.current !== null) {
+          const delta = start.current - e.changedTouches[0].clientX;
+          if (Math.abs(delta) > 40) step(delta > 0 ? 1 : -1);
+          start.current = null;
+        }
+      }}
     >
-      {/* High-performance Crossfade Image Stack - Zero 800vw layer or GPU layer thrashing */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-        {heroSlides.map((slide, index) => {
-          const isCurrent = index === currentSlide;
-          const isLoaded = loadedSlides.includes(index);
-
-          if (!isLoaded) return null;
-
-          return (
-            <div
-              key={slide.src}
-              className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-                isCurrent ? 'opacity-100 z-0' : 'opacity-0 -z-10 pointer-events-none'
-              }`}
-            >
-              <Image
-                src={slide.src}
-                alt={slide.alt}
-                fill
-                sizes="100vw"
-                className="object-cover object-center"
-                priority={index === 0}
-              />
-            </div>
-          );
-        })}
-
-        {/* Cinematic Vignette & Atmospheric Gradients on top of track */}
-        <div className="absolute inset-0 bg-gradient-to-t from-void via-void/40 to-black/30 pointer-events-none z-10" />
-        <div
-          className="absolute inset-0 pointer-events-none z-10 opacity-75"
-          style={{
-            background: 'radial-gradient(ellipse at center, transparent 35%, rgba(10, 8, 8, 0.85) 100%)',
-          }}
-        />
-      </div>
-
-      {/* Ambient Burgundy Glow Accent - Efficient CSS radial gradient (0 blur calculation overhead) */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] md:w-[750px] h-[340px] md:h-[450px] pointer-events-none z-10 opacity-60"
-        style={{
-          background: 'radial-gradient(circle, rgba(130, 36, 51, 0.35) 0%, rgba(130, 36, 51, 0.08) 50%, transparent 70%)',
-        }}
-      />
-
-      <div className="relative z-20 flex flex-col items-center justify-center px-4 max-w-5xl mx-auto">
-        {/* Main Title - Distinctive Glowing Styling */}
-        <div className="text-center animate-fade-in-up">
-          <h1 className="font-black text-6xl md:text-8xl lg:text-9xl text-white uppercase mb-[-0.1em] tracking-tighter leading-none opacity-95 drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]">
+      <EditorialHero
+        title={
+          <>
             Sapienza
-          </h1>
-          <h1 className="font-bold text-5xl md:text-7xl lg:text-8xl text-white/90 uppercase tracking-tight leading-none drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]">
+            <br />
             Foiling Team
-          </h1>
-        </div>
-
-        {/* Subtitle description - Internationalized */}
-        <p className="mt-6 text-white/80 max-w-xl text-center text-sm md:text-base font-light tracking-wide leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
-          {homeTranslations[language].heroSubtitle}
-        </p>
-
-        {/* Action Buttons with Refined States and Glow */}
-        <div className="flex flex-col sm:flex-row gap-5 mt-10 animate-fade-in-up" style={{ animationDelay: '0.25s' }}>
-          <Link
-            href="/team"
-            onClick={() => handleCTAClick('learn_more')}
-            className="px-9 py-4 rounded-full bg-brand text-white font-bold tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(130,36,51,0.5)] hover:shadow-[0_0_45px_rgba(130,36,51,0.8)] hover:bg-brand-light border border-white/10 uppercase text-xs sm:text-sm text-center"
-          >
-            {homeTranslations[language].learnMoreButton}
-          </Link>
-          <Link
-            href="/boat"
-            onClick={() => handleCTAClick('view_boat')}
-            className="px-9 py-4 rounded-full bg-white/10 md:backdrop-blur-md border border-white/20 text-white font-bold tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 hover:bg-white/20 hover:border-brand/50 shadow-xl uppercase text-xs sm:text-sm text-center"
-          >
-            {homeTranslations[language].viewMothButton}
-          </Link>
-        </div>
-      </div>
-
-      {/* Slide Navigation Indicators */}
-      <div className="absolute bottom-10 z-20 flex items-center gap-2">
-        {heroSlides.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => goToSlide(idx)}
-            className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-              idx === currentSlide
-                ? 'w-8 bg-brand-light shadow-[0_0_12px_rgba(163,66,82,0.8)]'
-                : 'w-2 bg-white/30 hover:bg-white/60'
-            }`}
-            aria-label={`Slide ${idx + 1}`}
-          />
-        ))}
-      </div>
+          </>
+        }
+        description={t.heroSubtitle}
+        image={
+          <>
+            <Image
+              key={slides[current][0]}
+              src={slides[current][0]}
+              alt={slides[current][it ? 1 : 2]}
+              fill
+              sizes="(max-width: 767px) 100vw, 56vw"
+              priority={current === 0}
+              className="sft-site-hero-photo"
+            />
+            <div className="sft-site-gallery-controls">
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label={it ? "Foto precedente" : "Previous photo"}
+                onClick={() => step(-1)}
+              >
+                <ChevronLeft />
+              </Button>
+              {!reducedMotion && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label={
+                    it
+                      ? paused
+                        ? "Riprendi galleria"
+                        : "Pausa galleria"
+                      : paused
+                        ? "Resume slideshow"
+                        : "Pause slideshow"
+                  }
+                  onClick={() => setPaused((p) => !p)}
+                >
+                  {paused ? <Play /> : <Pause />}
+                </Button>
+              )}
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label={it ? "Foto successiva" : "Next photo"}
+                onClick={() => step(1)}
+              >
+                <ChevronRight />
+              </Button>
+            </div>
+          </>
+        }
+        actions={
+          <>
+            <Button asChild variant="secondary" size="lg">
+              <Link href="/team" onClick={() => track("learn_more")}>
+                {t.learnMoreButton}
+                <ArrowUpRight />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link href="/boat" onClick={() => track("view_boat")}>
+                {t.viewMothButton}
+                <ArrowUpRight />
+              </Link>
+            </Button>
+          </>
+        }
+      />
     </div>
   );
-};
-
-export default HeroSection;
+}

@@ -1,146 +1,35 @@
 'use client';
-
-import {
-  Mail,
-  MessageSquare,
-  MapPin,
-  Facebook,
-  Instagram,
-  Linkedin,
-  TreePine
-} from 'lucide-react';
+import Link from 'next/link';
+import { ArrowUpRight, Instagram, Linkedin, Facebook } from 'lucide-react';
+import { Button, Card, CardContent } from '@sft/design-system';
 import { useLanguage } from '../context/LanguageContext';
 import { contactTranslations } from '../translations/contact';
-import Link from 'next/link';
-import PageLayout from '../components/PageLayout';
 
-const ContactClientPage = () => {
-  const { language } = useLanguage();
-  const t = contactTranslations[language];
-
-  return (
-    <PageLayout>
-      {/* Main Content */}
-      <div className="px-6 md:px-12 py-16">
-        <div className="grid lg:grid-cols-3 gap-8">
-
-          {/* Column 1: Contacts */}
-          <div className="bg-white rounded-xl shadow-lg border border-gray-100">
-            <div className="border-b p-6">
-              <h2 className="text-3xl font-bold text-gray-800">{t.ourContacts}</h2>
-            </div>
-
-            <div className="p-6">
-              <div className="space-y-6">
-                {/* Email Section */}
-                <div className="group">
-                  <h3 className="text-lg font-semibold text-black mb-2">{t.email}</h3>
-                  <a
-                    href="mailto:sapienzafoilingteam@gmail.com"
-                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-brand/5 transition-colors duration-200"
-                  >
-                    <Mail className="w-6 h-6 text-brand" />
-                    <span className="text-brand group-hover:underline">sapienzafoilingteam@gmail.com</span>
-                  </a>
-                </div>
-
-
-                {/* Location Section */}
-                <div className="group">
-                  <h3 className="text-lg font-semibold text-black mb-2">{t.location}</h3>
-                  <a
-                    href="https://goo.gl/maps/YOUR_LOCATION"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-brand/5 transition-colors duration-200"
-                  >
-                    <MapPin className="w-6 h-6 text-brand" />
-                    <span className="text-brand group-hover:underline">Via Eudossiana 18, 00184 Roma</span>
-                  </a>
-                </div>
-                <div className="group">
-                  <h3 className="text-lg font-semibold text-black mb-2">{t.linktree}</h3>
-                  <a
-                    href="https://linktr.ee/sapienzafoilingteam"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-brand/5 transition-colors duration-200"
-                  >
-                    <TreePine className="w-6 h-6 text-brand" />
-                    <span className="text-brand group-hover:underline">linktr.ee/sapienzafoilingteam</span>
-                  </a>
-                </div>
-
-
-                {/* Social Links */}
-                <div className="pt-4 border-t">
-                  <h3 className="text-lg font-semibold text-black mb-3 ">{t.social}</h3>
-                  <div className="flex space-x-9 ml-4">
-                    <a
-                      href="https://www.instagram.com/sapienzafoilingteam/"
-                      className="hover:text-brand transition-colors"
-                      aria-label="Instagram"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Instagram className="w-8 h-8 hover:scale-110 transition-transform" />
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/company/sapienza-foiling-team/about/"
-                      className="hover:text-brand transition-colors"
-                      aria-label="LinkedIn"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Linkedin className="w-8 h-8 hover:scale-110 transition-transform" />
-                    </a>
-                    <a
-                      href="https://www.facebook.com/profile.php?id=61572515878295"
-                      className="hover:text-brand transition-colors"
-                      aria-label="Facebook"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Facebook className="w-8 h-8 hover:scale-110 transition-transform" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Column 2: Map */}
-          <div className="bg-white rounded-xl shadow-lg border border-gray-100 flex items-center justify-center overflow-hidden min-h-[400px]">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.9876229173233!2d12.490363776654638!3d41.89312327124013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61b0d854d591%3A0x479e9d6899d47703!2sVia%20Eudossiana%2C%2018%2C%2000184%20Roma%20RM!5e0!3m2!1sit!2sit!4v1760276733613!5m2!1sit!2sit"
-              width="100%"
-              height="100%"
-              loading="lazy"
-              className="border-0"
-            ></iframe>
-          </div>
-
-          {/* Column 3: Get Involved */}
-          <div className="bg-white rounded-xl shadow-lg border border-gray-100 flex flex-col items-center justify-center p-6 space-y-8">
-            <div className="text-center">
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">{t.joinUs}</h3>
-              <p className="text-gray-600 mb-6">{t.joinUsText}</p>
-              <Link href="/career" className="inline-block bg-brand text-white font-bold py-3 px-6 rounded-lg hover:bg-brand-dark transition-colors">
-                {t.goToCareerPage}
-              </Link>
-            </div>
-            <div className="text-center w-full pt-8 border-t border-gray-100">
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">{t.collaborateWithUs}</h3>
-              <p className="text-gray-600 mb-6">{t.collaborateWithUsText}</p>
-              <a href="mailto:sapienzafoilingteam@gmail.com" className="inline-block bg-white text-brand border border-brand font-bold py-3 px-6 rounded-lg hover:bg-brand/5 transition-colors">
-                {t.contactUs}
-              </a>
-            </div>
-          </div>
-        </div>
+const socials = [
+  {name:'Instagram',Icon:Instagram,href:'https://www.instagram.com/sapienzafoilingteam/'},
+  {name:'LinkedIn',Icon:Linkedin,href:'https://www.linkedin.com/company/sapienza-foiling-team/about/'},
+  {name:'Facebook',Icon:Facebook,href:'https://www.facebook.com/profile.php?id=61572515878295'},
+];
+export default function ContactClientPage() {
+  const {language}=useLanguage();
+  const it=language==='it';
+  const t=contactTranslations[language];
+  return <main className="sft-root sft-content-page">
+    <div className="sft-page-container">
+      <header className="sft-page-intro"><h1 className="sft-display">{it?'Contatti':'Contact'}</h1><p>{it?'Per collaborazioni, informazioni sul progetto o per conoscere il team, scrivici.':'For collaborations, project information or to get to know the team, write to us.'}</p></header>
+      <div className="sft-contact-top">
+        <section className="sft-contact-email" aria-labelledby="contact-email">
+          <h2 id="contact-email" className="sft-eyebrow">{it?'Scrivi al team':'Write to the team'}</h2>
+          <a href="mailto:sapienzafoilingteam@gmail.com" className="sft-contact-address">sapienzafoilingteam@gmail.com<ArrowUpRight aria-hidden="true"/></a>
+          <div className="sft-contact-socials">{socials.map(({name,Icon,href})=><Button asChild variant="secondary" key={name}><a href={href} target="_blank" rel="noopener noreferrer"><Icon />{name}</a></Button>)}</div>
+          <a className="sft-contact-linktree" href="https://linktr.ee/sapienzafoilingteam" target="_blank" rel="noopener noreferrer">{it?'Tutti i nostri link':'All our links'}<ArrowUpRight size={16} aria-hidden="true"/></a>
+        </section>
+        <Card className="sft-contact-career"><CardContent><p className="sft-eyebrow">{it?'Entra nel progetto':'Join the project'}</p><h2 className="sft-display">{t.joinUs}</h2><p>{t.joinUsText}</p><Button asChild variant="brand"><Link href="/career">{t.goToCareerPage}<ArrowUpRight /></Link></Button></CardContent></Card>
       </div>
-    </PageLayout>
-  );
-};
-
-export default ContactClientPage;
+      <section className="sft-contact-location" aria-labelledby="contact-location">
+        <div><p className="sft-eyebrow">{t.location}</p><h2 id="contact-location" className="sft-display">{it?'Ci trovi a Roma':'Find us in Rome'}</h2><address>Via Eudossiana 18<br/>00184 Roma</address><Button asChild variant="outline"><a href="https://www.google.com/maps/search/?api=1&query=Via+Eudossiana+18+00184+Roma" target="_blank" rel="noopener noreferrer">{it?'Apri la mappa':'Open the map'}<ArrowUpRight /></a></Button></div>
+        <div className="sft-contact-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.9876229173233!2d12.490363776654638!3d41.89312327124013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61b0d854d591%3A0x479e9d6899d47703!2sVia%20Eudossiana%2C%2018%2C%2000184%20Roma%20RM!5e0!3m2!1sit!2sit!4v1760276733613!5m2!1sit!2sit" title={it?'Mappa della sede in Via Eudossiana 18, Roma':'Map of our location at Via Eudossiana 18, Rome'} loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div>
+      </section>
+    </div>
+  </main>;
+}

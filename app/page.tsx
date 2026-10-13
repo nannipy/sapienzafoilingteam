@@ -13,7 +13,7 @@ export default async function Home() {
 
   return (
     <>
-      <main className="relative min-h-screen bg-black" data-testid="home-page">
+      <main className="sft-root sft-site-home" data-testid="home-page">
         <HeroSection />
         <FleetShowcaseSection />
         <EventsSection events={events} />

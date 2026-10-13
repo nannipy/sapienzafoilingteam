@@ -40,7 +40,7 @@ describe('Navbar Component', () => {
       </LanguageProvider>
     );
 
-    expect(screen.getByAltText('Logo')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Sapienza Foiling Team — Home' })).toHaveAttribute('href', '/');
     const desktopNav = screen.getByTestId('desktop-nav');
 
     expect(desktopNav.querySelector('a[href="/boat"]')).toHaveTextContent(navbarTranslations.it.boat);
@@ -63,7 +63,7 @@ describe('Navbar Component', () => {
       </LanguageProvider>
     );
 
-    expect(screen.getByAltText('Logo')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Sapienza Foiling Team — Home' })).toHaveAttribute('href', '/');
     const desktopNav = screen.getByTestId('desktop-nav');
 
     expect(desktopNav.querySelector('a[href="/boat"]')).toHaveTextContent(navbarTranslations.en.boat);
@@ -81,7 +81,7 @@ describe('Navbar Component', () => {
     );
     const desktopNav = screen.getByTestId('desktop-nav');
     const teamLink = desktopNav.querySelector('a[href="/team"]');
-    expect(teamLink).toHaveClass('bg-gray-100');
+    expect(teamLink).toHaveAttribute('aria-current', 'page');
   });
 
   it('toggles mobile menu when hamburger button is clicked', async () => {
@@ -90,7 +90,7 @@ describe('Navbar Component', () => {
         <Navbar />
       </LanguageProvider>
     );
-    const hamburgerButton = screen.getByRole('button', { name: /toggle navigation/i });
+    const hamburgerButton = screen.getByRole('button', { name: /menu di navigazione|navigation menu/i });
 
     fireEvent.click(hamburgerButton!);
     screen.getByTestId('mobile-menu');
@@ -115,7 +115,7 @@ describe('Navbar Component', () => {
         <Navbar />
       </LanguageProvider>
     );
-    const hamburgerButton = screen.getByRole('button', { name: /toggle navigation/i });
+    const hamburgerButton = screen.getByRole('button', { name: /menu di navigazione|navigation menu/i });
 
     fireEvent.click(hamburgerButton);
     const mobileMenu = screen.getByTestId('mobile-menu');
@@ -141,7 +141,7 @@ describe('Navbar Component', () => {
         <Navbar />
       </LanguageProvider>
     );
-    const hamburgerButton = screen.getByRole('button', { name: /toggle navigation/i });
+    const hamburgerButton = screen.getByRole('button', { name: /menu di navigazione|navigation menu/i });
 
     fireEvent.click(hamburgerButton);
     const mobileMenu = screen.getByTestId('mobile-menu');
@@ -162,7 +162,7 @@ describe('Navbar Component', () => {
     expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument();
   });
 
-  it('mostra la bandiera EN e chiama setLanguage("it") quando la lingua corrente è EN', () => {
+  it('offre la lingua italiana e chiama setLanguage("it") quando la lingua corrente è EN', () => {
     (useLanguage as jest.Mock).mockReturnValue({
       language: 'en',
       setLanguage: mockSetLanguage,
@@ -174,33 +174,50 @@ describe('Navbar Component', () => {
       </LanguageProvider>
     );
 
-    const flagImage = screen.getByAltText('Italian Flag');
-    expect(flagImage).toBeInTheDocument();
-    expect(flagImage).toHaveAttribute('src', expect.stringContaining('_next/image?url=%2Fflags%2Fit-flag.png'));
-
-    const languageButton = screen.getByRole('button', { name: /switch language/i });
+    const languageButton = screen.getByRole('button', { name: /leggi in inglese|read in Italian/i });
     fireEvent.click(languageButton);
 
     expect(mockSetLanguage).toHaveBeenCalledTimes(1);
     expect(mockSetLanguage).toHaveBeenCalledWith('it');
   });
 
-  it('mostra la bandiera IT e chiama setLanguage("en") quando la lingua corrente è IT', () => {
+  it('offre la lingua inglese e chiama setLanguage("en") quando la lingua corrente è IT', () => {
     render(
       <LanguageProvider>
         <Navbar />
       </LanguageProvider>
     );
 
-    const flagImage = screen.getByAltText('British Flag');
-    expect(flagImage).toBeInTheDocument();
-    expect(flagImage).toHaveAttribute('src', expect.stringContaining('_next/image?url=%2Fflags%2Fen-flag.png'));
-
-    const languageButton = screen.getByRole('button', { name: /switch language/i });
+    const languageButton = screen.getByRole('button', { name: /leggi in inglese|read in Italian/i });
     fireEvent.click(languageButton);
 
     expect(mockSetLanguage).toHaveBeenCalledTimes(1);
     expect(mockSetLanguage).toHaveBeenCalledWith('en');
+  });
+
+  it('chiude il menu con Escape e restituisce il focus al pulsante', () => {
+    render(<Navbar />);
+    const trigger = screen.getByRole('button', {name: /menu di navigazione|navigation menu/i});
+    fireEvent.click(trigger);
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    fireEvent.keyDown(window, {key: 'Escape'});
+    expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument();
+    expect(trigger).toHaveFocus();
+  });
+
+  it('si compatta allo scroll, resta estesa con menu aperto e torna estesa in cima', () => {
+    const {container} = render(<Navbar />);
+    const header = container.querySelector('header');
+    Object.defineProperty(window, 'scrollY', {value: 100, configurable: true});
+    fireEvent.scroll(window);
+    expect(header).toHaveAttribute('data-compact', 'true');
+    fireEvent.click(screen.getByRole('button', {name: /menu di navigazione/i}));
+    expect(header).toHaveAttribute('data-compact', 'false');
+    fireEvent.keyDown(window, {key: 'Escape'});
+    expect(header).toHaveAttribute('data-compact', 'true');
+    Object.defineProperty(window, 'scrollY', {value: 0, configurable: true});
+    fireEvent.scroll(window);
+    expect(header).toHaveAttribute('data-compact', 'false');
   });
 
 });

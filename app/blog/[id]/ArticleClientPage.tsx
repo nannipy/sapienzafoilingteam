@@ -45,10 +45,10 @@ export default function ArticleClientPage({
     });
   };
 
-  const contentToRender = language === 'en' ? article.content_en : article.content;
+  const contentToRender = language === 'en' ? (article.content_en || article.content) : article.content;
 
   return (
-    <main className="min-h-screen bg-[#fffcfd] text-[#1a1718] pt-32 pb-24 ">
+    <main className="sft-root sft-content-page sft-article-page">
       <div className="container mx-auto px-6 lg:px-8 relative ">
         <div className="mb-12 max-w-3xl mx-auto">
           <Link
@@ -62,8 +62,8 @@ export default function ArticleClientPage({
 
         <article className="max-w-3xl mx-auto mt-8">
           <header className="mb-16">
-            <h1 className="text-4xl md:text-6xl font-syne font-black mb-8 text-brand-dark leading-[1.1] tracking-tighter break-words overflow-wrap-anywhere">
-              {language === 'en' ? article.title_en : article.title}
+            <h1 className="text-4xl md:text-6xl font-kelson font-black mb-8 text-brand-dark leading-[1.1] tracking-tighter break-words overflow-wrap-anywhere">
+              {language === 'en' ? (article.title_en || article.title) : article.title}
             </h1>
 
             <div className="flex flex-wrap items-center gap-6 text-gray-500 text-xs font-bold uppercase tracking-widest">
@@ -76,14 +76,14 @@ export default function ArticleClientPage({
 
           <div
             className="prose prose-xl max-w-none
-              prose-headings:font-syne prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-brand-dark
+              prose-headings:font-kelson prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-brand-dark
               prose-p:text-gray-800 prose-p:leading-relaxed prose-p:mb-8
               prose-a:text-brand prose-a:font-bold prose-a:no-underline hover:prose-a:underline
               prose-strong:text-black prose-strong:font-black
               prose-blockquote:border-l-4 prose-blockquote:border-brand prose-blockquote:bg-brand/5 prose-blockquote:py-6 prose-blockquote:px-8 prose-blockquote:rounded-r-2xl prose-blockquote:italic prose-blockquote:text-xl
               prose-code:text-brand prose-code:bg-brand/5 prose-code:px-2 prose-code:py-0.5 prose-code:rounded-md prose-code:font-bold
               prose-pre:bg-void prose-pre:text-gray-100 prose-pre:rounded-2xl prose-pre:p-6
-              prose-img:rounded-3xl prose-img:shadow-2xl
+              prose-img:rounded-3xl prose-img:shadow-sm
               prose-ul:marker:text-brand prose-ul:marker:font-bold"
             dangerouslySetInnerHTML={{ __html: contentToRender }}
           />

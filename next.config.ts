@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  transpilePackages: ['@sft/design-system'],
   outputFileTracingRoot: __dirname,
   images: {
     formats: ['image/avif', 'image/webp'],

@@ -1,143 +1,161 @@
-'use client';
-import React, { useState, useMemo } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
-import Image from 'next/image';
-import { useLanguage } from '../context/LanguageContext';
-import { navbarTranslations } from '../translations/navbar';
-import posthog from 'posthog-js';
+"use client";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import { Button } from "@sft/design-system";
 
-const Navbar = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const currentPath = usePathname();
+import { useLanguage } from "../context/LanguageContext";
+import { navbarTranslations } from "../translations/navbar";
+import posthog from "posthog-js";
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [compact, setCompact] = useState(false);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const path = usePathname();
   const { language, setLanguage } = useLanguage();
-
-  const navigationItems = useMemo(() => [
-    { label: navbarTranslations[language].boat, href: '/boat' },
-    { label: navbarTranslations[language].team, href: '/team' },
-    { label: navbarTranslations[language].sponsor, href: '/sponsor' },
-    { label: navbarTranslations[language].contact, href: '/contact' },
-    { label: navbarTranslations[language].blog, href: '/blog' },
-  ], [language]);
-
-  const isCurrentPath = (path: string) => currentPath === path;
-
-  const handleMenuToggle = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const handleNavClick = (toPage: string, type: 'menu' | 'cta' | 'link') => {
-    posthog.capture('page_navigation', {
-      from_page: currentPath,
-      to_page: toPage,
-      navigation_type: type
+  const t = navbarTranslations[language];
+  const items = [
+    { label: t.boat, href: "/boat" },
+    { label: t.team, href: "/team" },
+    { label: t.sponsor, href: "/sponsor" },
+    { label: t.contact, href: "/contact" },
+    { label: t.blog, href: "/blog" },
+  ];
+  useEffect(() => {
+    setOpen(false);
+  }, [path]);
+  useEffect(() => {
+    if (!open) return;
+    const close = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        trigger.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [open]);
+  useEffect(() => {
+    const update = () => setCompact(previous => window.scrollY > (previous ? 24 : 64));
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+  const track = (to: string, type: "menu" | "cta") =>
+    posthog.capture("page_navigation", {
+      from_page: path,
+      to_page: to,
+      navigation_type: type,
     });
-  };
-
-  if (currentPath?.startsWith("/admin")) return null;
-
+  if (path?.startsWith("/admin")) return null;
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3">
-      <div className="bg-white text-black font-semibold text-center mx-auto max-w-4xl rounded-full shadow-xl hover:shadow-xl transition-shadow duration-300">
-        <div className="flex items-center justify-between px-6 py-3">
-          <Link href="/" className="flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
-            <Image src="/logosft.svg" alt="Logo" width={40} height={40} className="h-16 w-16" priority />
-          </Link>
+    <header className="sft-root sft-site-header" data-compact={compact && !open}>
+      <a href="#main-content" className="sft-site-skip">
+        {language === "it" ? "Vai al contenuto" : "Skip to content"}
+      </a>
+      <nav
+        aria-label={
+          language === "it" ? "Navigazione principale" : "Main navigation"
+        }
+        className="sft-site-nav"
+      >
+        <Link href="/" aria-label="Sapienza Foiling Team — Home">
+          <span className="sft-brand sft-site-nav-lockup">
+            <img
+              src="/brand/logos/sft-burgundy.svg"
+              alt=""
+              width={36}
+              height={48}
+            />
 
-          <div data-testid="desktop-nav" className="hidden md:flex items-center space-x-4">
-
-            {navigationItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => handleNavClick(item.href, 'menu')}
-                aria-current={isCurrentPath(item.href) ? 'page' : undefined}
-                className={`px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-100  ${isCurrentPath(item.href) ? 'bg-gray-100' : ''
-                  }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+          </span>
+        </Link>
+        <div className="sft-site-desktop-nav" data-testid="desktop-nav">
+          {items.map((item) => (
             <Link
-              href="/career"
-              aria-current={isCurrentPath('/career') ? 'page' : undefined}
-              className="ml-4 px-6 py-2 bg-brand text-white rounded-full transition-all duration-300 hover:bg-brand-dark hover:shadow-md"
-              onClick={() => handleNavClick('career', 'cta')}
+              href={item.href}
+              key={item.href}
+              aria-current={path === item.href ? "page" : undefined}
+              onClick={() => track(item.href, "menu")}
             >
-              {navbarTranslations[language].career}
+              {item.label}
             </Link>
-          </div>
-
-          <button
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300"
-            onClick={handleMenuToggle}
-            aria-label="Toggle navigation"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
+          ))}
+          <Button asChild variant="brand">
+            <Link href="/career" onClick={() => track("career", "cta")}>
+              {t.career}
+            </Link>
+          </Button>
         </div>
-
-      </div>
-
-      {isMobileMenuOpen && (
+        <div className="sft-site-nav-tools">
+          <Button
+            variant="outline"
+            aria-label={
+              language === "it" ? "Leggi in inglese" : "Read in Italian"
+            }
+            onClick={() => setLanguage(language === "it" ? "en" : "it")}
+            className="sft-site-language"
+          >
+            <span aria-hidden="true">{language === "it" ? "EN" : "IT"}</span>
+            <span className="sr-only">
+              {language === "it" ? "Read in English" : "Leggi in italiano"}
+            </span>
+          </Button>
+          <Button
+            ref={trigger}
+            variant="ghost"
+            size="icon"
+            className="sft-site-menu-toggle"
+            aria-label={
+              language === "it" ? "Menu di navigazione" : "Navigation menu"
+            }
+            aria-expanded={open}
+            aria-controls="sft-mobile-menu"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <X /> : <Menu />}
+          </Button>
+        </div>
+      </nav>
+      {open && (
         <div
+          id="sft-mobile-menu"
+          className="sft-site-mobile-menu"
           data-testid="mobile-menu"
-          className="md:hidden mx-auto mt-2 max-w-4xl rounded-3xl bg-white text-center text-black font-semibold shadow-xl animate-fade-in"
         >
-          <div className="px-4 py-3">
-            {navigationItems.map((item) => (
+          <nav
+            aria-label={
+              language === "it" ? "Navigazione mobile" : "Mobile navigation"
+            }
+          >
+            {items.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                aria-current={isCurrentPath(item.href) ? 'page' : undefined}
-                className={`block px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-gray-100 ${isCurrentPath(item.href) ? 'bg-gray-100' : ''
-                  }`}
-                onClick={() => { setIsMobileMenuOpen(false); handleNavClick(item.href, 'menu'); }}
+                aria-current={path === item.href ? "page" : undefined}
+                onClick={() => {
+                  setOpen(false);
+                  track(item.href, "menu");
+                }}
               >
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/career"
-              aria-current={isCurrentPath('/career') ? 'page' : undefined}
-              className="block mt-2 px-4 py-2 bg-brand text-white rounded-lg text-center transition-all duration-300 hover:bg-brand-dark"
-              onClick={() => { setIsMobileMenuOpen(false); handleNavClick('career', 'cta'); }}
-            >
-              {navbarTranslations[language].career}
-            </Link>
-          </div>
+            <Button asChild variant="brand">
+              <Link
+                href="/career"
+                onClick={() => {
+                  setOpen(false);
+                  track("career", "cta");
+                }}
+              >
+                {t.career}
+              </Link>
+            </Button>
+          </nav>
         </div>
       )}
-      <button
-        onClick={() => setLanguage(language === 'en' ? 'it' : 'en')}
-        className={`
-          w-12 h-12 rounded-full flex items-center justify-center bg-white hover:bg-gray-200 transition-colors duration-300
-          fixed bottom-4 left-4 shadow-lg text-black`}
-        aria-label="Switch language"
-      >
-        {language === 'en' ? (
-          <Image
-            src="/flags/it-flag.png"
-            alt="Italian Flag"
-            width={24}
-            height={24}
-          />
-        ) : (
-          <Image
-            src="/flags/en-flag.png"
-            alt="British Flag"
-            width={24}
-            height={24}
-          />
-        )}
-      </button>
-    </nav>
+    </header>
   );
-};
-
-export default Navbar;
+}

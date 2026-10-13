@@ -1,108 +1,108 @@
-
-'use client';
-
-import React from "react";
+"use client";
 import Image from "next/image";
-import { useLanguage } from '../context/LanguageContext';
-import { homeTranslations } from '../translations/home';
-
-import { Event } from '../lib/types';
-
-interface EventsSectionProps {
-  events: Event[];
-}
-
-const EventCard = ({ event, isPast = false, language }: { event: Event; isPast?: boolean; language: 'en' | 'it' }) => (
-  <div className="group relative overflow-hidden rounded-3xl bg-carbon/60 border border-white/10 hover:border-brand/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 w-full max-w-md mx-auto h-[300px]">
-    {/* Image Background */}
-    <div className="absolute inset-0">
-      <Image
-        src={event.image_url || '/gallery/garda-racing.jpg'}
-        alt={event.image_alt || event.title}
-        fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className="object-cover transition-transform duration-700 group-hover:scale-105"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-void/85 via-void/30 to-transparent" />
-    </div>
-
-    {/* Content */}
-    <div className="relative z-10 p-8 h-full flex flex-col justify-end drop-shadow-md">
-      <h3 className="text-2xl font-syne font-bold text-white mb-2 leading-tight group-hover:text-brand-light transition-colors">
-        {language === 'en' ? event.title_en : event.title}
-      </h3>
-
-      <div className="flex flex-col gap-1 text-gray-200 text-sm font-geist">
-        <span className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-brand"></span>
-          {new Date(event.date).toLocaleDateString(language, { year: 'numeric', month: 'long', day: 'numeric' })}
-        </span>
-        <span className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
-          {event.location}
-        </span>
-      </div>
-    </div>
-  </div>
-);
-
-const EventsSection: React.FC<EventsSectionProps> = ({ events }) => {
-  const { language } = useLanguage();
-
-  const { upcomingEvents, pastEvents } = React.useMemo(() => {
-    const now = new Date();
-    const upcoming: Event[] = [];
-    const past: Event[] = [];
-    events.forEach(event => {
-      if (new Date(event.date) >= now) {
-        upcoming.push(event);
-      } else {
-        past.push(event);
-      }
-    });
-    return { upcomingEvents: upcoming, pastEvents: past };
-  }, [events]);
-
+import { Card, CardContent, Badge } from "@sft/design-system";
+import { useLanguage } from "../context/LanguageContext";
+import { homeTranslations } from "../translations/home";
+import { Event } from "../lib/types";
+function EventCard({
+  event,
+  past,
+  language,
+}: {
+  event: Event;
+  past: boolean;
+  language: "it" | "en";
+}) {
+  const title = language === "en" ? event.title_en || event.title : event.title;
   return (
-    <div id="events" className="bg-brand py-32 relative overflow-hidden">
-      {/* Intentional Pattern Background */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-      <div
-        className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none -translate-y-1/2 translate-x-1/2 opacity-70"
-        style={{ background: 'radial-gradient(circle, rgba(163, 66, 82, 0.4) 0%, transparent 70%)' }}
-      />
-      <div
-        className="absolute bottom-0 left-0 w-[300px] h-[300px] pointer-events-none translate-y-1/2 -translate-x-1/2 opacity-50"
-        style={{ background: 'radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%)' }}
-      />
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {upcomingEvents.length > 0 ? (
-          <section className="mb-24" id="upcoming-events">
-            <h2 className="text-4xl md:text-6xl font-syne font-black text-white mb-16 flex items-center gap-6 tracking-tighter uppercase">
-              <span className="w-16 h-2 bg-white rounded-full"></span>
-              {homeTranslations[language].upcomingEvents}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {upcomingEvents.map(event => <EventCard key={event.id} event={event} language={language} />)}
-            </div>
-          </section>
-        ) : null}
-
-        {pastEvents.length > 0 ? (
-          <section id="past-events">
-            <h2 className="text-4xl md:text-6xl font-syne font-black text-white mb-16 flex items-center gap-6 tracking-tighter uppercase">
-              <span className="w-16 h-2 bg-white/40 rounded-full"></span>
-              {homeTranslations[language].pastEvents}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {pastEvents.map(event => <EventCard key={event.id} event={event} isPast language={language} />)}
-            </div>
-          </section>
-        ) : null}
+    <Card className="sft-site-event-card">
+      <div className="sft-site-card-image">
+        <Image
+          src={event.image_url || "/gallery/garda-racing.jpg"}
+          alt={event.image_alt || title}
+          fill
+          sizes="(max-width:767px) 100vw, (max-width:1100px) 50vw, 33vw"
+        />
       </div>
-    </div>
+      <CardContent>
+        <Badge variant="secondary">
+          {language === "it"
+            ? past
+              ? "Archivio"
+              : "In programma"
+            : past
+              ? "Archive"
+              : "Upcoming"}
+        </Badge>
+        <h3 className="sft-display">{title}</h3>
+        <time dateTime={event.date}>
+          {new Date(event.date).toLocaleDateString(language, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </time>
+        <p>{event.location}</p>
+      </CardContent>
+    </Card>
   );
-};
-
-export default EventsSection;
+}
+export default function EventsSection({ events }: { events: Event[] }) {
+  const { language } = useLanguage();
+  const now = Date.now();
+  const upcoming = events.filter((e) => new Date(e.date).getTime() >= now);
+  const past = events.filter((e) => new Date(e.date).getTime() < now);
+  return (
+    <section id="events" className="sft-site-events">
+      <div className="sft-site-section">
+        <p className="sft-eyebrow">
+          {language === "it"
+            ? "Il team fuori dal cantiere"
+            : "The team beyond the workshop"}
+        </p>
+        {events.length === 0 && (
+          <>
+            <h2 className="sft-display">
+              {language === "it" ? "Eventi del team" : "Team events"}
+            </h2>
+            <p>
+              {language === "it"
+                ? "Non ci sono eventi disponibili al momento."
+                : "There are no events available at the moment."}
+            </p>
+          </>
+        )}
+        {[
+          {
+            rows: upcoming,
+            past: false,
+            id: "upcoming-events",
+            title: homeTranslations[language].upcomingEvents,
+          },
+          {
+            rows: past,
+            past: true,
+            id: "past-events",
+            title: homeTranslations[language].pastEvents,
+          },
+        ]
+          .filter((g) => g.rows.length)
+          .map((g) => (
+            <section key={g.id} id={g.id} className="sft-site-events-group">
+              <h2 className="sft-display">{g.title}</h2>
+              <div className="sft-site-event-grid">
+                {g.rows.map((e) => (
+                  <EventCard
+                    key={e.id}
+                    event={e}
+                    past={g.past}
+                    language={language}
+                  />
+                ))}
+              </div>
+            </section>
+          ))}
+      </div>
+    </section>
+  );
+}

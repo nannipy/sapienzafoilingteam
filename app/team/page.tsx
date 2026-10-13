@@ -3,7 +3,7 @@ import TeamClientPage from './TeamClientPage';
 
 export const metadata: Metadata = {
   title: 'Il Team | Reparti & Ingegneria Foiling',
-  description: 'Scopri i reparti e gli studenti della Sapienza Università di Roma che progettano Meravijosa: Aerodinamica, Idrodinamica, Strutture, Elettronica, Sostenibilità e Management.',
+  description: 'Conosci la guida e i capi reparto del Sapienza Foiling Team: Scafo, Elettronica, Foil, Materiali, Cantiere, Management, Social e Comunicazione.',
   alternates: {
     canonical: '/team',
   },

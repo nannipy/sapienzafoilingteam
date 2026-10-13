@@ -3,6 +3,8 @@
 import React from 'react';
 import { Facebook, Linkedin, Instagram } from 'lucide-react';
 import posthog from 'posthog-js';
+import { Button } from '@sft/design-system';
+import { useLanguage } from '../context/LanguageContext';
 
 interface ShareButtonsProps {
   articleId: string;
@@ -10,6 +12,8 @@ interface ShareButtonsProps {
 }
 
 const ShareButtons: React.FC<ShareButtonsProps> = ({ articleId, articleTitle }) => {
+  const {language} = useLanguage();
+  const it = language === 'it';
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   const handleShare = (platform: 'facebook' | 'linkedin' | 'instagram') => {
@@ -35,17 +39,17 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({ articleId, articleTitle }) 
   };
 
   return (
-    <div className="flex items-center gap-4 mt-8">
-      <p className="font-semibold">Share this post:</p>
-      <button onClick={() => handleShare('facebook')} className="text-gray-600 hover:text-blue-600">
+    <div className="flex flex-wrap items-center gap-4 mt-8">
+      <p className="font-semibold">{it ? 'Condividi l’articolo' : 'Share this article'}</p>
+      <Button variant="outline" size="icon" aria-label={it ? 'Condividi su Facebook' : 'Share on Facebook'} onClick={() => handleShare('facebook')}>
         <Facebook />
-      </button>
-      <button onClick={() => handleShare('linkedin')} className="text-gray-600 hover:text-blue-700">
+      </Button>
+      <Button variant="outline" size="icon" aria-label={it ? 'Condividi su LinkedIn' : 'Share on LinkedIn'} onClick={() => handleShare('linkedin')}>
         <Linkedin />
-      </button>
-      <button onClick={() => handleShare('instagram')} className="text-gray-600 hover:text-pink-500">
+      </Button>
+      <Button variant="outline" size="icon" aria-label={it ? 'Apri Instagram' : 'Open Instagram'} onClick={() => handleShare('instagram')}>
         <Instagram />
-      </button>
+      </Button>
     </div>
   );
 };
