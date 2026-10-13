@@ -109,9 +109,9 @@ export const careerTranslations = {
       statusCard: {
         label: 'STATO',
         badge: 'Candidature Aperte',
-        deadline: 'Scadenza candidature: 4 ottobre',
+        deadline: 'Scadenza candidature: 12 ottobre',
         subtext:
-          'Scegli fino a 2 reparti e inviaci CV e una breve lettera motivazionale entro il 4 ottobre. Se ti candidi per ruoli tecnici o design, allega anche un portfolio o progetti svolti.',
+          'Scegli fino a 2 reparti e inviaci CV e una breve lettera motivazionale entro il 12 ottobre. Se ti candidi per ruoli tecnici o design, allega anche un portfolio o progetti svolti.',
         ctaButton: 'Candidati Ora',
         secondaryCta: 'I Reparti',
       },
@@ -124,8 +124,8 @@ export const careerTranslations = {
         number: '01',
         title: 'CANDIDATURA',
         description:
-          'Compila il form con CV, lettera motivazionale ed eventuale portfolio (CAD/FEM/design). Le candidature chiudono il 4 ottobre. Valutiamo tutte le candidature per selezionare chi accede al colloquio.',
-        deadlineBadge: 'Scadenza: 4 Ottobre',
+          'Compila il form con CV, lettera motivazionale ed eventuale portfolio (CAD/FEM/design). Le candidature chiudono il 12 ottobre. Valutiamo tutte le candidature per selezionare chi accede al colloquio.',
+        deadlineBadge: 'Scadenza: 12 ottobre',
       },
       step2: {
         number: '02',
@@ -158,7 +158,7 @@ export const careerTranslations = {
     banner: {
       title: 'Vuoi unirti a noi?',
       description:
-        'Le candidature sono aperte a tutti gli studenti regolarmente iscritti a La Sapienza fino al 4 ottobre.',
+        'Le candidature sono aperte a tutti gli studenti regolarmente iscritti a La Sapienza fino al 12 ottobre.',
       cta: 'Candidati Ora',
       secondary: 'Scopri i Reparti',
     },
@@ -182,7 +182,7 @@ export const careerTranslations = {
         },
         {
           q: 'Quando si svolgono le selezioni?',
-          a: 'La finestra principale è a inizio anno accademico: per questa sessione la data limite per candidarsi è il 4 ottobre. Raccogliamo comunque candidature tutto l’anno per specifiche esigenze di reparto.',
+          a: 'La finestra principale è a inizio anno accademico: per questa sessione la data limite per candidarsi è il 12 ottobre. Raccogliamo comunque candidature tutto l’anno per specifiche esigenze di reparto.',
         },
         {
           q: 'C’è una prova scritta?',

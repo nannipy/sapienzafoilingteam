@@ -22,7 +22,7 @@ La presenza del campo remoto è stata verificata dopo l’applicazione della mig
 
 ## Esito controlli del 6 ottobre 2026
 
-Build webpack e TypeScript riusciti. I 10 test admin passano, inclusi autenticazione e paginazione dei media. La suite complessiva precedente ha 26 test riusciti e 4 fallimenti preesistenti nel popup recruiting: il test presume una data precedente al 4 ottobre ma non imposta l’orologio. Lint verificato con la configurazione flat temporanea equivalente ai preset Next del progetto, perché la configurazione legacy esistente non è compatibile con ESLint 9.
+Build webpack e TypeScript riusciti. I 10 test admin passano, inclusi autenticazione e paginazione dei media. La suite complessiva precedente ha 26 test riusciti e 4 fallimenti preesistenti nel popup recruiting: il test presume una data precedente al 12 ottobre ma non imposta l’orologio. Lint verificato con la configurazione flat temporanea equivalente ai preset Next del progetto, perché la configurazione legacy esistente non è compatibile con ESLint 9.
 
 Dopo l’applicazione della migrazione da parte dell’utente, una lettura del database remoto ha confermato che `posts.status` esiste: 30 articoli pubblicati, 0 bozze e nessuno stato non valido. La lettura anonima restituisce gli stessi 30 articoli pubblicati. Non è stato eseguito un deploy.
 

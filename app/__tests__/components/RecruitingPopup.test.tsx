@@ -51,7 +51,7 @@ describe('RecruitingPopup', () => {
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     expect(screen.getByText(recruitingPopupTranslations.it.title)).toBeInTheDocument();
     expect(screen.getByText(recruitingPopupTranslations.it.cta)).toBeInTheDocument();
-    expect(screen.getByText('4 Ottobre')).toBeInTheDocument();
+    expect(screen.getByText('12 ottobre')).toBeInTheDocument();
   });
 
   it('closes when clicking the close button', () => {

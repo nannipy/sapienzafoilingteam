@@ -6,8 +6,8 @@ export const recruitingPopupTranslations = {
     description:
       'Partecipa alle selezioni per entrare nel team universitario che progetta, costruisce e porta in regata un Moth foiling sostenibile per la SuMoth Challenge!',
     deadlineLabel: 'Scadenza Candidature',
-    deadlineDate: '4 Ottobre',
-    deadlineNotice: 'Hai tempo fino al 4 ottobre per inviare la tua candidatura.',
+    deadlineDate: '12 ottobre',
+    deadlineNotice: 'Hai tempo fino al 12 ottobre per inviare la tua candidatura.',
     highlight:
       'Fai esperienza pratica su compositi avanzati, telemetria e fluidodinamica prima ancora di laurearti.',
     cta: 'Scopri i Reparti e Candidati',
