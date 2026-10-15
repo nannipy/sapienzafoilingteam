@@ -34,7 +34,7 @@ export const homeTranslations = {
     learnMoreButton: 'Scopri il Team',
     viewMothButton: 'Esplora Meravijosa',
     nextEventBanner: 'Prossimo Evento: 9 Maggio - Aperitivo di presentazione',
-    heroSubtitle: 'Progettiamo, costruiamo e navighiamo la prossima generazione di imbarcazioni foiling sostenibili',
+    heroSubtitle: 'Progettiamo, costruiamo e voliamo la prossima generazione di imbarcazioni foiling sostenibili',
     socialLinks: {
       instagram: 'Instagram',
       linkedin: 'LinkedIn',
