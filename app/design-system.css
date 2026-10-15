@@ -647,3 +647,5 @@
 .sft-boat-component-photo[data-component="foils"] img { object-position: center; }
 .sft-boat-component-photo[data-component="rig"] { aspect-ratio: 4/3; }
 .sft-boat-component-photo[data-component="rig"] img { object-position: center 55%; }
+
+.sft-department-icon[src*=".png"] { filter: none; mix-blend-mode: normal; }
