@@ -5,16 +5,16 @@ export interface TeamPerson {
 }
 // A single record per person keeps names and future portraits consistent across roles.
 export const people: Record<string, TeamPerson> = {
-  stella: { id: 'stella', name: 'Stella Tortora', photo: '/team/stella.webp' },
-  matteo: { id: 'matteo', name: 'Matteo Valabrega', photo: '/team/matteo.webp' },
-  michele: { id: 'michele', name: 'Michele Arrigo Semeraro', photo: '/team/michele.webp' },
-  giovanni: { id: 'giovanni', name: 'Giovanni Battista Pernazza', photo: '/team/giovanni.webp' },
-  giacomo: { id: 'giacomo', name: 'Giacomo Romeo', photo: '/team/giacomo.webp' },
+  stella: { id: 'stella', name: 'Stella Tortora', photo: '/team/stella-2026.webp' },
+  matteo: { id: 'matteo', name: 'Matteo Valabrega', photo: '/team/matteo-2026.webp' },
+  michele: { id: 'michele', name: 'Michele Arrigo Semeraro', photo: '/team/michele-2026.webp' },
+  giovanni: { id: 'giovanni', name: 'Giovanni Battista Pernazza', photo: '/team/giovanni-2026.webp' },
+  giacomo: { id: 'giacomo', name: 'Giacomo Romeo', photo: '/team/giacomo-2026.webp' },
   jacopo: { id: 'jacopo', name: 'Jacopo S. Pender' },
-  mario: { id: 'mario', name: 'Mario Valenzise', photo: '/team/mario.webp' },
-  fulvio: { id: 'fulvio', name: 'Fulvio Pellini', photo: '/team/fulvio.webp' },
+  mario: { id: 'mario', name: 'Mario Valenzise', photo: '/team/mario-2026.webp' },
+  fulvio: { id: 'fulvio', name: 'Fulvio Pellini', photo: '/team/fulvio-2026.webp' },
   arturo: { id: 'arturo', name: 'Arturo Buzzetti', photo: '/team/arturo.webp' },
-  francesco: { id: 'francesco', name: 'Francesco Grossi', photo: '/team/francesco.webp' },
+  francesco: { id: 'francesco', name: 'Francesco Grossi', photo: '/team/francesco-2026.webp' },
   riccardo: { id: 'riccardo', name: 'Riccardo Mariotti' },
   giulio: { id: 'giulio', name: 'Giulio Mastronardi' },
 };
