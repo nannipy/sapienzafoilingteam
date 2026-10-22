@@ -1,7 +1,7 @@
 export const sponsors = [
   { name: 'Romana Diesel', link: 'https://www.romanadiesel.com/', logo: 'romanadiesel.png', width: 250, height: 40 },
   { name: 'Fluidodesign', link: 'http://www.fluidodesign.eu/', logo: 'fluidodesign.svg', width: 270, height: 70 },
-  { name: 'Gottifredi', link: 'https://www.gottifredimaffioli.com/', logo: 'gottifredi.svg', width: 250 },
+  { name: 'Gottifredi Maffioli', link: 'https://www.gottifredimaffioli.com/', logo: 'gottifredi.svg', width: 250 },
   { name: 'Harken', link: 'https://www.harken.it/it/home/', logo: 'harken.svg', width: 250 },
   { name: 'Beta', link: 'https://www.beta-cae.com/', logo: 'beta.svg', width: 200, height: 80 },
   { name: 'Solidworks', link: 'https://www.solidworks.com', logo: 'solidworks.svg', width: 250, height: 80 },
