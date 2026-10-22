@@ -20,8 +20,8 @@ export const people: Record<string, TeamPerson> = {
 };
 export const leadership = [
   { person: 'stella', role: { it: 'Team Captain', en: 'Team Captain' } },
-  { person: 'matteo', role: { it: 'Co-Captain tecnico', en: 'Technical Co-Captain' } },
-  { person: 'michele', role: { it: 'Co-Captain tecnico', en: 'Technical Co-Captain' } },
+  { person: 'matteo', role: { it: 'Capo progetto', en: 'Project Lead' } },
+  { person: 'michele', role: { it: 'Capo progetto', en: 'Project Lead' } },
 ];
 export const departments = [
   { id: 'scafo', icon: '/brand/departments/scafo.png', description: {"it": "Studia la forma e la struttura dello scafo e l’integrazione con gli altri componenti della barca, dalla progettazione alle verifiche strutturali.", "en": "Works on hull geometry, structure and integration with the other boat components, from design to structural checks."}, name: { it: 'Scafo e Terrazze', en: 'Hull & Decks' }, heads: ['arturo', 'francesco'] },
