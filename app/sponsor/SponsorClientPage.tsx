@@ -14,7 +14,7 @@ export default function SponsorClientPage() {
   const track = (name: string) => posthog?.capture('sponsor_clicked', {sponsor_name:name});
   const partners = [
     {name:'Centro Velico 3V',src:'/sponsors/3v.svg',href:'https://www.centrovelico3v.it',group:it?'Base nautica':'Sailing base'},
-    {name:'DIMA — Sapienza',src:'/collaborations/dima.png',href:'https://www.dima.uniroma1.it/dima/',group:it?'Collaborazione':'Collaboration'},
+    {name:'DIMA — Sapienza',src:'/collaborations/dima-logo.png',width:810,height:332,href:'https://www.dima.uniroma1.it/dima/',group:it?'Collaborazione':'Collaboration'},
     {name:'INM — CNR',src:'/collaborations/inm.png',href:'https://www.inm.cnr.it/',group:it?'Collaborazione':'Collaboration'},
   ];
   return <main className="sft-root sft-content-page">
@@ -38,7 +38,7 @@ export default function SponsorClientPage() {
         <h2 id="network-heading" className="sft-display">{it?'Base nautica e collaborazioni':'Sailing base & collaborations'}</h2>
         <div className="sft-network-grid">{partners.map(partner=><Card className="sft-sponsor-card" key={partner.name}><a href={partner.href} target="_blank" rel="noopener noreferrer" onClick={()=>track(partner.name)}>
           <p className="sft-eyebrow">{partner.group}</p>
-          <div className="sft-sponsor-logo"><Image src={partner.src} alt="" width={240} height={80} /></div>
+          <div className="sft-sponsor-logo"><Image className={partner.src === '/collaborations/dima-logo.png' ? 'sft-dima-logo' : undefined} src={partner.src} alt="" width={partner.width ?? 240} height={partner.height ?? 80} sizes="280px" /></div>
           <span>{partner.name}<ArrowUpRight aria-hidden="true" size={16}/></span>
         </a></Card>)}</div>
       </div>
