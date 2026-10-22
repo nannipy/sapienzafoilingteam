@@ -6,7 +6,7 @@ export default function PersonCard({ person, role }: { person: TeamPerson; role:
   const initials = person.name.split(' ').filter(Boolean).map(word => word[0]).slice(0, 2).join('');
   return <Card className="sft-person-card">
     <div className={`sft-person-portrait${person.photo ? ' sft-person-portrait--photo' : ''}`}>
-      {person.photo ? <Image src={person.photo} alt={person.name} fill sizes="(max-width: 767px) 80px, 112px" /> : <span className="sft-person-initials" aria-hidden="true">{initials}</span>}
+      {person.photo ? <Image src={person.photo} alt={person.name} fill sizes={person.id === 'giulio' ? '(max-width: 767px) 112px, 157px' : '(max-width: 767px) 80px, 112px'} style={person.id === 'giulio' ? { transform: 'scale(1.4)', transformOrigin: '50% 12%' } : undefined} /> : <span className="sft-person-initials" aria-hidden="true">{initials}</span>}
     </div>
     <CardContent>
       <p className="sft-eyebrow">{role}</p>
