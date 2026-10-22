@@ -51,7 +51,7 @@ export const careerTranslations = {
         number: '03',
         title: 'INTERVIEW',
         description:
-          'If a suitable opportunity becomes available, we may invite you to an interview with the Team Leader and Department Leads to discuss your background, motivation, the SuMoth rules, and your weekly availability.',
+          'If a suitable opportunity becomes available, we may invite you to an interview with the Team Captain and Department Leads to discuss your background, motivation, the SuMoth rules, and your weekly availability.',
       },
     },
     banner: {
@@ -152,7 +152,7 @@ export const careerTranslations = {
         number: '03',
         title: 'COLLOQUIO',
         description:
-          'Se si presenterà un’opportunità adatta, potremo invitarti a un colloquio con il Team Leader e i responsabili del reparto per parlare del tuo percorso, delle motivazioni, del regolamento SuMoth e della disponibilità settimanale.',
+          'Se si presenterà un’opportunità adatta, potremo invitarti a un colloquio con il Team Captain e i responsabili del reparto per parlare del tuo percorso, delle motivazioni, del regolamento SuMoth e della disponibilità settimanale.',
       },
     },
     banner: {
