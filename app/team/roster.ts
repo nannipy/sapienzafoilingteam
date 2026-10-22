@@ -16,7 +16,7 @@ export const people: Record<string, TeamPerson> = {
   arturo: { id: 'arturo', name: 'Arturo Buzzetti', photo: '/team/arturo.webp' },
   francesco: { id: 'francesco', name: 'Francesco Grossi', photo: '/team/francesco-2026.webp' },
   riccardo: { id: 'riccardo', name: 'Riccardo Mariotti' },
-  giulio: { id: 'giulio', name: 'Giulio Mastronardi' },
+  giulio: { id: 'giulio', name: 'Giulio Mastronardi', photo: '/team/giulio-2026.webp' },
 };
 export const leadership = [
   { person: 'stella', role: { it: 'Team Captain', en: 'Team Captain' } },
