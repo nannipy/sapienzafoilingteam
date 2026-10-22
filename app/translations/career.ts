@@ -4,14 +4,14 @@ export const careerTranslations = {
       kicker: 'RECRUITING',
       title: 'JOIN THE TEAM',
       description:
-        'We design and build a sustainable foiling Moth for the international SuMoth Challenge. If you study at Sapienza and want hands-on experience on a real racing boat, apply below.',
+        'We design and build a sustainable foiling Moth for the international SuMoth Challenge. Recruitment is currently closed. If you study at Sapienza, you can still send an unsolicited application.',
       statusCard: {
         label: 'STATUS',
-        badge: 'Applications Open',
-        deadline: 'Application Deadline: October 4th',
+        badge: 'Recruitment closed',
+        deadline: 'Unsolicited applications only',
         subtext:
-          'Choose up to 2 departments and submit your CV and a brief motivation letter by October 4th. Include a portfolio or past projects if applying for technical or design roles.',
-        ctaButton: 'Apply Now',
+          'We are currently accepting unsolicited applications only. Tell us which departments interest you and send your CV and a short motivation letter. We will contact you if a suitable opportunity becomes available.',
+        ctaButton: 'Send an unsolicited application',
         secondaryCta: 'Departments',
       },
     },
@@ -23,8 +23,8 @@ export const careerTranslations = {
         number: '01',
         title: 'APPLICATION',
         description:
-          'Fill out the form with your CV, motivation letter, and optional portfolio (for CAD/FEM/design). Applications close on October 4th. We review all submissions to select candidates for the interview.',
-        deadlineBadge: 'Deadline: October 4th',
+          'Use the form to send an unsolicited application with your CV, motivation letter, and optional portfolio. Recruitment is currently closed: submitting the form does not guarantee an interview or a place on the team.',
+        deadlineBadge: 'Unsolicited applications only',
       },
       step2: {
         number: '02',
@@ -51,21 +51,21 @@ export const careerTranslations = {
         number: '03',
         title: 'INTERVIEW',
         description:
-          'Direct conversation with the Team Leader and Department Leads. We discuss your background, motivation, thoughts on the SuMoth rules, and your available weekly hours.',
+          'If a suitable opportunity becomes available, we may invite you to an interview with the Team Leader and Department Leads to discuss your background, motivation, the SuMoth rules, and your weekly availability.',
       },
     },
     banner: {
       title: 'Ready to join?',
       description:
-        'Applications are open to all Sapienza students across all degree programs until October 4th.',
-      cta: 'Apply Now',
+        'Recruitment is currently closed. Sapienza students from all degree programs can still send an unsolicited application.',
+      cta: 'Send an unsolicited application',
       secondary: 'Departments',
     },
     openPositions: {
       requirements: 'Requirements',
     },
     spontaneousApplication: {
-      applyButton: 'Apply Now',
+      applyButton: 'Send an unsolicited application',
     },
     faq: {
       kicker: 'FAQ',
@@ -81,7 +81,7 @@ export const careerTranslations = {
         },
         {
           q: 'When does recruiting happen?',
-          a: 'The main intake is at the start of the academic year: for this session, the application deadline is October 4th. We also accept applications year-round for specific department needs.',
+          a: 'Recruitment is currently closed. We are only accepting unsolicited applications and will contact candidates if a suitable department opportunity becomes available.',
         },
         {
           q: 'Is there a written exam?',
@@ -105,14 +105,14 @@ export const careerTranslations = {
       kicker: 'RECRUITING',
       title: 'ENTRA NEL TEAM',
       description:
-        'Progettiamo e costruiamo un Moth foiling sostenibile per la SuMoth Challenge internazionale. Se studi a La Sapienza e vuoi lavorare su una vera barca da regata, candidati.',
+        'Progettiamo e costruiamo un Moth foiling sostenibile per la SuMoth Challenge internazionale. Le selezioni sono momentaneamente chiuse. Se studi a La Sapienza, puoi comunque inviarci una candidatura spontanea.',
       statusCard: {
         label: 'STATO',
-        badge: 'Candidature Aperte',
-        deadline: 'Scadenza candidature: 12 ottobre',
+        badge: 'Selezioni chiuse',
+        deadline: 'Solo candidature spontanee',
         subtext:
-          'Scegli fino a 2 reparti e inviaci CV e una breve lettera motivazionale entro il 12 ottobre. Se ti candidi per ruoli tecnici o design, allega anche un portfolio o progetti svolti.',
-        ctaButton: 'Candidati Ora',
+          'Al momento accettiamo solo candidature spontanee. Indicaci i reparti di tuo interesse e inviaci CV e una breve lettera motivazionale. Ti contatteremo se si presenterà un’opportunità adatta al tuo profilo.',
+        ctaButton: 'Invia una candidatura spontanea',
         secondaryCta: 'I Reparti',
       },
     },
@@ -124,8 +124,8 @@ export const careerTranslations = {
         number: '01',
         title: 'CANDIDATURA',
         description:
-          'Compila il form con CV, lettera motivazionale ed eventuale portfolio (CAD/FEM/design). Le candidature chiudono il 12 ottobre. Valutiamo tutte le candidature per selezionare chi accede al colloquio.',
-        deadlineBadge: 'Scadenza: 12 ottobre',
+          'Invia una candidatura spontanea tramite il form, allegando CV, lettera motivazionale ed eventuale portfolio. Le selezioni sono momentaneamente chiuse: l’invio non garantisce un colloquio o l’ingresso nel team.',
+        deadlineBadge: 'Solo candidature spontanee',
       },
       step2: {
         number: '02',
@@ -152,21 +152,21 @@ export const careerTranslations = {
         number: '03',
         title: 'COLLOQUIO',
         description:
-          'Colloquio con il Team Leader e i responsabili del reparto scelto. Parliamo del tuo percorso, delle tue motivazioni, di cosa hai colto del regolamento e della tua reale disponibilità settimanale.',
+          'Se si presenterà un’opportunità adatta, potremo invitarti a un colloquio con il Team Leader e i responsabili del reparto per parlare del tuo percorso, delle motivazioni, del regolamento SuMoth e della disponibilità settimanale.',
       },
     },
     banner: {
       title: 'Vuoi unirti a noi?',
       description:
-        'Le candidature sono aperte a tutti gli studenti regolarmente iscritti a La Sapienza fino al 12 ottobre.',
-      cta: 'Candidati Ora',
+        'Le selezioni sono momentaneamente chiuse. Gli studenti di tutti i corsi di laurea di Sapienza possono comunque inviare una candidatura spontanea.',
+      cta: 'Invia una candidatura spontanea',
       secondary: 'Scopri i Reparti',
     },
     openPositions: {
       requirements: 'Requisiti',
     },
     spontaneousApplication: {
-      applyButton: 'Candidati Ora',
+      applyButton: 'Invia una candidatura spontanea',
     },
     faq: {
       kicker: 'DOMANDE FREQUENTI',
@@ -182,7 +182,7 @@ export const careerTranslations = {
         },
         {
           q: 'Quando si svolgono le selezioni?',
-          a: 'La finestra principale è a inizio anno accademico: per questa sessione la data limite per candidarsi è il 12 ottobre. Raccogliamo comunque candidature tutto l’anno per specifiche esigenze di reparto.',
+          a: 'Al momento le selezioni sono chiuse. Accettiamo solo candidature spontanee e contatteremo i candidati se si presenteranno opportunità adatte alle esigenze dei reparti.',
         },
         {
           q: 'C’è una prova scritta?',

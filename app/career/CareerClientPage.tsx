@@ -82,7 +82,7 @@ const CareerClientPage: React.FC<CareerClientPageProps> = () => {
                       {t.hero.statusCard.label}
                     </span>
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-white border border-white/30 text-xs font-semibold backdrop-blur-sm">
-                      <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                      <span className="w-2 h-2 rounded-full bg-white" />
                       {t.hero.statusCard.badge}
                     </span>
                   </div>

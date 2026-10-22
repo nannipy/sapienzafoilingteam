@@ -68,7 +68,28 @@ export default function Navbar() {
               width={36}
               height={48}
             />
-
+            <svg
+              className="sft-site-wordmark"
+              viewBox="0 0 156 48"
+              aria-hidden="true"
+            >
+              <text
+                x="0"
+                y="21"
+                textLength="156"
+                lengthAdjust="spacingAndGlyphs"
+              >
+                SAPIENZA
+              </text>
+              <text
+                x="0"
+                y="46"
+                textLength="156"
+                lengthAdjust="spacingAndGlyphs"
+              >
+                FOILING TEAM
+              </text>
+            </svg>
           </span>
         </Link>
         <div className="sft-site-desktop-nav" data-testid="desktop-nav">

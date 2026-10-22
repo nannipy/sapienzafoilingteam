@@ -5,15 +5,17 @@ export interface TeamPerson {
 }
 // A single record per person keeps names and future portraits consistent across roles.
 export const people: Record<string, TeamPerson> = {
-  stella: { id: 'stella', name: 'Stella Tortora' },
-  matteo: { id: 'matteo', name: 'Matteo Valbrega' },
-  michele: { id: 'michele', name: 'Michele Arrigo' },
-  giovanni: { id: 'giovanni', name: 'Giovanni Battista Pernazza' },
-  giacomo: { id: 'giacomo', name: 'Giacomo Romeo' },
+  stella: { id: 'stella', name: 'Stella Tortora', photo: '/team/stella.webp' },
+  matteo: { id: 'matteo', name: 'Matteo Valabrega', photo: '/team/matteo.webp' },
+  michele: { id: 'michele', name: 'Michele Arrigo Semeraro', photo: '/team/michele.webp' },
+  giovanni: { id: 'giovanni', name: 'Giovanni Battista Pernazza', photo: '/team/giovanni.webp' },
+  giacomo: { id: 'giacomo', name: 'Giacomo Romeo', photo: '/team/giacomo.webp' },
   jacopo: { id: 'jacopo', name: 'Jacopo S. Pender' },
-  mario: { id: 'mario', name: 'Mario' },
-  fulvio: { id: 'fulvio', name: 'Fulvio Pellini' },
-  riccardo: { id: 'riccardo', name: 'Riccardo' },
+  mario: { id: 'mario', name: 'Mario Valenzise', photo: '/team/mario.webp' },
+  fulvio: { id: 'fulvio', name: 'Fulvio Pellini', photo: '/team/fulvio.webp' },
+  francesco: { id: 'francesco', name: 'Francesco Grossi', photo: '/team/francesco.webp' },
+  riccardo: { id: 'riccardo', name: 'Riccardo Mariotti' },
+  giulio: { id: 'giulio', name: 'Giulio Mastronardi' },
 };
 export const leadership = [
   { person: 'stella', role: { it: 'Team Leader', en: 'Team Leader' } },
@@ -26,6 +28,6 @@ export const departments = [
   { id: 'elettronica', icon: '/brand/departments/elettronica.png', description: {"it": "Si occupa di sensori, acquisizione dati e telemetria: strumenti per leggere il comportamento della barca e confrontare i risultati dei test.", "en": "Develops sensors, data acquisition and telemetry to understand the boat’s behaviour and compare test results."}, name: { it: 'Elettronica', en: 'Electronics' }, heads: ['giovanni'] },
   { id: 'materiali', icon: '/brand/departments/materiali.png', description: {"it": "Studia e seleziona fibre, resine e materiali per i componenti della barca, valutando proprietà meccaniche, lavorabilità e impatto ambientale.", "en": "Researches and selects fibres, resins and materials for boat components, considering mechanical properties, manufacturing requirements and environmental impact."}, name: { it: 'Materiali', en: 'Materials' }, heads: ['mario'] },
   { id: 'comunicazione', icon: '/brand/departments/comunicazione.png', description: {"it": "Racconta il lavoro del team attraverso social, sito e contenuti visivi, documentando la costruzione, i test e gli eventi.", "en": "Shares the team’s work through social media, the website and visual content, documenting construction, testing and events."}, name: { it: 'Social e Comunicazione', en: 'Social & Communication' }, heads: ['giacomo', 'giovanni'] },
-  { id: 'cantiere', icon: '/brand/departments/cantiere.png', description: {"it": "Trasforma i progetti in componenti reali: preparazione degli stampi, lavorazioni, laminazione e assemblaggio della barca.", "en": "Turns designs into physical components through mould preparation, fabrication, lamination and boat assembly."}, name: { it: 'Cantiere', en: 'Workshop' }, heads: ['fulvio'] },
-  { id: 'management', icon: '/brand/departments/management.png', description: {"it": "Coordina l’organizzazione del progetto, le scadenze e le risorse, curando anche i rapporti con sponsor e partner.", "en": "Coordinates project organisation, deadlines and resources, as well as relationships with sponsors and partners."}, name: { it: 'Management', en: 'Management' }, heads: ['riccardo'] },
+  { id: 'cantiere', icon: '/brand/departments/cantiere.png', description: {"it": "Trasforma i progetti in componenti reali: preparazione degli stampi, lavorazioni, laminazione e assemblaggio della barca.", "en": "Turns designs into physical components through mould preparation, fabrication, lamination and boat assembly."}, name: { it: 'Cantiere', en: 'Workshop' }, heads: ['fulvio', 'francesco'] },
+  { id: 'management', icon: '/brand/departments/management.png', description: {"it": "Coordina l’organizzazione del progetto, le scadenze e le risorse, curando anche i rapporti con sponsor e partner.", "en": "Coordinates project organisation, deadlines and resources, as well as relationships with sponsors and partners."}, name: { it: 'Management e Finanze', en: 'Management & Finance' }, heads: ['riccardo', 'giulio'] },
 ];

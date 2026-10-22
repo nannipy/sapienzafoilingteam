@@ -454,7 +454,13 @@
 .sft-team-leaders-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .sft-root .sft-person-card { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; padding: 16px; gap: 16px; overflow: hidden; border: 0; border-radius: 20px; }
 .sft-person-portrait { position: relative; width: 112px; height: 112px; border-radius: 12px; overflow: hidden; display: grid; place-items: center; background: var(--secondary); color: var(--primary); }
-.sft-person-portrait img { object-fit: cover; }
+.sft-person-portrait--photo {
+  background-color: var(--sft-burgundy);
+  background-image: url("/brand/patterns/team-flow.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.sft-person-portrait img { object-fit: cover; filter: none; mix-blend-mode: normal; }
 .sft-person-initials { font-family: var(--font-kelson), sans-serif; font-size: 40px; font-weight: 800; opacity: .28; }
 .sft-person-card [data-slot="card-content"] { padding: 0; }
 .sft-person-card .sft-eyebrow { font-size: 10px; color: var(--primary); margin-bottom: 12px; }
@@ -628,9 +634,9 @@
 .sft-blog-newsletter { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; margin-bottom: 72px; }
 .sft-blog-newsletter h2 { margin-bottom: 0; }
 .sft-boat-component-photo[data-component="pcb"] { height: auto; aspect-ratio: 4/3; }
-.sft-boat-component-photo[data-component="wings"] { height: auto; aspect-ratio: 1; }
+.sft-boat-component-photo[data-component="wings"] { height: auto; aspect-ratio: 4/3; }
 .sft-boat-component-photo[data-component="pcb"] img { object-fit: cover; object-position: center 53%; }
-.sft-boat-component-photo[data-component="wings"] img { object-fit: cover; object-position: center 65%; }
+.sft-boat-component-photo[data-component="wings"] img { object-fit: cover; object-position: center 85%; }
 @media (max-width: 767px) {
   .sft-blog-newsletter { grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
 }
