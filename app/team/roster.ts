@@ -13,7 +13,7 @@ export const people: Record<string, TeamPerson> = {
   jacopo: { id: 'jacopo', name: 'Jacopo S. Pender' },
   mario: { id: 'mario', name: 'Mario Valenzise', photo: '/team/mario.webp' },
   fulvio: { id: 'fulvio', name: 'Fulvio Pellini', photo: '/team/fulvio.webp' },
-  arturo: { id: 'arturo', name: 'Arturo Buzzetti' },
+  arturo: { id: 'arturo', name: 'Arturo Buzzetti', photo: '/team/arturo.webp' },
   francesco: { id: 'francesco', name: 'Francesco Grossi', photo: '/team/francesco.webp' },
   riccardo: { id: 'riccardo', name: 'Riccardo Mariotti' },
   giulio: { id: 'giulio', name: 'Giulio Mastronardi' },
