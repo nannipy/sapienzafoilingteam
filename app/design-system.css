@@ -628,8 +628,7 @@
 @media (max-width: 900px) { .sft-blog-intro { grid-template-columns: 1fr; gap: 28px; } }
 @media (max-width: 767px) { .sft-blog-newsletter { padding: 24px; } .sft-blog-newsletter form > div { flex-direction: column; } }
 
-.sft-sponsor-logo:has(.sft-fluidodesign-logo) { overflow: hidden; }
-.sft-sponsor-logo .sft-fluidodesign-logo { transform: scale(2); }
+.sft-sponsor-logo :is(.sft-fluidodesign-logo, .sft-dima-logo) { width: 280px; max-width: 100%; max-height: 100%; height: auto; }
 
 .sft-blog-newsletter { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; margin-bottom: 72px; }
 .sft-blog-newsletter h2 { margin-bottom: 0; }
