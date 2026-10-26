@@ -1,0 +1,57 @@
+.sft-team-day-page { padding-bottom: 80px; }
+.sft-team-day-page .sft-page-intro .sft-eyebrow { margin-bottom: 16px; }
+.sft-team-day-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 64px; align-items: start; }
+.sft-team-day-details { padding-top: 24px; }
+.sft-team-day-details dl { display: grid; gap: 24px; margin: 0; }
+.sft-team-day-details dl > div { display: flex; align-items: center; gap: 16px; }
+.sft-team-day-details dt { color: var(--sft-burgundy); }
+.sft-team-day-details dd { margin: 0; }
+.sft-team-day-contribution { margin-block: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+.sft-team-day-contribution p { font-size: 14px; line-height: 1.7; color: var(--muted-foreground); }
+.sft-team-day-contribution .sft-team-day-contribution-title { margin-bottom: 8px; font-weight: 600; color: var(--foreground); }
+.sft-team-day-contribution span { white-space: nowrap; font-weight: 500; color: var(--foreground); }
+.sft-team-day-form p { color: var(--muted-foreground); }
+.sft-team-day-details > a { display: inline-flex; align-items: center; gap: 8px; color: var(--sft-burgundy); }
+.sft-team-day-card { min-width: 0; }
+.sft-team-day-card > [data-slot="card-content"] { padding: 32px; }
+.sft-team-day-form, .sft-team-day-fields, .sft-team-day-confirmation { display: grid; gap: 24px; }
+.sft-team-day-form h2, .sft-team-day-confirmation h2 { font-size: 28px; line-height: 1.2; margin-bottom: 12px; }
+.sft-team-day-form p { line-height: 1.6; font-size: 14px; }
+.sft-team-day-fields { border: 0; margin: 0; padding: 0; min-width: 0; }
+.sft-team-day-fields [data-slot="label"] { margin-bottom: 8px; }
+.sft-team-day-names { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.sft-team-day-names > div { min-width: 0; }
+.sft-team-day-fields [data-slot="input"] { width: 100%; font-size: 16px; min-height: 44px; }
+.sft-team-day-payment { border: 0; padding: 0; margin: 0; display: grid; gap: 12px; min-width: 0; }
+.sft-team-day-payment legend { margin-bottom: 12px; font-weight: 600; }
+.sft-team-day-method { display: flex; align-items: center; gap: 12px; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; }
+.sft-team-day-method[data-selected="true"] { border-color: var(--primary); background: var(--secondary); }
+.sft-team-day-method[data-disabled="true"] { color: var(--muted-foreground); cursor: not-allowed; background: var(--muted); }
+.sft-team-day-method input, .sft-team-day-privacy input { accent-color: var(--primary); width: 18px; height: 18px; flex-shrink: 0; }
+.sft-team-day-method small { display: block; font-size: 12px; margin-top: 4px; }
+.sft-team-day-method:focus-within { outline: 2px solid var(--ring); outline-offset: 3px; }
+.sft-team-day-privacy { display: flex; align-items: flex-start; gap: 12px; }
+.sft-team-day-privacy input { margin-top: 2px; }
+.sft-team-day-privacy [data-slot="label"] { display: block; line-height: 1.6; }
+.sft-team-day-privacy a { color: var(--primary); text-decoration: underline; }
+.sft-team-day-confirmation > svg { color: var(--success); }
+.sft-team-day-confirmation p { line-height: 1.6; }
+.sft-team-day-code { border-block: 1px solid var(--border); padding-block: 24px; margin: 0; }
+.sft-team-day-code dt { color: var(--muted-foreground); font-size: 14px; margin-bottom: 8px; }
+.sft-team-day-code dd { font-family: var(--font-mono); font-size: 20px; overflow-wrap: anywhere; margin: 0; }
+.sft-team-day-bank-details { display: grid; gap: 20px; padding: 24px; margin: 0; background: var(--muted); border-radius: var(--radius); }
+.sft-team-day-bank-details dt { color: var(--muted-foreground); font-size: 14px; margin-bottom: 4px; }
+.sft-team-day-bank-details dd { margin: 0; overflow-wrap: anywhere; line-height: 1.6; }
+.sft-team-day-bank-mono { font-family: var(--font-mono); font-size: 14px; }
+@media (max-width: 767px) {
+  .sft-team-day-grid { grid-template-columns: 1fr; gap: 32px; }
+  .sft-team-day-details { padding-top: 0; }
+  .sft-team-day-card > [data-slot="card-content"] { padding: 24px; }
+  .sft-team-day-names { grid-template-columns: 1fr; }
+}
+
+.sft-team-day-program { margin-top: 24px; line-height: 1.7; color: var(--muted-foreground); }
+.sft-team-day-links { display: flex; flex-wrap: wrap; gap: 12px; margin-block: 24px; }
+.sft-team-day-details > a.sft-team-day-poster { display: block; overflow: hidden; border-radius: var(--radius); }
+.sft-team-day-poster img { display: block; width: 100%; height: auto; }
+.sft-team-day-card { scroll-margin-top: 128px; }
