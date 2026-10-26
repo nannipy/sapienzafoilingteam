@@ -3,7 +3,7 @@ import TeamClientPage from './TeamClientPage';
 
 export const metadata: Metadata = {
   title: 'Il Team | Reparti & Ingegneria Foiling',
-  description: 'Conosci la guida e i capi reparto del Sapienza Foiling Team: Scafo, Elettronica, Foil, Materiali, Cantiere, Management, Social e Comunicazione.',
+  description: 'Conosci la guida e i capi reparto del Sapienza Foiling Team: Scafo e Terrazze, Elettronica, Foil, Materiali, Cantiere, Management, Social e Comunicazione.',
   alternates: {
     canonical: '/team',
   },
