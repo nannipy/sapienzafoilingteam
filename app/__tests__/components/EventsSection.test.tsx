@@ -30,4 +30,9 @@ describe('EventsSection', () => {
     expect(screen.getByText('Upcoming Event')).toBeInTheDocument();
     expect(screen.getByText('Past Event')).toBeInTheDocument();
   });
+  it('distinguishes unavailable events from an empty calendar', () => {
+    render(<LanguageProvider><EventsSection events={[]} unavailable /></LanguageProvider>);
+    expect(screen.getByRole('status')).toHaveTextContent('Gli eventi non sono raggiungibili');
+    expect(screen.queryByText('Non ci sono eventi disponibili al momento.')).not.toBeInTheDocument();
+  });
 });

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@sft/design-system";
 
 import { useLanguage } from "../context/LanguageContext";
@@ -96,11 +96,13 @@ export default function Navbar() {
           {items.map((item) => (
             <Link
               href={item.href}
+              className={item.href === "/boat" ? "sft-site-boat-link" : undefined}
               key={item.href}
               aria-current={path === item.href ? "page" : undefined}
               onClick={() => track(item.href, "menu")}
             >
               {item.label}
+              {item.href === "/boat" && <ArrowUpRight aria-hidden="true" />}
             </Link>
           ))}
           <Button asChild variant="brand">
@@ -154,6 +156,7 @@ export default function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
+                className={item.href === "/boat" ? "sft-site-boat-link" : undefined}
                 aria-current={path === item.href ? "page" : undefined}
                 onClick={() => {
                   setOpen(false);
@@ -161,6 +164,7 @@ export default function Navbar() {
                 }}
               >
                 {item.label}
+                {item.href === "/boat" && <ArrowUpRight aria-hidden="true" />}
               </Link>
             ))}
             <Button asChild variant="brand">

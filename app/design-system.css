@@ -39,6 +39,35 @@
   color: var(--primary);
   background: var(--secondary);
 }
+.sft-site-desktop-nav > a.sft-site-boat-link,
+.sft-site-mobile-menu a.sft-site-boat-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--sft-burgundy);
+  background: var(--secondary);
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background-color 180ms ease;
+}
+.sft-site-boat-link svg { width: 16px; height: 16px; }
+.sft-site-desktop-nav > a.sft-site-boat-link:hover,
+.sft-site-mobile-menu a.sft-site-boat-link:hover,
+.sft-site-desktop-nav > a.sft-site-boat-link[aria-current="page"],
+.sft-site-mobile-menu a.sft-site-boat-link[aria-current="page"] {
+  background: var(--sft-burgundy);
+  color: var(--sft-paper);
+}
+.sft-site-boat-link:focus-visible {
+  outline: 2px solid var(--sft-burgundy);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sft-site-desktop-nav > a.sft-site-boat-link,
+  .sft-site-mobile-menu a.sft-site-boat-link { transition: none; }
+}
 .sft-site-nav-tools {
   display: flex;
   align-items: center;
@@ -505,6 +534,8 @@
 .sft-sponsor-card a:hover { background: var(--secondary); }
 .sft-sponsor-logo { height: 112px; display: flex; justify-content: center; align-items: center; }
 .sft-sponsor-logo img { max-width: 100%; max-height: 88px; width: auto; height: auto; object-fit: contain; }
+/* Blend the white backgrounds embedded in these sponsor assets with the card. */
+.sft-sponsor-logo img:is([src$="/beta.svg"], [src$="/ansys.svg"], [src$="/easycomposites.svg"], [src$="/ESSS.svg"]) { mix-blend-mode: multiply; }
 .sft-sponsor-card a > span { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--muted-foreground); margin-top: 20px; }
 .sft-partner-network { padding-block: 64px; background: var(--sft-burgundy); color: white; }
 .sft-partner-network h2, .sft-partner-invitation h2, .sft-contact-location h2, .sft-contact-career h2 { font-size: clamp(30px, 3vw, 44px); line-height: 1.1; text-transform: uppercase; }
@@ -654,3 +685,25 @@
 .sft-boat-component-photo[data-component="rig"] img { object-position: center 55%; }
 
 .sft-department-icon[src*=".png"] { filter: none; mix-blend-mode: normal; }
+
+/* Boat gallery: still images and manually played clips share one stage. */
+.sft-boat-gallery { background: var(--secondary); }
+.sft-boat-gallery .sft-site-section-heading > p { color: var(--muted-foreground); max-width: 46ch; }
+.sft-boat-gallery-stage { position: relative; aspect-ratio: 16/9; overflow: hidden; border-radius: 20px; background: var(--sft-burgundy-dark); }
+.sft-boat-gallery-stage img { object-fit: contain; }
+.sft-boat-gallery-stage video { display: block; width: 100%; height: 100%; object-fit: contain; }
+.sft-boat-gallery-caption { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 24px; }
+.sft-boat-gallery-caption .sft-eyebrow { color: var(--primary); }
+.sft-boat-gallery-caption p { font-family: var(--font-kelson), sans-serif; font-size: clamp(22px, 3vw, 32px); font-weight: 700; margin-top: 8px; }
+.sft-boat-gallery-arrows { display: flex; gap: 8px; flex-shrink: 0; }
+.sft-boat-gallery-thumbnails { display: flex; gap: 12px; overflow-x: auto; padding: 4px 4px 16px; scroll-snap-type: x proximity; }
+.sft-boat-gallery-thumbnails button { position: relative; flex: 0 0 140px; aspect-ratio: 4/3; overflow: hidden; border-radius: 12px; border: 3px solid transparent; scroll-snap-align: start; cursor: pointer; background: var(--sft-burgundy-dark); }
+.sft-boat-gallery-thumbnails button[aria-pressed="true"] { border-color: var(--primary); outline: 2px solid var(--primary); outline-offset: 2px; }
+.sft-boat-gallery-thumbnails button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.sft-boat-gallery-thumbnails img { object-fit: cover; }
+.sft-boat-gallery-play { position: absolute; inset: 0; display: grid; place-items: center; color: white; background: #0003; }
+.sft-boat-gallery-play svg { border-radius: 50%; background: var(--sft-burgundy); padding: 9px; box-sizing: content-box; }
+@media (max-width: 767px) {
+  .sft-boat-gallery-stage { aspect-ratio: 4/3; border-radius: 16px; }
+  .sft-boat-gallery-thumbnails button { flex-basis: 112px; }
+}
