@@ -1,4 +1,6 @@
 'use client';
+import { uploadMedia } from '@/app/actions/media';
+import { mediaForm } from '@/app/lib/media-form';
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
@@ -54,7 +56,7 @@ export default function EventForm({ initialData = {}, onSubmit, isSubmitting, er
     };
 
     const handleFileSelected = (file: File | null) => {
-        if (file && file.type.startsWith('image/')) {
+        if (file && ['image/png', 'image/jpeg', 'image/gif', 'image/webp'].includes(file.type) && file.size <= 4 * 1024 * 1024) {
             setUploadError(null);
             const objectUrl = URL.createObjectURL(file);
             setPreviewUrl(objectUrl);
@@ -72,7 +74,7 @@ export default function EventForm({ initialData = {}, onSubmit, isSubmitting, er
         try {
             const fileExt = file.name.split('.').pop();
             const fileName = `${Date.now()}.${fileExt}`;
-            const { data, error: uploadError } = await supabase.storage.from(BUCKET_NAME).upload(fileName, file);
+            const { data, error: uploadError } = await uploadMedia(mediaForm(fileName, file));
 
             if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`);
             if (!data) throw new Error('Upload successful but no data returned.');
@@ -178,7 +180,7 @@ export default function EventForm({ initialData = {}, onSubmit, isSubmitting, er
                         <label className="block text-sm font-medium text-gray-700 mb-1"><ImageIcon size={16} className="inline mr-1 mb-0.5" />{eventTranslations[language].admin.eventImage} (Optional)</label>
                         <div onDragEnter={handleDragEnter} onDragLeave={handleDragLeave} onDragOver={handleDragOver} onDrop={handleDrop} onClick={() => !isUploading && fileInputRef.current?.click()}
                             className={`relative flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 text-center transition-colors group ${isDragging ? 'border-brand bg-red-50' : 'border-gray-300 hover:border-gray-400 bg-gray-50'} ${isUploading ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
-                            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileInputChange} className="hidden" disabled={isUploading} />
+                            <input ref={fileInputRef} type="file" accept="image/png,image/jpeg,image/gif,image/webp" onChange={handleFileInputChange} className="hidden" disabled={isUploading} />
                             {isUploading ? (
                                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-75 z-10"><Loader2 className="w-8 h-8 text-brand animate-spin mb-2" /><p>Uploading...</p></div>
                             ) : previewUrl ? (

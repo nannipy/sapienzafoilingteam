@@ -10,7 +10,7 @@ export const people: Record<string, TeamPerson> = {
   michele: { id: 'michele', name: 'Michele Arrigo Semeraro', photo: '/team/michele-2026.webp' },
   giovanni: { id: 'giovanni', name: 'Giovanni Battista Pernazza', photo: '/team/giovanni-2026.webp' },
   giacomo: { id: 'giacomo', name: 'Giacomo Romeo', photo: '/team/giacomo-2026.webp' },
-  jacopo: { id: 'jacopo', name: 'Jacopo S. Pender' },
+  jacopo: { id: 'jacopo', name: 'Jacopo S. Pender', photo: '/team/jacopo-2026-v2.webp' },
   mario: { id: 'mario', name: 'Mario Valenzise', photo: '/team/mario-2026.webp' },
   fulvio: { id: 'fulvio', name: 'Fulvio Pellini', photo: '/team/fulvio-2026.webp' },
   arturo: { id: 'arturo', name: 'Arturo Buzzetti', photo: '/team/arturo.webp' },

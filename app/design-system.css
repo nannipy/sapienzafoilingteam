@@ -64,6 +64,358 @@
   outline: 2px solid var(--sft-burgundy);
   outline-offset: 3px;
 }
+/* SFT Day campaign link — same pill shape as Meravijosa, different voice:
+   Kelson display type and a mono date, flat burgundy with the team gold dot. */
+.sft-site-desktop-nav > a.sft-site-sftday-link,
+.sft-site-mobile-menu a.sft-site-sftday-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 0 13px 0 15px;
+  border-radius: 999px;
+  background: var(--sft-burgundy);
+  color: var(--sft-paper);
+  font-family: var(--font-kelson), sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background-color 180ms ease;
+}
+.sft-site-desktop-nav > a.sft-site-sftday-link:hover,
+.sft-site-mobile-menu a.sft-site-sftday-link:hover,
+.sft-site-desktop-nav > a.sft-site-sftday-link[aria-current="page"],
+.sft-site-mobile-menu a.sft-site-sftday-link[aria-current="page"] {
+  background: var(--sft-burgundy-dark);
+  color: var(--sft-paper);
+}
+.sft-site-sftday-label {
+  display: inline-block;
+  transform: translateY(0.5px);
+}
+.sft-site-sftday-date {
+  flex: none;
+  padding-left: 9px;
+  border-left: 1px solid rgba(255, 252, 253, 0.38);
+  font-family: var(--font-geist-mono), var(--font-mono), monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+.sft-site-sftday-link:focus-visible {
+  outline: 2px solid var(--sft-burgundy);
+  outline-offset: 3px;
+}
+.sft-site-sftday-placeholder {
+  display: inline-block;
+  width: 138px;
+  height: 44px;
+  flex: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sft-site-desktop-nav > a.sft-site-sftday-link,
+  .sft-site-mobile-menu a.sft-site-sftday-link { transition: none; }
+}
+@media (max-width: 1100px) {
+  .sft-site-mobile-menu a.sft-site-sftday-link {
+    min-height: 48px;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+}
+
+/* SFT Day invitation — an editorial ticket stub built on the shared SFT tokens. */
+.sft-day-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #10101685;
+  backdrop-filter: blur(3px);
+}
+.sft-day-popup-backdrop {
+  position: fixed;
+  inset: 0;
+}
+.sft-day-popup-card {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  width: min(680px, 100%);
+  margin: auto;
+  overflow: hidden;
+  background: var(--sft-paper);
+  color: var(--sft-ink);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 25px 90px #0004;
+  will-change: transform, opacity;
+}
+.sft-day-popup-card:focus {
+  outline: none;
+}
+.sft-day-popup-stub {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px 24px;
+  background: var(--sft-burgundy);
+  color: var(--sft-paper);
+}
+.sft-day-popup-stub::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  right: 0;
+  border-right: 1px dashed rgba(255, 252, 253, 0.45);
+}
+.sft-day-popup-day {
+  display: block;
+  font-family: var(--font-kelson), sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.sft-day-popup-month {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font-geist-mono), var(--font-mono), monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+.sft-day-popup-year {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-geist-mono), var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: rgba(255, 252, 253, 0.78);
+  font-variant-numeric: tabular-nums;
+}
+.sft-day-popup-stub-note {
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 252, 253, 0.3);
+  font-family: var(--font-geist-mono), var(--font-mono), monospace;
+  font-size: 10px;
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sft-day-popup-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 32px;
+}
+.sft-day-popup-close {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.sft-day-popup-close:hover {
+  background: var(--muted);
+  color: var(--sft-ink);
+}
+.sft-day-popup-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-family: var(--font-geist-mono), var(--font-mono), monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sft-burgundy);
+}
+.sft-day-popup-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sft-burgundy);
+}
+.sft-day-popup-title {
+  margin: 14px 0 0;
+  font-family: var(--font-kelson), sans-serif;
+  font-size: clamp(34px, 5vw, 44px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.sft-day-popup-lead {
+  max-width: 46ch;
+  margin: 12px 0 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--muted-foreground);
+}
+.sft-day-popup-meta {
+  width: 100%;
+  margin: 22px 0 0;
+  border-top: 1px solid var(--border);
+}
+.sft-day-popup-meta > div {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+}
+.sft-day-popup-meta dt {
+  padding-top: 2px;
+  font-family: var(--font-geist-mono), var(--font-mono), monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.sft-day-popup-meta dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.sft-day-popup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+.sft-day-popup-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: var(--sft-burgundy);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background-color 180ms ease;
+}
+.sft-day-popup-cta:hover {
+  background: var(--sft-burgundy-dark);
+  color: #ffffff;
+}
+.sft-day-popup-cta:focus-visible,
+.sft-day-popup-dismiss:focus-visible,
+.sft-day-popup-close:focus-visible {
+  outline: 2px solid var(--sft-burgundy);
+  outline-offset: 3px;
+}
+.sft-day-popup-cta svg {
+  flex: none;
+}
+.sft-day-popup-dismiss {
+  min-height: 44px;
+  padding: 12px 8px;
+  border: 0;
+  background: transparent;
+  color: var(--muted-foreground);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+.sft-day-popup-dismiss:hover {
+  color: var(--sft-ink);
+}
+@media (max-width: 640px) {
+  .sft-day-popup {
+    padding: 12px;
+  }
+  .sft-day-popup-card {
+    grid-template-columns: 1fr;
+  }
+  .sft-day-popup-stub {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 16px;
+    padding: 20px 20px 18px;
+  }
+  .sft-day-popup-stub::after {
+    top: auto;
+    left: 12px;
+    right: 12px;
+    bottom: 0;
+    border-right: 0;
+    border-bottom: 1px dashed rgba(255, 252, 253, 0.45);
+  }
+  .sft-day-popup-day {
+    display: inline;
+    font-size: 46px;
+  }
+  .sft-day-popup-month {
+    display: inline;
+    margin-left: 10px;
+  }
+  .sft-day-popup-year {
+    display: inline;
+    margin-left: 8px;
+  }
+  .sft-day-popup-stub-note {
+    display: none;
+  }
+  .sft-day-popup-body {
+    padding: 24px 20px;
+  }
+  .sft-day-popup-close {
+    color: var(--sft-paper);
+  }
+  .sft-day-popup-close:hover {
+    background: rgba(255, 252, 253, 0.14);
+    color: var(--sft-paper);
+  }
+  .sft-day-popup-meta > div {
+    grid-template-columns: 70px minmax(0, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sft-day-popup-close,
+  .sft-day-popup-cta,
+  .sft-day-popup-dismiss {
+    transition: none;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .sft-site-desktop-nav > a.sft-site-boat-link,
   .sft-site-mobile-menu a.sft-site-boat-link { transition: none; }

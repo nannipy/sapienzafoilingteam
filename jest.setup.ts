@@ -6,6 +6,7 @@ configure({
 });
 
 beforeAll(() => {
+  if (typeof window === 'undefined') return;
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: jest.fn().mockImplementation(query => ({

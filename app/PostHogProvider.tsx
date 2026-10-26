@@ -1,7 +1,7 @@
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { JSX, Suspense, useEffect } from 'react'
 import React from 'react'
 
@@ -16,14 +16,10 @@ if (typeof window !== 'undefined') {
 
 function PostHogPageviewInternal(): JSX.Element {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
 
   useEffect(() => {
-    if (pathname) {
-      let url = window.origin + pathname
-      if (searchParams && searchParams.toString()) {
-        url = url + `?${searchParams.toString()}`
-      }
+    if (pathname && !pathname.startsWith('/admin') && pathname !== '/login') {
+      const url = window.origin + pathname
       posthog.capture(
         '$pageview',
         {
@@ -31,7 +27,7 @@ function PostHogPageviewInternal(): JSX.Element {
         }
       )
     }
-  }, [pathname, searchParams])
+  }, [pathname])
 
   return <></>
 }

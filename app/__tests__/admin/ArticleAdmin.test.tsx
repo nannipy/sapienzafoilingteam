@@ -1,3 +1,4 @@
+jest.mock('@/app/actions/media', () => ({ uploadMedia: jest.fn() }));
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import ArticleAdmin from '@/app/components/ArticleAdmin';

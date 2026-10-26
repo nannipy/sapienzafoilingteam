@@ -42,3 +42,6 @@ next-env.d.ts
 # ide & agent local files
 .claude/
 .agents/
+
+# Independent local event preview
+.next-local-preview/

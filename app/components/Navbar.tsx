@@ -7,14 +7,20 @@ import { Button } from "@sft/design-system";
 
 import { useLanguage } from "../context/LanguageContext";
 import { navbarTranslations } from "../translations/navbar";
+import { sftDayPromoTranslations } from "../translations/sftDayPromo";
+import { isSftDayPromoActive } from "../lib/sft-day-promo";
 import posthog from "posthog-js";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [compact, setCompact] = useState(false);
+  // null while we resolve the campaign window on the client, so the static
+  // render never disagrees with hydration after the deadline.
+  const [sftDayActive, setSftDayActive] = useState<boolean | null>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const path = usePathname();
   const { language, setLanguage } = useLanguage();
   const t = navbarTranslations[language];
+  const promo = sftDayPromoTranslations[language];
   const items = [
     { label: t.boat, href: "/boat" },
     { label: t.team, href: "/team" },
@@ -25,6 +31,9 @@ export default function Navbar() {
   useEffect(() => {
     setOpen(false);
   }, [path]);
+  useEffect(() => {
+    setSftDayActive(isSftDayPromoActive());
+  }, []);
   useEffect(() => {
     if (!open) return;
     const close = (e: KeyboardEvent) => {
@@ -93,6 +102,23 @@ export default function Navbar() {
           </span>
         </Link>
         <div className="sft-site-desktop-nav" data-testid="desktop-nav">
+          {sftDayActive === null && (
+            <span className="sft-site-sftday-placeholder" aria-hidden="true" />
+          )}
+          {sftDayActive && (
+            <Link
+              href="/sft-day"
+              className="sft-site-sftday-link"
+              aria-label={promo.navAria}
+              aria-current={path === "/sft-day" ? "page" : undefined}
+              onClick={() => track("/sft-day", "menu")}
+            >
+              <span className="sft-site-sftday-label">{promo.navLabel}</span>
+              <span className="sft-site-sftday-date" aria-hidden="true">
+                {promo.navDate}
+              </span>
+            </Link>
+          )}
           {items.map((item) => (
             <Link
               href={item.href}
@@ -152,6 +178,23 @@ export default function Navbar() {
               language === "it" ? "Navigazione mobile" : "Mobile navigation"
             }
           >
+            {sftDayActive && (
+              <Link
+                href="/sft-day"
+                className="sft-site-sftday-link"
+                aria-label={promo.navAria}
+                aria-current={path === "/sft-day" ? "page" : undefined}
+                onClick={() => {
+                  setOpen(false);
+                  track("/sft-day", "menu");
+                }}
+              >
+                <span className="sft-site-sftday-label">{promo.navLabel}</span>
+                <span className="sft-site-sftday-date" aria-hidden="true">
+                  {promo.navDate}
+                </span>
+              </Link>
+            )}
             {items.map((item) => (
               <Link
                 key={item.href}

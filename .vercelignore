@@ -1,0 +1,19 @@
+# Superato da package.json: si carica solo il tarball del design system in uso
+vendor/sft-design-system-1.1.1.tgz
+vendor/sft-design-system-1.1.2.tgz
+
+# File locali di verifica e artefatti di build
+.sft-proof-audit.tmp.ts
+.next-local-preview
+coverage
+tsconfig.tsbuildinfo
+
+# Segreti e configurazione locale
+.env*
+!.env.example
+
+# Strumenti per agenti
+.claude
+.agents
+.gemini
+.DS_Store

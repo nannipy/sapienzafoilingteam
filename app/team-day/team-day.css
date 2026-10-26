@@ -17,6 +17,17 @@
 .sft-team-day-form, .sft-team-day-fields, .sft-team-day-confirmation { display: grid; gap: 24px; }
 .sft-team-day-form h2, .sft-team-day-confirmation h2 { font-size: 28px; line-height: 1.2; margin-bottom: 12px; }
 .sft-team-day-form p { line-height: 1.6; font-size: 14px; }
+.sft-team-day-step { display: grid; gap: 20px; }
+.sft-team-day-step-header { display: flex; flex-direction: column-reverse; align-items: flex-start; gap: 12px; margin-bottom: 4px; }
+.sft-team-day-step-indicator { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--primary); background: var(--secondary); padding: 4px 10px; border-radius: 999px; }
+.sft-team-day-back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--muted-foreground); background: none; border: 0; padding: 4px 0; cursor: pointer; text-decoration: underline; width: fit-content; transition: color 0.15s ease; }
+.sft-team-day-back-btn:hover { color: var(--foreground); }
+.sft-team-day-attendee-preview { font-size: 14px; background: var(--muted); border-radius: var(--radius); padding: 12px 16px; border: 1px solid var(--border); display: grid; gap: 4px; }
+.sft-team-day-attendee-preview dt { font-size: 12px; color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.05em; }
+.sft-team-day-attendee-preview dd { font-weight: 500; color: var(--foreground); margin: 0; }
+.sft-team-day-optional { font-size: 12px; font-weight: normal; color: var(--muted-foreground); margin-left: 6px; }
+.sft-team-day-textarea { width: 100%; font-size: 15px; min-height: 72px; resize: vertical; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--background); color: var(--foreground); font-family: inherit; line-height: 1.5; }
+.sft-team-day-textarea:focus { outline: 2px solid var(--ring); outline-offset: 2px; }
 .sft-team-day-fields { border: 0; margin: 0; padding: 0; min-width: 0; }
 .sft-team-day-fields [data-slot="label"] { margin-bottom: 8px; }
 .sft-team-day-names { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -55,3 +66,30 @@
 .sft-team-day-details > a.sft-team-day-poster { display: block; overflow: hidden; border-radius: var(--radius); }
 .sft-team-day-poster img { display: block; width: 100%; height: auto; }
 .sft-team-day-card { scroll-margin-top: 128px; }
+
+.sft-team-day-attendee-preview { margin: 16px 0 0; overflow-wrap: anywhere; }
+.sft-team-day-next-hint { font-size: 13px; }
+.sft-team-day-back-btn { min-height: 44px; margin-bottom: 12px; text-decoration: none; }
+.sft-team-day-back-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  .sft-team-day-page * { scroll-behavior: auto; }
+}
+
+.sft-team-day-details > a.sft-team-day-poster { margin-bottom: 24px; }
+.sft-team-day-details { padding-top: 0; }
+.sft-personal-ticket [data-slot="card-content"] { display: grid; gap: 16px; padding: 24px; }
+.sft-personal-ticket h3 { font-weight: 600; }
+.sft-personal-ticket img { max-width: 100%; height: auto; background: white; }
+.sft-personal-ticket code { overflow-wrap: anywhere; font-family: var(--font-mono); }
+.sft-personal-ticket .sft-team-day-links { margin: 0; }
+.sft-extra-participant { border-top: 1px solid var(--border); padding-top: 24px; }
+
+/* Provider artwork is used at its original aspect ratio, without filters. */
+.sft-team-day-provider-logo { display: block; object-fit: contain; width: auto; height: 24px; flex-shrink: 0; }
+.sft-team-day-provider-option { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.sft-team-day-method[data-provider="paypal"], .sft-team-day-method[data-provider="revolut"] { min-height: 72px; background: white; }
+.sft-team-day-method[data-provider="paypal"][data-selected="true"], .sft-team-day-method[data-provider="revolut"][data-selected="true"] { background: white; box-shadow: inset 0 0 0 1px var(--primary); }
+.sft-team-day-provider-checkout { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px; min-height: 56px; padding: 16px 24px; border-radius: var(--radius); border: 1px solid #191c1f; background: white; color: #191c1f; text-decoration: none; font-family: Arial, sans-serif; font-weight: 500; transition: box-shadow 160ms ease; }
+.sft-team-day-provider-checkout[data-provider="paypal"] { background: #ffc439; border-color: #ffc439; color: #003087; }
+.sft-team-day-provider-checkout:hover { box-shadow: 0 0 0 2px var(--ring); }
+.sft-team-day-provider-checkout:focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; }

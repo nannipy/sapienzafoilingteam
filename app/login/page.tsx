@@ -99,7 +99,7 @@ export default function LoginPage() {
           const lockoutTime = Date.now() + (BASE_LOCKOUT_TIME * penaltyMultiplier);
           setLockoutUntil(lockoutTime);
         }
-        console.error("Real Supabase Error:", signInError);
+
         throw new Error('Invalid credentials'); // Masking original error for security
       }
 
@@ -108,8 +108,7 @@ export default function LoginPage() {
       setLockoutUntil(null);
       router.push('/admin');
 
-    } catch (err: unknown) {
-      console.error("Login Error Catch:", err);
+    } catch {
       // Generic error message to prevent account enumeration
       setError('Credenziali non valide. Verifica email e password e riprova.');
     } finally {

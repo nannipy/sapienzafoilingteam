@@ -10,11 +10,16 @@ const RecruitingPopup = dynamic(() => import('./RecruitingPopup'), {
   ssr: false,
 });
 
+const SftDayPopup = dynamic(() => import('./SftDayPopup'), {
+  ssr: false,
+});
+
 export default function ClientModals() {
   return (
     <>
       <CookieBanner />
       <RecruitingPopup />
+      <SftDayPopup />
     </>
   );
 }
