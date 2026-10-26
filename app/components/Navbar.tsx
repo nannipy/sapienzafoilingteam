@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@sft/design-system";
 
 import { useLanguage } from "../context/LanguageContext";
@@ -68,18 +68,41 @@ export default function Navbar() {
               width={36}
               height={48}
             />
-
+            <svg
+              className="sft-site-wordmark"
+              viewBox="0 0 156 48"
+              aria-hidden="true"
+            >
+              <text
+                x="0"
+                y="21"
+                textLength="156"
+                lengthAdjust="spacingAndGlyphs"
+              >
+                SAPIENZA
+              </text>
+              <text
+                x="0"
+                y="46"
+                textLength="156"
+                lengthAdjust="spacingAndGlyphs"
+              >
+                FOILING TEAM
+              </text>
+            </svg>
           </span>
         </Link>
         <div className="sft-site-desktop-nav" data-testid="desktop-nav">
           {items.map((item) => (
             <Link
               href={item.href}
+              className={item.href === "/boat" ? "sft-site-boat-link" : undefined}
               key={item.href}
               aria-current={path === item.href ? "page" : undefined}
               onClick={() => track(item.href, "menu")}
             >
               {item.label}
+              {item.href === "/boat" && <ArrowUpRight aria-hidden="true" />}
             </Link>
           ))}
           <Button asChild variant="brand">
@@ -133,6 +156,7 @@ export default function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
+                className={item.href === "/boat" ? "sft-site-boat-link" : undefined}
                 aria-current={path === item.href ? "page" : undefined}
                 onClick={() => {
                   setOpen(false);
@@ -140,6 +164,7 @@ export default function Navbar() {
                 }}
               >
                 {item.label}
+                {item.href === "/boat" && <ArrowUpRight aria-hidden="true" />}
               </Link>
             ))}
             <Button asChild variant="brand">

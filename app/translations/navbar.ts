@@ -1,7 +1,7 @@
 export const navbarTranslations = {
   en: {
     home: 'Home',
-    boat: 'Moth',
+    boat: 'Meravijosa',
     team: 'Team',
     sponsor: 'Sponsor',
     contact: 'Contact',
@@ -11,7 +11,7 @@ export const navbarTranslations = {
   },
   it: {
     home: 'Home',
-    boat: 'Moth',
+    boat: 'Meravijosa',
     team: 'Team',
     sponsor: 'Sponsor',
     contact: 'Contatti',
