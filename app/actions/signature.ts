@@ -1,51 +1,12 @@
 'use server';
+import { contactInput, consumePublicLimit, publicSourceHash, sendStaffNotification } from '../lib/public-action-security';
 
-export async function submitSignature(data: {
-    name: string;
-    email: string;
-    payment: string;
-}) {
-    const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-
-    const CHAT_IDS = [
-        process.env.TELEGRAM_CHAT_ID,
-        "5901269690"
-    ].filter(Boolean);
-
-    if (!BOT_TOKEN || CHAT_IDS.length === 0) {
-        console.warn("⚠️ Config Telegram mancante");
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        return { success: true };
-    }
-
-    const message = `
-✍️ *Nuova Firma Sulla Barca!*
-👤 *Nome:* ${data.name}
-📧 *Email:* ${data.email}
-💳 *Pagamento:* ${data.payment}
-💰 *Importo:* 2€
-    `;
-
-    try {
-        await Promise.all(
-            CHAT_IDS.map(chatId =>
-                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: message,
-                        parse_mode: 'Markdown',
-                    }),
-                })
-            )
-        );
-
-        return { success: true };
-    } catch (error) {
-        console.error('Errore invio Telegram:', error);
-        return { success: false, error: 'Internal server error' };
-    }
+export async function submitSignature(input: unknown) {
+  const data = contactInput(input);
+  if (!data) return { success: false, error: 'Dati non validi' };
+  try {
+    if (!await consumePublicLimit('contact', await publicSourceHash(), 5)) return { success: false, error: 'Troppi tentativi' };
+    await sendStaffNotification(`Nuova firma sulla barca\nNome: ${data.name}\nEmail: ${data.email}\nPagamento: ${data.payment}\nImporto: 2€`);
+    return { success: true };
+  } catch { return { success: false, error: 'Invio non disponibile' }; }
 }

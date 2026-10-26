@@ -27,7 +27,7 @@ export default async function proxy(request: NextRequest) {
   const isAdminRoute = request.nextUrl.pathname.startsWith('/admin')
   const isLoginPage = request.nextUrl.pathname === '/login'
 
-  if (isAdminRoute && !user) {
+  if (isAdminRoute && (!user || user.app_metadata?.role !== 'admin')) {
     const loginUrl = new URL('/login', request.url)
     loginUrl.searchParams.set('redirectTo', request.nextUrl.pathname)
     const redirectResponse = NextResponse.redirect(loginUrl)
@@ -35,7 +35,7 @@ export default async function proxy(request: NextRequest) {
     return redirectResponse
   }
 
-  if (isLoginPage && user) {
+  if (isLoginPage && user?.app_metadata?.role === 'admin') {
     const redirectResponse = NextResponse.redirect(new URL('/admin', request.url))
     response.cookies.getAll().forEach(cookie => redirectResponse.cookies.set(cookie))
     return redirectResponse
@@ -44,8 +44,4 @@ export default async function proxy(request: NextRequest) {
   return response
 }
 
-export const config = {
-  matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
-  ],
-}
+export const config = { matcher: ['/admin/:path*', '/login'] }

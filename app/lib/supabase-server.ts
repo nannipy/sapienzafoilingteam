@@ -40,9 +40,9 @@ export async function verifySession() {
     return user;
 }
 
-export async function requireAuth() {
+export async function requireAdmin() {
     const user = await verifySession();
-    if (!user) {
+    if (!user || user.app_metadata?.role !== 'admin') {
         redirect('/login');
     }
     return user;

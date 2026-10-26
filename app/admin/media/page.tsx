@@ -5,7 +5,8 @@ import Image from 'next/image';
 // Removed unused LanguageContext and translations
 import { supabase } from '../../lib/supabase';
 import { useAdminContext } from '../../context/AdminContext';
-import { getMediaItems } from '@/app/actions/media';
+import { mediaForm } from '@/app/lib/media-form';
+import { getMediaItems, uploadMedia, createMediaFolder, moveMedia, removeMedia } from '@/app/actions/media';
 import {
   Folder,
   FolderPlus,
@@ -40,13 +41,12 @@ type FolderItem = {
 };
 
 const NOTIFICATION_TIMEOUT = 5000; // 5 seconds
-const MAX_FILE_SIZE_MB = 5;
+const MAX_FILE_SIZE_MB = 4;
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 const ALLOWED_FILE_TYPES = [
   'image/jpeg',
   'image/png',
   'image/gif',
-  'image/svg+xml',
   'image/webp',
   'application/pdf',
 ];
@@ -193,9 +193,7 @@ export default function MediaManagerPage() {
     try {
       const uploadPromises = validFiles.map(file => {
         const filePath = currentPath ? `${currentPath}/${file.name}` : file.name;
-        return supabase.storage
-          .from('images')
-          .upload(filePath, file, { upsert: false });
+        return uploadMedia(mediaForm(filePath, file));
       });
 
       const results = await Promise.allSettled(uploadPromises);
@@ -244,9 +242,7 @@ export default function MediaManagerPage() {
     const folderPath = currentPath ? `${currentPath}/${folderName.trim()}/.emptyFolderPlaceholder` : `${folderName.trim()}/.emptyFolderPlaceholder`;
 
     try {
-      const { error: uploadError } = await supabase.storage
-        .from('images')
-        .upload(folderPath, new Blob(['']), { contentType: 'text/plain', upsert: false }); // Use empty blob
+      const { error: uploadError } = await createMediaFolder(folderPath); // Use empty blob
 
       if (uploadError) {
         // Handle specific error for existing folder/file
@@ -302,9 +298,7 @@ export default function MediaManagerPage() {
     setIsProcessing(true);
     try {
       // 3. Supabase remove call
-      const { error: deleteError } = await supabase.storage
-        .from('images')
-        .remove([filePath]); // Path must be in an array
+      const { error: deleteError } = await removeMedia([filePath]); // Path must be in an array
 
       // 4. Detailed Error Handling
       if (deleteError) {
@@ -364,9 +358,7 @@ export default function MediaManagerPage() {
 
 
       if (objectsToDelete.length > 0) {
-        const { error: deleteError } = await supabase.storage
-          .from('images')
-          .remove(objectsToDelete);
+        const { error: deleteError } = await removeMedia(objectsToDelete);
 
         if (deleteError) {
           console.error('Error during bulk delete:', deleteError);
@@ -400,9 +392,7 @@ export default function MediaManagerPage() {
 
     setIsProcessing(true);
     try {
-      const { error: moveError } = await supabase.storage
-        .from('images')
-        .move(oldPath, newPath);
+      const { error: moveError } = await moveMedia(oldPath, newPath);
 
       if (moveError) throw moveError;
 
@@ -457,16 +447,14 @@ export default function MediaManagerPage() {
       if (objectsToMove.length === 0) {
         // Folder might be empty or just a prefix. Try creating the new placeholder.
         const newPlaceholderPath = `${newFolderPath}/.emptyFolderPlaceholder`;
-        const { error: createError } = await supabase.storage
-          .from('images')
-          .upload(newPlaceholderPath, new Blob(['']), { contentType: 'text/plain', upsert: false });
+        const { error: createError } = await createMediaFolder(newPlaceholderPath);
 
         if (createError && !createError.message.includes('Duplicate')) { // Ignore if new folder already exists
           throw new Error(`Could not create new folder placeholder: ${createError.message}`);
         }
         // If old placeholder existed, try removing it (best effort)
         try {
-          await supabase.storage.from('images').remove([oldPlaceholderPath]);
+          await removeMedia([oldPlaceholderPath]);
         } catch (removeError: unknown) { // Changed from any to unknown
           // Type check before accessing message
           const message = removeError instanceof Error ? removeError.message : '';
@@ -480,7 +468,7 @@ export default function MediaManagerPage() {
         const movePromises = objectsToMove.map(oldObjectPath => {
           const relativePath = oldObjectPath.substring(oldFolderPath.length + 1); // Get path relative to folder root
           const newObjectPath = `${newFolderPath}/${relativePath}`;
-          return supabase.storage.from('images').move(oldObjectPath, newObjectPath);
+          return moveMedia(oldObjectPath, newObjectPath);
         });
 
         const results = await Promise.allSettled(movePromises);

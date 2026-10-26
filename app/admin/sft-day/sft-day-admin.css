@@ -1,0 +1,151 @@
+/* Structural rules are scoped because the packaged design system ships
+   unlayered utility classes that take priority over responsive Tailwind rules. */
+.sft-day-admin {
+  color: var(--foreground);
+  font-family: var(--font-geist), var(--font-sans), sans-serif;
+}
+.sft-day-admin .sft-day-workspace { display: grid; gap: 24px; }
+.sft-day-admin .sft-day-page-title {
+  margin: 0;
+  font-family: var(--font-kelson), var(--font-display), sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+}
+.sft-day-admin .sft-day-page-header { display: flex; flex-direction: column; align-items: stretch; }
+.sft-day-admin .sft-day-page-header > div:last-child { display: flex; flex-wrap: wrap; gap: 8px; }
+.sft-day-admin .sft-day-page-header [data-slot="button"] { width: auto; flex: 1 1 auto; }
+.sft-day-admin .sft-day-overview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+.sft-day-admin .sft-day-metric { padding: 20px; }
+.sft-day-admin .sft-day-metric:nth-child(even) { border-left: 1px solid var(--border); }
+.sft-day-admin .sft-day-metric:nth-child(n+3) { border-top: 1px solid var(--border); }
+.sft-day-admin .sft-day-metric dt { color: var(--muted-foreground); font-size: 13px; line-height: 1.4; }
+.sft-day-admin .sft-day-metric dd { margin: 8px 0 0; font-size: 24px; font-weight: 600; line-height: 1.2; }
+.sft-day-admin .sft-day-metric:nth-child(3) dd { color: var(--success); }
+.sft-day-admin .sft-day-metric:nth-child(4) dd { color: var(--warning); }
+.sft-day-admin .sft-day-entry,
+.sft-day-admin .sft-day-bookings {
+  margin: 0;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+.sft-day-admin .sft-day-entry-grid { display: grid; gap: 20px; align-items: stretch; }
+.sft-day-admin .sft-day-code-row { display: flex; flex-direction: column; gap: 8px; }
+.sft-day-admin .sft-day-code-row input { width: 100%; min-width: 0; }
+.sft-day-admin .sft-day-code-row button { flex: none; width: 100%; min-width: 112px; }
+.sft-day-admin .sft-day-scan-button { width: 100%; min-width: 0; }
+.sft-day-admin .sft-day-email-retry { margin-top: 16px; padding-top: 16px; border-color: var(--border); }
+.sft-day-admin .sft-day-email-retry button { width: auto; }
+.sft-day-admin .sft-day-entry-result { margin: 0; min-width: 0; }
+.sft-day-admin .sft-day-entry-placeholder {
+  display: none;
+  height: 100%;
+  min-height: 136px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  background: var(--background);
+  color: var(--muted-foreground);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.sft-day-admin .sft-day-entry-placeholder p { max-width: 38ch; }
+.sft-day-admin .sft-day-booking-toolbar { display: flex; flex-direction: column; align-items: stretch; gap: 16px; }
+.sft-day-admin .sft-day-booking-toolbar > div:first-child { width: 100%; min-width: 0; }
+.sft-day-admin .sft-day-search-field { position: relative; }
+.sft-day-admin .sft-day-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--muted-foreground);
+}
+.sft-day-admin #booking-search { width: 100%; padding-left: 40px; padding-right: 44px; }
+.sft-day-admin .sft-day-payment-note {
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--muted);
+  line-height: 1.6;
+}
+.sft-day-admin .sft-day-table-wrap { display: none; border: 1px solid var(--border); border-radius: 8px; }
+.sft-day-admin .sft-day-table { width: 100%; min-width: 920px; table-layout: fixed; }
+.sft-day-admin .sft-day-col-person { width: 32%; }
+.sft-day-admin .sft-day-col-people { width: 9%; }
+.sft-day-admin .sft-day-col-payment { width: 16%; }
+.sft-day-admin .sft-day-col-status { width: 20%; }
+.sft-day-admin .sft-day-col-actions { width: 23%; }
+.sft-day-admin .sft-day-table thead { background: var(--muted); color: var(--muted-foreground); }
+.sft-day-admin .sft-day-table th { height: 48px; text-align: left; font-size: 12px; font-weight: 600; letter-spacing: .025em; }
+.sft-day-admin .sft-day-table th:last-child { text-align: right; }
+.sft-day-admin .sft-day-booking-row { border-top: 1px solid var(--border); background: var(--card); }
+.sft-day-admin .sft-day-booking-row:hover,
+.sft-day-admin .sft-day-booking-row-open { background: var(--background); }
+.sft-day-admin .sft-day-table td { vertical-align: middle; }
+.sft-day-admin .sft-day-booking-reference { line-height: 1.5; }
+.sft-day-admin .sft-day-booking-reference code { font-family: var(--font-geist-mono), var(--font-mono), monospace; font-size: 11px; }
+.sft-day-admin .sft-day-row-actions { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+.sft-day-admin .sft-day-row-actions button { width: 100%; height: 40px; }
+.sft-day-admin .sft-day-expanded-row { background: var(--muted); }
+.sft-day-admin .sft-day-expanded-row > td > ul { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.sft-day-admin .sft-day-ticket { background: var(--card); border-color: var(--border); }
+.sft-day-admin .sft-day-ticket-actions,
+.sft-day-admin .sft-day-ticket-danger { display: flex; flex-wrap: wrap; flex-direction: column; gap: 8px; }
+.sft-day-admin .sft-day-ticket-danger { padding-top: 12px; border-top: 1px solid var(--border); }
+.sft-day-admin .sft-day-ticket-actions [data-slot="button"],
+.sft-day-admin .sft-day-ticket-danger [data-slot="button"] { width: 100%; }
+.sft-day-admin .sft-day-pagination { padding-top: 16px; border-top: 1px solid var(--border); }
+.sft-day-admin a { text-underline-offset: 3px; }
+.sft-day-admin input { caret-color: var(--primary); }
+.sft-day-admin ::selection { background: var(--secondary); color: var(--secondary-foreground); }
+@media (min-width: 640px) {
+  .sft-day-admin .sft-day-code-row { flex-direction: row; }
+  .sft-day-admin .sft-day-code-row input { flex: 1 1 0; width: 0; }
+  .sft-day-admin .sft-day-code-row button { width: auto; }
+  .sft-day-admin .sft-day-scan-button { width: auto; }
+  .sft-day-admin .sft-day-booking-toolbar { flex-direction: row; align-items: flex-end; justify-content: space-between; }
+  .sft-day-admin .sft-day-booking-toolbar > div:first-child { flex: 1 1 0; max-width: 576px; }
+  .sft-day-admin .sft-day-booking-toolbar > div:last-child { flex: 0 0 auto; }
+  .sft-day-admin .sft-day-ticket-actions,
+  .sft-day-admin .sft-day-ticket-danger { flex-direction: row; }
+  .sft-day-admin .sft-day-ticket-actions [data-slot="button"],
+  .sft-day-admin .sft-day-ticket-danger [data-slot="button"] { width: auto; }
+}
+@media (min-width: 1024px) {
+  .sft-day-admin .sft-day-page-header { flex-direction: row; align-items: center; justify-content: space-between; }
+  .sft-day-admin .sft-day-page-header > div:last-child { flex: none; }
+  .sft-day-admin .sft-day-page-header [data-slot="button"] { flex: none; }
+  .sft-day-admin .sft-day-overview { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .sft-day-admin .sft-day-metric { padding: 20px 24px; }
+  .sft-day-admin .sft-day-metric + .sft-day-metric { border-left: 1px solid var(--border); border-top: 0; }
+  .sft-day-admin .sft-day-entry,
+  .sft-day-admin .sft-day-bookings { padding: 24px; }
+  .sft-day-admin .sft-day-entry-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; }
+  .sft-day-admin .sft-day-entry-placeholder { display: flex; }
+  .sft-day-admin .sft-day-entry-result > div { height: 100%; }
+  .sft-day-admin .sft-day-table-wrap { display: block; }
+  .sft-day-admin .sft-day-bookings > ul { display: none; }
+  .sft-day-admin .sft-day-bookings .sft-day-mobile-bookings { display: none; }
+}
+@media (min-width: 1280px) {
+  .sft-day-admin .sft-day-expanded-row > td > ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.sft-day-admin .sft-day-notices:empty { display: none; }

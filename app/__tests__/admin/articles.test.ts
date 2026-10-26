@@ -5,7 +5,7 @@ import { createArticle, updateArticleAction } from '@/app/actions/articles';
 jest.mock('server-only', () => ({}));
 jest.mock('react', () => ({ ...jest.requireActual('react'), cache: (fn: unknown) => fn }));
 jest.mock('next/cache', () => ({ revalidatePath: jest.fn() }));
-jest.mock('@/app/lib/supabase-server', () => ({ requireAuth: jest.fn().mockResolvedValue({ id: 'admin' }) }));
+jest.mock('@/app/lib/supabase-server', () => ({ requireAdmin: jest.fn().mockResolvedValue({ id: 'admin' }) }));
 const mockQuery = { select: jest.fn(), order: jest.fn(), eq: jest.fn(), single: jest.fn(), insert: jest.fn(), update: jest.fn() };
 jest.mock('@/app/lib/supabase-admin', () => ({ supabaseAdmin: { from: () => mockQuery } }));
 const published = { id: 'published', title: 'Articolo', title_en: 'Article', content: 'Testo', content_en: 'Text', status: 'published' as const };

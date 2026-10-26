@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { articlePayload } from '@/app/lib/article-validation';
 import { Article } from '@/app/lib/types';
-import { requireAuth } from '@/app/lib/supabase-server';
+import { requireAdmin } from '@/app/lib/supabase-server';
 import {
   getArticles as dbGetArticles,
   createArticle as dbCreateArticle,
@@ -26,12 +26,12 @@ function generateSlug(title: string): string {
 }
 
 export async function getArticles() {
-  await requireAuth();
+  await requireAdmin();
   return await dbGetArticles(true);
 }
 
 export async function createArticle(articleData: Partial<Article>) {
-  const user = await requireAuth();
+  const user = await requireAdmin();
 
   const payload = articlePayload(articleData);
   const data = await dbCreateArticle({
@@ -48,7 +48,7 @@ export async function createArticle(articleData: Partial<Article>) {
 }
 
 export async function updateArticleAction(id: string, articleData: Partial<Article>) {
-  await requireAuth();
+  await requireAdmin();
 
   const data = await dbUpdateArticle(id, articlePayload(articleData));
 
@@ -61,7 +61,7 @@ export async function updateArticleAction(id: string, articleData: Partial<Artic
 }
 
 export async function deleteArticleAction(id: string) {
-  await requireAuth();
+  await requireAdmin();
   await dbDeleteArticle(id);
   revalidatePath(`/blog/${id}`);
   revalidatePath('/blog');

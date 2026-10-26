@@ -1,4 +1,6 @@
 'use client';
+import { uploadMedia } from '@/app/actions/media';
+import { mediaForm } from '@/app/lib/media-form';
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
@@ -58,7 +60,7 @@ export default function ArticleAdmin({ section = 'published' }: { section?: 'dra
   }, [previewUrl]);
 
   const handleFileSelected = (file: File | null) => {
-    if (file && file.type.startsWith('image/')) {
+    if (file && ['image/png', 'image/jpeg', 'image/gif', 'image/webp'].includes(file.type) && file.size <= 4 * 1024 * 1024) {
       setUploadError(null);
       const objectUrl = URL.createObjectURL(file);
       setPreviewUrl(objectUrl);
@@ -79,10 +81,7 @@ export default function ArticleAdmin({ section = 'published' }: { section?: 'dra
       const fileExt = file.name.split('.').pop();
       const fileName = `${Date.now()}.${fileExt}`;
       const filePath = `${fileName}`;
-      const { data, error: uploadError } = await supabase
-        .storage
-        .from(BUCKET_NAME)
-        .upload(filePath, file, { cacheControl: '3600', upsert: false });
+      const { data, error: uploadError } = await uploadMedia(mediaForm(filePath, file));
 
       if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`);
       if (!data) throw new Error('Upload successful but no data returned.');
@@ -519,7 +518,7 @@ export default function ArticleAdmin({ section = 'published' }: { section?: 'dra
                   } ${isUploading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                 style={{ minHeight: '150px' }}
               >
-                <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileInputChange} className="hidden" disabled={isUploading} />
+                <input ref={fileInputRef} type="file" accept="image/png,image/jpeg,image/gif,image/webp" onChange={handleFileInputChange} className="hidden" disabled={isUploading} />
 
                 {isUploading && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-75 rounded-lg z-10">

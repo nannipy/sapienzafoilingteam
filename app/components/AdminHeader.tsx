@@ -17,7 +17,7 @@ export default function AdminHeader({ onLogout }: { onLogout?: () => void }) {
     { href: '/admin/media', label: 'Media', icon: ImageIcon },
     { href: '/admin/positions', label: en ? 'Open positions' : 'Posizioni aperte', icon: FileUser },
     { href: '/admin/events', label: en ? 'Events' : 'Eventi', icon: Calendar },
-    { href: '/admin/team-day', label: en ? 'Team Day bookings' : 'Prenotazioni Team Day', icon: Calendar },
+    { href: '/admin/sft-day', label: en ? 'SFT Day bookings' : 'Prenotazioni SFT Day', icon: Calendar },
   ];
   return (
     <header className="border-b border-gray-200 bg-white">
