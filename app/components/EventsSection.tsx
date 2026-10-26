@@ -47,7 +47,7 @@ function EventCard({
     </Card>
   );
 }
-export default function EventsSection({ events }: { events: Event[] }) {
+export default function EventsSection({ events, unavailable = false }: { events: Event[]; unavailable?: boolean }) {
   const { language } = useLanguage();
   const now = Date.now();
   const upcoming = events.filter((e) => new Date(e.date).getTime() >= now);
@@ -65,10 +65,14 @@ export default function EventsSection({ events }: { events: Event[] }) {
             <h2 className="sft-display">
               {language === "it" ? "Eventi del team" : "Team events"}
             </h2>
-            <p>
-              {language === "it"
-                ? "Non ci sono eventi disponibili al momento."
-                : "There are no events available at the moment."}
+            <p role={unavailable ? "status" : undefined}>
+              {unavailable
+                ? language === "it"
+                  ? "Gli eventi non sono raggiungibili al momento. Riprova tra poco."
+                  : "Events are temporarily unavailable. Please try again shortly."
+                : language === "it"
+                  ? "Non ci sono eventi disponibili al momento."
+                  : "There are no events available at the moment."}
             </p>
           </>
         )}

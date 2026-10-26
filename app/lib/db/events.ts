@@ -3,10 +3,9 @@ import 'server-only';
 import { supabaseAdmin } from '@/app/lib/supabase-admin';
 import { Event } from '@/app/lib/types';
 
-export async function getEvents(): Promise<Event[]> {
-  const { data, error } = await supabaseAdmin
-    .from('events')
-    .select('*');
+export async function getEvents(signal?: AbortSignal): Promise<Event[]> {
+  const query = supabaseAdmin.from('events').select('*');
+  const { data, error } = await (signal ? query.abortSignal(signal) : query);
 
   if (error) throw new Error(error.message);
   return data;
