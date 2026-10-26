@@ -534,6 +534,8 @@
 .sft-sponsor-card a:hover { background: var(--secondary); }
 .sft-sponsor-logo { height: 112px; display: flex; justify-content: center; align-items: center; }
 .sft-sponsor-logo img { max-width: 100%; max-height: 88px; width: auto; height: auto; object-fit: contain; }
+/* Blend the white backgrounds embedded in these sponsor assets with the card. */
+.sft-sponsor-logo img:is([src$="/beta.svg"], [src$="/ansys.svg"], [src$="/easycomposites.svg"], [src$="/ESSS.svg"]) { mix-blend-mode: multiply; }
 .sft-sponsor-card a > span { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--muted-foreground); margin-top: 20px; }
 .sft-partner-network { padding-block: 64px; background: var(--sft-burgundy); color: white; }
 .sft-partner-network h2, .sft-partner-invitation h2, .sft-contact-location h2, .sft-contact-career h2 { font-size: clamp(30px, 3vw, 44px); line-height: 1.1; text-transform: uppercase; }
