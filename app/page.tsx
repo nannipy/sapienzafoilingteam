@@ -3,6 +3,7 @@ import React from "react";
 import { getEvents } from "./lib/db/events";
 import HeroSection from "./components/HeroSection";
 import FleetShowcaseSection from "./components/FleetShowcaseSection";
+import BoatGallerySection from "./components/BoatGallerySection";
 import CallToActionSection from "./components/CallToActionSection";
 import EventsSection from "./components/EventsSection";
 
@@ -16,6 +17,7 @@ export default async function Home() {
       <main className="sft-root sft-site-home" data-testid="home-page">
         <HeroSection />
         <FleetShowcaseSection />
+        <BoatGallerySection />
         <EventsSection events={events} />
         <CallToActionSection />
       </main>

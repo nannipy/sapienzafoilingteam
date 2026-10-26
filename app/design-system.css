@@ -622,14 +622,15 @@
 @media (max-width: 900px) { .sft-blog-intro { grid-template-columns: 1fr; gap: 28px; } }
 @media (max-width: 767px) { .sft-blog-newsletter { padding: 24px; } .sft-blog-newsletter form > div { flex-direction: column; } }
 
-.sft-sponsor-logo :is(.sft-fluidodesign-logo, .sft-dima-logo) { width: 280px; max-width: 100%; max-height: 100%; height: auto; }
+.sft-sponsor-logo .sft-dima-logo { width: 280px; max-width: 100%; max-height: 100%; height: auto; }
+.sft-sponsor-logo .sft-fluidodesign-logo { width: 100%; max-width: 100%; max-height: none; height: auto; }
 
 .sft-blog-newsletter { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; margin-bottom: 72px; }
 .sft-blog-newsletter h2 { margin-bottom: 0; }
 .sft-boat-component-photo[data-component="pcb"] { height: auto; aspect-ratio: 4/3; }
-.sft-boat-component-photo[data-component="wings"] { height: auto; aspect-ratio: 1; }
+.sft-boat-component-photo[data-component="wings"] { height: auto; aspect-ratio: 4/3; }
 .sft-boat-component-photo[data-component="pcb"] img { object-fit: cover; object-position: center 53%; }
-.sft-boat-component-photo[data-component="wings"] img { object-fit: cover; object-position: center 65%; }
+.sft-boat-component-photo[data-component="wings"] img { object-fit: cover; object-position: center 85%; }
 @media (max-width: 767px) {
   .sft-blog-newsletter { grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
 }
@@ -648,3 +649,25 @@
 .sft-boat-component-photo[data-component="rig"] img { object-position: center 55%; }
 
 .sft-department-icon[src*=".png"] { filter: none; mix-blend-mode: normal; }
+
+/* Boat gallery: still images and manually played clips share one stage. */
+.sft-boat-gallery { background: var(--secondary); }
+.sft-boat-gallery .sft-site-section-heading > p { color: var(--muted-foreground); max-width: 46ch; }
+.sft-boat-gallery-stage { position: relative; aspect-ratio: 16/9; overflow: hidden; border-radius: 20px; background: var(--sft-burgundy-dark); }
+.sft-boat-gallery-stage img { object-fit: contain; }
+.sft-boat-gallery-stage video { display: block; width: 100%; height: 100%; object-fit: contain; }
+.sft-boat-gallery-caption { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 24px; }
+.sft-boat-gallery-caption .sft-eyebrow { color: var(--primary); }
+.sft-boat-gallery-caption p { font-family: var(--font-kelson), sans-serif; font-size: clamp(22px, 3vw, 32px); font-weight: 700; margin-top: 8px; }
+.sft-boat-gallery-arrows { display: flex; gap: 8px; flex-shrink: 0; }
+.sft-boat-gallery-thumbnails { display: flex; gap: 12px; overflow-x: auto; padding: 4px 4px 16px; scroll-snap-type: x proximity; }
+.sft-boat-gallery-thumbnails button { position: relative; flex: 0 0 140px; aspect-ratio: 4/3; overflow: hidden; border-radius: 12px; border: 3px solid transparent; scroll-snap-align: start; cursor: pointer; background: var(--sft-burgundy-dark); }
+.sft-boat-gallery-thumbnails button[aria-pressed="true"] { border-color: var(--primary); outline: 2px solid var(--primary); outline-offset: 2px; }
+.sft-boat-gallery-thumbnails button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.sft-boat-gallery-thumbnails img { object-fit: cover; }
+.sft-boat-gallery-play { position: absolute; inset: 0; display: grid; place-items: center; color: white; background: #0003; }
+.sft-boat-gallery-play svg { border-radius: 50%; background: var(--sft-burgundy); padding: 9px; box-sizing: content-box; }
+@media (max-width: 767px) {
+  .sft-boat-gallery-stage { aspect-ratio: 4/3; border-radius: 16px; }
+  .sft-boat-gallery-thumbnails button { flex-basis: 112px; }
+}
