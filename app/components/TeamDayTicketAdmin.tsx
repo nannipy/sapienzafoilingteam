@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Button, Input, Label } from '@sft/design-system';
 import {
   AlertTriangle, Archive, ArchiveRestore, Ban, Check, CheckCircle2, ChevronDown, ChevronUp, Clock,
-  Copy, Download, ExternalLink, Loader2, Mail, QrCode, ScanLine, Square, Wallet, XCircle,
+  Copy, Download, ExternalLink, Loader2, Mail, QrCode, ScanLine, Square, Trash2, Wallet, XCircle,
 } from 'lucide-react';
-import { controlTeamDayTicket, resendTeamDayTicket, retryTeamDayEmails, setTeamDayPaymentStatus, setTeamDayParticipantArchived } from '@/app/actions/team-day-admin';
+import { controlTeamDayTicket, deleteArchivedTeamDayParticipant, resendTeamDayTicket, retryTeamDayEmails, setTeamDayPaymentStatus, setTeamDayParticipantArchived } from '@/app/actions/team-day-admin';
 import { useLanguage } from '@/app/context/LanguageContext';
 import { personState, ticketQrValue, type PersonState, type TeamDayTicket, type TicketControlResult } from '@/app/lib/team-day-ticket-types';
 
@@ -26,6 +26,8 @@ const copy = {
     resend: 'Invia / reinvia email', cancel: 'Annulla biglietto', confirm: 'Annullare il biglietto? Non sarà più valido per l’ingresso.',
     archive: 'Archivia persona', restore: 'Ripristina persona', archiveConfirm: 'Archiviare questa persona? Sparirà dall’elenco prenotazioni e il QR non sarà più ammesso.',
     archiveDone: 'Persona archiviata.', restoreDone: 'Persona ripristinata.', migrationRequired: 'Archivio non disponibile: applica la migrazione del database e ricarica.',
+    deleteArchived: 'Elimina definitivamente', deleteArchivedConfirm: 'Eliminare definitivamente questa persona, il suo biglietto e le email collegate? L’operazione non si può annullare. La prenotazione sarà eliminata solo se non restano altre persone.',
+    deletedPerson: 'Persona e dati collegati eliminati definitivamente.', deletedBooking: 'Persona, dati collegati e prenotazione eliminati definitivamente.',
     open: 'Apri biglietto', pdf: 'Scarica PDF', showQr: 'Mostra QR', hideQr: 'Nascondi QR', downloadQr: 'Scarica QR', checkIn: 'Registra ingresso',
     qrHint: 'Mostra questo codice allo staff all’ingresso. Non condividerlo: vale un solo ingresso.',
     qrUnavailable: 'QR non disponibile. Apri il biglietto per visualizzarlo.',
@@ -52,6 +54,8 @@ const copy = {
     resend: 'Send / resend email', cancel: 'Cancel ticket', confirm: 'Cancel this ticket? It will no longer allow entry.',
     archive: 'Archive person', restore: 'Restore person', archiveConfirm: 'Archive this person? They will disappear from the bookings list and their QR will no longer be admitted.',
     archiveDone: 'Person archived.', restoreDone: 'Person restored.', migrationRequired: 'Archive unavailable: apply the database migration and reload.',
+    deleteArchived: 'Delete permanently', deleteArchivedConfirm: 'Permanently delete this person, their ticket and related emails? This cannot be undone. The booking will be deleted only if no other people remain.',
+    deletedPerson: 'Person and related data permanently deleted.', deletedBooking: 'Person, related data and booking permanently deleted.',
     open: 'Open ticket', pdf: 'Download PDF', showQr: 'Show QR', hideQr: 'Hide QR', downloadQr: 'Download QR', checkIn: 'Record entry',
     qrHint: 'Show this code to staff at the entrance. Keep it private: it allows one admission.',
     qrUnavailable: 'QR unavailable. Open the ticket to display it.',
@@ -283,6 +287,18 @@ export function TeamDayAdminTicket({ ticket, onChanged, paymentStatus, idPrefix 
       onChanged();
     } catch (error) { setMessage(error instanceof Error && error.message === 'MIGRATION_REQUIRED' ? t.migrationRequired : t.error); } finally { lock.current = false; setBusy(false); }
   }
+  async function deleteArchived() {
+    if (lock.current || !archived) return;
+    if (!window.confirm(t.deleteArchivedConfirm)) return;
+    lock.current = true; setBusy(true); setMessage('');
+    try {
+      const result = await deleteArchivedTeamDayParticipant(ticket.participant_id);
+      setMessage(result.bookingDeleted ? t.deletedBooking : t.deletedPerson);
+      onChanged();
+    } catch (error) {
+      setMessage(error instanceof Error && error.message === 'MIGRATION_REQUIRED' ? t.migrationRequired : t.error);
+    } finally { lock.current = false; setBusy(false); }
+  }
   async function copyCode() {
     try {
       await navigator.clipboard.writeText(ticket.code);
@@ -369,6 +385,9 @@ export function TeamDayAdminTicket({ ticket, onChanged, paymentStatus, idPrefix 
         <Button type="button" variant="ghost" size="sm" className={`h-10 ${archived ? 'text-brand' : 'text-[var(--muted-foreground)]'}`} disabled={busy} onClick={() => void toggleArchive()}>
           {archived ? <ArchiveRestore size={16} aria-hidden="true" /> : <Archive size={16} aria-hidden="true" />}{archived ? t.restore : t.archive}
         </Button>
+        {archived && <Button type="button" variant="outline" size="sm" className="h-10 border-[var(--destructive)] text-[var(--destructive)] hover:bg-[var(--muted)]" disabled={busy} onClick={() => void deleteArchived()}>
+          {busy ? <Loader2 size={16} className="animate-spin" aria-hidden="true" /> : <Trash2 size={16} aria-hidden="true" />}{t.deleteArchived}
+        </Button>}
       </div>
       {message && <p role="status" className="mt-2 text-sm text-[var(--foreground)]">{message}</p>}
     </li>

@@ -40,6 +40,20 @@ export async function setTeamDayParticipantArchived(participantId: string, archi
   if (error || !data) throw new Error('Impossibile archiviare la persona.');
 }
 
+export async function deleteArchivedTeamDayParticipant(participantId: string): Promise<{ bookingDeleted: boolean }> {
+  await requireAdmin();
+  if (!TICKET_CODE_PATTERN.test(participantId)) throw new Error('Dati non validi.');
+  const { data, error } = await supabaseAdmin.rpc('delete_archived_team_day_participant', {
+    p_participant_id: participantId,
+    p_event_id: TEAM_DAY_EVENT_ID,
+  });
+  if (error?.code === 'PGRST202' || /could not find the function|schema cache/i.test(error?.message ?? '')) {
+    throw new Error('MIGRATION_REQUIRED');
+  }
+  if (error || !data || typeof data.bookingDeleted !== 'boolean') throw new Error('Impossibile eliminare la persona archiviata.');
+  return { bookingDeleted: data.bookingDeleted };
+}
+
 export async function controlTeamDayTicket(value: string, action: 'verify' | 'check_in' | 'cancel'): Promise<TicketControlResult> {
   const user = await requireAdmin();
   const code = typeof value === 'string' ? parseTicketCode(value) : null;
