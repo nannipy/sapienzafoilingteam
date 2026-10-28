@@ -31,7 +31,7 @@
     "@zxing/browser": "^0.2.1",
     "dompurify": "3.4.17",
     "framer-motion": "^12.42.2",
-    "isomorphic-dompurify": "^3.19.0",
+    "isomorphic-dompurify": "^4.6.0",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.577.0",
     "marked": "^16.4.2",
