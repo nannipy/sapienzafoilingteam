@@ -52,7 +52,8 @@
     "jsdom": "26.1.0",
     "source-map-js": "^1.2.2",
     "handlebars": "4.7.10",
-    "dompurify": "3.4.17"
+    "dompurify": "3.4.17",
+    "postcss-selector-parser": "6.1.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.10.0",
