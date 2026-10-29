@@ -9,6 +9,7 @@ jest.mock('@/app/components/BoatGallerySection', () => ({ __esModule: true, defa
 jest.mock('@/app/components/FleetShowcaseSection', () => ({ __esModule: true, default: () => <p>La flotta</p> }));
 jest.mock('@/app/components/CallToActionSection', () => ({ __esModule: true, default: () => <p>Entra nel team</p> }));
 jest.mock('@/app/components/EventsSection', () => ({ __esModule: true, default: ({ events, unavailable }: { events: unknown[]; unavailable: boolean }) => <p>{unavailable ? 'Eventi non raggiungibili' : `Eventi: ${events.length}`}</p> }));
+jest.mock('@/app/components/SftDayCountdownBanner', () => ({ __esModule: true, default: () => null }));
 
 const load = jest.mocked(getEvents);
 describe('Homepage event availability', () => {
