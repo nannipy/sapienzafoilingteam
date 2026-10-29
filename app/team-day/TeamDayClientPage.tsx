@@ -7,6 +7,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Alert, AlertDescription, Button, Card, CardContent, Input, Label } from '@sft/design-system';
 import { ArrowLeft, ArrowUpRight, Banknote, CalendarDays, CheckCircle2, Landmark, Loader2, MapPin, Smartphone, Wallet } from 'lucide-react';
 import TeamDayTicketCard from '@/app/components/TeamDayTicketCard';
+import SftDayCountdownBanner from '@/app/components/SftDayCountdownBanner';
 import type { TicketView } from '@/app/lib/team-day-ticket-types';
 import type { TeamDayParticipantInput } from '@/app/lib/team-day-validation';
 import { submitTeamDayRegistration } from '@/app/actions/team-day';
@@ -165,12 +166,13 @@ export default function TeamDayClientPage({
   return (
     <main className="sft-root sft-content-page sft-team-day-page">
       <div className="sft-page-container">
+        {/* <SftDayCountdownBanner /> */}
         <header className="sft-page-intro">
           <div>
             <p className="sft-eyebrow">{t.eyebrow}</p>
             <h1 className="sft-display">{t.title}</h1>
           </div>
-          <p>{t.intro}</p>
+          <SftDayCountdownBanner />
         </header>
 
         <div className="sft-team-day-grid">

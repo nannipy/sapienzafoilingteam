@@ -218,6 +218,67 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+.sft-day-popup-countdown {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--sft-burgundy) var(--sft-flow) right center / cover no-repeat;
+  color: var(--sft-paper);
+}
+.sft-day-popup-countdown-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-geist-mono), var(--font-mono), monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sft-gold);
+}
+.sft-day-popup-countdown-label::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--sft-gold);
+}
+
+.sft-day-popup-countdown ol {
+  display: grid;
+  grid-template-columns: repeat(4, 56px);
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sft-day-popup-countdown li {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 6px 4px;
+  border: 1px solid rgba(255, 252, 253, 0.28);
+  border-radius: 8px;
+  background: rgba(10, 8, 8, 0.18);
+}
+.sft-day-popup-countdown-value {
+  font-family: var(--font-geist-mono), var(--font-mono), monospace;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.sft-day-popup-countdown-unit {
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 252, 253, 0.75);
+}
+
 .sft-day-popup-body {
   display: flex;
   flex-direction: column;
@@ -310,6 +371,24 @@
   line-height: 1.5;
   overflow-wrap: anywhere;
 }
+.sft-day-popup-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  margin-top: 22px;
+}
+.sft-day-popup-info .sft-day-popup-meta {
+  margin-top: 0;
+}
+.sft-day-popup-poster {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 6px 20px #0004;
+}
+
+
 .sft-day-popup-actions {
   display: flex;
   flex-wrap: wrap;
@@ -395,6 +474,15 @@
   .sft-day-popup-stub-note {
     display: none;
   }
+    .sft-day-popup-countdown ol {
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .sft-day-popup-poster {
+    display: none;
+  }
+
+
   .sft-day-popup-body {
     padding: 24px 20px;
   }

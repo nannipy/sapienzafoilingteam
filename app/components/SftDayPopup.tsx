@@ -2,16 +2,18 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { ArrowRight, X } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { usePostHog } from 'posthog-js/react';
 import { useLanguage } from '../context/LanguageContext';
-import { sftDayPromoTranslations } from '../translations/sftDayPromo';
-import { isSftDayPromoActive } from '../lib/sft-day-promo';
+import { sftDayCountdownTranslations, sftDayPromoTranslations } from '../translations/sftDayPromo';
+import { SFT_DAY_STARTS_AT, getSftDayTimeLeft, isSftDayPromoActive } from '../lib/sft-day-promo';
 
 const DISMISS_STORAGE_KEY = 'sft_day_popup_dismissed_until';
 const DISMISS_DURATION_MS = 24 * 60 * 60 * 1000; // re-show after 24 hours
+const UNITS = ['days', 'hours', 'minutes', 'seconds'] as const;
 
 export default function SftDayPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +23,18 @@ export default function SftDayPopup() {
   const posthog = usePostHog();
   const reduceMotion = useReducedMotion();
   const t = sftDayPromoTranslations[language] || sftDayPromoTranslations.it;
+  const tc = sftDayCountdownTranslations[language] || sftDayCountdownTranslations.it;
+  const [now, setNow] = useState(() => Date.now());
+
+  // Tick only while the popup is open.
+  useEffect(() => {
+    if (!isOpen) return;
+    setNow(Date.now());
+    const timer = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(timer);
+  }, [isOpen]);
+
+  const timeLeft = getSftDayTimeLeft(now);
 
   useEffect(() => {
     if (!isSftDayPromoActive()) return;
@@ -155,6 +169,15 @@ export default function SftDayPopup() {
                 <span className="sft-day-popup-month">{t.stubMonth}</span>
                 <span className="sft-day-popup-year">{t.stubYear}</span>
               </div>
+              <Image
+                className="sft-day-popup-poster"
+                src="/events/sft-team-day-2026-11-08-v2.png"
+                alt=""
+                width={120}
+                height={150}
+                sizes="120px"
+              />
+
               <span className="sft-day-popup-stub-note">{t.stubNote}</span>
             </div>
 
@@ -180,21 +203,36 @@ export default function SftDayPopup() {
               <p id="sft-day-popup-lead" className="sft-day-popup-lead">
                 {t.lead}
               </p>
+                            <div className="sft-day-popup-info">
+                <dl className="sft-day-popup-meta">
+                  <div>
+                    <dt>{t.dateLabel}</dt>
+                    <dd>{t.date}</dd>
+                  </div>
+                  <div>
+                    <dt>{t.locationLabel}</dt>
+                    <dd>{t.location}</dd>
+                  </div>
+                  <div>
+                    <dt>{t.priceLabel}</dt>
+                    <dd>{t.price}</dd>
+                  </div>
+                </dl>
+                {now < SFT_DAY_STARTS_AT && (
+                  <div className="sft-day-popup-countdown">
+                    <span className="sft-day-popup-countdown-label">{tc.eyebrow}</span>
+                    <ol>
+                      {UNITS.map(unit => (
+                        <li key={unit}>
+                          <span className="sft-day-popup-countdown-value">{String(timeLeft[unit]).padStart(2, '0')}</span>
+                          <span className="sft-day-popup-countdown-unit">{tc.units[unit][timeLeft[unit] === 1 ? 0 : 1]}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+              </div>
 
-              <dl className="sft-day-popup-meta">
-                <div>
-                  <dt>{t.dateLabel}</dt>
-                  <dd>{t.date}</dd>
-                </div>
-                <div>
-                  <dt>{t.locationLabel}</dt>
-                  <dd>{t.location}</dd>
-                </div>
-                <div>
-                  <dt>{t.priceLabel}</dt>
-                  <dd>{t.price}</dd>
-                </div>
-              </dl>
 
               <div className="sft-day-popup-actions">
                 <Link

@@ -1,0 +1,32 @@
+/* SFT Day countdown banner — same campaign voice as the navbar link:
+   flat burgundy, Kelson display type, mono digits and the team gold dot. */
+.sft-day-countdown { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; margin: 0; padding: 16px 24px; border-radius: var(--sft-radius-editorial, 1.5rem); background: var(--sft-burgundy) var(--sft-flow) right center / cover no-repeat; color: var(--sft-paper); }
+.sft-day-countdown[data-phase="final-days"], .sft-day-countdown[data-phase="last-day"] { background-color: var(--sft-burgundy-dark); box-shadow: inset 0 0 0 2px var(--sft-gold); }
+.sft-day-countdown-copy { flex: 1 1 280px; min-width: 0; }
+.sft-day-countdown-eyebrow { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 6px; font-family: var(--font-geist-mono), var(--font-mono), monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sft-gold); }
+.sft-day-countdown-eyebrow > span { width: 8px; height: 8px; border-radius: 999px; background: var(--sft-gold); }
+.sft-day-countdown-title { margin: 0; font-family: var(--font-kelson), var(--font-display), sans-serif; font-size: 22px; font-weight: 700; line-height: 1.15; letter-spacing: 0.01em; color: var(--sft-paper); }
+.sft-day-countdown-message { margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: rgba(255, 252, 253, 0.88); }
+.sft-day-countdown-side { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.sft-day-countdown-clock { display: flex; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.sft-day-countdown-clock li { display: grid; justify-items: center; gap: 4px; min-width: 56px; padding: 6px 8px; border: 1px solid rgba(255, 252, 253, 0.28); border-radius: 12px; background: rgba(10, 8, 8, 0.18); }
+.sft-day-countdown-value { font-family: var(--font-geist-mono), var(--font-mono), monospace; font-size: 20px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.sft-day-countdown-unit { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255, 252, 253, 0.75); }
+.sft-day-countdown-cta { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 18px; border-radius: 999px; background: var(--sft-paper); color: var(--sft-burgundy); font-weight: 600; text-decoration: none; transition: background-color 160ms ease; }
+.sft-day-countdown-cta:hover { background: var(--sft-gold); color: var(--sft-ink); }
+.sft-day-countdown-cta:focus-visible { outline: 2px solid var(--sft-gold); outline-offset: 3px; }
+
+/* Home: aligned with the hero above it. */
+.sft-site-day-countdown { max-width: 1320px; margin: 28px auto 0; padding: 0 32px; }
+.sft-site-day-countdown:empty { display: none; }
+
+@media (max-width: 767px) {
+  .sft-day-countdown { padding: 16px 20px; gap: 16px; }
+  .sft-day-countdown-side, .sft-day-countdown-clock { width: 100%; }
+  .sft-day-countdown-clock li { flex: 1 1 0; min-width: 0; }
+  .sft-day-countdown-cta { width: 100%; justify-content: center; }
+  .sft-site-day-countdown { margin-top: 20px; padding: 0 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sft-day-countdown-cta { transition: none; }
+}

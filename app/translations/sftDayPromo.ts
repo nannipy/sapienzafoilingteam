@@ -42,3 +42,38 @@ export const sftDayPromoTranslations = {
     stubNote: 'Doors open at 11:00',
   },
 };
+
+export const sftDayCountdownTranslations = {
+  it: {
+    regionLabel: 'Conto alla rovescia per l’SFT Day',
+    eyebrow: 'Countdown',
+    countdownTitle: 'Mancano pochi giorni all’SFT Day',
+    countdownMessage: 'Prenota ora il tuo posto: ogni prenotazione sostiene il team.',
+    finalDaysTitle: 'Ultimi giorni per prenotare',
+    finalDaysMessage: 'Non restare a terra: assicurati il tuo posto prima che sia troppo tardi.',
+    lastDayTitle: 'Ci siamo quasi!',
+    lastDayMessage: 'Manca meno di un giorno all’SFT Day. Hai già prenotato il tuo posto?',
+    liveTitle: 'L’SFT Day è iniziato!',
+    liveMessage: 'Ti aspettiamo all’Aeroporto dell’Urbe, Via Salaria 825, Roma.',
+    cta: 'Prenota ora',
+    units: { days: ['giorno', 'giorni'], hours: ['ora', 'ore'], minutes: ['minuto', 'minuti'], seconds: ['secondo', 'secondi'] },
+    remaining: 'Mancano',
+    and: 'e',
+  },
+  en: {
+    regionLabel: 'SFT Day countdown',
+    eyebrow: 'Countdown',
+    countdownTitle: 'SFT Day is just days away',
+    countdownMessage: 'Book your spot now: every booking supports the team.',
+    finalDaysTitle: 'Last days to book',
+    finalDaysMessage: 'Don’t miss out: secure your spot before it’s too late.',
+    lastDayTitle: 'Almost there!',
+    lastDayMessage: 'Less than a day to go until SFT Day. Have you booked your spot yet?',
+    liveTitle: 'SFT Day has started!',
+    liveMessage: 'Join us at Aeroporto dell’Urbe, Via Salaria 825, Rome.',
+    cta: 'Book now',
+    units: { days: ['day', 'days'], hours: ['hour', 'hours'], minutes: ['minute', 'minutes'], seconds: ['second', 'seconds'] },
+    remaining: 'Time left:',
+    and: 'and',
+  },
+};

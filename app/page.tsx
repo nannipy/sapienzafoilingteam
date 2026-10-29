@@ -7,6 +7,7 @@ import FleetShowcaseSection from "./components/FleetShowcaseSection";
 import BoatGallerySection from "./components/BoatGallerySection";
 import CallToActionSection from "./components/CallToActionSection";
 import EventsSection from "./components/EventsSection";
+import SftDayCountdownBanner from "./components/SftDayCountdownBanner";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -24,6 +25,9 @@ export default async function Home() {
     <>
       <main className="sft-root sft-site-home" data-testid="home-page">
         <HeroSection />
+        <div className="sft-site-day-countdown">
+          <SftDayCountdownBanner registrationHref="/sft-day#team-day-registration" />
+        </div>
         <FleetShowcaseSection />
         <BoatGallerySection />
         <EventsSection events={events} unavailable={eventsUnavailable} />
